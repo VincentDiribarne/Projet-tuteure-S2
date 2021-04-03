@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Effectuer un exercice" version="4">
+  <OBJECT>
+    <ID name="Effectuer un exercice" mc="Standard.Package" uid="f688a201-2efb-4ece-a5b5-8cc21d769384"/>
+    <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Effectuer un exercice]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Étudiant" mc="Standard.Actor" uid="c2711619-6332-47f9-80fd-4c3c6f0aa505"/>
+        <COMPID name="Proposer un mot dans la zone de saisie" mc="Standard.UseCase" uid="dbed8f38-2a78-43a1-ad77-e6be6b526b90"/>
+        <COMPID name="Valider la saisie de sa réponse" mc="Standard.UseCase" uid="af208514-0abf-4e39-9d34-6b25c866c6af"/>
+        <COMPID name="Voir en la saisie du mot en temps réel" mc="Standard.UseCase" uid="6372f8fc-9616-4044-b61e-d964bfd749c9"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation UseCase03" mc="Standard.UseCaseDiagram" uid="53be3223-81c6-48c0-ab25-96f2c60495f5"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

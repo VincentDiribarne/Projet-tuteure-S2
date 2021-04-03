@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Ouverture d'un exercice" version="4">
+  <OBJECT>
+    <ID name="Ouverture d'un exercice" mc="Standard.Package" uid="67a1dc95-2134-4ede-b72e-3a16eff7b62a"/>
+    <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Ouverture d'un exercice]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Étudiant" mc="Standard.Actor" uid="531db70c-4389-4bea-afce-f2157193ef80"/>
+        <COMPID name="Ouvrir l'exercice" mc="Standard.UseCase" uid="1a27fd9d-5868-4ddd-a730-ce42d9153334"/>
+        <COMPID name="Voir la consigne" mc="Standard.UseCase" uid="74bf3929-0a24-410a-bb8b-002e0e9b1ed1"/>
+        <COMPID name="Voir la transcription occultée de l'exercice" mc="Standard.UseCase" uid="bf0f6908-abfa-4891-bcef-66be159f9695"/>
+        <COMPID name="Voir la preview de la ressource" mc="Standard.UseCase" uid="5504ed96-bdb6-44ee-b554-c01f70861537"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation UseCase02" mc="Standard.UseCaseDiagram" uid="613751e9-f733-48d5-a889-42c502500291"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Diagrammes d'activités" version="4">
+  <OBJECT>
+    <ID name="Diagrammes d'activités" mc="Standard.Package" uid="3976a9ce-8dd6-438c-afe1-9f903fb5975a"/>
+    <PID name="ptut" mc="Standard.Package" uid="b9170a03-c6e2-4bb7-8a5f-e68561114d5c"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Diagrammes d'activités]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="UseCase01" mc="Standard.Package" uid="12923285-4051-470c-942d-c6a228830683"/>
+        <COMPID name="UseCase02" mc="Standard.Package" uid="1ce56822-8491-4763-84bc-7e5d000660d7"/>
+        <COMPID name="UseCase03" mc="Standard.Package" uid="dca55a67-4a28-4693-969e-5cb55624fa91"/>
+        <COMPID name="UseCase04" mc="Standard.Package" uid="078ce88a-3000-437a-a39f-67dd8a6c9b50"/>
+        <COMPID name="UseCase05" mc="Standard.Package" uid="e2295828-880b-4b35-8a78-284eb6af35e4"/>
+        <COMPID name="UseCase06" mc="Standard.Package" uid="0016ad41-de12-44d0-bc85-518ba35e828f"/>
+        <COMPID name="UseCase07" mc="Standard.Package" uid="58110c0a-b579-4911-87ba-ce107f2ef187"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
