@@ -12,13 +12,6 @@
       <ATT name="Name"><![CDATA[UseCase03]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
-    <DEPENDENCIES>
-      <COMP relation="OwnedElement">
-        <COMPID name="Étudiant" mc="Standard.Actor" uid="df1565ac-d163-4274-8f71-dc166379c576"/>
-      </COMP>
-      <COMP relation="Product">
-        <COMPID name="Diagramme de cas d'utilisation UseCase03" mc="Standard.UseCaseDiagram" uid="968d8775-a959-45dd-9fbc-6cf7cccbefaa"/>
-      </COMP>
-    </DEPENDENCIES>
+    <DEPENDENCIES></DEPENDENCIES>
   </OBJECT>
 </EXT>

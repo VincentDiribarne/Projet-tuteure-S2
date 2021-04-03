@@ -21,10 +21,6 @@
         <COMPID name="ExerciceModeEvaluation" mc="Standard.Class" uid="364c2532-2570-440c-865b-cefe5b081d2e"/>
         <COMPID name="ExerciceModeEntrainement" mc="Standard.Class" uid="4d33a066-0618-46e9-a167-22ec5ead1f09"/>
         <COMPID name="Aide" mc="Standard.Class" uid="f52db86c-f16f-4157-8287-5034403468a5"/>
-        <COMPID name="Ouvrir l'exercice" mc="Standard.UseCase" uid="f1d81bfc-de9f-404a-9301-6a7a0994686d"/>
-        <COMPID name="Voir la consigne" mc="Standard.UseCase" uid="15b750cb-bae0-4019-bbfc-8c361133cd8a"/>
-        <COMPID name="Voir la transcription occultée de l'exercice" mc="Standard.UseCase" uid="8dc90e8f-b3e3-49e0-b640-c58042b12b9b"/>
-        <COMPID name="Voir la preview de la ressource" mc="Standard.UseCase" uid="877cbf77-c63f-4e1d-9781-925184081bb9"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="Diagramme de classe Enseignant" mc="Standard.ClassDiagram" uid="226aded4-36a6-4523-9d42-3679d9041db2"/>
