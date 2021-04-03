@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="UseCase01" version="4">
+  <OBJECT>
+    <ID name="UseCase01" mc="Standard.Package" uid="8c52ee39-a005-457f-b3c4-0e4019b07617"/>
+    <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[UseCase01]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Personne" mc="Standard.Actor" uid="8e50deb4-369e-4745-ab57-ede6353ee0d4"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation UseCase01" mc="Standard.UseCaseDiagram" uid="313d3157-3f19-4c67-ac0a-73996a95329b"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

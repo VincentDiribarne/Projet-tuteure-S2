@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Diagramme de classe Etudiant" version="4">
+  <OBJECT>
+    <ID name="Diagramme de classe Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
+    <PID name="Diagrammes de classe" mc="Standard.Package" uid="6287a82b-547c-4cbf-841c-76c1f2369577"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Diagramme de classe Etudiant]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Etudiant" mc="Standard.Class" uid="8d684c9b-2fba-4ee3-8caf-164aa2316dec"/>
+        <COMPID name="ExerciceModeEntrainement" mc="Standard.Class" uid="02840264-5234-4778-b8f6-acc632ebf8aa"/>
+        <COMPID name="ExerciceModeEvaluation" mc="Standard.Class" uid="e602c1d5-aff3-4b73-a74b-be6be84f1a5c"/>
+        <COMPID name="Ressource" mc="Standard.Class" uid="57659ee9-485a-4fdf-a742-b2a86bfa1fbd"/>
+        <COMPID name="Consigne" mc="Standard.Class" uid="00252945-730f-465a-aa58-f7f769c3d14d"/>
+        <COMPID name="Aide" mc="Standard.Class" uid="3126e133-babe-4565-9b8f-bdc6cd61b904"/>
+        <COMPID name="Ouvrir l'application" mc="Standard.UseCase" uid="3f2818cf-238f-4c69-a2fd-e205578a41b3"/>
+        <COMPID name="Cliquer sur l'icône de l'application" mc="Standard.UseCase" uid="e810fdbd-9deb-4938-a68a-986735323e54"/>
+        <COMPID name="Attendre que l'application se lance" mc="Standard.UseCase" uid="c7e702c2-d7dd-4f60-8c86-0f3f834d2d24"/>
+        <COMPID name="Proposer un mot dans la zone de saisie" mc="Standard.UseCase" uid="30df3308-5d36-4906-867c-c753ec598082"/>
+        <COMPID name="Valider la saisie de sa réponse" mc="Standard.UseCase" uid="67accb2a-19e1-4dc7-9f5e-78537f57501b"/>
+        <COMPID name="Voir la saisie du mot en temps réel" mc="Standard.UseCase" uid="052a7117-d3cf-400e-b5bd-de85df283646"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de classe Etudiant" mc="Standard.ClassDiagram" uid="162e463c-fa80-4c4f-8f24-26e0aeb07c9a"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
