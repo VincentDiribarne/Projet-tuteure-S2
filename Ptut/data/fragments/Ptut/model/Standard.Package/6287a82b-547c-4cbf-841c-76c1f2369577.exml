@@ -14,8 +14,8 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
-        <COMPID name="Enseignant" mc="Standard.Package" uid="050d2387-f384-4ede-b9d7-e53653dafbb0"/>
+        <COMPID name="Diagramme de classe Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
+        <COMPID name="Diagramme de classe Enseignant" mc="Standard.Package" uid="050d2387-f384-4ede-b9d7-e53653dafbb0"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>
