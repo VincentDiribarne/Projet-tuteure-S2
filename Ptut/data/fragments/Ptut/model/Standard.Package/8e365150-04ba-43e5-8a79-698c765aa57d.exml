@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="UseCase10" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Sélectionner une ressource" version="4">
   <OBJECT>
-    <ID name="UseCase10" mc="Standard.Package" uid="8e365150-04ba-43e5-8a79-698c765aa57d"/>
+    <ID name="Sélectionner une ressource" mc="Standard.Package" uid="8e365150-04ba-43e5-8a79-698c765aa57d"/>
     <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
     <ATTRIBUTES>
       <ATT name="IsInstantiable">false</ATT>
@@ -9,9 +9,18 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[UseCase10]]></ATT>
+      <ATT name="Name"><![CDATA[Sélectionner une ressource]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
-    <DEPENDENCIES></DEPENDENCIES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Enseignant" mc="Standard.Actor" uid="c10a3ee4-1271-454c-a247-968fada37d89"/>
+        <COMPID name="Sélectionner une ressource" mc="Standard.UseCase" uid="40c781c6-ae03-45fe-ac55-a890ca2c6a35"/>
+        <COMPID name="Importer une ressource de l'ordinateur" mc="Standard.UseCase" uid="bfa3cb2c-d877-4f3b-82c7-1116f078226c"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation UseCase10" mc="Standard.UseCaseDiagram" uid="cd6b76f3-ca8d-47c8-aefe-e1b577d68b93"/>
+      </COMP>
+    </DEPENDENCIES>
   </OBJECT>
 </EXT>

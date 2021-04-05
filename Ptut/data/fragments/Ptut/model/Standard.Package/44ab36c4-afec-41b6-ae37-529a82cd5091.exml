@@ -14,17 +14,23 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="UseCase01" mc="Standard.Package" uid="8c52ee39-a005-457f-b3c4-0e4019b07617"/>
-        <COMPID name="UseCase02" mc="Standard.Package" uid="67a1dc95-2134-4ede-b72e-3a16eff7b62a"/>
-        <COMPID name="UseCase03" mc="Standard.Package" uid="f688a201-2efb-4ece-a5b5-8cc21d769384"/>
-        <COMPID name="UseCase04" mc="Standard.Package" uid="d9aaa3c3-3421-46fd-8bdc-c9e0dc63a0b1"/>
-        <COMPID name="UseCase05" mc="Standard.Package" uid="d2c35677-a92a-4864-9ac9-d3386eb1e5c6"/>
-        <COMPID name="UseCase06" mc="Standard.Package" uid="dca57f3a-36c9-42d7-bf6c-65a852dcf748"/>
-        <COMPID name="UseCase07" mc="Standard.Package" uid="45e878d3-6a02-4063-9bac-83e8bdeba26c"/>
-        <COMPID name="UseCase08" mc="Standard.Package" uid="74bb2893-5858-40e2-8bf7-161131594abf"/>
-        <COMPID name="UseCase09" mc="Standard.Package" uid="093f7a78-4688-4879-adc0-e9326fff9ad2"/>
-        <COMPID name="UseCase10" mc="Standard.Package" uid="8e365150-04ba-43e5-8a79-698c765aa57d"/>
-        <COMPID name="UseCase11" mc="Standard.Package" uid="faacb157-68e5-420f-ab7d-4a2cf788c448"/>
+        <COMPID name="Ouverture de l'application" mc="Standard.Package" uid="8c52ee39-a005-457f-b3c4-0e4019b07617"/>
+        <COMPID name="Ouverture d'un exercice" mc="Standard.Package" uid="67a1dc95-2134-4ede-b72e-3a16eff7b62a"/>
+        <COMPID name="Effectuer un exercice" mc="Standard.Package" uid="f688a201-2efb-4ece-a5b5-8cc21d769384"/>
+        <COMPID name="Affichage du temps" mc="Standard.Package" uid="d9aaa3c3-3421-46fd-8bdc-c9e0dc63a0b1"/>
+        <COMPID name="Affichage de la progression" mc="Standard.Package" uid="d2c35677-a92a-4864-9ac9-d3386eb1e5c6"/>
+        <COMPID name="Enregistrement du travail étudiant" mc="Standard.Package" uid="dca57f3a-36c9-42d7-bf6c-65a852dcf748"/>
+        <COMPID name="Lecture d'une ressource" mc="Standard.Package" uid="45e878d3-6a02-4063-9bac-83e8bdeba26c"/>
+        <COMPID name="Affichage de l'aide / la solution" mc="Standard.Package" uid="74bb2893-5858-40e2-8bf7-161131594abf"/>
+        <COMPID name="Paramétrage de l'application" mc="Standard.Package" uid="093f7a78-4688-4879-adc0-e9326fff9ad2"/>
+        <COMPID name="Sélectionner une ressource" mc="Standard.Package" uid="8e365150-04ba-43e5-8a79-698c765aa57d"/>
+        <COMPID name="Édition d'une consigne" mc="Standard.Package" uid="faacb157-68e5-420f-ab7d-4a2cf788c448"/>
+        <COMPID name="Édition du texte lié à la ressource" mc="Standard.Package" uid="a69a3504-1729-480b-b387-ec76ef10395d"/>
+        <COMPID name="Édition d'une aide" mc="Standard.Package" uid="d3b723e8-e1fa-4c65-a133-6ffd88f13328"/>
+        <COMPID name="Sélection du mode de l'exercice" mc="Standard.Package" uid="96472a90-c928-494a-8659-1240232728ab"/>
+        <COMPID name="Paramétrage de l'exercice" mc="Standard.Package" uid="34b4e61d-902c-4291-aea1-82311dea223c"/>
+        <COMPID name="Package1" mc="Standard.Package" uid="c1b7eb49-fce6-4a41-af41-2ad5b7eaf00c"/>
+        <COMPID name="Package2" mc="Standard.Package" uid="82ee9e7a-cc98-4a51-ba41-d3bdb3780191"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>

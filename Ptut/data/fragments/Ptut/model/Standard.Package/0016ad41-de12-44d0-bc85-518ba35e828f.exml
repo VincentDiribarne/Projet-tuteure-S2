@@ -12,6 +12,10 @@
       <ATT name="Name"><![CDATA[UseCase06]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
-    <DEPENDENCIES></DEPENDENCIES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedBehavior">
+        <COMPID name="Activity" mc="Standard.Activity" uid="810228ee-db43-4936-b10d-ec540d41f2c1"/>
+      </COMP>
+    </DEPENDENCIES>
   </OBJECT>
 </EXT>

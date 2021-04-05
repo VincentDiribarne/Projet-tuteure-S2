@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Édition d'une aide" version="4">
+  <OBJECT>
+    <ID name="Édition d'une aide" mc="Standard.Package" uid="d3b723e8-e1fa-4c65-a133-6ffd88f13328"/>
+    <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Édition d'une aide]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Enseignant" mc="Standard.Actor" uid="f7695c6d-9693-4572-a4d4-f44a1c3ad583"/>
+        <COMPID name="Écrire des aides potentielles pour l'étudiant" mc="Standard.UseCase" uid="e1d6d7a9-66e8-45b9-90aa-0ae8fe0947cc"/>
+        <COMPID name="Connaître le script de la ressource" mc="Standard.UseCase" uid="f815dae3-703a-4680-a315-2470b9520bf6"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation UseCase13" mc="Standard.UseCaseDiagram" uid="090bc424-90d4-4297-b07a-4a7f695de8a2"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

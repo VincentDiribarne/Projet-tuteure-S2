@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="UseCase12" version="4">
+  <OBJECT>
+    <ID name="UseCase12" mc="Standard.Package" uid="1be4e174-b72d-4c0e-8ffd-30161e2b339b"/>
+    <PID name="Diagrammes d'activités" mc="Standard.Package" uid="3976a9ce-8dd6-438c-afe1-9f903fb5975a"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[UseCase12]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedBehavior">
+        <COMPID name="Activity" mc="Standard.Activity" uid="0f265e14-96e6-4195-8e18-c5418f9ae007"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
