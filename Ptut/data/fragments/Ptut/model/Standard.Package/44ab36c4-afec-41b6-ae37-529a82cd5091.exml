@@ -29,8 +29,9 @@
         <COMPID name="Édition d'une aide" mc="Standard.Package" uid="d3b723e8-e1fa-4c65-a133-6ffd88f13328"/>
         <COMPID name="Sélection du mode de l'exercice" mc="Standard.Package" uid="96472a90-c928-494a-8659-1240232728ab"/>
         <COMPID name="Paramétrage de l'exercice" mc="Standard.Package" uid="34b4e61d-902c-4291-aea1-82311dea223c"/>
-        <COMPID name="Package1" mc="Standard.Package" uid="c1b7eb49-fce6-4a41-af41-2ad5b7eaf00c"/>
-        <COMPID name="Package2" mc="Standard.Package" uid="82ee9e7a-cc98-4a51-ba41-d3bdb3780191"/>
+        <COMPID name="Sauvegarde de l'exercice enseigant" mc="Standard.Package" uid="c1b7eb49-fce6-4a41-af41-2ad5b7eaf00c"/>
+        <COMPID name="Fermeture de l'application" mc="Standard.Package" uid="82ee9e7a-cc98-4a51-ba41-d3bdb3780191"/>
+        <COMPID name="General" mc="Standard.Package" uid="efca197d-45ef-4d1d-a514-072616530bd4"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>

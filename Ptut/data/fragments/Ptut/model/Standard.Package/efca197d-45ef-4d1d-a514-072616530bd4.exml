@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="General" version="4">
+  <OBJECT>
+    <ID name="General" mc="Standard.Package" uid="efca197d-45ef-4d1d-a514-072616530bd4"/>
+    <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[General]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Étudiant" mc="Standard.Actor" uid="d74e8803-7812-4a19-a071-57cd8fd9bc80"/>
+        <COMPID name="Enseignant" mc="Standard.Actor" uid="cb7265ec-1fbb-45a3-8be0-8fb49909c6af"/>
+        <COMPID name="Personne" mc="Standard.Actor" uid="21bb1b89-b0ff-43d0-9492-32c535b8a069"/>
+        <COMPID name="Accéder à l'application" mc="Standard.UseCase" uid="dc93ed38-9734-4738-9760-f80f39019703"/>
+        <COMPID name="Proposer des exercices" mc="Standard.UseCase" uid="e67209e4-de62-4c48-8259-8badad99374d"/>
+        <COMPID name="Faire/Réaliser des exercices" mc="Standard.UseCase" uid="0e6c98bc-7706-40bb-bd57-e804cc13ab18"/>
+        <COMPID name="Paramétrer l'application" mc="Standard.UseCase" uid="3b43c665-2b6f-4250-bcc7-95cf6de4bdcf"/>
+        <COMPID name="Enregistrer son travail" mc="Standard.UseCase" uid="db88aedd-b3c7-4da9-877d-b54052487a1e"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation GENERAL" mc="Standard.UseCaseDiagram" uid="48764b7d-fbc5-47cc-a273-df736f9252e8"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
