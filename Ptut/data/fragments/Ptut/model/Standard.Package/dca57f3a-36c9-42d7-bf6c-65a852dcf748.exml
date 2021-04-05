@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="UseCase06" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Enregistrement du travail étudiant" version="4">
   <OBJECT>
-    <ID name="UseCase06" mc="Standard.Package" uid="dca57f3a-36c9-42d7-bf6c-65a852dcf748"/>
+    <ID name="Enregistrement du travail étudiant" mc="Standard.Package" uid="dca57f3a-36c9-42d7-bf6c-65a852dcf748"/>
     <PID name="Diagrammes Use Case" mc="Standard.Package" uid="44ab36c4-afec-41b6-ae37-529a82cd5091"/>
     <ATTRIBUTES>
       <ATT name="IsInstantiable">false</ATT>
@@ -9,9 +9,20 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[UseCase06]]></ATT>
+      <ATT name="Name"><![CDATA[Enregistrement du travail étudiant]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
-    <DEPENDENCIES></DEPENDENCIES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Étudiant" mc="Standard.Actor" uid="a2f2d04d-cbeb-4454-9b0f-a11446b165a4"/>
+        <COMPID name="Enregistrer son exercice" mc="Standard.UseCase" uid="16309a8b-954f-4f00-96fe-1656a48d993c"/>
+        <COMPID name="Entrer son nom" mc="Standard.UseCase" uid="12abb389-5376-4010-bed0-08d27d3ee56a"/>
+        <COMPID name="Entrer son prénom" mc="Standard.UseCase" uid="fbebe553-2774-4c8c-b302-7afaed0ad943"/>
+        <COMPID name="Entrer le nom/numéro de l'exercice" mc="Standard.UseCase" uid="4843c30e-fe37-4c2c-bd75-723ea72f9364"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation UseCase06" mc="Standard.UseCaseDiagram" uid="5ee40aca-e5c5-4550-a436-c051bed4d89b"/>
+      </COMP>
+    </DEPENDENCIES>
   </OBJECT>
 </EXT>
