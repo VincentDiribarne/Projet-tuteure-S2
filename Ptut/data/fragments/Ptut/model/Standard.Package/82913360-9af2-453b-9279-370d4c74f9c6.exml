@@ -21,6 +21,7 @@
         <COMPID name="Consigne" mc="Standard.Class" uid="00252945-730f-465a-aa58-f7f769c3d14d"/>
         <COMPID name="Aide" mc="Standard.Class" uid="3126e133-babe-4565-9b8f-bdc6cd61b904"/>
         <COMPID name="Exercice" mc="Standard.Class" uid="32bb6f7b-1203-44b5-8772-14829213531a"/>
+        <COMPID name="Parametre" mc="Standard.Class" uid="8a67a7f7-969a-42b5-9629-bfeb763944b1"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="Diagramme de classe Etudiant" mc="Standard.ClassDiagram" uid="162e463c-fa80-4c4f-8f24-26e0aeb07c9a"/>

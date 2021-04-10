@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Aide" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Parametre" version="4">
   <OBJECT>
-    <ID name="Aide" mc="Standard.Class" uid="f52db86c-f16f-4157-8287-5034403468a5"/>
-    <PID name="Diagramme de classe Enseignant" mc="Standard.Package" uid="050d2387-f384-4ede-b9d7-e53653dafbb0"/>
+    <ID name="Parametre" mc="Standard.Class" uid="8a67a7f7-969a-42b5-9629-bfeb763944b1"/>
+    <PID name="Diagramme de classe Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
       <ATT name="IsMain">false</ATT>
@@ -11,13 +11,13 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Aide]]></ATT>
+      <ATT name="Name"><![CDATA[Parametre]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedOperation">
         <OBJECT>
-          <ID name="Aide" mc="Standard.Operation" uid="7105a441-280f-407d-85e0-3294320610ba"/>
+          <ID name="darkMode" mc="Standard.Operation" uid="88ae9c89-9caa-4975-9dc8-ad61dcf64870"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
@@ -25,13 +25,13 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[Aide]]></ATT>
+            <ATT name="Name"><![CDATA[darkMode]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
             <COMP relation="IO">
               <OBJECT>
-                <ID name="" mc="Standard.Parameter" uid="4c5d9a08-ddb5-4b61-b65c-58e4215e8610"/>
+                <ID name="" mc="Standard.Parameter" uid="159a33a7-787b-409e-b763-503dcacbd415"/>
                 <ATTRIBUTES>
                   <ATT name="ParameterPassing">In</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
@@ -48,20 +48,17 @@
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <LINK relation="Type">
-                    <FOREIGNID name="string" mc="Standard.DataType" uid="00000004-0000-000d-0000-000000000000"/>
+                    <FOREIGNID name="boolean" mc="Standard.DataType" uid="00000004-0000-0005-0000-000000000000"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="create" mc="Infrastructure.Stereotype" uid="00700680-0000-0204-0000-000000000000"/>
-            </LINK>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="contenu" mc="Standard.Attribute" uid="1a51f7ac-f32a-4332-a9d1-c0aadb83bbf6"/>
+          <ID name="taillePolice" mc="Standard.Attribute" uid="553008c0-00d3-41dc-9c0e-29899f48d109"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
@@ -75,7 +72,31 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[contenu]]></ATT>
+            <ATT name="Name"><![CDATA[taillePolice]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="stylePolice" mc="Standard.Attribute" uid="e4081b10-a0f3-4319-a838-44f30b660cec"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">false</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[stylePolice]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
