@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Consigne" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Proposition" version="4">
   <OBJECT>
-    <ID name="Consigne" mc="Standard.Class" uid="00252945-730f-465a-aa58-f7f769c3d14d"/>
-    <PID name="Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
+    <ID name="Proposition" mc="Standard.Class" uid="d7553352-079d-4f09-a9ed-95113990294f"/>
+    <PID name="Diagrammes de classe" mc="Standard.Package" uid="6287a82b-547c-4cbf-841c-76c1f2369577"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
       <ATT name="IsMain">false</ATT>
@@ -11,13 +11,13 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Consigne]]></ATT>
+      <ATT name="Name"><![CDATA[Proposition]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="contenu" mc="Standard.Attribute" uid="168ed62d-1fda-4717-aa27-008ecd172d3c"/>
+          <ID name="mot" mc="Standard.Attribute" uid="e5e48ead-94e6-4a7e-a0f9-d9e59392f990"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
@@ -31,7 +31,7 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[contenu]]></ATT>
+            <ATT name="Name"><![CDATA[mot]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>

@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Aide" version="4">
   <OBJECT>
-    <ID name="Aide" mc="Standard.Class" uid="3126e133-babe-4565-9b8f-bdc6cd61b904"/>
-    <PID name="Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
+    <ID name="Aide" mc="Standard.Class" uid="94692208-5d36-4555-9574-3f0bb4a8f133"/>
+    <PID name="Diagrammes de classe" mc="Standard.Package" uid="6287a82b-547c-4cbf-841c-76c1f2369577"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
       <ATT name="IsMain">false</ATT>
@@ -17,7 +17,7 @@
     <DEPENDENCIES>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="contenu" mc="Standard.Attribute" uid="a3ea9266-1b1b-4e35-90df-7a8024f5e4bd"/>
+          <ID name="contenu" mc="Standard.Attribute" uid="5d4231de-2be7-476e-8311-4ca0298ea9ac"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>

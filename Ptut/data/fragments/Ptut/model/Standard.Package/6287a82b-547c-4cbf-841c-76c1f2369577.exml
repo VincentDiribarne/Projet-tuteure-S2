@@ -14,8 +14,18 @@
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedElement">
-        <COMPID name="Diagramme de classe Etudiant" mc="Standard.Package" uid="82913360-9af2-453b-9279-370d4c74f9c6"/>
-        <COMPID name="Diagramme de classe Enseignant" mc="Standard.Package" uid="050d2387-f384-4ede-b9d7-e53653dafbb0"/>
+        <COMPID name="Enseignant" mc="Standard.Class" uid="d6bb42ea-542e-4250-880a-62c1af1cda94"/>
+        <COMPID name="Étudiant" mc="Standard.Class" uid="8c398c6b-a68e-498b-8876-59c4267d42aa"/>
+        <COMPID name="Ressource" mc="Standard.Class" uid="2bc6a768-6a35-4971-b9e4-7f6c1901d49c"/>
+        <COMPID name="Exercice" mc="Standard.Class" uid="4e1eb01b-6b43-4c12-ba29-a28b65826f38"/>
+        <COMPID name="Consigne" mc="Standard.Class" uid="6432717c-721e-4058-8299-9cd846ff7fc2"/>
+        <COMPID name="Aide" mc="Standard.Class" uid="94692208-5d36-4555-9574-3f0bb4a8f133"/>
+        <COMPID name="ExerciceModeÉvaluation" mc="Standard.Class" uid="39a7c776-2e2d-4eac-8f5e-0b0f7b4c478e"/>
+        <COMPID name="ExerciceModeEntraînement" mc="Standard.Class" uid="e58a9af6-c9a5-4295-9fbe-f34c4bbc36cf"/>
+        <COMPID name="Proposition" mc="Standard.Class" uid="d7553352-079d-4f09-a9ed-95113990294f"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de classe vue métier" mc="Standard.ClassDiagram" uid="e0a059e3-2bf5-496c-b6ba-27dd8f036d93"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>

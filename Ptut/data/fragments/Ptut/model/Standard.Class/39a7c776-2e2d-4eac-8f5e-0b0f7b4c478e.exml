@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="ExerciceModeEvaluation" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="ExerciceModeÉvaluation" version="4">
   <OBJECT>
-    <ID name="ExerciceModeEvaluation" mc="Standard.Class" uid="364c2532-2570-440c-865b-cefe5b081d2e"/>
-    <PID name="Enseignant" mc="Standard.Package" uid="050d2387-f384-4ede-b9d7-e53653dafbb0"/>
+    <ID name="ExerciceModeÉvaluation" mc="Standard.Class" uid="39a7c776-2e2d-4eac-8f5e-0b0f7b4c478e"/>
+    <PID name="Diagrammes de classe" mc="Standard.Package" uid="6287a82b-547c-4cbf-841c-76c1f2369577"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
       <ATT name="IsMain">false</ATT>
@@ -11,13 +11,13 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[ExerciceModeEvaluation]]></ATT>
+      <ATT name="Name"><![CDATA[ExerciceModeÉvaluation]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="tempsAutorise" mc="Standard.Attribute" uid="489bd144-5a38-4e63-8cfc-9b06dfdd6772"/>
+          <ID name="tempsAutorise" mc="Standard.Attribute" uid="03b82481-b960-4d78-8a77-92e1c875d9fa"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
@@ -36,14 +36,30 @@
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="Type">
-              <FOREIGNID name="string" mc="Standard.DataType" uid="00000004-0000-000d-0000-000000000000"/>
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
             </LINK>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Infrastructure.Note" uid="c1985a96-60a2-475c-8f5e-da1f0830f57b"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<Saisir le texte de la note ici>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="description" mc="Infrastructure.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>
       <COMP relation="Parent">
         <OBJECT>
-          <ID name="Generalization" mc="Standard.Generalization" uid="cf7e589d-aee3-4786-897d-5219038dbeb0"/>
+          <ID name="Generalization" mc="Standard.Generalization" uid="2bd3a2de-06df-4fdf-8e95-a50a42891795"/>
           <ATTRIBUTES>
             <ATT name="Discriminator"></ATT>
             <ATT name="Name"><![CDATA[Generalization]]></ATT>
@@ -51,7 +67,7 @@
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="SuperType">
-              <ID name="Exercice" mc="Standard.Class" uid="ebea893e-8839-40e5-bf04-128eec7f203c"/>
+              <ID name="Exercice" mc="Standard.Class" uid="4e1eb01b-6b43-4c12-ba29-a28b65826f38"/>
             </LINK>
           </DEPENDENCIES>
         </OBJECT>
