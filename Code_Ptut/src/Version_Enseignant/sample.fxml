@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez créer un exercice, ou en ouvrir un." textAlignment="CENTER" wrappingWidth="175.50244140625" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="15.0" />
+         </BorderPane.margin>
+      </Text>
+   </left>
+   <top>
+      <VBox prefHeight="26.0" prefWidth="1000.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+      				<MenuBar snapToPixel="false">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="Exercice">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" text="Ouvrir" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<MenuItem mnemonicParsing="false" text="Quitter" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Aide">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+      								<MenuItem mnemonicParsing="false" text="A propos" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Paramètres" />
+      					</menus>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+      				</MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <right>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous voulez de l'aide sur le fonctionnement de l'application, consultez la rubrique d'aide" textAlignment="CENTER" wrappingWidth="217.9052734375" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="15.0" />
+         </BorderPane.margin>
+      </Text>
+   </right>
+   <center>
+      <VBox prefHeight="617.0" prefWidth="576.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur Reconstitution">
+               <VBox.margin>
+                  <Insets top="80.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Version Enseignante">
+               <VBox.margin>
+                  <Insets bottom="200.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution">
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si notre application vous plait, n'hesitez pas à la noter x)" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V1.1" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
+
