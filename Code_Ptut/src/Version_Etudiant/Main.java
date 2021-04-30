@@ -1,4 +1,4 @@
-package sample;
+package Version_Etudiant;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
