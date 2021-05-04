@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
+   <top>
+      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+      				<MenuBar snapToPixel="false">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="Exercice">
+      							<items>
+      								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Aide">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+      								<MenuItem mnemonicParsing="false" text="A propos" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Paramètres" />
+      					</menus>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+      				</MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="812.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Aperçu">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="-100.0" />
+               </VBox.margin>
+            </Label>
+            <AnchorPane prefHeight="447.0" prefWidth="1080.0">
+               <children>
+                  <Pane layoutX="48.0" layoutY="43.0" prefHeight="250.0" prefWidth="466.0" style="-fx-border-style: solid;">
+                     <children>
+                        <MediaView fitHeight="200.0" fitWidth="400.0" layoutX="34.0" layoutY="25.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="567.0" layoutY="43.0" prefHeight="150.0" prefWidth="457.0" style="-fx-border-style: solid;">
+                     <children>
+                        <Label layoutX="23.0" layoutY="14.0" text="Consigne" />
+                        <TextField fx:id="textFieldConsigneFinale" alignment="TOP_LEFT" editable="false" layoutX="23.0" layoutY="37.0" prefHeight="75.0" prefWidth="403.0" promptText="Cliquer sur le bouton 'Modifier' pour éditer la consigne" />
+                        <Button layoutX="379.0" layoutY="117.0" mnemonicParsing="false" onAction="#modifierConsigne" text="Modifier" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="51.0" layoutY="313.0" prefHeight="245.0" prefWidth="465.0" style="-fx-border-style: solid;">
+                     <children>
+                        <Label layoutX="23.0" layoutY="14.0" text="Aide" />
+                        <TextField alignment="TOP_LEFT" editable="false" layoutX="23.0" layoutY="35.0" prefHeight="170.0" prefWidth="412.0" promptText="Cliquer sur le bouton 'Modifier' pour éditer les aides" />
+                        <Button layoutX="387.0" layoutY="212.0" mnemonicParsing="false" onAction="#modifierAide" text="Modifier" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="567.0" layoutY="207.0" prefHeight="352.0" prefWidth="457.0" style="-fx-border-style: solid;">
+                     <children>
+                        <Label layoutX="26.0" layoutY="16.0" text="Transcription" />
+                        <TextField alignment="TOP_LEFT" editable="false" layoutX="26.0" layoutY="42.0" prefHeight="269.0" prefWidth="400.0" promptText="Cliquer sur le bouton 'Modifier' pour éditer la transcription" />
+                        <Button layoutX="379.0" layoutY="319.0" mnemonicParsing="false" onAction="#modifierTranscription" text="Modifier" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="1080.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#pageImporterRessource" text="Retour">
+                     <HBox.margin>
+                        <Insets right="500.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" text="Ok" />
+               </children>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
