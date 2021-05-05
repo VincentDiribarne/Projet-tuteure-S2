@@ -9,8 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.*;
+import javafx.scene.paint.Color;
 import javafx.stage.*;
 
 public class Controller {
@@ -18,19 +20,29 @@ public class Controller {
 	//Id des variables présentes dans les fichiers FXML
 	@FXML private TextField repertoire;
 	@FXML private MediaView mediaView;
+	//Page Apercu
+	@FXML private TextField texteConsigne;
+	@FXML private TextField texteTranscription;
+	@FXML private TextField texteAide;
+	//Page Options
+	@FXML private RadioButton radioButtonEntrainement;
+	@FXML private RadioButton radioButtonEvaluation;
+	@FXML private RadioButton radioButton2Lettres;
+	@FXML private RadioButton radioButton3Lettres;
+	@FXML private HBox modeEntrainement;
+	@FXML private HBox modeEntrainement1;
+	@FXML private HBox modeEntrainement2;
+	@FXML private HBox modeEntrainement3;
+	@FXML private HBox modeEntrainement4;
+	@FXML private HBox modeEvaluation;
+	
 
-	//Pour l'édition de l'exercice
-	//Consigne
-	@FXML private TextField textFieldConsigne;
-	@FXML private TextArea textAreaConsigne;
-	@FXML private TextField textFieldConsigneFinale;
-
-
+	//////////////////////////Méthodes////////////////////////////////////////
+	//Méthode pour passer d'une scène à l'autre
 	private void changerScene (Parent root) {
 		Stage stage = (Stage) MainEnseignant.root.getScene().getWindow();
 		MainEnseignant.root = root;
-		stage.setMaximized(true);
-		stage.setScene(new Scene(root));
+		stage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		stage.show();
 	}
 
@@ -88,7 +100,6 @@ public class Controller {
 		Media media = new Media(selectedFile.toURI().toURL().toExternalForm());
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		mediaView.setMediaPlayer(mediaPlayer);
-		mediaPlayer.play();
 	}
 
 	@FXML
@@ -96,65 +107,161 @@ public class Controller {
 		Parent root = FXMLLoader.load(getClass().getResource("PageApercu.fxml"));
 		changerScene(root);
 	}
-
-	//Méthode pour ouvrir une nouvelle fenêtre pour éditer la consigne
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////			EDITION DE L'EXERCICE		////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//Pour éditer la consigne
+	//Lorsqu'on appuie sur Valider, un effet s'applique au TextField
 	@FXML
-	public void modifierConsigne(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("ModifierConsigne.fxml"));
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
+	public void validationConsigne(ActionEvent event) {
+		texteConsigne.setEditable(false);
+		texteConsigne.setOpacity(0.5);
+	}
 
-		//La fenêtre créée doit être validée et aucune opératio n'est eprmis avec la fenêtre parente
-		stage.initModality(Modality.WINDOW_MODAL);
-		stage.initOwner(MainEnseignant.root.getScene().getWindow());
-		stage.setTitle("Édition de la consigne");
+	//Lorsque le professeur veut rééditer la consigne, l'effet disparaît sur le TextField
+	@FXML
+	public void editionConsigne(MouseEvent event) {
+		texteConsigne.setEditable(true);
+		texteConsigne.setOpacity(1);
+	}
+	
+	//Pour éditer la transcription
+	//Lorsqu'on appuie sur Valider, un effet s'applique au TextField
+	@FXML
+	public void validationTranscription(ActionEvent event) {
+		texteTranscription.setEditable(false);
+		texteTranscription.setOpacity(0.5);
+	}
+
+	//Lorsque le professeur veut rééditer la transcription, l'effet disparaît sur le TextField
+	@FXML
+	public void editionTranscription(MouseEvent event) {
+		texteTranscription.setEditable(true);
+		texteTranscription.setOpacity(1);
+	}
+	
+	//Pour éditer les aides
+	//Lorsqu'on appuie sur Valider, un effet s'applique au TextField
+	@FXML
+	public void validationAide(ActionEvent event) {
+		texteAide.setEditable(false);
+		texteAide.setOpacity(0.5);
+	}
+
+	//Lorsque le professeur veut rééditer les aides, l'effet disparaît sur le TextField
+	@FXML
+	public void editionAide(MouseEvent event) {
+		texteAide.setEditable(true);
+		texteAide.setOpacity(1);
+	}
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////			GESTION DES OPTIONS 		////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//Chargement de la page des Options
+	@FXML
+	public void pageOptions(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("PageOptions.fxml"));
+		changerScene(root);
+	}
+	
+	//Gestion de si je sélectionne un mode, l'autre se décoche
+	@FXML
+	public void selectionModeEvaluation(ActionEvent event) {
+		//On fait apparaître ce qui concerne le mode Evaluation
+		modeEvaluation.setVisible(true);
 		
-		stage.show();
-	}
-
-	//Méthode pour ouvrir une nouvelle fenêtre pour éditer la transcription
-	@FXML
-	public void modifierTranscription(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("ModifierTranscription.fxml"));
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-
-		//La fenêtre créée doit être validée et aucune opératio n'est eprmis avec la fenêtre parente
-		stage.initModality(Modality.WINDOW_MODAL);
-		stage.initOwner(MainEnseignant.root.getScene().getWindow());
-		stage.setTitle("Édition de la transcription");
-
-		stage.show();
-	}
-
-	//Méthode pour ouvrir une nouvelle fenêtre pour éditer les aides
-	@FXML
-	public void modifierAide(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("ModifierAide.fxml"));
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-
-		//La fenêtre créée doit être validée et aucune opératio n'est eprmis avec la fenêtre parente
-		stage.initModality(Modality.WINDOW_MODAL);
-		stage.initOwner(MainEnseignant.root.getScene().getWindow());
-		stage.setTitle("Édition des aides");
-
-		stage.show();
-	}
-	
-	//Méthode qui remplit le textArea en fonction de ce que contient le TextField
-	@FXML 
-	public void remplissageTexte(KeyEvent event) {
-		//On dit que le texte doit revenir à la ligne
-		textAreaConsigne.setWrapText(true);
-		//On note ce qu'écrit le professeur dans le textArea
-		textAreaConsigne.setText(textFieldConsigne.getText());
+		//On cache ce qui concerne le mode Entraînement
+		modeEntrainement.setVisible(false);
+		modeEntrainement1.setVisible(false);
+		modeEntrainement2.setVisible(false);
+		modeEntrainement3.setVisible(false);
+		modeEntrainement4.setVisible(false);
+		
+		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
+		if(radioButtonEntrainement.isSelected()) {
+			radioButtonEntrainement.setSelected(false);
+		}
+		
+		//Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode Evaluation
+		if(!radioButtonEvaluation.isSelected()) {
+			modeEvaluation.setVisible(false);
+		}
 	}
 	
 	@FXML
-	public void validation(ActionEvent event) {
-		textFieldConsigneFinale = new TextField();
-		textFieldConsigneFinale.setText(textFieldConsigne.getText());
+	public void selectionModeEntrainement(ActionEvent event) {	
+		//On fait apparaître ce qui concerne le mode Entrainement
+		modeEntrainement.setVisible(true);
+		modeEntrainement1.setVisible(true);
+		modeEntrainement2.setVisible(true);
+		modeEntrainement3.setVisible(true);
+		modeEntrainement4.setVisible(true);
+		
+		//On cache ce qui concerne le mode Evaluation
+		modeEvaluation.setVisible(false);
+		
+		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
+		if(radioButtonEvaluation.isSelected()) {
+			radioButtonEvaluation.setSelected(false);
+		}
+		
+		//Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode Entrainement
+		if(!radioButtonEntrainement.isSelected()) {
+			modeEntrainement.setVisible(false);
+			modeEntrainement1.setVisible(false);
+			modeEntrainement2.setVisible(false);
+			modeEntrainement3.setVisible(false);
+			modeEntrainement4.setVisible(false);
+		}
 	}
+	
+	
+	//Gestion de si je sélectionne une nombre de lettres minimum autorisé, l'autre se décoche 
+	@FXML
+	public void selection2Lettres(ActionEvent event) {
+		if(radioButton3Lettres.isSelected()) {
+			radioButton3Lettres.setSelected(false);
+		}
+	}
+	
+	@FXML
+	public void selection3Lettres(ActionEvent event) {
+		if(radioButton2Lettres.isSelected()) {
+			radioButton2Lettres.setSelected(false);
+		}
+	}
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////			PAGE D'ENREGISTREMENT 		////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@FXML
+	public void pageEnregistrementFinal(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("EnregistrementFinal.fxml"));
+		changerScene(root);
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////		GESTION DES PARAMETRES 		////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@FXML
+	public void pageParametres(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("PageParametres.fxml"));
+		changerScene(root);
+	}
+	
+	/*@FXML
+	public void darkMode(ActionEvent event) {
+		
+	}*/
 
 }

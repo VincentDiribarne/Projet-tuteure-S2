@@ -29,7 +29,7 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" text="Paramètres" />
+      						<Menu mnemonicParsing="false" onAction="#pageParametres" text="Paramètres" />
       					</menus>
                <VBox.margin>
                   <Insets />
@@ -70,6 +70,9 @@
                </font>
             </Text>
          </children>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
       </VBox>
    </center>
    <left>

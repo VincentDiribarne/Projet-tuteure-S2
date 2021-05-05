@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
@@ -10,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
+<BorderPane stylesheets="@../../../darkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
    <top>
       <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
          <children>
@@ -41,65 +42,72 @@
       </VBox>
    </top>
    <center>
-      <VBox prefHeight="668.0" prefWidth="855.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label alignment="CENTER" text="Paramètres">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Nom de l'exercice">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
+                  <Label text="Taille de la police">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="18.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="200.0" />
+                     </HBox.margin>
                   </Label>
-                  <TextField prefHeight="31.0" prefWidth="218.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font></TextField>
+                  <ComboBox prefWidth="150.0" />
                </children>
                <VBox.margin>
-                  <Insets top="100.0" />
+                  <Insets bottom="20.0" left="200.0" right="200.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Répertoire">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
+                  <Label text="Style de police">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="18.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="200.0" />
+                     </HBox.margin>
                   </Label>
-                  <TextField fx:id="repertoire" prefHeight="31.0" prefWidth="402.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font></TextField>
-                  <Button mnemonicParsing="false" onAction="#choisirRepertoire" text="Parcourir">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Button>
+                  <ComboBox prefWidth="150.0" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="200.0" right="200.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="DarkMode">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ToggleButton mnemonicParsing="false" text="Activer" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="200.0" right="200.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#annuler" onMouseClicked="#annuler" text="Annuler">
+                  <Button mnemonicParsing="false" text="Retour">
                      <HBox.margin>
-                        <Insets right="50.0" />
+                        <Insets right="500.0" />
                      </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#pageImporterRessource" text="Ok">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" text="Appliquer" />
                </children>
             </HBox>
          </children>

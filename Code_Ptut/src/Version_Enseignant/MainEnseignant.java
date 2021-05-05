@@ -2,13 +2,19 @@ package Version_Enseignant;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainEnseignant extends Application {
 	
 	static Parent root;
+	
+	//Paramètres de taille d'écran
+	static double width;
+	static double height;
 	
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -19,14 +25,11 @@ public class MainEnseignant extends Application {
          primaryStage.setMaximized(true);
 
          //On récupère la largeur et la hauteur de l'écran
-         //int width = (int) Screen.getPrimary().getBounds().getWidth();
-         //int height = (int) Screen.getPrimary().getBounds().getHeight();
-         
-         //On restreint la largeur et la hauteur de la page
-         //primaryStage.setMinWidth(width - 100);
-         //primaryStage.setMinHeight(height - 100);
+         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+         width=screenBounds.getWidth();
+         height=screenBounds.getHeight();
         
-         primaryStage.setScene(new Scene(root));
+         primaryStage.setScene(new Scene(root, width, height));
          primaryStage.show();
         
     }
