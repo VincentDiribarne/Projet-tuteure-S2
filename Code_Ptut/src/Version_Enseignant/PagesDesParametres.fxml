@@ -21,8 +21,10 @@
       							<items>
       								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
       							</items>
       						</Menu>
@@ -42,28 +44,60 @@
       </VBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="517.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
          <children>
+            <Label text="Paramètres">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="25.0" top="10.0" />
+               </VBox.margin>
+            </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Votre exercice a bien été enregistré !!">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
+                  <Label text="Taille de la police">
+                     <HBox.margin>
+                        <Insets right="300.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ChoiceBox prefWidth="150.0" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#annuler" text="Ok">
+                  <Label text="Style de police">
                      <HBox.margin>
-                        <Insets bottom="25.0" right="50.0" />
+                        <Insets right="300.0" />
+                     </HBox.margin>
+                  </Label>
+                  <VBox prefHeight="100.0" prefWidth="145.0">
+                     <children>
+                        <ChoiceBox prefWidth="150.0" />
+                        <ListView fx:id="listePolices" prefHeight="69.0" prefWidth="153.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="DarkMode">
+                     <HBox.margin>
+                        <Insets right="300.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ToggleButton mnemonicParsing="false" text="Activer" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Retour">
+                     <HBox.margin>
+                        <Insets right="400.0" />
                      </HBox.margin>
                   </Button>
+                  <Button mnemonicParsing="false" text="Appliquer" />
                </children>
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
             </HBox>
          </children>
       </VBox>

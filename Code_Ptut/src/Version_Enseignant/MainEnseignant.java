@@ -28,7 +28,8 @@ public class MainEnseignant extends Application {
          Rectangle2D screenBounds = Screen.getPrimary().getBounds();
          width=screenBounds.getWidth();
          height=screenBounds.getHeight();
-        
+
+         
          primaryStage.setScene(new Scene(root, width, height));
          primaryStage.show();
         

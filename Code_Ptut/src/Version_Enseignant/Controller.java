@@ -2,24 +2,35 @@ package Version_Enseignant;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.*;
-import javafx.scene.paint.Color;
 import javafx.stage.*;
+import javafx.stage.FileChooser.ExtensionFilter;
 
-public class Controller {
+public class Controller implements Initializable{
 
 	//Id des variables présentes dans les fichiers FXML
 	@FXML private TextField repertoire;
+	@FXML private TextField NomExo;
+	@FXML private Button OkNouvelExo;
 	@FXML private MediaView mediaView;
+	//Importer la ressource
+	@FXML private ImageView imageAudio;
 	//Page Apercu
 	@FXML private TextField texteConsigne;
 	@FXML private TextField texteTranscription;
@@ -35,9 +46,24 @@ public class Controller {
 	@FXML private HBox modeEntrainement3;
 	@FXML private HBox modeEntrainement4;
 	@FXML private HBox modeEvaluation;
-	
+	//Page de parametres
+	@FXML ListView<String> listePolice = new ListView<>();
+	ObservableList<String> polices = FXCollections.observableArrayList("Arial", "Avant Garde", "Avenir","BebasBell Gothic", "Benguiat Gothic", "Bitstream Vera Sans", "Calibri");
 
-	//////////////////////////Méthodes////////////////////////////////////////
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////			INITIALISATION		////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		listePolice.setItems(polices);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////			METHDOES GENERALES		////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	//Méthode pour passer d'une scène à l'autre
 	private void changerScene (Parent root) {
 		Stage stage = (Stage) MainEnseignant.root.getScene().getWindow();
@@ -46,7 +72,11 @@ public class Controller {
 		stage.show();
 	}
 
-	//Bouton Quitter qui permet à l'enseignant de quitter l'application
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////		METHDOES DISPONIBLES SUR TOUTES LES PAGES		////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
@@ -68,7 +98,8 @@ public class Controller {
 		changerScene(root);
 	}
 
-
+	
+	//Bouton annuler pour revenir à la page d'accueil (depuis la page d'enregistrement final et depuis la page nouvel exo)
 	@FXML
 	public void annuler(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("PageAccueil.fxml"));
@@ -85,21 +116,79 @@ public class Controller {
 		selectedDirectory = directoryChooser.showDialog(null);
 		repertoire.setText(selectedDirectory.getAbsolutePath());
 	}
-
+	
+	//Méthode pour se diriger à la page où l'enseignant importe la ressource
 	@FXML
 	public void pageImporterRessource(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("ImporterRessource.fxml"));
 		changerScene(root);
 	}
 
+	
+	//Depuis la page d'importation, on ouvre l'explorateur de fichiers pour que l'enseignant choisisse la ressource
 	@FXML
 	public void importerRessource(ActionEvent event) throws IOException {
 		FileChooser fileChooser = new FileChooser();
+		FileChooser fileChooserImage = new FileChooser();
+		//La variable path va contenir l'URL du fichier
+		String path = "", extension = "";
+		
+		//On restreint le choix des extensions
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Documents Média (MP3, MP4)", "*.mp3","*.mp4"));
+
+		//On crée un fichier qui va contenir l'URL du fichier sélectionné
 		File selectedFile = new File("");
 		selectedFile = fileChooser.showOpenDialog(null);
-		Media media = new Media(selectedFile.toURI().toURL().toExternalForm());
+		path = selectedFile.toURI().toURL().toExternalForm();
+		Media media = new Media(path);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaView.setMediaPlayer(mediaPlayer);
+		
+		//Boucle pour récupérer l'exension du fichier
+		for(int i = 0; i < path.length(); i++) {
+			if(i > path.length() - 5) {
+				extension = extension + path.charAt(i);
+			}
+		}
+		
+		//S'il s'agit d'un fichier video
+		if(extension.compareTo(".mp4") == 0) {
+			
+			//On réduit le ImageView
+			imageAudio.setFitWidth(5);
+			imageAudio.setFitHeight(5);
+			
+			//On agrandit le MediaView
+			mediaView.setFitWidth(500);
+			mediaView.setFitHeight(300);
+			
+			mediaView.setMediaPlayer(mediaPlayer);
+		}
+		
+		//S'il s'agit d'un fichier audio
+		if(extension.compareTo(".mp3") == 0) {
+			
+			//On réduit le mediaView
+			mediaView.setFitWidth(5);
+			mediaView.setFitHeight(5);
+			
+			//On agrandit le ImageView
+			imageAudio.setFitWidth(500);
+			imageAudio.setFitHeight(300);
+			
+			//On restreint le choix des extensions des images
+			fileChooserImage.getExtensionFilters().add(new ExtensionFilter("Images", "*.jpg","*.png","*.jpeg","*.gif"));
+			fileChooserImage.setTitle("Choix d'une image pour la preview de l'audio");
+			selectedFile = new File("");
+			selectedFile = fileChooserImage.showOpenDialog(null);
+			
+			//On crée une image à partir de l'URL du fichier sélectionné
+			Image image = new Image(selectedFile.toURI().toURL().toExternalForm());
+			//On set l'imageView avec l'image
+			imageAudio.setImage(image);
+			//On set le media dans le mediaView
+			mediaView.setMediaPlayer(mediaPlayer);
+			mediaPlayer.play();
+		}
 	}
 
 	@FXML
@@ -255,9 +344,11 @@ public class Controller {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	public void pageParametres(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("PageParametres.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("PageDesParametres.fxml"));
 		changerScene(root);
 	}
+
+
 	
 	/*@FXML
 	public void darkMode(ActionEvent event) {

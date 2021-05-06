@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="@../../../darkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
    <top>
       <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
          <children>
@@ -21,8 +21,10 @@
       							<items>
       								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
       							</items>
       						</Menu>
@@ -32,7 +34,7 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" onAction="#pageParametres" text="Paramètres" />
+      						<Menu mnemonicParsing="false" text="Paramètres" />
       					</menus>
                <VBox.margin>
                   <Insets />
@@ -42,69 +44,56 @@
       </VBox>
    </top>
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="517.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" text="Paramètres">
+            <Label text="Paramètres">
                <font>
                   <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="25.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Taille de la police">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
                      <HBox.margin>
-                        <Insets right="200.0" />
+                        <Insets right="300.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0" />
+                  <ChoiceBox prefWidth="150.0" />
                </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="200.0" right="200.0" />
-               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Style de police">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
                      <HBox.margin>
-                        <Insets right="200.0" />
+                        <Insets right="300.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0" />
+                  <VBox prefHeight="100.0" prefWidth="145.0">
+                     <children>
+                        <ChoiceBox prefWidth="150.0" />
+                        <ListView fx:id="listePolices" prefHeight="69.0" prefWidth="153.0" />
+                     </children>
+                  </VBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="200.0" right="200.0" />
-               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="DarkMode">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
                      <HBox.margin>
-                        <Insets right="200.0" />
+                        <Insets right="300.0" />
                      </HBox.margin>
                   </Label>
                   <ToggleButton mnemonicParsing="false" text="Activer" />
                </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="200.0" right="200.0" />
-               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" text="Retour">
                      <HBox.margin>
-                        <Insets right="500.0" />
+                        <Insets right="400.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" text="Appliquer" />

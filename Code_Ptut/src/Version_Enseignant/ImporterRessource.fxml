@@ -20,8 +20,10 @@
       							<items>
       								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
       							</items>
       						</Menu>
@@ -31,7 +33,7 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" onAction="#pageParametres" text="Paramètres" />
+      						<Menu mnemonicParsing="false" text="Paramètres" />
       					</menus>
                <VBox.margin>
                   <Insets />
@@ -51,7 +53,8 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0">
+            <ImageView fx:id="imageAudio" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+            <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin>

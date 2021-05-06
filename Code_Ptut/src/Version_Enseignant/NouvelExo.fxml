@@ -20,8 +20,10 @@
       							<items>
       								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
       							</items>
       						</Menu>
@@ -31,7 +33,7 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" onAction="#pageParametres" text="Paramètres" />
+      						<Menu mnemonicParsing="false" text="Paramètres" />
       					</menus>
                <VBox.margin>
                   <Insets />
@@ -53,7 +55,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="31.0" prefWidth="218.0">
+                  <TextField fx:id="NomExo" prefHeight="31.0" prefWidth="218.0">
                      <font>
                         <Font size="20.0" />
                      </font></TextField>
@@ -72,7 +74,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="repertoire" prefHeight="31.0" prefWidth="402.0">
+                  <TextField fx:id="repertoire" editable="false" prefHeight="31.0" prefWidth="402.0">
                      <font>
                         <Font size="20.0" />
                      </font></TextField>
@@ -92,7 +94,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#pageImporterRessource" text="Ok">
+                  <Button fx:id="OkNouvelExo" mnemonicParsing="false" onAction="#pageImporterRessource" text="Ok">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

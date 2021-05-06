@@ -18,8 +18,10 @@
       							<items>
       								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem disable="true" mnemonicParsing="true" text="Enregistrer" />
+      								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
       							</items>
       						</Menu>
