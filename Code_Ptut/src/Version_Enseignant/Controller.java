@@ -6,8 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,23 +18,29 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.*;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.*;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class Controller implements Initializable{
 
 	//Id des variables présentes dans les fichiers FXML
+	//Page NouvelExo où l'on précise le nom de l'exercice et le lieu d'enregistrement
 	@FXML private TextField repertoire;
 	@FXML private TextField NomExo;
 	@FXML private Button OkNouvelExo;
+	//Page d'importation de la ressource 
 	@FXML private MediaView mediaView;
-	//Importer la ressource
+	public MediaPlayer mediaPlayer;
 	@FXML private ImageView imageAudio;
+	@FXML private Button playPause;
 	//Page Apercu
 	@FXML private TextField texteConsigne;
 	@FXML private TextField texteTranscription;
 	@FXML private TextField texteAide;
-	//Page Options
+	@FXML private MediaView MediaViewApercu;
+	@FXML private Button okApercu;
+	//Page des Options
 	@FXML private RadioButton radioButtonEntrainement;
 	@FXML private RadioButton radioButtonEvaluation;
 	@FXML private RadioButton radioButton2Lettres;
@@ -48,15 +53,15 @@ public class Controller implements Initializable{
 	@FXML private HBox modeEvaluation;
 	//Page de parametres
 	@FXML ListView<String> listePolice = new ListView<>();
-	ObservableList<String> polices = FXCollections.observableArrayList("Arial", "Avant Garde", "Avenir","BebasBell Gothic", "Benguiat Gothic", "Bitstream Vera Sans", "Calibri");
 
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////			INITIALISATION		////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ObservableList<String> polices = FXCollections.observableArrayList("Arial", "Avant Garde", "Avenir","BebasBell Gothic", "Benguiat Gothic", "Bitstream Vera Sans", "Calibri");
 		listePolice.setItems(polices);
 	}
 
@@ -91,6 +96,10 @@ public class Controller implements Initializable{
 		//TODO Chargez l'exercice dans la page
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////	  PAGE NOUVEL EXO (NOM + LIEU D'ENREGISTREMENT)		////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	//Bouton Nouveau qui permet à l'enseignant de démarrer la création d'un nouvel exercice
 	@FXML
 	public void PageNouvelExo(ActionEvent event) throws IOException {
@@ -115,7 +124,28 @@ public class Controller implements Initializable{
 		directoryChooser.setTitle("Choisissez un répertoire pour l'enregistrement");
 		selectedDirectory = directoryChooser.showDialog(null);
 		repertoire.setText(selectedDirectory.getAbsolutePath());
+		verifRempli();
 	}
+	
+	
+	//Méthode qui vérifie si les textFields sont rempli afin d'activer le bouton Ok
+	@FXML
+	public void verifRempli() {
+		
+		//Pour la page de nouvelExo
+		if(!NomExo.getText().trim().isEmpty() && !repertoire.getText().trim().isEmpty()) {
+			OkNouvelExo.setDisable(false);
+		}
+		
+		if(NomExo.getText().trim().isEmpty()) {
+			OkNouvelExo.setDisable(true);
+		}	
+	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////		PAGE D'IMPORTATION DE LA RESSOURCE		////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//Méthode pour se diriger à la page où l'enseignant importe la ressource
 	@FXML
@@ -141,7 +171,7 @@ public class Controller implements Initializable{
 		selectedFile = fileChooser.showOpenDialog(null);
 		path = selectedFile.toURI().toURL().toExternalForm();
 		Media media = new Media(path);
-		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer = new MediaPlayer(media);
 		
 		//Boucle pour récupérer l'exension du fichier
 		for(int i = 0; i < path.length(); i++) {
@@ -190,17 +220,31 @@ public class Controller implements Initializable{
 			mediaPlayer.play();
 		}
 	}
-
+	
+	//Fonction qui permet à l'enseignant de visualiser sa video ou son son
 	@FXML
-	public void pageApercu(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("PageApercu.fxml"));
-		changerScene(root);
-	}
+	public void playOrPause() {
+		if(mediaPlayer.getStatus() == Status.PAUSED || mediaPlayer.getStatus() == Status.READY) {
+            mediaPlayer.play();
+            playPause.setText("Pause");
+        }
+          else{
+            mediaPlayer.pause();
+            playPause.setText("Play");
+        }
+    } 
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////			EDITION DE L'EXERCICE		////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//Méthode pour se diriger vers la page Apercu depuis la page d'importation
+	@FXML
+	public void pageApercu(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("PageApercu.fxml"));
+		changerScene(root);
+	}
 	
 	//Pour éditer la consigne
 	//Lorsqu'on appuie sur Valider, un effet s'applique au TextField
@@ -246,7 +290,6 @@ public class Controller implements Initializable{
 		texteAide.setEditable(true);
 		texteAide.setOpacity(1);
 	}
-	
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -347,7 +390,6 @@ public class Controller implements Initializable{
 		Parent root = FXMLLoader.load(getClass().getResource("PageDesParametres.fxml"));
 		changerScene(root);
 	}
-
 
 	
 	/*@FXML

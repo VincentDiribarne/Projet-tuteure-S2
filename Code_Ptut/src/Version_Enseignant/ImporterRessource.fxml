@@ -59,6 +59,10 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </MediaView>
+            <Button fx:id="playPause" mnemonicParsing="false" onAction="#playOrPause" text="Play">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Button>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#PageNouvelExo" text="Retour">

@@ -55,7 +55,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="NomExo" prefHeight="31.0" prefWidth="218.0">
+                  <TextField fx:id="NomExo" onKeyTyped="#verifRempli" prefHeight="31.0" prefWidth="218.0">
                      <font>
                         <Font size="20.0" />
                      </font></TextField>
@@ -94,7 +94,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="OkNouvelExo" mnemonicParsing="false" onAction="#pageImporterRessource" text="Ok">
+                  <Button fx:id="OkNouvelExo" disable="true" mnemonicParsing="false" onAction="#pageImporterRessource" text="Ok">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
