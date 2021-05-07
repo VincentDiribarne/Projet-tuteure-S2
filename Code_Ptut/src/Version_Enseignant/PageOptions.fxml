@@ -65,7 +65,7 @@
 								<Font size="18.0" />
 							</font>
 						</Label>
-						<TextField prefHeight="31.0" prefWidth="23.0">
+						<TextField fx:id="CaraOccul" onKeyTyped="#RestrictionOne" prefHeight="31.0" prefWidth="22.0">
 							<tooltip>
 								<Tooltip text="Ce caractère d'occultation sera utilisé pour crypter le texte donné à l'étudiant" />
 							</tooltip>
@@ -85,17 +85,13 @@
 								<Insets right="400.0" />
 							</HBox.margin>
 						</Label>
-						<ToggleButton mnemonicParsing="false" text="Activer">
-							<tooltip>
-								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-							</tooltip>
-						</ToggleButton>
+                  <CheckBox mnemonicParsing="false" />
 					</children>
 					<VBox.margin>
 						<Insets left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox alignment="CENTER" prefHeight="55.0" prefWidth="1030.0">
+				<HBox alignment="CENTER" prefHeight="11.0" prefWidth="1030.0">
 					<children>
 						<Label text="Mode">
 							<font>
@@ -107,7 +103,7 @@
 						</Label>
 					</children>
 					<VBox.margin>
-						<Insets left="50.0" top="50.0" />
+						<Insets left="50.0" top="25.0" />
 					</VBox.margin>
 				</HBox>
 				<HBox alignment="CENTER" prefHeight="61.0" prefWidth="980.0">
@@ -151,7 +147,7 @@
 								<Insets right="20.0" />
 							</HBox.margin>
 						</Label>
-						<TextField>
+						<TextField fx:id="nbMinute" onKeyTyped="#RestrictionChiffre">
 							<HBox.margin>
 								<Insets right="5.0" />
 							</HBox.margin>
@@ -169,11 +165,11 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-						<ToggleButton mnemonicParsing="false" text="Activer">
-							<tooltip>
+                  <CheckBox mnemonicParsing="false">
+                     <tooltip>
 								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-							</tooltip>
-						</ToggleButton>
+                     </tooltip>
+                  </CheckBox>
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />
@@ -186,11 +182,11 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-						<ToggleButton mnemonicParsing="false" text="Activer">
-							<tooltip>
+                  <CheckBox mnemonicParsing="false">
+                     <tooltip>
 								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-							</tooltip>
-						</ToggleButton>
+                     </tooltip>
+                  </CheckBox>
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />
@@ -203,11 +199,11 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-						<ToggleButton mnemonicParsing="false" text="Activer">
-							<tooltip>
+                  <CheckBox mnemonicParsing="false">
+                     <tooltip>
 								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-							</tooltip>
-						</ToggleButton>
+                     </tooltip>
+                  </CheckBox>
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />

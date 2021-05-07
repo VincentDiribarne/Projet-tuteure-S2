@@ -123,7 +123,7 @@
                         <Insets right="500.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="okApercu" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#pageOptions" text="Ok" />
+                  <Button fx:id="okApercu" alignment="CENTER" mnemonicParsing="false" onAction="#pageOptions" text="Ok" />
                </children>
                <VBox.margin>
                   <Insets bottom="25.0" top="25.0" />

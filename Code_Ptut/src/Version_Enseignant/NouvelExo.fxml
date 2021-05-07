@@ -77,7 +77,10 @@
                   <TextField fx:id="repertoire" editable="false" prefHeight="31.0" prefWidth="402.0">
                      <font>
                         <Font size="20.0" />
-                     </font></TextField>
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Cliquer sur le bouton Parcourir et sélectionnez le répertoire dans lequel vous voulez enregistrer votre exercice  " />
+                     </tooltip></TextField>
                   <Button mnemonicParsing="false" onAction="#choisirRepertoire" text="Parcourir">
                      <font>
                         <Font size="20.0" />

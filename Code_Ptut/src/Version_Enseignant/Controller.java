@@ -15,6 +15,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.*;
@@ -51,6 +52,8 @@ public class Controller implements Initializable{
 	@FXML private HBox modeEntrainement3;
 	@FXML private HBox modeEntrainement4;
 	@FXML private HBox modeEvaluation;
+	@FXML private TextField CaraOccul;
+	@FXML private TextField nbMinute;
 	//Page de parametres
 	@FXML ListView<String> listePolice = new ListView<>();
 
@@ -123,7 +126,9 @@ public class Controller implements Initializable{
 		File selectedDirectory;
 		directoryChooser.setTitle("Choisissez un répertoire pour l'enregistrement");
 		selectedDirectory = directoryChooser.showDialog(null);
-		repertoire.setText(selectedDirectory.getAbsolutePath());
+		if(selectedDirectory != null) {
+			repertoire.setText(selectedDirectory.getAbsolutePath());
+		}
 		verifRempli();
 	}
 	
@@ -370,6 +375,23 @@ public class Controller implements Initializable{
 		}
 	}
 	
+	//Méthode qui restreint à un caractère, la saisie du caractère d'occultation
+	@FXML
+	public void RestrictionOne(KeyEvent event) {
+		if(CaraOccul.getText().length() > 1) {
+			CaraOccul.deletePreviousChar();
+		}
+	}
+	
+	//Méthode qui restreint à la saisie de chiffres uniquement pour la saisie du temps
+	@FXML
+	public void RestrictionChiffre(KeyEvent event) {
+		if(nbMinute.getText().length() > 0) {
+			if(!nbMinute.getText().matches("[0-9]*")) {
+				nbMinute.deletePreviousChar();
+			}
+		}
+	}
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -380,6 +402,15 @@ public class Controller implements Initializable{
 	public void pageEnregistrementFinal(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("EnregistrementFinal.fxml"));
 		changerScene(root);
+		
+        //Enregistrement
+        /*FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters()
+        .addAll(
+                new FileChooser.ExtensionFilter("txt", "*.txt")
+        );
+        fileChooser.setTitle(NomExo.getText());
+        fileChooser.showSaveDialog(null);*/
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
