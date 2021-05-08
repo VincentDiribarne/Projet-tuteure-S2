@@ -1,0 +1,57 @@
+<!---<BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="719.0" prefWidth="74.0" style="-fx-alignment: center;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text stroke="#f8f8f8" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </VBox>
+         </center>
+         <left>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox style="-fx-alignment: center;" BorderPane.alignment="CENTER_LEFT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </VBox>
+         </right>
+         <bottom>
+            <HBox minWidth="889.0" prefHeight="39.0" prefWidth="889.0" style="-fx-alignment: center; -fx-position-shape: fixed;" BorderPane.alignment="CENTER">
+               <children>
+                  <Region prefHeight="40.0" prefWidth="558.0" />
+                  <Text accessibleRole="PARENT" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-origin: center;" text="N'hesirez pas à noter l'application, si elle vous plait" textAlignment="CENTER">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
+                  <Region prefHeight="40.0" prefWidth="558.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V1.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="35.93359375">
+                     <font>
+                        <Font name="System Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+      </BorderPane>-->
