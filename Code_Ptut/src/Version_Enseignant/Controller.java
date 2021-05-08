@@ -6,8 +6,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,9 +25,13 @@ import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.*;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.Duration;
 
 public class Controller implements Initializable{
 
+	//Variables
+	private static Scene previousScene;
+	
 	//Id des variables présentes dans les fichiers FXML
 	//Page NouvelExo où l'on précise le nom de l'exercice et le lieu d'enregistrement
 	@FXML private TextField repertoire;
@@ -35,6 +42,7 @@ public class Controller implements Initializable{
 	public MediaPlayer mediaPlayer;
 	@FXML private ImageView imageAudio;
 	@FXML private Button playPause;
+	@FXML private Slider progressBar;
 	//Page Apercu
 	@FXML private TextField texteConsigne;
 	@FXML private TextField texteTranscription;
@@ -55,7 +63,10 @@ public class Controller implements Initializable{
 	@FXML private TextField CaraOccul;
 	@FXML private TextField nbMinute;
 	//Page de parametres
-	@FXML ListView<String> listePolice = new ListView<>();
+	@FXML ListView<String> listePolices = new ListView<>();
+	@FXML ListView<String> listeTailles = new ListView<>();
+	@FXML TextField taille;
+	@FXML TextField police;
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +76,9 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<String> polices = FXCollections.observableArrayList("Arial", "Avant Garde", "Avenir","BebasBell Gothic", "Benguiat Gothic", "Bitstream Vera Sans", "Calibri");
-		listePolice.setItems(polices);
+		listePolices.setItems(polices);
+		ObservableList<String> tailles = FXCollections.observableArrayList("12","13","14","15","16");
+		listeTailles.setItems(tailles);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +88,7 @@ public class Controller implements Initializable{
 	//Méthode pour passer d'une scène à l'autre
 	private void changerScene (Parent root) {
 		Stage stage = (Stage) MainEnseignant.root.getScene().getWindow();
+		previousScene = MainEnseignant.root.getScene();
 		MainEnseignant.root = root;
 		stage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		stage.show();
@@ -222,8 +236,41 @@ public class Controller implements Initializable{
 			imageAudio.setImage(image);
 			//On set le media dans le mediaView
 			mediaView.setMediaPlayer(mediaPlayer);
-			mediaPlayer.play();
 		}
+		
+		
+		//Gestion de la progressBar
+		mediaPlayer.currentTimeProperty().addListener(new ChangeListener<javafx.util.Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends javafx.util.Duration> observable, javafx.util.Duration oldValue, javafx.util.Duration newValue) {
+                progressBar.setValue(newValue.toSeconds());
+            }
+        }
+        );
+		
+		progressBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(javafx.util.Duration.seconds(progressBar.getValue()));
+            }
+        });
+        
+        progressBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mediaPlayer.seek(javafx.util.Duration.seconds(progressBar.getValue()));
+            }
+        });
+        
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                javafx.util.Duration total = media.getDuration();
+                progressBar.setMax(total.toSeconds());
+            }
+        });
+		
+		mediaPlayer.play();
 	}
 	
 	//Fonction qui permet à l'enseignant de visualiser sa video ou son son
@@ -320,6 +367,7 @@ public class Controller implements Initializable{
 		modeEntrainement2.setVisible(false);
 		modeEntrainement3.setVisible(false);
 		modeEntrainement4.setVisible(false);
+		
 		
 		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
 		if(radioButtonEntrainement.isSelected()) {
@@ -421,11 +469,30 @@ public class Controller implements Initializable{
 		Parent root = FXMLLoader.load(getClass().getResource("PageDesParametres.fxml"));
 		changerScene(root);
 	}
+	
+	@FXML
+	public void setParametreTaille(MouseEvent event) {
+		taille.setText((String) listeTailles.getFocusModel().getFocusedItem());
+	}
+	
+	@FXML
+	public void setParametrePolice(MouseEvent event) {
+		police.setText((String) listePolices.getFocusModel().getFocusedItem());
+	}
+	
+	/* Ne marche pas
+	@FXML
+	public void retourPara(ActionEvent event) {
+		Stage stage = (Stage) MainEnseignant.root.getScene().getWindow();
+		MainEnseignant.root = previousScene.getRoot();
+		stage.setScene(new Scene(previousScene.getRoot(), MainEnseignant.width, MainEnseignant.height));
+		stage.show();
+	}*/
 
 	
-	/*@FXML
+	@FXML
 	public void darkMode(ActionEvent event) {
 		
-	}*/
+	}
 
 }

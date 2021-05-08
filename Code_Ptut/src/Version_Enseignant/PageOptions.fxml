@@ -34,7 +34,11 @@
 								<MenuItem mnemonicParsing="false" text="A propos" />
 							</items>
 						</Menu>
-						<Menu mnemonicParsing="false" text="Paramètres" />
+						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#pageParametres" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" text="DarkMode" />
+                     </items></Menu>
 					</menus>
 					<VBox.margin>
 						<Insets />
@@ -91,7 +95,7 @@
 						<Insets left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox alignment="CENTER" prefHeight="11.0" prefWidth="1030.0">
+				<HBox alignment="CENTER" prefHeight="30.0" prefWidth="1030.0">
 					<children>
 						<Label text="Mode">
 							<font>
@@ -140,7 +144,7 @@
 						<Insets bottom="10.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEvaluation" alignment="CENTER" prefHeight="44.0" prefWidth="980.0" visible="false">
+				<HBox fx:id="modeEvaluation" alignment="CENTER" prefHeight="16.0" prefWidth="980.0" visible="false">
 					<children>
 						<Label text="Limite de temps">
 							<HBox.margin>
@@ -235,7 +239,7 @@
 						<Insets bottom="5.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+				<HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
 					<children>
 						<Button mnemonicParsing="false" onAction="#pageApercu" text="Retour">
 							<HBox.margin>
