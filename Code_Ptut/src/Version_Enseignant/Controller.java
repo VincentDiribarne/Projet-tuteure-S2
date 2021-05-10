@@ -6,11 +6,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.InvalidationListener;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -210,7 +208,6 @@ public class Controller implements Initializable{
 			mediaView.setFitWidth(500);
 			mediaView.setFitHeight(300);
 			
-			mediaView.setMediaPlayer(mediaPlayer);
 		}
 		
 		//S'il s'agit d'un fichier audio
@@ -234,43 +231,41 @@ public class Controller implements Initializable{
 			Image image = new Image(selectedFile.toURI().toURL().toExternalForm());
 			//On set l'imageView avec l'image
 			imageAudio.setImage(image);
-			//On set le media dans le mediaView
-			mediaView.setMediaPlayer(mediaPlayer);
+
 		}
 		
+		//On set le media dans le mediaView
+		mediaView.setMediaPlayer(mediaPlayer);
+		mediaPlayer.setAutoPlay(true);
 		
 		//Gestion de la progressBar
-		mediaPlayer.currentTimeProperty().addListener(new ChangeListener<javafx.util.Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends javafx.util.Duration> observable, javafx.util.Duration oldValue, javafx.util.Duration newValue) {
-                progressBar.setValue(newValue.toSeconds());
-            }
-        }
-        );
-		
-		progressBar.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mediaPlayer.seek(javafx.util.Duration.seconds(progressBar.getValue()));
-            }
-        });
-        
-        progressBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mediaPlayer.seek(javafx.util.Duration.seconds(progressBar.getValue()));
-            }
-        });
-        
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
-                javafx.util.Duration total = media.getDuration();
-                progressBar.setMax(total.toSeconds());
+            	System.out.println("TOTO");
+                progressBar.setMax(mediaPlayer.getTotalDuration().toSeconds());
+                System.out.println(progressBar.getMax());
             }
         });
+        
+        InvalidationListener sliderChangeListener = o-> {
+            Duration seekTo = Duration.seconds(progressBar.getValue());
+            mediaPlayer.seek(seekTo);
+        };
+        
+        progressBar.valueProperty().addListener(sliderChangeListener);
+
+
+        mediaPlayer.currentTimeProperty().addListener(l-> {
+
+        	progressBar.valueProperty().removeListener(sliderChangeListener);
+
+            Duration currentTime = mediaPlayer.getCurrentTime();
+            progressBar.setValue(currentTime.toSeconds());    
+
+            progressBar.valueProperty().addListener(sliderChangeListener);
+        });
 		
-		mediaPlayer.play();
 	}
 	
 	//Fonction qui permet à l'enseignant de visualiser sa video ou son son
@@ -480,14 +475,14 @@ public class Controller implements Initializable{
 		police.setText((String) listePolices.getFocusModel().getFocusedItem());
 	}
 	
-	/* Ne marche pas
+	
 	@FXML
 	public void retourPara(ActionEvent event) {
 		Stage stage = (Stage) MainEnseignant.root.getScene().getWindow();
 		MainEnseignant.root = previousScene.getRoot();
 		stage.setScene(new Scene(previousScene.getRoot(), MainEnseignant.width, MainEnseignant.height));
 		stage.show();
-	}*/
+	}
 
 	
 	@FXML
