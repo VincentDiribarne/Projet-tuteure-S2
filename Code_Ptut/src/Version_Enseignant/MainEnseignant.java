@@ -10,15 +10,15 @@ import javafx.stage.Stage;
 
 public class MainEnseignant extends Application {
 	
-	static Parent root;
+	public static Parent root;
 	
 	//Paramètres de taille d'écran
-	static double width;
-	static double height;
+	public static double width;
+	public static double height;
 	
     @Override
     public void start(Stage primaryStage) throws Exception{
-         root = FXMLLoader.load(getClass().getResource("PageAccueil.fxml"));
+         root = FXMLLoader.load(getClass().getResource("FXML_Files/PageAccueil.fxml"));
          primaryStage.setTitle("Reconstitution - Version Enseignante");
          
          //On affiche le plein écran

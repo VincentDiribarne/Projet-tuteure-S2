@@ -8,41 +8,37 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.ControllerDeDepart" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Apercu">
    <top>
-     <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
-			<children>
-				<MenuBar snapToPixel="false">
-					<menus>
-						<Menu mnemonicParsing="false" text="Exercice">
-							<items>
-								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
-								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
-								<SeparatorMenuItem mnemonicParsing="false" />
-								<MenuItem mnemonicParsing="false" text="Enregistrer" />
-								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
-								<SeparatorMenuItem mnemonicParsing="false" />
-								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
-							</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Aide">
-							<items>
-								<MenuItem mnemonicParsing="false" text="Tutoriel" />
-								<MenuItem mnemonicParsing="false" text="A propos" />
-							</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Paramètres">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#pageParametres" text="Préférences" />
-                        <CheckMenuItem mnemonicParsing="false" text="DarkMode" />
-                     </items></Menu>
-					</menus>
-					<VBox.margin>
-						<Insets />
-					</VBox.margin>
-				</MenuBar>
-			</children>
-		</VBox>
+      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+      				<MenuBar snapToPixel="false">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="Exercice">
+      							<items>
+      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Aide">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+      								<MenuItem mnemonicParsing="false" text="A propos" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Paramètres" />
+      					</menus>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+      				</MenuBar>
+         </children>
+      </VBox>
    </top>
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="584.0" prefWidth="1296.0" BorderPane.alignment="CENTER">

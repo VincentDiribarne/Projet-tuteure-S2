@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.ControllerDeDepart" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Des_Parametres">
    <top>
       <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
          <children>
@@ -19,7 +19,7 @@
       					<menus>
       						<Menu mnemonicParsing="false" text="Exercice">
       							<items>
-      								<MenuItem mnemonicParsing="false" onAction="#PageNouvelExo" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
       								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />

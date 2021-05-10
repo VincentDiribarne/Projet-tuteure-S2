@@ -25,16 +25,11 @@ import javafx.stage.*;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 
-public class Controller implements Initializable{
-
-	//Variables
-	private static Scene previousScene;
+public class ControllerDeDepart implements Initializable{
 	
 	//Id des variables présentes dans les fichiers FXML
 	//Page NouvelExo où l'on précise le nom de l'exercice et le lieu d'enregistrement
-	@FXML private TextField repertoire;
-	@FXML private TextField NomExo;
-	@FXML private Button OkNouvelExo;
+
 	//Page d'importation de la ressource 
 	@FXML private MediaView mediaView;
 	public MediaPlayer mediaPlayer;
@@ -86,7 +81,6 @@ public class Controller implements Initializable{
 	//Méthode pour passer d'une scène à l'autre
 	private void changerScene (Parent root) {
 		Stage stage = (Stage) MainEnseignant.root.getScene().getWindow();
-		previousScene = MainEnseignant.root.getScene();
 		MainEnseignant.root = root;
 		stage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		stage.show();
@@ -96,20 +90,9 @@ public class Controller implements Initializable{
 	/////////////////////////////		METHDOES DISPONIBLES SUR TOUTES LES PAGES		////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
-	@FXML
-	public void quitter(ActionEvent event) {
-		Platform.exit();
-	}
 
-	//Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà créé auparavant
-	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
-		fileChooser.showOpenDialog(null);
-		//TODO Chargez l'exercice dans la page
-	}
+
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////	  PAGE NOUVEL EXO (NOM + LIEU D'ENREGISTREMENT)		////////////////////////////////
@@ -131,33 +114,7 @@ public class Controller implements Initializable{
 	}
 
 
-	//Méthode pour choisir le répertoire dans lequel l'enseignant enregistrera son fichier
-	@FXML
-	public void choisirRepertoire(ActionEvent event) {
-		DirectoryChooser directoryChooser = new DirectoryChooser();
-		File selectedDirectory;
-		directoryChooser.setTitle("Choisissez un répertoire pour l'enregistrement");
-		selectedDirectory = directoryChooser.showDialog(null);
-		if(selectedDirectory != null) {
-			repertoire.setText(selectedDirectory.getAbsolutePath());
-		}
-		verifRempli();
-	}
 	
-	
-	//Méthode qui vérifie si les textFields sont rempli afin d'activer le bouton Ok
-	@FXML
-	public void verifRempli() {
-		
-		//Pour la page de nouvelExo
-		if(!NomExo.getText().trim().isEmpty() && !repertoire.getText().trim().isEmpty()) {
-			OkNouvelExo.setDisable(false);
-		}
-		
-		if(NomExo.getText().trim().isEmpty()) {
-			OkNouvelExo.setDisable(true);
-		}	
-	}
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
