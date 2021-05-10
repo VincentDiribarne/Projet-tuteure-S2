@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,27 +16,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: gray;" stylesheets="@MenuAndButtonStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <MenuBar style="-fx-background-color: gray; -fx-border-color: white;" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
+      <MenuBar style="-fx-background-color: gray; -fx-border-color: white; -fx-border-width: 2;" BorderPane.alignment="CENTER">
+           <menus>
+               <Menu mnemonicParsing="false" text="Exercice">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="Ouvrir" />
+                       <SeparatorMenuItem mnemonicParsing="false" />
+                       <MenuItem mnemonicParsing="false" text="Enregistrer" />
+                       <MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+                       <SeparatorMenuItem mnemonicParsing="false" />
+                       <MenuItem mnemonicParsing="false" text="Quitter" />
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" text="Aide">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="Tutoriel" />
+                       <MenuItem mnemonicParsing="false" text="A propos" />
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" text="Paramètres">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="Préférences" />
+                       <CheckMenuItem mnemonicParsing="false" text="DarkMode" />
+                   </items></Menu>
+           </menus>
       </MenuBar>
    </top>
    <center>
@@ -45,7 +54,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Paramètre" textAlignment="CENTER" textFill="#dd5b5b" GridPane.halignment="CENTER" GridPane.valignment="BASELINE">
+            <Label text="Paramètres" textAlignment="CENTER" textFill="#251c1c" GridPane.halignment="CENTER" GridPane.valignment="BASELINE">
                <GridPane.margin>
                   <Insets top="50.0" />
                </GridPane.margin>
@@ -53,22 +62,66 @@
                   <Font name="Cooper Black" size="48.0" />
                </font>
             </Label>
-            <Text fill="#56545e" strokeType="OUTSIDE" strokeWidth="0.0" text="Taille de la police" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Taille de la police" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets bottom="100.0" left="250.0" />
+                  <Insets bottom="100.0" right="400.0" />
                </GridPane.margin>
                <font>
                   <Font name="Arial Italic" size="24.0" />
                </font>
             </Text>
-            <Text layoutX="260.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Style de la police" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Text fill="WHITE" layoutX="260.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Style de la police" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
                   <Font name="Arial Italic" size="24.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="250.0" top="65.0" />
+                  <Insets right="400.0" top="25.0" />
                </GridPane.margin>
             </Text>
+            <SplitMenuButton mnemonicParsing="false" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5; -fx-opacity: 0.8; -fx-background-radius: 5;" text="12" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+              <items>
+                <MenuItem mnemonicParsing="false" text="10" />
+                <MenuItem mnemonicParsing="false" text="11" />
+                  <MenuItem mnemonicParsing="false" text="12" />
+                  <MenuItem mnemonicParsing="false" text="14" />
+                  <MenuItem mnemonicParsing="false" text="18" />
+                  <MenuItem mnemonicParsing="false" text="24" />
+                  <MenuItem mnemonicParsing="false" text="36" />
+                  <MenuItem mnemonicParsing="false" text="48" />
+                  <MenuItem mnemonicParsing="false" text="64" />
+                  <MenuItem mnemonicParsing="false" text="72" />
+                  <MenuItem mnemonicParsing="false" text="92" />
+                  <MenuItem mnemonicParsing="false" text="96" />
+              </items>
+               <GridPane.margin>
+                  <Insets bottom="100.0" />
+               </GridPane.margin>
+            </SplitMenuButton>
+            <SplitMenuButton mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 2;" text="Arial" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Arial" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+               <GridPane.margin>
+                  <Insets top="25.0" />
+               </GridPane.margin>
+            </SplitMenuButton>
+            <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Appliquer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Retour" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </center>
