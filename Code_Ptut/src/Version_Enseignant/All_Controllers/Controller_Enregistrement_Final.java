@@ -12,11 +12,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Controller_Enregistrement_Final implements Initializable{
 
+	
+	@FXML private Label recupScene;
+	
 	//Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -45,7 +49,7 @@ public class Controller_Enregistrement_Final implements Initializable{
 	//Bouton Nouveau qui permet de créer un nouvel exercice
 	@FXML
 	public void pageNouvelExo() throws IOException {
-		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
+		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
@@ -54,7 +58,7 @@ public class Controller_Enregistrement_Final implements Initializable{
 	//Bouton Préférences qui emmène sur la page des paramètres
 	@FXML
 	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
+		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PagesDesParametres.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
@@ -65,6 +69,23 @@ public class Controller_Enregistrement_Final implements Initializable{
 	public void darkMode() {
 		//TODO faire le DarkMode
 	}
+	
+	@FXML
+	public void pageParametres(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PagesDesParametres.fxml"));
+		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.show();
+	}
+	
+	@FXML
+	public void annuler(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PagesDesParametres.fxml"));
+		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.show();
+	}
+	
 
 
 }

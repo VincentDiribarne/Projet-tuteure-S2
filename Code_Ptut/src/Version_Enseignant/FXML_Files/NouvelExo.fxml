@@ -101,7 +101,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="okNouvelExo" disable="true" mnemonicParsing="false" text="Ok">
+                  <Button fx:id="okNouvelExo" disable="true" mnemonicParsing="false" onAction="#pageImportationRessource" text="Ok">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

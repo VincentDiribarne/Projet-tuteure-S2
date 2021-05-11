@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,9 @@ public class Controller_Nouvel_Exo implements Initializable{
 	@FXML private TextField repertoire;
 	@FXML private TextField nomExo;
 	@FXML private Button okNouvelExo;
-
+	
+	private static String contenuRepertoire;
+	private static String contenuNomExo;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////			INITIALISATION		////////////////////////////////////////////////
@@ -34,10 +38,51 @@ public class Controller_Nouvel_Exo implements Initializable{
 	//Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		//On rempli les champs s'il ne sont pas null (si l'enseignant revient en arrière)
+		if(contenuRepertoire != null) {
+			repertoire.setText(contenuRepertoire);
+		}
+		
+		if(contenuNomExo != null) {
+			nomExo.setText(contenuNomExo);
+		}
+		
+		//Si les deux champs sont remplis, on met le bouton cliquable
+		if(contenuRepertoire != null && nomExo != null) {
+			okNouvelExo.setDisable(false);
+		}
+		
+		//On regarde si le textField du repertoire est vide ou non
+		repertoire.textProperty().addListener(new ChangeListener<String>() {
 
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newvalue) {
+				if(!repertoire.getText().isEmpty() && !nomExo.getText().isEmpty()) {
+					okNouvelExo.setDisable(false);
+				} else {
+					okNouvelExo.setDisable(true);
+				}
+			}
+			
+		});
+		
+		//On regarde si le textField du Nomd e l'exercice est vide ou non
+		nomExo.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newvalue) {
+				if(!nomExo.getText().isEmpty() && !repertoire.getText().isEmpty()) {
+					okNouvelExo.setDisable(false);
+				} else {
+					okNouvelExo.setDisable(true);
+				}
+			}
+			
+		});
+		
 	}
 
-	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////			METHDOES GENERALES		////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,20 +102,11 @@ public class Controller_Nouvel_Exo implements Initializable{
 		//TODO Chargez l'exercice dans la page
 	}
 
-	//Bouton Nouveau qui permet de créer un nouvel exercice
-	@FXML
-	public void pageNouvelExo() throws IOException {
-		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
 	//Bouton Préférences qui emmène sur la page des paramètres
 	@FXML
 	public void preferences(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PagesDesParametres.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
 	}
@@ -86,6 +122,15 @@ public class Controller_Nouvel_Exo implements Initializable{
 	////////////////////////////////		METHDOES SPECIFIQUES A LA PAGE		////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	//Bouton Nouveau qui permet de créer un nouvel exercice
+	@FXML
+	public void pageNouvelExo() throws IOException {
+		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.show();
+	}
+	
 	//Méthode pour choisir le répertoire dans lequel l'enseignant enregistrera son fichier
 	@FXML
 	public void choisirRepertoire(ActionEvent event) {
@@ -96,23 +141,19 @@ public class Controller_Nouvel_Exo implements Initializable{
 		if(selectedDirectory != null) {
 			repertoire.setText(selectedDirectory.getAbsolutePath());
 		}
-		verifRempli();
 	}
-
-
-	//Méthode qui vérifie si les textFields sont rempli afin d'activer le bouton Ok
-	//TODO à revoir
+	
+	//Méthode pour aller sur la page d'importation de la ressource
 	@FXML
-	private void verifRempli() {
-
-		//Pour la page de nouvelExo
-		if(!nomExo.getText().trim().isEmpty() && !repertoire.getText().trim().isEmpty()) {
-			okNouvelExo.setDisable(false);
-		}
-
-		if(nomExo.getText().trim().isEmpty() || repertoire.getText().trim().isEmpty()) {
-			okNouvelExo.setDisable(true);
-		}
+	public void pageImportationRessource(ActionEvent event) throws IOException {
+		
+		//Au moment d'aller sur la page d'après, on récupère le contenu des TextFields
+		contenuRepertoire = repertoire.getText();
+		contenuNomExo = nomExo.getText();
+		
+		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ImporterRessource.fxml"));
+		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.show();
 	}
-
 }

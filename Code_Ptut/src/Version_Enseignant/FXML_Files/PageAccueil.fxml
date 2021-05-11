@@ -19,8 +19,8 @@
       								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
       								<SeparatorMenuItem mnemonicParsing="false" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<MenuItem mnemonicParsing="false" disable="true" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" disable="true" text="Enregistrer sous" />
       								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
       							</items>
@@ -31,7 +31,11 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" text="Paramètres" />
+      						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
       					</menus>
                <VBox.margin>
                   <Insets />

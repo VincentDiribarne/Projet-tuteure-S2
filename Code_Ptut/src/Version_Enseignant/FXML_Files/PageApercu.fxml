@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.ControllerDeDepart" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Apercu">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Apercu">
    <top>
       <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
          <children>
@@ -16,7 +16,7 @@
       					<menus>
       						<Menu mnemonicParsing="false" text="Exercice">
       							<items>
-      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
       								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />
@@ -31,7 +31,11 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" text="Paramètres" />
+      						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
       					</menus>
                <VBox.margin>
                   <Insets />
@@ -70,7 +74,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <Button fx:id="validerConsigne" mnemonicParsing="false" onAction="#validationConsigne" text="Valider" />
+                        <Button mnemonicParsing="false" onAction="#validationConsigne" text="Valider" />
                      </children>
                      <HBox.margin>
                         <Insets right="100.0" />

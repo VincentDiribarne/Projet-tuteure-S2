@@ -54,7 +54,7 @@ public class Controller_Page_Accueil implements Initializable{
 	@FXML
 	public void preferences(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PagesDesParametres.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
 	}

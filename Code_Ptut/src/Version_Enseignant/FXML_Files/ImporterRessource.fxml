@@ -18,7 +18,7 @@
       					<menus>
       						<Menu mnemonicParsing="false" text="Exercice">
       							<items>
-      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" text="Nouveau" />
       								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
       								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" text="Enregistrer" />
@@ -33,7 +33,11 @@
       								<MenuItem mnemonicParsing="false" text="A propos" />
       							</items>
       						</Menu>
-      						<Menu mnemonicParsing="false" text="Paramètres" />
+      						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
       					</menus>
                <VBox.margin>
                   <Insets />
@@ -70,7 +74,7 @@
                </VBox.margin></Button>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#PageNouvelExo" text="Retour">
+                  <Button mnemonicParsing="false" onAction="#pageNouvelExo" text="Retour">
                      <HBox.margin>
                         <Insets bottom="20.0" right="300.0" />
                      </HBox.margin>
@@ -78,7 +82,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#pageApercu" text="Ok">
+                  <Button fx:id="okImport" disable="true" mnemonicParsing="false" onAction="#pageApercu" text="Ok">
                      <font>
                         <Font size="20.0" />
                      </font>
