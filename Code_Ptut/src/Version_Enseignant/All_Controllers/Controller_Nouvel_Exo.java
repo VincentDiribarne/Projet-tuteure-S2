@@ -28,8 +28,8 @@ public class Controller_Nouvel_Exo implements Initializable{
 	@FXML private TextField nomExo;
 	@FXML private Button okNouvelExo;
 	
-	private static String contenuRepertoire;
-	private static String contenuNomExo;
+	public static String contenuRepertoire;
+	public static String contenuNomExo;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////			INITIALISATION		////////////////////////////////////////////////
@@ -127,6 +127,14 @@ public class Controller_Nouvel_Exo implements Initializable{
 	public void pageNouvelExo() throws IOException {
 		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.show();
+	}
+	
+	@FXML
+	public void retourAccueil() throws IOException {
+		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageAccueil.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
 	}

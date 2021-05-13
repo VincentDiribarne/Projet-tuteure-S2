@@ -169,11 +169,7 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-                  <CheckBox mnemonicParsing="false">
-                     <tooltip>
-								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-                     </tooltip>
-                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" />
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />
@@ -186,11 +182,7 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-                  <CheckBox mnemonicParsing="false">
-                     <tooltip>
-								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-                     </tooltip>
-                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" />
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />
@@ -203,11 +195,7 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-                  <CheckBox mnemonicParsing="false">
-                     <tooltip>
-								<Tooltip text="La sensibilité à la casse activée fait la distinction entre les majuscules et les minuscules" />
-                     </tooltip>
-                  </CheckBox>
+                  <CheckBox fx:id="checkBoxMotIncomplet" mnemonicParsing="false" onAction="#motIncomplet" />
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />

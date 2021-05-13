@@ -24,7 +24,7 @@
 								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
 								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
 								<SeparatorMenuItem mnemonicParsing="false" />
-								<MenuItem mnemonicParsing="false" text="Quitter" />
+								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Aide">
@@ -93,7 +93,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Annuler">
+                  <Button mnemonicParsing="false" onAction="#retourAccueil" text="Annuler">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>

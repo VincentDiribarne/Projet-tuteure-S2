@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,10 +29,33 @@ public class Controller_Page_Apercu implements Initializable{
 	@FXML private MediaView MediaViewApercu;
 	@FXML private Button okApercu;
 	
+	public static String contenuConsigne;
+	public static String contenuTranscription;
+	public static String contenuAide;
+	
 	//Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		
+		//On met le media dans la preview
+		MediaPlayer mediaPlayer = new MediaPlayer(Controller_Importer_Ressource.contenuMedia);
+		MediaViewApercu.setMediaPlayer(mediaPlayer);
+		
+		//Si les contenus ne sont pas null (lorsque l'enseignant fait retour), les informations sont conservées
+		//Consigne
+		if(contenuConsigne != null) {
+			texteConsigne.setText(contenuConsigne);
+		}
+		
+		//Transcription
+		if(contenuTranscription != null) {
+			texteTranscription.setText(contenuTranscription);
+		}
+		
+		//Aide
+		if(contenuAide != null) {
+			texteAide.setText(contenuAide);
+		}
 	}
 
 	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
@@ -122,6 +146,11 @@ public class Controller_Page_Apercu implements Initializable{
 		//Méthode pour charger la page des options de l'exercice
 		@FXML
 		public void pageOptions(ActionEvent event) throws IOException {
+			//Quand on passe à la page suivante, on réucpère les informations des TextFields
+			contenuConsigne = texteConsigne.getText();
+			contenuTranscription = texteTranscription.getText();
+			contenuAide = texteAide.getText();
+			
 			Stage primaryStage = (Stage) okApercu.getScene().getWindow();
 			Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageOptions.fxml"));
 			primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
