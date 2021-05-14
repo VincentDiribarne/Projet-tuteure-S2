@@ -49,14 +49,17 @@ public class Controller_Enregistrement_Final implements Initializable{
 		
 		//Limite de temps (pour le mode Evaluation)
 		byte [] nbMin = Controller_Page_Des_Options.nbMin.getBytes();
+		byte [] longueurNbMin = getLongueur(Controller_Page_Des_Options.nbMin);
 		
 		//Conteneurs du media
-		byte[] contenuMedia = null;
+		byte [] contenuMedia = null;
 		byte [] longueurMedia = null;
 		
+		//On récupère le media et on lui demande sa taille
 		try {
 			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().readAllBytes();
-			longueurMedia = getLongueur(URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().toString());
+			longueurMedia = ByteBuffer.allocate(8).putInt(contenuMedia.length).array();
+			
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -85,6 +88,19 @@ public class Controller_Enregistrement_Final implements Initializable{
 			
 			//On y écrit le caractère d'occultation
 			out.write(caraOccul);
+			
+			//On y écrit le mode (sur 1 octet)
+			//Si c'est le mode entrainement
+			if(Controller_Page_Des_Options.entrainement = true) {
+				out.write(0);
+			} 
+			//Sinon il s'agit du mode evaluation
+			else {
+				out.write(1);
+				//On écrit la limite de temps
+				out.write(longueurNbMin);
+				out.write(nbMin);
+			}
 			
 			//On y écrit les données du media
 			out.write(longueurMedia);

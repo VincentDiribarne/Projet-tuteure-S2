@@ -89,7 +89,7 @@
 								<Insets right="400.0" />
 							</HBox.margin>
 						</Label>
-                  <CheckBox mnemonicParsing="false" />
+                  <CheckBox fx:id="sensibiliteCasse" mnemonicParsing="false" onAction="#sensiCasse" />
 					</children>
 					<VBox.margin>
 						<Insets left="50.0" right="50.0" />

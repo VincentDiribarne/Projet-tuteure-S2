@@ -35,9 +35,19 @@ public class Controller_Page_Des_Options implements Initializable{
 	@FXML private TextField CaraOccul;
 	@FXML private TextField nbMinute;
 	@FXML private CheckBox checkBoxMotIncomplet;
+	@FXML private CheckBox sensibiliteCasse;
 
+	//Variables qui contiennent les informations sur l'exercice
 	public static String caraOccul;
 	public static String nbMin;
+	public static boolean sensiCasse = false;
+	public static boolean entrainement = false;
+	public static boolean evaluation = false;
+	public static boolean solution = false;
+	public static boolean motDecouverts = false;
+	public static boolean motIncomplet = false;
+	public static boolean lettres_2 = false;
+	public static boolean lettres_3 = false;
 
 	//Méthode d'initialisation de la page
 	@Override
@@ -101,6 +111,7 @@ public class Controller_Page_Des_Options implements Initializable{
 	public void selectionModeEvaluation(ActionEvent event) {
 		//On fait apparaître ce qui concerne le mode Evaluation
 		modeEvaluation.setVisible(true);
+		evaluation = true;
 
 		//On cache ce qui concerne le mode Entraînement
 		modeEntrainement.setVisible(false);
@@ -112,12 +123,15 @@ public class Controller_Page_Des_Options implements Initializable{
 		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
 		if(radioButtonEntrainement.isSelected()) {
 			radioButtonEntrainement.setSelected(false);
+			entrainement = false;
 		}
 
 		//Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode Evaluation
 		if(!radioButtonEvaluation.isSelected()) {
 			modeEvaluation.setVisible(false);
+			evaluation = false;
 		}
+		
 	}
 
 	@FXML
@@ -129,10 +143,12 @@ public class Controller_Page_Des_Options implements Initializable{
 
 		//On cache ce qui concerne le mode Evaluation
 		modeEvaluation.setVisible(false);
+		entrainement = true;
 
 		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
 		if(radioButtonEvaluation.isSelected()) {
 			radioButtonEvaluation.setSelected(false);
+			evaluation = false;
 		}
 
 		//Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode Entrainement
@@ -142,7 +158,10 @@ public class Controller_Page_Des_Options implements Initializable{
 			modeEntrainement2.setVisible(false);
 			modeEntrainement3.setVisible(false);
 			modeEntrainement4.setVisible(false);
+			
+			entrainement = false;
 		}
+		
 	}
 
 
@@ -193,6 +212,18 @@ public class Controller_Page_Des_Options implements Initializable{
 			modeEntrainement3.setVisible(false);
 			modeEntrainement4.setVisible(false);
 		} 
+	}
+	
+	//Méthode qui passe à true ou false la variable sensiCasse
+	@FXML
+	public void sensiCasse(ActionEvent event) {
+		//Si la case est décochée
+		if(sensibiliteCasse.isSelected()) {
+			sensiCasse = true;
+		} 
+		else {
+			sensiCasse = false;
+		}
 	}
 
 }
