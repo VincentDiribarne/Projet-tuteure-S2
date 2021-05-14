@@ -1,8 +1,12 @@
 package Version_Enseignant.All_Controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
@@ -27,7 +31,7 @@ public class Controller_Enregistrement_Final implements Initializable{
 	//Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		
 		//Conteneurs en octets de la consigne
 		byte [] contenuConsigne = Controller_Page_Apercu.contenuConsigne.getBytes();
 		byte [] longueurConsigne = getLongueur(Controller_Page_Apercu.contenuConsigne);
@@ -45,6 +49,20 @@ public class Controller_Enregistrement_Final implements Initializable{
 		
 		//Limite de temps (pour le mode Evaluation)
 		byte [] nbMin = Controller_Page_Des_Options.nbMin.getBytes();
+		
+		//Conteneurs du media
+		byte[] contenuMedia = null;
+		byte [] longueurMedia = null;
+		
+		try {
+			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().readAllBytes();
+			longueurMedia = getLongueur(URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().toString());
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 		
 		try {
 			
@@ -67,7 +85,11 @@ public class Controller_Enregistrement_Final implements Initializable{
 			
 			//On y écrit le caractère d'occultation
 			out.write(caraOccul);
-				
+			
+			//On y écrit les données du media
+			out.write(longueurMedia);
+			out.write(contenuMedia);
+	
 			//Fermeture du fichier
 			out.close();
 
