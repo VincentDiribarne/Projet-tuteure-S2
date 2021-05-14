@@ -52,7 +52,7 @@
                <children>
                   <VBox alignment="CENTER" minHeight="45.0" prefHeight="60.0" prefWidth="10000.0">
                      <children>
-                        <Text accessibleRole="PARENT" fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesirez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" VBox.vgrow="ALWAYS">
+                        <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesirez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="Corbel" size="20.0" />
                            </font>

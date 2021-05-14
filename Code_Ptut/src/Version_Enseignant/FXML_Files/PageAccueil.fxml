@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Accueil">
+   <top>
+      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+      				<MenuBar snapToPixel="false">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="Exercice">
+      							<items>
+      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" disable="true" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" disable="true" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Aide">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+      								<MenuItem mnemonicParsing="false" text="A propos" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
+      					</menus>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+      				</MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="528.0" prefWidth="626.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="RecupScene" text="Bienvenue sur Reconstitution" textAlignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Version Enseignante">
+               <VBox.margin>
+                  <Insets bottom="170.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="250.0" fitWidth="250.0">
+               <image>
+                  <Image url="Logo_Renconstitution.png" />
+               </image>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution">
+               <VBox.margin>
+                  <Insets bottom="70.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si notre application vous plait, n'hesitez pas à la noter x)">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <left>
+      <VBox alignment="CENTER" prefHeight="528.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez créer un exercice, ou en ouvrir un." textAlignment="CENTER" wrappingWidth="171.50244140625">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Label />
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="CENTER" prefHeight="528.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous voulez de l'aide sur le fonctionnement de l'application, consultez la rubrique d'aide" textAlignment="CENTER" wrappingWidth="213.9052734375">
+               <VBox.margin>
+                  <Insets right="100.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Importer_Ressource">
+   <top>
+      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+      				<MenuBar snapToPixel="false">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="Exercice">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Aide">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+      								<MenuItem mnemonicParsing="false" text="A propos" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
+      					</menus>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+      				</MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-style: solid;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#importerRessource" text="Importer">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imageAudio" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+            <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </MediaView>
+            <Slider fx:id="progressBar" maxWidth="500.0" prefHeight="18.0" prefWidth="119.0">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+            </Slider>
+            <Button fx:id="playPause" mnemonicParsing="false" onAction="#playOrPause" text="Play">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin></Button>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#pageNouvelExo" text="Retour">
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="300.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="okImport" disable="true" mnemonicParsing="false" onAction="#pageApercu" text="Ok">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin></Button>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Apercu">
+   <top>
+      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+      				<MenuBar snapToPixel="false">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="Exercice">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Nouveau" />
+      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+      								<SeparatorMenuItem mnemonicParsing="false" />
+      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Aide">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+      								<MenuItem mnemonicParsing="false" text="A propos" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
+      					</menus>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+      				</MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="584.0" prefWidth="1296.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Aperçu">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MediaView fx:id="MediaViewApercu" fitHeight="200.0" fitWidth="400.0">
+                     <HBox.margin>
+                        <Insets left="100.0" right="200.0" />
+                     </HBox.margin>
+                  </MediaView>
+                  <VBox prefHeight="200.0" prefWidth="301.0">
+                     <children>
+                        <Label text="Consigne">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="texteConsigne" alignment="TOP_LEFT" onMouseClicked="#editionConsigne" prefHeight="134.0" prefWidth="407.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#validationConsigne" text="Valider" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="187.0" prefWidth="1296.0">
+               <children>
+                  <VBox prefHeight="177.0" prefWidth="818.0">
+                     <HBox.margin>
+                        <Insets left="100.0" right="200.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label text="Aides" />
+                        <TextField fx:id="texteAide" alignment="TOP_LEFT" onMouseClicked="#editionAide" prefHeight="134.0" prefWidth="301.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#validationAide" text="Valider" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="177.0" prefWidth="725.0">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label text="Transcription" />
+                        <TextField fx:id="texteTranscription" alignment="TOP_LEFT" onMouseClicked="#editionTranscription" prefHeight="128.0" prefWidth="314.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#validationTranscription" text="Valider" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="1080.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#pageImporterRessource" text="Retour">
+                     <HBox.margin>
+                        <Insets right="500.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="okApercu" alignment="CENTER" mnemonicParsing="false" onAction="#pageOptions" text="Ok" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" top="25.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

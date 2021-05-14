@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
+   <top>
+      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
+			<children>
+				<MenuBar snapToPixel="false">
+					<menus>
+						<Menu mnemonicParsing="false" text="Exercice">
+							<items>
+								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
+								<MenuItem mnemonicParsing="false" text="Ouvrir" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
+								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Aide">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+								<MenuItem mnemonicParsing="false" text="A propos" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Paramètres">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                     </items></Menu>
+					</menus>
+					<VBox.margin>
+						<Insets />
+					</VBox.margin>
+				</MenuBar>
+			</children>
+		</VBox>
+   </top>
+   <center>
+      <VBox prefHeight="668.0" prefWidth="855.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nom de l'exercice">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nomExo" prefHeight="31.0" prefWidth="218.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font></TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">
+               <children>
+                  <Label text="Répertoire">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="repertoire" editable="false" prefHeight="31.0" prefWidth="402.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Cliquer sur le bouton Parcourir et sélectionnez le répertoire dans lequel vous voulez enregistrer votre exercice  " />
+                     </tooltip></TextField>
+                  <Button mnemonicParsing="false" onAction="#choisirRepertoire" text="Parcourir">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#retourAccueil" text="Annuler">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="okNouvelExo" disable="true" mnemonicParsing="false" onAction="#pageImportationRessource" text="Ok">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
