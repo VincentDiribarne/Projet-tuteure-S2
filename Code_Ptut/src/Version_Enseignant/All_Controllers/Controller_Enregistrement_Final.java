@@ -89,11 +89,33 @@ public class Controller_Enregistrement_Final implements Initializable{
 			//On y écrit le caractère d'occultation
 			out.write(caraOccul);
 			
+			//Si la sensibilité à la casse est activée ou non
+			if(Controller_Page_Des_Options.sensiCasse == true) {
+				out.write(1);
+			} else {
+				out.write(0);
+			}
+			
 			//On y écrit le mode (sur 1 octet)
 			//Si c'est le mode entrainement
-			if(Controller_Page_Des_Options.entrainement = true) {
+			if(Controller_Page_Des_Options.entrainement == true) {
 				out.write(0);
+				
+				//Si l'affichage de la solution est autorisé
+				if(Controller_Page_Des_Options.solution == true) {
+					out.write(1);
+				} else {
+					out.write(0);
+				}
+				
+				//Si l'affiche du nombre de mots découverts en temps réel est autorisé
+				if(Controller_Page_Des_Options.motDecouverts == true) {
+					out.write(1);
+				} else {
+					out.write(0);
+				}
 			} 
+			
 			//Sinon il s'agit du mode evaluation
 			else {
 				out.write(1);

@@ -169,7 +169,7 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-                  <CheckBox mnemonicParsing="false" />
+                  <CheckBox fx:id="checkBoxSolution" mnemonicParsing="false" onAction="#affichageSolution" />
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />
@@ -182,7 +182,7 @@
 								<Insets right="100.0" />
 							</HBox.margin>
 						</Label>
-                  <CheckBox mnemonicParsing="false" />
+                  <CheckBox fx:id="checkBoxMotsDecouverts" mnemonicParsing="false" onAction="#motDecouverts" />
 					</children>
 					<VBox.margin>
 						<Insets bottom="5.0" left="50.0" right="50.0" />

@@ -35,6 +35,8 @@ public class Controller_Page_Des_Options implements Initializable{
 	@FXML private TextField CaraOccul;
 	@FXML private TextField nbMinute;
 	@FXML private CheckBox checkBoxMotIncomplet;
+	@FXML private CheckBox checkBoxSolution;
+	@FXML private CheckBox checkBoxMotsDecouverts;
 	@FXML private CheckBox sensibiliteCasse;
 
 	//Variables qui contiennent les informations sur l'exercice
@@ -113,6 +115,13 @@ public class Controller_Page_Des_Options implements Initializable{
 		modeEvaluation.setVisible(true);
 		evaluation = true;
 
+		//On enlève les sélections du mode entrainement
+		checkBoxMotIncomplet.setSelected(false);
+		checkBoxSolution.setSelected(false);
+		checkBoxMotsDecouverts.setSelected(false);
+		radioButton2Lettres.setSelected(false);
+		radioButton3Lettres.setSelected(false);
+
 		//On cache ce qui concerne le mode Entraînement
 		modeEntrainement.setVisible(false);
 		modeEntrainement1.setVisible(false);
@@ -131,7 +140,7 @@ public class Controller_Page_Des_Options implements Initializable{
 			modeEvaluation.setVisible(false);
 			evaluation = false;
 		}
-		
+
 	}
 
 	@FXML
@@ -144,6 +153,9 @@ public class Controller_Page_Des_Options implements Initializable{
 		//On cache ce qui concerne le mode Evaluation
 		modeEvaluation.setVisible(false);
 		entrainement = true;
+
+		//On réinitialise le nombre de minutes
+		nbMinute.setText(null);
 
 		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
 		if(radioButtonEvaluation.isSelected()) {
@@ -158,10 +170,10 @@ public class Controller_Page_Des_Options implements Initializable{
 			modeEntrainement2.setVisible(false);
 			modeEntrainement3.setVisible(false);
 			modeEntrainement4.setVisible(false);
-			
+
 			entrainement = false;
 		}
-		
+
 	}
 
 
@@ -203,26 +215,57 @@ public class Controller_Page_Des_Options implements Initializable{
 	public void motIncomplet(ActionEvent event) {
 
 		//Si on coche le radioButton
-		if(!checkBoxMotIncomplet.isDisable()) {
+		if(checkBoxMotIncomplet.isSelected()) {
 			modeEntrainement3.setVisible(true);
 			modeEntrainement4.setVisible(true);
 		} 
 		//Si on le décoche
-		if(checkBoxMotIncomplet.isDisabled()) {
+		if(!checkBoxMotIncomplet.isSelected()) {
+			// on le cache 
 			modeEntrainement3.setVisible(false);
 			modeEntrainement4.setVisible(false);
+			// on les déselectionne
+			radioButton2Lettres.setSelected(false);
+			radioButton3Lettres.setSelected(false);
 		} 
 	}
-	
+
 	//Méthode qui passe à true ou false la variable sensiCasse
 	@FXML
 	public void sensiCasse(ActionEvent event) {
-		//Si la case est décochée
+		//Si la case est cochée
 		if(sensibiliteCasse.isSelected()) {
 			sensiCasse = true;
-		} 
+		}
+		//Dans le cas contraire
 		else {
 			sensiCasse = false;
+		}
+	}
+
+	//Méthode qui passe à true ou false la variable solution
+	@FXML
+	public void affichageSolution(ActionEvent event) {
+		//Si la case est cochée
+		if(checkBoxSolution.isSelected()) {
+			solution = true;
+		}
+		//Dans le cas contraire
+		else {
+			solution = false;
+		}
+	}
+
+	//Méthode qui passe à true ou false la variable motsDécouverts
+	@FXML 
+	public void motDecouverts(ActionEvent event) {
+		//Si la case est cochée
+		if(checkBoxMotsDecouverts.isSelected()) {
+			motDecouverts = true;
+		}
+		//Dans le cas contraire
+		else {
+			motDecouverts = false;
 		}
 	}
 
