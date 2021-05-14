@@ -6,9 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class MainEtudiant extends Application{
 
-    @Override
+	@Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         primaryStage.setTitle("Reconstitution - Version Etudiante");
