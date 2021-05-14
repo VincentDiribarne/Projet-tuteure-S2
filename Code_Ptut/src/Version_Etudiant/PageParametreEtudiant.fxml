@@ -100,21 +100,25 @@
             <SplitMenuButton mnemonicParsing="false" prefHeight="33.0" prefWidth="77.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 2;" text="Arial" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
               <items>
                 <MenuItem mnemonicParsing="false" text="Arial" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem mnemonicParsing="false" text="Candara" />
+                  <MenuItem mnemonicParsing="false" text="Comin Sans MS" />
+                  <MenuItem mnemonicParsing="false" text="DejaVu" />
+                  <MenuItem mnemonicParsing="false" text="Courrier New" />
+                  <MenuItem mnemonicParsing="false" text="Lato" />
               </items>
                <GridPane.margin>
                   <Insets top="25.0" />
                </GridPane.margin>
             </SplitMenuButton>
-            <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Appliquer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="173.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 20;" text="Appliquer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" right="10.0" />
                </GridPane.margin>
                <font>
-                  <Font name="Calibri" size="12.0" />
+                  <Font name="Calibri" size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Retour" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="102.0" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Retour" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" />
                </GridPane.margin>
