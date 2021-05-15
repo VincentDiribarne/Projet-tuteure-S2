@@ -243,6 +243,9 @@ public class Controller_Importer_Ressource implements Initializable {
 	// Méthode pour charger la page d'aperçu de l'exercice
 	@FXML
 	public void pageApercu(ActionEvent event) throws IOException {
+		//on récupère le media
+		contenuMedia = mediaPlayer.getMedia();
+		
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageApercu.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));

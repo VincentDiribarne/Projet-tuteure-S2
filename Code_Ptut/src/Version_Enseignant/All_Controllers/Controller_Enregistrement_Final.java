@@ -1,8 +1,12 @@
 package Version_Enseignant.All_Controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
@@ -19,56 +23,128 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class Controller_Enregistrement_Final implements Initializable{
+public class Controller_Enregistrement_Final implements Initializable {
 
+	@FXML
+	private Text recupScene;
 
-	@FXML private Text recupScene;
-
-	//Méthode d'initialisation de la page
+	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		//Conteneurs en octets de la consigne
-		byte [] contenuConsigne = Controller_Page_Apercu.contenuConsigne.getBytes();
-		byte [] longueurConsigne = getLongueur(Controller_Page_Apercu.contenuConsigne);
-		
-		//Conteneurs en octets de la transcription
-		byte [] contenuTranscription = Controller_Page_Apercu.contenuTranscription.getBytes();
-		byte [] longueurTranscription = getLongueur(Controller_Page_Apercu.contenuTranscription);
-		
-		//Conteneurs en octets de l'aide
-		byte [] contenuAide = Controller_Page_Apercu.contenuAide.getBytes();
-		byte [] longueurAide = getLongueur(Controller_Page_Apercu.contenuAide);
-		
-		//Caractère d'occultation
-		byte [] caraOccul = Controller_Page_Des_Options.caraOccul.getBytes();
-		
-		//Limite de temps (pour le mode Evaluation)
-		byte [] nbMin = Controller_Page_Des_Options.nbMin.getBytes();
-		
+		// Conteneurs en octets de la consigne
+		byte[] contenuConsigne = Controller_Page_Apercu.contenuConsigne.getBytes();
+		byte[] longueurConsigne = getLongueur(Controller_Page_Apercu.contenuConsigne);
+
+		// Conteneurs en octets de la transcription
+		byte[] contenuTranscription = Controller_Page_Apercu.contenuTranscription.getBytes();
+		byte[] longueurTranscription = getLongueur(Controller_Page_Apercu.contenuTranscription);
+
+		// Conteneurs en octets de l'aide
+		byte[] contenuAide = Controller_Page_Apercu.contenuAide.getBytes();
+		byte[] longueurAide = getLongueur(Controller_Page_Apercu.contenuAide);
+
+		// Caractère d'occultation
+		byte[] caraOccul = Controller_Page_Des_Options.caraOccul.getBytes();
+
+		// Conteneurs du media
+		byte[] contenuMedia = null;
+		byte[] longueurMedia = null;
+
+		// On récupère le media et on lui demande sa taille
 		try {
-			
-			//On ouvre un fichier où on va enregistrer les informations
-			//On lui donne l'endroit où il doit être enregistré et le nom
+			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream()
+					.readAllBytes();
+			longueurMedia = ByteBuffer.allocate(8).putInt(contenuMedia.length).array();
+
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+
+			// On ouvre un fichier où on va enregistrer les informations
+			// On lui donne l'endroit où il doit être enregistré et le nom
 			File file = new File(Controller_Nouvel_Exo.contenuRepertoire, Controller_Nouvel_Exo.contenuNomExo + ".bin");
 			FileOutputStream out = new FileOutputStream(file);
-			
-			//On y écrit la consigne
+
+			// On y écrit la consigne
 			out.write(longueurConsigne);
 			out.write(contenuConsigne);
-			
-			//On y écrit la transcription
+
+			// On y écrit la transcription
 			out.write(longueurTranscription);
 			out.write(contenuTranscription);
-			
-			//On y écrit les aides
+
+			// On y écrit les aides
 			out.write(longueurAide);
 			out.write(contenuAide);
-			
-			//On y écrit le caractère d'occultation
+
+			// On y écrit le caractère d'occultation
 			out.write(caraOccul);
+
+			// Si la sensibilité à la casse est activée ou non
+			if (Controller_Page_Des_Options.sensiCasse == true) {
+				out.write(1);
+			} else {
+				out.write(0);
+			}
+
+			// On y écrit le mode (sur 1 octet)
+			// Si c'est le mode entrainement
+			if (Controller_Page_Des_Options.entrainement == true) {
+				out.write(0);
+
+				// Si l'affichage de la solution est autorisé
+				if (Controller_Page_Des_Options.solution == true) {
+					out.write(1);
+				} else {
+					out.write(0);
+				}
+
+				// Si l'affiche du nombre de mots découverts en temps réel est autorisé
+				if (Controller_Page_Des_Options.motDecouverts == true) {
+					out.write(1);
+				} else {
+					out.write(0);
+				}
+
+				// Si les mots incomplets sont autorisés
+				if (Controller_Page_Des_Options.motIncomplet == true) {
+					out.write(1);
+					
+					//On précise le nombre de lettres autorisées
+					if (Controller_Page_Des_Options.lettres_2 == true) {
+						out.write(2);
+					} else {
+						out.write(3);
+					}
+					
+				} else {
+					out.write(0);
+				}
+			}
+
+			// Sinon il s'agit du mode evaluation
+			else {
 				
-			//Fermeture du fichier
+				// Limite de temps (pour le mode Evaluation)
+				byte[] nbMin = Controller_Page_Des_Options.nbMin.getBytes();
+				byte[] longueurNbMin = getLongueur(Controller_Page_Des_Options.nbMin);
+				
+				out.write(1);
+				// On écrit la limite de temps
+				out.write(longueurNbMin);
+				out.write(nbMin);
+			}
+
+			// On y écrit les données du media
+			out.write(longueurMedia);
+			out.write(contenuMedia);
+
+			// Fermeture du fichier
 			out.close();
 
 		} catch (IOException e) {
@@ -78,25 +154,28 @@ public class Controller_Enregistrement_Final implements Initializable{
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////			METHDOES GENERALES		////////////////////////////////////////////
+	///////////////////////////////////// METHDOES GENERALES
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
+	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
+	// sur toutes les pages)
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
 
-	//Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà créé auparavant
+	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
+	// créé auparavant
 	@FXML
 	public void ouvrir(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Ouvrez votre exercice");
 		fileChooser.showOpenDialog(null);
-		//TODO Chargez l'exercice dans la page
+		// TODO Chargez l'exercice dans la page
 	}
 
-	//Bouton Nouveau qui permet de créer un nouvel exercice
+	// Bouton Nouveau qui permet de créer un nouvel exercice
 	@FXML
 	public void pageNouvelExo() throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
@@ -105,7 +184,7 @@ public class Controller_Enregistrement_Final implements Initializable{
 		primaryStage.show();
 	}
 
-	//Bouton Préférences qui emmène sur la page des paramètres
+	// Bouton Préférences qui emmène sur la page des paramètres
 	@FXML
 	public void preferences(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
@@ -114,10 +193,10 @@ public class Controller_Enregistrement_Final implements Initializable{
 		primaryStage.show();
 	}
 
-	//Bouton DarkMode qui met en darkMode l'application
-	@FXML 
+	// Bouton DarkMode qui met en darkMode l'application
+	@FXML
 	public void darkMode() {
-		//TODO faire le DarkMode
+		// TODO faire le DarkMode
 	}
 
 	@FXML
@@ -135,17 +214,15 @@ public class Controller_Enregistrement_Final implements Initializable{
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
 	}
-	
-	
+
 	private byte[] getLongueur(String chaine) {
-		
-        int nbCara= 0;
-        
-        for(int i=0; i< chaine.length();i++){
-            nbCara ++;
-        }
-        return ByteBuffer.allocate(4).putInt(nbCara).array();
-    }
-	
+
+		int nbCara = 0;
+
+		for (int i = 0; i < chaine.length(); i++) {
+			nbCara++;
+		}
+		return ByteBuffer.allocate(4).putInt(nbCara).array();
+	}
 
 }
