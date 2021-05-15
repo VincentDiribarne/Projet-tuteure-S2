@@ -20,26 +20,42 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class Controller_Page_Des_Options implements Initializable{
+public class Controller_Page_Des_Options implements Initializable {
 
-	@FXML private RadioButton radioButtonEntrainement;
-	@FXML private RadioButton radioButtonEvaluation;
-	@FXML private RadioButton radioButton2Lettres;
-	@FXML private RadioButton radioButton3Lettres;
-	@FXML private HBox modeEntrainement;
-	@FXML private HBox modeEntrainement1;
-	@FXML private HBox modeEntrainement2;
-	@FXML private HBox modeEntrainement3;
-	@FXML private HBox modeEntrainement4;
-	@FXML private HBox modeEvaluation;
-	@FXML private TextField CaraOccul;
-	@FXML private TextField nbMinute;
-	@FXML private CheckBox checkBoxMotIncomplet;
-	@FXML private CheckBox checkBoxSolution;
-	@FXML private CheckBox checkBoxMotsDecouverts;
-	@FXML private CheckBox sensibiliteCasse;
+	@FXML
+	private RadioButton radioButtonEntrainement;
+	@FXML
+	private RadioButton radioButtonEvaluation;
+	@FXML
+	private RadioButton radioButton2Lettres;
+	@FXML
+	private RadioButton radioButton3Lettres;
+	@FXML
+	private HBox modeEntrainement;
+	@FXML
+	private HBox modeEntrainement1;
+	@FXML
+	private HBox modeEntrainement2;
+	@FXML
+	private HBox modeEntrainement3;
+	@FXML
+	private HBox modeEntrainement4;
+	@FXML
+	private HBox modeEvaluation;
+	@FXML
+	private TextField CaraOccul;
+	@FXML
+	private TextField nbMinute;
+	@FXML
+	private CheckBox checkBoxMotIncomplet;
+	@FXML
+	private CheckBox checkBoxSolution;
+	@FXML
+	private CheckBox checkBoxMotsDecouverts;
+	@FXML
+	private CheckBox sensibiliteCasse;
 
-	//Variables qui contiennent les informations sur l'exercice
+	// Variables qui contiennent les informations sur l'exercice
 	public static String caraOccul;
 	public static String nbMin;
 	public static boolean sensiCasse = false;
@@ -51,28 +67,30 @@ public class Controller_Page_Des_Options implements Initializable{
 	public static boolean lettres_2 = false;
 	public static boolean lettres_3 = false;
 
-	//Méthode d'initialisation de la page
+	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
 
-	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
+	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
+	// sur toutes les pages)
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
 
-	//Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà créé auparavant
+	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
+	// créé auparavant
 	@FXML
 	public void ouvrir(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Ouvrez votre exercice");
 		fileChooser.showOpenDialog(null);
-		//TODO Chargez l'exercice dans la page
+		// TODO Chargez l'exercice dans la page
 	}
 
-	//Bouton Préférences qui emmène sur la page des paramètres
+	// Bouton Préférences qui emmène sur la page des paramètres
 	@FXML
 	public void preferences(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
@@ -81,7 +99,7 @@ public class Controller_Page_Des_Options implements Initializable{
 		primaryStage.show();
 	}
 
-	//Bouton qui fait retourner l'enseignant à la page d'apercu (bouton retour)
+	// Bouton qui fait retourner l'enseignant à la page d'apercu (bouton retour)
 	@FXML
 	public void pageApercu(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
@@ -92,7 +110,7 @@ public class Controller_Page_Des_Options implements Initializable{
 
 	@FXML
 	public void pageEnregistrementFinal(ActionEvent event) throws IOException {
-		//Quand on passe à la page suivante, on mémorise les informations des options
+		// Quand on passe à la page suivante, on mémorise les informations des options
 		caraOccul = CaraOccul.getText();
 		nbMin = nbMinute.getText();
 
@@ -102,168 +120,215 @@ public class Controller_Page_Des_Options implements Initializable{
 		primaryStage.show();
 	}
 
-	//Bouton DarkMode qui met en darkMode l'application
-	@FXML 
+	// Bouton DarkMode qui met en darkMode l'application
+	@FXML
 	public void darkMode() {
-		//TODO faire le DarkMode
+		// TODO faire le DarkMode
 	}
 
-	//Gestion de si je sélectionne un mode, l'autre se décoche
+	// Gestion de si je sélectionne un mode, l'autre se décoche
 	@FXML
 	public void selectionModeEvaluation(ActionEvent event) {
-		//On fait apparaître ce qui concerne le mode Evaluation
+		// On fait apparaître ce qui concerne le mode Evaluation
 		modeEvaluation.setVisible(true);
 		evaluation = true;
 
-		//On enlève les sélections du mode entrainement
+		// On enlève les sélections du mode entrainement et on passe les variables à false
 		checkBoxMotIncomplet.setSelected(false);
+		motIncomplet = false;
 		checkBoxSolution.setSelected(false);
+		solution = false;
 		checkBoxMotsDecouverts.setSelected(false);
+		motDecouverts = false;
 		radioButton2Lettres.setSelected(false);
+		lettres_2 = false;
 		radioButton3Lettres.setSelected(false);
+		lettres_3 = false;
 
-		//On cache ce qui concerne le mode Entraînement
+		// On cache ce qui concerne le mode Entraînement
 		modeEntrainement.setVisible(false);
 		modeEntrainement1.setVisible(false);
 		modeEntrainement2.setVisible(false);
 		modeEntrainement3.setVisible(false);
 		modeEntrainement4.setVisible(false);
 
-		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
-		if(radioButtonEntrainement.isSelected()) {
+		// On regarde si l'autre bouton est sélectionné, si c'est le cas on le
+		// déselectionne
+		if (radioButtonEntrainement.isSelected()) {
 			radioButtonEntrainement.setSelected(false);
 			entrainement = false;
 		}
 
-		//Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode Evaluation
-		if(!radioButtonEvaluation.isSelected()) {
+		// Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode
+		// Evaluation
+		if (!radioButtonEvaluation.isSelected()) {
 			modeEvaluation.setVisible(false);
 			evaluation = false;
+			
+			//on vide le textField
+			nbMinute.setText(null);
 		}
 
 	}
 
 	@FXML
-	public void selectionModeEntrainement(ActionEvent event) {	
-		//On fait apparaître ce qui concerne le mode Entrainement
+	public void selectionModeEntrainement(ActionEvent event) {
+		// On fait apparaître ce qui concerne le mode Entrainement
 		modeEntrainement.setVisible(true);
 		modeEntrainement1.setVisible(true);
 		modeEntrainement2.setVisible(true);
 
-		//On cache ce qui concerne le mode Evaluation
+		// On cache ce qui concerne le mode Evaluation
 		modeEvaluation.setVisible(false);
 		entrainement = true;
 
-		//On réinitialise le nombre de minutes
+		// On réinitialise le nombre de minutes
 		nbMinute.setText(null);
 
-		//On regarde si l'autre bouton est sélectionné, si c'est le cas on le déselectionne
-		if(radioButtonEvaluation.isSelected()) {
+		// On regarde si l'autre bouton est sélectionné, si c'est le cas on le
+		// déselectionne
+		if (radioButtonEvaluation.isSelected()) {
 			radioButtonEvaluation.setSelected(false);
 			evaluation = false;
 		}
 
-		//Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode Entrainement
-		if(!radioButtonEntrainement.isSelected()) {
+		// Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode
+		// Entrainement
+		if (!radioButtonEntrainement.isSelected()) {
 			modeEntrainement.setVisible(false);
 			modeEntrainement1.setVisible(false);
 			modeEntrainement2.setVisible(false);
 			modeEntrainement3.setVisible(false);
 			modeEntrainement4.setVisible(false);
+			
+			// On enlève les sélections du mode entrainement et on passe les variables à false
+			checkBoxMotIncomplet.setSelected(false);
+			motIncomplet = false;
+			checkBoxSolution.setSelected(false);
+			solution = false;
+			checkBoxMotsDecouverts.setSelected(false);
+			motDecouverts = false;
+			radioButton2Lettres.setSelected(false);
+			lettres_2 = false;
+			radioButton3Lettres.setSelected(false);
+			lettres_3 = false;
 
 			entrainement = false;
 		}
-
+		
 	}
 
-
-	//Gestion de si je sélectionne une nombre de lettres minimum autorisé, l'autre se décoche 
+	// Gestion de si je sélectionne une nombre de lettres minimum autorisé, l'autre
+	// se décoche
 	@FXML
 	public void selection2Lettres(ActionEvent event) {
-		if(radioButton3Lettres.isSelected()) {
+		if (radioButton3Lettres.isSelected()) {
 			radioButton3Lettres.setSelected(false);
+
+			lettres_2 = true;
+			lettres_3 = false;
+		} else {
+			lettres_2 = false;
 		}
 	}
 
 	@FXML
 	public void selection3Lettres(ActionEvent event) {
-		if(radioButton2Lettres.isSelected()) {
+		if (radioButton2Lettres.isSelected()) {
 			radioButton2Lettres.setSelected(false);
+			
+			lettres_3 = true;
+			lettres_2 = false;
+		} 
+		else {
+			lettres_3 = false;
 		}
 	}
 
-	//Méthode qui restreint à un caractère, la saisie du caractère d'occultation
+	// Méthode qui restreint à un caractère, la saisie du caractère d'occultation
 	@FXML
 	public void RestrictionOne(KeyEvent event) {
-		if(CaraOccul.getText().length() > 1) {
+		if (CaraOccul.getText().length() > 1) {
 			CaraOccul.deletePreviousChar();
 		}
 	}
 
-	//Méthode qui restreint à la saisie de chiffres uniquement pour la saisie du temps
+	// Méthode qui restreint à la saisie de chiffres uniquement pour la saisie du
+	// temps
 	@FXML
 	public void RestrictionChiffre(KeyEvent event) {
-		if(nbMinute.getText().length() > 0) {
-			if(!nbMinute.getText().matches("[0-9]*")) {
+		if (nbMinute.getText().length() > 0) {
+			if (!nbMinute.getText().matches("[0-9]*")) {
 				nbMinute.deletePreviousChar();
 			}
 		}
 	}
 
-	//Méthode qui enlève ou fait apparaître le choix du nombre de lettre si mot incomplet est coché
+	// Méthode qui enlève ou fait apparaître le choix du nombre de lettre si mot
+	// incomplet est coché
 	@FXML
 	public void motIncomplet(ActionEvent event) {
 
-		//Si on coche le radioButton
-		if(checkBoxMotIncomplet.isSelected()) {
+		// Si on coche le radioButton
+		if (checkBoxMotIncomplet.isSelected()) {
 			modeEntrainement3.setVisible(true);
 			modeEntrainement4.setVisible(true);
-		} 
-		//Si on le décoche
-		if(!checkBoxMotIncomplet.isSelected()) {
-			// on le cache 
+
+			// on passe à true
+			motIncomplet = true;
+		}
+		// Si on le décoche
+		if (!checkBoxMotIncomplet.isSelected()) {
+			// on le cache
 			modeEntrainement3.setVisible(false);
 			modeEntrainement4.setVisible(false);
-			// on les déselectionne
+			// on les déselectionne et on repasse les variables à false
 			radioButton2Lettres.setSelected(false);
 			radioButton3Lettres.setSelected(false);
-		} 
+			
+			lettres_2 = false;
+			lettres_3 = false;
+
+			// on passe à false
+			motIncomplet = false;
+		}
+
 	}
 
-	//Méthode qui passe à true ou false la variable sensiCasse
+	// Méthode qui passe à true ou false la variable sensiCasse
 	@FXML
 	public void sensiCasse(ActionEvent event) {
-		//Si la case est cochée
-		if(sensibiliteCasse.isSelected()) {
+		// Si la case est cochée
+		if (sensibiliteCasse.isSelected()) {
 			sensiCasse = true;
 		}
-		//Dans le cas contraire
+		// Dans le cas contraire
 		else {
 			sensiCasse = false;
 		}
 	}
 
-	//Méthode qui passe à true ou false la variable solution
+	// Méthode qui passe à true ou false la variable solution
 	@FXML
 	public void affichageSolution(ActionEvent event) {
-		//Si la case est cochée
-		if(checkBoxSolution.isSelected()) {
+		// Si la case est cochée
+		if (checkBoxSolution.isSelected()) {
 			solution = true;
 		}
-		//Dans le cas contraire
+		// Dans le cas contraire
 		else {
 			solution = false;
 		}
 	}
 
-	//Méthode qui passe à true ou false la variable motsDécouverts
-	@FXML 
+	// Méthode qui passe à true ou false la variable motsDécouverts
+	@FXML
 	public void motDecouverts(ActionEvent event) {
-		//Si la case est cochée
-		if(checkBoxMotsDecouverts.isSelected()) {
+		// Si la case est cochée
+		if (checkBoxMotsDecouverts.isSelected()) {
 			motDecouverts = true;
 		}
-		//Dans le cas contraire
+		// Dans le cas contraire
 		else {
 			motDecouverts = false;
 		}
