@@ -1,8 +1,6 @@
 package Version_Enseignant.All_Controllers;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -53,8 +51,7 @@ public class Controller_Enregistrement_Final implements Initializable {
 
 		// On récupère le media et on lui demande sa taille
 		try {
-			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream()
-					.readAllBytes();
+			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().readAllBytes();
 			longueurMedia = ByteBuffer.allocate(8).putInt(contenuMedia.length).array();
 
 		} catch (MalformedURLException e1) {
@@ -87,43 +84,43 @@ public class Controller_Enregistrement_Final implements Initializable {
 
 			// Si la sensibilité à la casse est activée ou non
 			if (Controller_Page_Des_Options.sensiCasse == true) {
-				out.write(1);
+				out.write(0031);
 			} else {
-				out.write(0);
+				out.write(0030);
 			}
 
 			// On y écrit le mode (sur 1 octet)
 			// Si c'est le mode entrainement
 			if (Controller_Page_Des_Options.entrainement == true) {
-				out.write(0);
+				out.write(0030);
 
 				// Si l'affichage de la solution est autorisé
 				if (Controller_Page_Des_Options.solution == true) {
-					out.write(1);
+					out.write(0031);
 				} else {
-					out.write(0);
+					out.write(0030);
 				}
 
 				// Si l'affiche du nombre de mots découverts en temps réel est autorisé
 				if (Controller_Page_Des_Options.motDecouverts == true) {
-					out.write(1);
+					out.write(0031);
 				} else {
-					out.write(0);
+					out.write(0030);
 				}
 
 				// Si les mots incomplets sont autorisés
 				if (Controller_Page_Des_Options.motIncomplet == true) {
-					out.write(1);
+					out.write(0031);
 					
 					//On précise le nombre de lettres autorisées
 					if (Controller_Page_Des_Options.lettres_2 == true) {
-						out.write(2);
+						out.write(0032);
 					} else {
-						out.write(3);
+						out.write(0033);
 					}
 					
 				} else {
-					out.write(0);
+					out.write(0030);
 				}
 			}
 

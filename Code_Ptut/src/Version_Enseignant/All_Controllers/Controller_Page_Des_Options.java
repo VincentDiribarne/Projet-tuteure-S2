@@ -70,7 +70,58 @@ public class Controller_Page_Des_Options implements Initializable {
 	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		
+		//Pour la fonction ouvrir
+		//On met le caractère d'occultation 
+		if(caraOccul != null) {
+			CaraOccul.setText(caraOccul);
+		}
+		
+		//On met la sensibilité à la casse si celle-ci est activée
+		if(sensiCasse == true) {
+			sensibiliteCasse.setSelected(true);
+		}
+		
+		//On met le bon mode
+		//Entrainement
+		if(entrainement == true) {
+			radioButtonEntrainement.setSelected(true);
+			
+			//Si l'affichage de la solution est autorisé
+			if(solution == true) {
+				checkBoxSolution.setSelected(true);
+			}
+			
+			//Si l'affichage du nombre de mots découverts en temps réel est autorisé
+			if(motDecouverts == true) {
+				checkBoxMotsDecouverts.setSelected(true);
+			}
+			
+			//Si l'option mot incomplet est autorisé
+			if(motIncomplet ==  true) {
+				checkBoxMotIncomplet.setSelected(true);
+				
+				//Si c'est pour deux lettres
+				if(lettres_2 == true) {
+					radioButton2Lettres.setSelected(true);
+				}
+				
+				//Si c'est pour trois lettres
+				if(lettres_3 == true) {
+					radioButton3Lettres.setSelected(true);
+				}
+				
+			}
+		}
+		
+		//Evaluation
+		if(evaluation == true) {
+			radioButtonEvaluation.setSelected(true);
+			
+			//On met le nombre de minutes 
+			nbMinute.setText(nbMin);
+		}
+		
 	}
 
 	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible

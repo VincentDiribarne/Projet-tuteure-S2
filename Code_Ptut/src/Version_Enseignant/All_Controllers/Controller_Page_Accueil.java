@@ -17,127 +17,182 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class Controller_Page_Accueil implements Initializable{
+public class Controller_Page_Accueil implements Initializable {
 
-	@FXML Label RecupScene;
+	@FXML
+	Label RecupScene;
 
-	//Méthode d'initialisation de la page
+	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
 
-	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
+	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
+	// sur toutes les pages)
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
 
-	//Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà créé auparavant
+	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
+	// créé auparavant
 	@FXML
 	public void ouvrir(ActionEvent event) throws IOException {
+		
 		FileChooser fileChooser = new FileChooser();
+		File selectedFile = new File("");
 		fileChooser.setTitle("Ouvrez votre exercice");
-		//Appel de la fonction décrypte pour la fichier sélectionné
-		decrypte(fileChooser.showOpenDialog(null));
-		//TODO Chargez l'exercice dans la page
+		
+		// Appel de la fonction décrypte pour la fichier sélectionné
+		selectedFile = fileChooser.showOpenDialog(null);
+		decrypte(selectedFile);
+		
+		//On met le nom du fichier dans le TextField associé
+		Controller_Nouvel_Exo.contenuNomExo = selectedFile.getName();
+		
+		//On met le répertoire du fichier dans le TextField associé
+		Controller_Nouvel_Exo.contenuRepertoire = selectedFile.getAbsolutePath();
+		
+		//On load la page d'après
+		pageNouvelExo();
 	}
 
-	//Fonction qui va load les informations du fichier sélectionné dans les différents TextField...
+	
+	// Fonction qui va load les informations du fichier sélectionné dans les
+	// différents TextField...
 	public void decrypte(File file) throws IOException {
 
-		//Variables pour récupérer les informations du fichier
-		String consigne, aide, transcription, caraOccul, nbMin;
-		int nombreOctetALire, sensiCasse, mode, solution, motsDecouverts;
+		// Variables pour récupérer les informations du fichier
+		String consigne, aide, transcription, caraOccul, nbMin, Smedia;
+		int nombreOctetALire, sensiCasse, mode, solution, motsDecouverts, motsIncomplets, lettre;
+		Media media;
 
-		//On ouvre le fichier en lecture
+		// On ouvre le fichier en lecture
 		FileInputStream fin = new FileInputStream(file);
 
-		//On récupère la longueur de la consigne + la consigne
-		nombreOctetALire = entier(ByteBuffer.wrap(fin.readNBytes(4)));
+		// On récupère la longueur de la consigne + la consigne
+		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
 		consigne = chaine(fin.readNBytes(nombreOctetALire));
-		//On met la consigne dans la textField associé
+		// On met la consigne dans la textField associé
 		Controller_Page_Apercu.contenuConsigne = consigne;
 
-		//On récupère la longueur de la transcription + la transcription
-		nombreOctetALire = entier(ByteBuffer.wrap(fin.readNBytes(4)));
+		// On récupère la longueur de la transcription + la transcription
+		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
 		transcription = chaine(fin.readNBytes(nombreOctetALire));
-		//On met la transcription dans le textField associé
+		// On met la transcription dans le textField associé
 		Controller_Page_Apercu.contenuTranscription = transcription;
 
-		//On récupère la longueur de l'aide + l'aide
-		nombreOctetALire = entier(ByteBuffer.wrap(fin.readNBytes(4)));
+		// On récupère la longueur de l'aide + l'aide
+		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
 		aide = chaine(fin.readNBytes(nombreOctetALire));
-		//On met les aides dans le textField associé
+		// On met les aides dans le textField associé
 		Controller_Page_Apercu.contenuAide = aide;
 
-		//On récupère le caractère d'occultation
+		// On récupère le caractère d'occultation
 		caraOccul = chaine(fin.readNBytes(1));
-		//On met le caractère dans le texField associé
+		// On met le caractère dans le texField associé
 		Controller_Page_Des_Options.caraOccul = caraOccul;
 
-		//On récupère la reponse de sensiCasse 0 = false, 1 = true
-		sensiCasse = entier(ByteBuffer.wrap(fin.readNBytes(1)));
-		
-		//On met la variable associée en fonction de la réponse
-		if(sensiCasse == 1) {
+		// On récupère la reponse de sensiCasse 0 = false, 1 = true
+		sensiCasse = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+
+		// On met la variable associée en fonction de la réponse
+		if (sensiCasse == 1) {
 			Controller_Page_Des_Options.sensiCasse = true;
 		} else {
 			Controller_Page_Des_Options.sensiCasse = false;
 		}
 
-		//On récupère le mode choisi par l'enseignant 0 = entrainement, 1 = evaluation
-		mode = entier(ByteBuffer.wrap(fin.readNBytes(1)));
+		// On récupère le mode choisi par l'enseignant 0 = entrainement, 1 = evaluation
+		mode = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
 
-		//On met la variable associée en fonction de la réponse
-		//Mode Evaluation
-		if(mode == 1) {
+		// On met la variable associée en fonction de la réponse
+		// Mode Evaluation
+		if (mode == 1) {
 			Controller_Page_Des_Options.evaluation = true;
 			Controller_Page_Des_Options.entrainement = false;
 
-			nombreOctetALire = entier(ByteBuffer.wrap(fin.readNBytes(4)));
+			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
 			nbMin = chaine(fin.readNBytes(nombreOctetALire));
 
 			Controller_Page_Des_Options.nbMin = nbMin;
-			
-			//Mode Entrainement
+
+			// Mode Entrainement
 		} else {
 			Controller_Page_Des_Options.evaluation = false;
 			Controller_Page_Des_Options.entrainement = true;
-			
-			//On récupère la reponse de l'affiche de la solution 0 = false, 1 = true
-			solution = entier(ByteBuffer.wrap(fin.readNBytes(1)));
-			
-			//On met la variable associée en fonction de la réponse
-			if(solution == 1) {
+
+			// On récupère la reponse de l'affiche de la solution 0 = false, 1 = true
+			solution = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+
+			// On met la variable associée en fonction de la réponse
+			if (solution == 1) {
 				Controller_Page_Des_Options.solution = true;
 			} else {
 				Controller_Page_Des_Options.solution = false;
 			}
-			
+
+			// On récupère la reponse de l'affiche du nombre de mots découverts en temps
+			// réel 0 = false, 1 = true
+			motsDecouverts = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+
+			// On met la variable associée en fonction de la réponse
+			if (motsDecouverts == 1) {
+				Controller_Page_Des_Options.motDecouverts = true;
+			} else {
+				Controller_Page_Des_Options.motDecouverts = false;
+			}
+
+			// On récupère la reponse de l'autorisation du nb min de lettre pour découvrir
+			// le mot 0 = false, 1 = true
+			motsIncomplets = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+
+			// On met la variable associée en fonction de la réponse
+			if (motsIncomplets == 1) {
+				Controller_Page_Des_Options.motIncomplet = true;
+
+				// On récupère la reponse du nb min de lettre pour découvrir le mot 2 = 2
+				// lettres, 3 = 3 lettres
+				lettre = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+
+				// On met la variable associée en fonction de la réponse
+				if (lettre == 2) {
+					Controller_Page_Des_Options.lettres_2 = true;
+					Controller_Page_Des_Options.lettres_3 = false;
+				} else {
+					Controller_Page_Des_Options.lettres_2 = false;
+					Controller_Page_Des_Options.lettres_3 = true;
+				}
+
+			} else {
+				Controller_Page_Des_Options.motIncomplet = false;
+				Controller_Page_Des_Options.lettres_2 = false;
+				Controller_Page_Des_Options.lettres_3 = false;
+			}
 		}
+		
+		//On récupère ensuite le media
+		/*nombreOctetALire = entier(ByteBuffer.wrap(fin.readNBytes(8)));
+		Smedia = chaine(fin.readNBytes(nombreOctetALire));
+		Controller_Importer_Ressource.contenuMedia = new Media(Smedia);*/
 
-
-		//Fermeture du fichier
+		// Fermeture du fichier
 		fin.close();
 	}
 
-	//Fonction qui transforme un byteBuffer en Int
-	public int entier(ByteBuffer bytes) {
-		return bytes.getInt();
-	}
-
-	//Fonction qui converti des bytes en String
+	// Fonction qui converti des bytes en String
 	public String chaine(byte[] bytes) {
-		//Variable qui contiendra la chaine
+		// Variable qui contiendra la chaine
 		String chaine = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
 		return chaine;
 	}
 
-	//Bouton Nouveau qui permet de créer un nouvel exercice
+	// Bouton Nouveau qui permet de créer un nouvel exercice
 	@FXML
 	public void pageNouvelExo() throws IOException {
 		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
@@ -146,7 +201,7 @@ public class Controller_Page_Accueil implements Initializable{
 		primaryStage.show();
 	}
 
-	//Bouton Préférences qui emmène sur la page des paramètres
+	// Bouton Préférences qui emmène sur la page des paramètres
 	@FXML
 	public void preferences(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
@@ -155,10 +210,10 @@ public class Controller_Page_Accueil implements Initializable{
 		primaryStage.show();
 	}
 
-	//Bouton DarkMode qui met en darkMode l'application
-	@FXML 
+	// Bouton DarkMode qui met en darkMode l'application
+	@FXML
 	public void darkMode() {
-		//TODO faire le DarkMode
+		// TODO faire le DarkMode
 	}
 
 }
