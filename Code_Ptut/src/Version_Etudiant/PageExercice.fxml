@@ -118,7 +118,7 @@
                   <Insets bottom="95.0" left="45.0" right="155.0" />
                </GridPane.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black; -fx-border-width: 1;" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Corbel" size="14.0" />
                </font>
