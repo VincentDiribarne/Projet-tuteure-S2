@@ -81,6 +81,7 @@ public class Controller_Page_Accueil implements Initializable{
 
 		//On récupère la reponse de sensiCasse 0 = false, 1 = true
 		sensiCasse = entier(ByteBuffer.wrap(fin.readNBytes(1)));
+		
 		//On met la variable associée en fonction de la réponse
 		if(sensiCasse == 1) {
 			Controller_Page_Des_Options.sensiCasse = true;
@@ -107,10 +108,17 @@ public class Controller_Page_Accueil implements Initializable{
 			Controller_Page_Des_Options.evaluation = false;
 			Controller_Page_Des_Options.entrainement = true;
 			
+			//On récupère la reponse de l'affiche de la solution 0 = false, 1 = true
+			solution = entier(ByteBuffer.wrap(fin.readNBytes(1)));
+			
+			//On met la variable associée en fonction de la réponse
+			if(solution == 1) {
+				Controller_Page_Des_Options.solution = true;
+			} else {
+				Controller_Page_Des_Options.solution = false;
+			}
 			
 		}
-
-
 
 
 		//Fermeture du fichier
