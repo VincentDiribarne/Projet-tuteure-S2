@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,9 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.CheckMenuItem?>
-<BorderPane minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_Menu">
    <center>
        <BorderPane minHeight="750.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <top>
@@ -26,7 +26,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="0.0" prefWidth="482.0">
                      <children>
-                        <Text fill="#0400ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur Reconstitution !" textAlignment="CENTER">
+                        <Text fx:id="recupScene" fill="#0400ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur Reconstitution !" textAlignment="CENTER">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -124,12 +124,12 @@
                    <menus>
                        <Menu mnemonicParsing="false" text="Exercice">
                            <items>
-                               <MenuItem mnemonicParsing="false" text="Ouvrir" />
+                               <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
                                <SeparatorMenuItem mnemonicParsing="false" />
-                               <MenuItem mnemonicParsing="false" text="Enregistrer" />
-                               <MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+                               <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
+                               <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
                                <SeparatorMenuItem mnemonicParsing="false" />
-                               <MenuItem mnemonicParsing="false" text="Quitter" />
+                               <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
                            </items>
                        </Menu>
                        <Menu mnemonicParsing="false" text="Aide">
