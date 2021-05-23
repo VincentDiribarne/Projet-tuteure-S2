@@ -58,9 +58,11 @@ public class Controller_Enregistrement_Final implements Initializable {
 		try {
 			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().readAllBytes();
 			longueurMedia = ByteBuffer.allocate(8).putInt(contenuMedia.length).array();
-			
+		
+		if(Controller_Importer_Ressource.contenuImage != null) {
 			contenuImage = URI.create(Controller_Importer_Ressource.contenuImage.getUrl()).toURL().openStream().readAllBytes();
 			longueurImage = ByteBuffer.allocate(8).putInt(contenuImage.length).array();
+		}
 
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();

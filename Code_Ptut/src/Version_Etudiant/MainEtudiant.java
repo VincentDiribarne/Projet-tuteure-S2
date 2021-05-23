@@ -2,21 +2,34 @@ package Version_Etudiant;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainEtudiant extends Application{
-
+	
+	public static Parent root;
+	
+	//Paramètres de taille d'écran
+	public static double width;
+	public static double height;
+	
 	@Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        root = FXMLLoader.load(getClass().getResource("FXML_Files/Menu.fxml"));
         primaryStage.setTitle("Reconstitution - Version Etudiante");
-        primaryStage.setScene(new Scene(root, 1200, 800));
-        primaryStage.setMinWidth(1300);
-        primaryStage.setMinHeight(850);
+
+        //On affiche le plein écran
         primaryStage.setMaximized(true);
-        //primaryStage.setFullScreen(true);
+        
+        //On récupère la largeur et la hauteur de l'écran
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+        width=screenBounds.getWidth();
+        height=screenBounds.getHeight();
+        
+        primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
     }
 
