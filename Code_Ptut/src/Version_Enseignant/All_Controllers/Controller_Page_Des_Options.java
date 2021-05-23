@@ -6,12 +6,15 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -54,18 +57,20 @@ public class Controller_Page_Des_Options implements Initializable {
 	private CheckBox checkBoxMotsDecouverts;
 	@FXML
 	private CheckBox sensibiliteCasse;
+	@FXML
+	private Button enregistrer;
 
 	// Variables qui contiennent les informations sur l'exercice
 	public static String caraOccul;
 	public static String nbMin;
-	public static boolean sensiCasse = false;
-	public static boolean entrainement = false;
-	public static boolean evaluation = false;
-	public static boolean solution = false;
-	public static boolean motDecouverts = false;
-	public static boolean motIncomplet = false;
-	public static boolean lettres_2 = false;
-	public static boolean lettres_3 = false;
+	public static boolean sensiCasse;
+	public static boolean entrainement;
+	public static boolean evaluation;
+	public static boolean solution;
+	public static boolean motDecouverts;
+	public static boolean motIncomplet;
+	public static boolean lettres_2;
+	public static boolean lettres_3;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -87,6 +92,11 @@ public class Controller_Page_Des_Options implements Initializable {
 		if(entrainement == true) {
 			radioButtonEntrainement.setSelected(true);
 			
+			//On affiche ce qui est en rapport avec le mode Entrainement
+			modeEntrainement.setVisible(true);
+			modeEntrainement1.setVisible(true);
+			modeEntrainement2.setVisible(true);
+			
 			//Si l'affichage de la solution est autorisé
 			if(solution == true) {
 				checkBoxSolution.setSelected(true);
@@ -100,6 +110,9 @@ public class Controller_Page_Des_Options implements Initializable {
 			//Si l'option mot incomplet est autorisé
 			if(motIncomplet ==  true) {
 				checkBoxMotIncomplet.setSelected(true);
+				
+				modeEntrainement3.setVisible(true);
+				modeEntrainement4.setVisible(true);
 				
 				//Si c'est pour deux lettres
 				if(lettres_2 == true) {
@@ -118,7 +131,8 @@ public class Controller_Page_Des_Options implements Initializable {
 		if(evaluation == true) {
 			radioButtonEvaluation.setSelected(true);
 			
-			//On met le nombre de minutes 
+			//On met le nombre de minutes et on l'affiche
+			modeEvaluation.setVisible(true);
 			nbMinute.setText(nbMin);
 		}
 		

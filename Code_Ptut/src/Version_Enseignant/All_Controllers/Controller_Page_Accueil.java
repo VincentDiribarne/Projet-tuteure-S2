@@ -2,7 +2,7 @@ package Version_Enseignant.All_Controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -68,9 +69,9 @@ public class Controller_Page_Accueil implements Initializable {
 	public void decrypte(File file) throws IOException {
 
 		// Variables pour récupérer les informations du fichier
-		String consigne, aide, transcription, caraOccul, nbMin, Smedia;
-		int nombreOctetALire, sensiCasse, mode, solution, motsDecouverts, motsIncomplets, lettre;
-		Media media;
+		String consigne, aide, transcription, caraOccul, nbMin;
+		int nombreOctetALire, sensiCasse, mode, solution, motsDecouverts, motsIncomplets, lettre, extension;
+		File tmpFile;
 
 		// On ouvre le fichier en lecture
 		FileInputStream fin = new FileInputStream(file);
@@ -99,7 +100,7 @@ public class Controller_Page_Accueil implements Initializable {
 		Controller_Page_Des_Options.caraOccul = caraOccul;
 
 		// On récupère la reponse de sensiCasse 0 = false, 1 = true
-		sensiCasse = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+		sensiCasse = ByteBuffer.wrap(fin.readNBytes(1)).get();
 
 		// On met la variable associée en fonction de la réponse
 		if (sensiCasse == 1) {
@@ -109,7 +110,7 @@ public class Controller_Page_Accueil implements Initializable {
 		}
 
 		// On récupère le mode choisi par l'enseignant 0 = entrainement, 1 = evaluation
-		mode = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+		mode = ByteBuffer.wrap(fin.readNBytes(1)).get();
 
 		// On met la variable associée en fonction de la réponse
 		// Mode Evaluation
@@ -117,7 +118,7 @@ public class Controller_Page_Accueil implements Initializable {
 			Controller_Page_Des_Options.evaluation = true;
 			Controller_Page_Des_Options.entrainement = false;
 
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
 			nbMin = chaine(fin.readNBytes(nombreOctetALire));
 
 			Controller_Page_Des_Options.nbMin = nbMin;
@@ -128,7 +129,7 @@ public class Controller_Page_Accueil implements Initializable {
 			Controller_Page_Des_Options.entrainement = true;
 
 			// On récupère la reponse de l'affiche de la solution 0 = false, 1 = true
-			solution = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+			solution = ByteBuffer.wrap(fin.readNBytes(1)).get();
 
 			// On met la variable associée en fonction de la réponse
 			if (solution == 1) {
@@ -139,7 +140,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 			// On récupère la reponse de l'affiche du nombre de mots découverts en temps
 			// réel 0 = false, 1 = true
-			motsDecouverts = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+			motsDecouverts = ByteBuffer.wrap(fin.readNBytes(1)).get();
 
 			// On met la variable associée en fonction de la réponse
 			if (motsDecouverts == 1) {
@@ -150,7 +151,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 			// On récupère la reponse de l'autorisation du nb min de lettre pour découvrir
 			// le mot 0 = false, 1 = true
-			motsIncomplets = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+			motsIncomplets = ByteBuffer.wrap(fin.readNBytes(1)).get();
 
 			// On met la variable associée en fonction de la réponse
 			if (motsIncomplets == 1) {
@@ -158,7 +159,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 				// On récupère la reponse du nb min de lettre pour découvrir le mot 2 = 2
 				// lettres, 3 = 3 lettres
-				lettre = ByteBuffer.wrap(fin.readNBytes(2)).getShort();
+				lettre = ByteBuffer.wrap(fin.readNBytes(1)).get();
 
 				// On met la variable associée en fonction de la réponse
 				if (lettre == 2) {
@@ -176,11 +177,49 @@ public class Controller_Page_Accueil implements Initializable {
 			}
 		}
 		
-		//On récupère ensuite le media
-		/*nombreOctetALire = entier(ByteBuffer.wrap(fin.readNBytes(8)));
-		Smedia = chaine(fin.readNBytes(nombreOctetALire));
-		Controller_Importer_Ressource.contenuMedia = new Media(Smedia);*/
+		//On regarde l'extension du media
+		extension = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		
+		//Si c'est un mp3, on doit déchiffrer l'image
+		if(extension == 0) {
+			
+			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			
+			File tmpFileImage = File.createTempFile("data", ".png");
+			FileOutputStream ecritureFileImage = new FileOutputStream(tmpFileImage);
+			ecritureFileImage.write(fin.readNBytes(nombreOctetALire));
+			ecritureFileImage.close();
+			
+			Controller_Importer_Ressource.contenuImage = new Image(tmpFileImage.toURI().toString());
+			
+			//On efface le fichier temporaire
+			tmpFileImage.deleteOnExit();
+			
+			//On lit le mp3
+			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			
+			tmpFile = File.createTempFile("data", ".mp3");
 
+		} 
+		//Sinon c'est un mp4
+		else {
+			
+			//On récupère ensuite le media
+			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			
+			tmpFile = File.createTempFile("data", ".mp4");
+
+		}
+		
+		FileOutputStream ecritureFile = new FileOutputStream(tmpFile);
+		ecritureFile.write(fin.readAllBytes());
+		ecritureFile.close();
+		
+		Controller_Importer_Ressource.contenuMedia = new Media(tmpFile.toURI().toString());
+		
+		//On efface le fichier temporaire
+		tmpFile.deleteOnExit();
+		
 		// Fermeture du fichier
 		fin.close();
 	}

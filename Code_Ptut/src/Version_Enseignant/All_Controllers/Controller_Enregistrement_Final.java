@@ -9,6 +9,7 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
 
+
 import Version_Enseignant.MainEnseignant;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -48,11 +49,18 @@ public class Controller_Enregistrement_Final implements Initializable {
 		// Conteneurs du media
 		byte[] contenuMedia = null;
 		byte[] longueurMedia = null;
+		
+		//Conteneur de l'image (pour mp3)
+		byte[] contenuImage = null;
+		byte[] longueurImage = null;
 
-		// On récupère le media et on lui demande sa taille
+		// On récupère le media / image et on lui demande sa taille
 		try {
 			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().readAllBytes();
 			longueurMedia = ByteBuffer.allocate(8).putInt(contenuMedia.length).array();
+			
+			contenuImage = URI.create(Controller_Importer_Ressource.contenuImage.getUrl()).toURL().openStream().readAllBytes();
+			longueurImage = ByteBuffer.allocate(8).putInt(contenuImage.length).array();
 
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
@@ -84,43 +92,43 @@ public class Controller_Enregistrement_Final implements Initializable {
 
 			// Si la sensibilité à la casse est activée ou non
 			if (Controller_Page_Des_Options.sensiCasse == true) {
-				out.write(0031);
+				out.write(1);
 			} else {
-				out.write(0030);
+				out.write(0);
 			}
 
 			// On y écrit le mode (sur 1 octet)
 			// Si c'est le mode entrainement
 			if (Controller_Page_Des_Options.entrainement == true) {
-				out.write(0030);
+				out.write(0);
 
 				// Si l'affichage de la solution est autorisé
 				if (Controller_Page_Des_Options.solution == true) {
-					out.write(0031);
+					out.write(1);
 				} else {
-					out.write(0030);
+					out.write(0);
 				}
 
 				// Si l'affiche du nombre de mots découverts en temps réel est autorisé
 				if (Controller_Page_Des_Options.motDecouverts == true) {
-					out.write(0031);
+					out.write(1);
 				} else {
-					out.write(0030);
+					out.write(0);
 				}
 
 				// Si les mots incomplets sont autorisés
 				if (Controller_Page_Des_Options.motIncomplet == true) {
-					out.write(0031);
+					out.write(1);
 					
 					//On précise le nombre de lettres autorisées
 					if (Controller_Page_Des_Options.lettres_2 == true) {
-						out.write(0032);
+						out.write(2);
 					} else {
-						out.write(0033);
+						out.write(3);
 					}
 					
 				} else {
-					out.write(0030);
+					out.write(0);
 				}
 			}
 
@@ -136,6 +144,17 @@ public class Controller_Enregistrement_Final implements Initializable {
 				out.write(longueurNbMin);
 				out.write(nbMin);
 			}
+			
+			//S'il s'agit d'une extension mp4
+			if(getExtension(Controller_Importer_Ressource.contenuMedia.getSource()) == "mp4") {
+				out.write(1);
+			}
+			//S'il s'agit d'une extension mp3
+			else {
+				out.write(0);
+				out.write(longueurImage);
+				out.write(contenuImage);
+			}
 
 			// On y écrit les données du media
 			out.write(longueurMedia);
@@ -147,7 +166,26 @@ public class Controller_Enregistrement_Final implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		//On remet toutes les variables statiques à null
+		Controller_Nouvel_Exo.contenuNomExo = null;
+		Controller_Nouvel_Exo.contenuRepertoire = null;
+		Controller_Importer_Ressource.contenuMedia = null;
+		Controller_Importer_Ressource.contenuImage = null;
+		Controller_Page_Apercu.contenuAide = null;
+		Controller_Page_Apercu.contenuConsigne = null;
+		Controller_Page_Apercu.contenuTranscription = null;
+		Controller_Page_Des_Options.caraOccul = null;
+		Controller_Page_Des_Options.sensiCasse = false;
+		Controller_Page_Des_Options.entrainement = false;
+		Controller_Page_Des_Options.evaluation = false;
+		Controller_Page_Des_Options.lettres_2 = false;
+		Controller_Page_Des_Options.lettres_3 = false;
+		Controller_Page_Des_Options.motDecouverts = false;
+		Controller_Page_Des_Options.motIncomplet = false;
+		Controller_Page_Des_Options.solution = false;
+		Controller_Page_Des_Options.nbMin = null;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,6 +249,7 @@ public class Controller_Enregistrement_Final implements Initializable {
 		primaryStage.show();
 	}
 
+	//Méthode qui récupère la lonngueur en byte d'une chaine de caractère
 	private byte[] getLongueur(String chaine) {
 
 		int nbCara = 0;
@@ -220,5 +259,18 @@ public class Controller_Enregistrement_Final implements Initializable {
 		}
 		return ByteBuffer.allocate(4).putInt(nbCara).array();
 	}
+	
+	private String getExtension(String filePath) {
+        if (filePath == null) {
+            return null;
+        }
+        int posPoint = filePath.lastIndexOf(".");
+
+        if (posPoint == -1) {
+            return null;
+        }
+
+        return filePath.substring(posPoint);
+    }
 
 }
