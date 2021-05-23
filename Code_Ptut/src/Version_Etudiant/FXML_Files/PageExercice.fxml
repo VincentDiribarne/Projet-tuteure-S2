@@ -30,7 +30,7 @@
                       <MenuItem mnemonicParsing="false" text="Enregistrer" />
                       <MenuItem mnemonicParsing="false" text="Enregistrer sous" />
                       <SeparatorMenuItem mnemonicParsing="false" />
-                      <MenuItem mnemonicParsing="false" text="Quitter" />
+                      <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
                   </items>
               </Menu>
               <Menu mnemonicParsing="false" text="Aide">
@@ -98,7 +98,7 @@
                </GridPane.margin>
             </TextArea>
             <MediaView fx:id="mediaView" fitHeight="300.0" fitWidth="450.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label text="Temps Restant : " GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label fx:id="titleTime" text="Temps Restant : " GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Comic Sans MS Bold" size="24.0" />
                </font>
@@ -114,12 +114,12 @@
                   <Insets bottom="100.0" left="140.0" />
                </GridPane.margin>
             </Text>
-            <TextField promptText="Rentrez ici les mots que vous entendez" style="-fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <TextField fx:id="motPropose" promptText="Rentrez ici les mots que vous entendez" style="-fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="95.0" left="45.0" right="155.0" />
                </GridPane.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black; -fx-border-width: 1;" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button mnemonicParsing="false" onAction="#propositionMot" prefHeight="35.0" prefWidth="105.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black; -fx-border-width: 1;" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Corbel" size="14.0" />
                </font>
