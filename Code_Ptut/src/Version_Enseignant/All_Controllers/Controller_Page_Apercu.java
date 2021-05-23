@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -28,6 +29,7 @@ public class Controller_Page_Apercu implements Initializable{
 	@FXML private TextField texteAide;
 	@FXML private MediaView MediaViewApercu;
 	@FXML private Button okApercu;
+	@FXML private ImageView imageViewApercu;
 	
 	public static String contenuConsigne;
 	public static String contenuTranscription;
@@ -40,6 +42,9 @@ public class Controller_Page_Apercu implements Initializable{
 		//On met le media dans la preview
 		MediaPlayer mediaPlayer = new MediaPlayer(Controller_Importer_Ressource.contenuMedia);
 		MediaViewApercu.setMediaPlayer(mediaPlayer);
+		
+		//On met l'image dans la preview
+		imageViewApercu.setImage(Controller_Importer_Ressource.contenuImage);
 		
 		//Si les contenus ne sont pas null (lorsque l'enseignant fait retour), les informations sont conservées
 		//Consigne
