@@ -22,6 +22,7 @@ import javafx.scene.media.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Controller_Page_Exercice implements Initializable{
 
@@ -55,14 +56,15 @@ public class Controller_Page_Exercice implements Initializable{
 
 	@FXML private Button playPause;
 	MediaPlayer mediaPlayer = new MediaPlayer(contenuMedia);
-	
+
 	private ArrayList<String> lesMots = new ArrayList<>();
+	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		int i;
-		String mot = "";
+		int i, check = 0;
+		String mot = "", m = "";
 
 		transcription.setWrapText(true);
 
@@ -71,19 +73,35 @@ public class Controller_Page_Exercice implements Initializable{
 
 			//Pour la transcription, on utilise le caractère d'occultation
 			for(i = 0; i < contenuTranscription.length(); i++) {
-				
+
 				//Si cela correspond bien à la regex, on occulte le mot
 				if(okRegex(contenuTranscription.charAt(i)) == true) {
 					transcription.setText(transcription.getText() + caractereOccul);
 					mot += contenuTranscription.charAt(i);
 				} else {
-					if(mot != "") {
-						lesMots.add(mot);
-					}
 					transcription.setText(transcription.getText() + contenuTranscription.charAt(i));
 					mot = "";
 				}
-			}	
+			}
+
+			for(int j = 0; j < contenuTranscription.length(); j++) {
+				if(contenuTranscription.charAt(j) != ' ') {
+					if(okRegex(contenuTranscription.charAt(j))) {
+						m += caractereOccul;
+					} else {
+						check = 1;
+					}
+				} else {
+					if(m != "") {
+						lesMotsEtudiant.add(m);
+						if(check == 1) {
+							lesMotsEtudiant.add(contenuTranscription.charAt(j - 1) + "");
+							check = 0;
+						}
+					}		
+					m = "";
+				}
+			}
 		}
 
 
@@ -101,7 +119,7 @@ public class Controller_Page_Exercice implements Initializable{
 		if(contenuImage != null) {
 			imageView.setImage(contenuImage);
 		}
-		
+
 		//On load le temps nécessaire si c'est en mode Evaluation
 		if(evaluation == true) {
 			time.setText(nbMin);
@@ -144,44 +162,56 @@ public class Controller_Page_Exercice implements Initializable{
 		return false;
 	}
 
+
 	//Méthode qui fait apparaître la popUp pour que l'étudiant rentre ses infos pour l'enregistrement
 	public void popUpEnregistrement() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementApresouverture.fxml"));
 		Stage stage = new Stage();
-		stage.setTitle("Enregistrement futur");
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.UNDECORATED);
 		//On bloque le resize
 		stage.setResizable(false);
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
 	}
-	
+
 	//Méthode pour quitter l'application
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
-	
+
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
 	public void propositionMot(ActionEvent event) {
-		
+
 		String mot = motPropose.getText();
-		int longueurMot = mot.length(), index = 0;
-		
+		transcription.setText("");
+		System.out.println(lesMotsEtudiant);
+		System.out.println(lesMots);
+
 		for(String motCompa : lesMots) {
+
 			if(motCompa.compareTo(mot) == 0) {
-				System.out.println("Mot trouvé : " + mot);
+
+			}
+
+		}
+
+		//On réécrit le texte où l'étudiant à trouvé les mots
+		for(String m : lesMotsEtudiant) {
+			if(m == caractereOccul) {
+				transcription.setText(transcription.getText() + m + " ");
+			}
+			else {
+				transcription.deletePreviousChar();
+				transcription.setText(transcription.getText() + m + " ");
 			}
 		}
-		
+
+		//On réinitialise le TextField
 		motPropose.setText(null);
-		
-		for(String word : lesMots) {
-			System.out.print(word + " ");
-		}
-		
 	}
 
 }
