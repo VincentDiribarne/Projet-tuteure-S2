@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -20,7 +21,8 @@ public class MainEtudiant extends Application{
     public void start(Stage primaryStage) throws Exception{
         root = FXMLLoader.load(getClass().getResource("FXML_Files/Menu.fxml"));
         primaryStage.setTitle("Reconstitution - Version Etudiante");
-
+        primaryStage.getIcons().add(new Image("/Image/Logo_Reconstitution.png"));
+        
         //On affiche le plein écran
         primaryStage.setMaximized(true);
         
