@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane minHeight="500.0" minWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_EnregistrementApresOuverture">
+<GridPane minHeight="500.0" minWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_EnregistrementApresOuverture">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -21,7 +17,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Pour un enregistrement futur" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+      <Label text="Veuillez enregistrer votre exercice dès à présent !" GridPane.halignment="CENTER" GridPane.valignment="TOP">
          <font>
             <Font size="32.0" />
          </font>
@@ -29,7 +25,7 @@
             <Insets top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Nom" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Label text="Prénom" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
             <Font name="Comic Sans MS Italic" size="18.0" />
          </font>
@@ -37,7 +33,7 @@
             <Insets left="35.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="ok" disable="true" mnemonicParsing="false" onAction="#quitter" prefHeight="25.0" prefWidth="115.0" style="-fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Ok" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+      <Button fx:id="ok" mnemonicParsing="false" onAction="#quitter" prefHeight="32.0" prefWidth="141.0" style="-fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Enregistrer Sous" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="20.0" right="45.0" />
          </GridPane.margin>
@@ -45,12 +41,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="nom" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <TextField fx:id="nom" promptText="Thomas" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="150.0" right="70.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="prenom" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <TextField fx:id="prenom" promptText="LeDuc" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="150.0" right="70.0" />
          </GridPane.margin>
@@ -68,7 +64,7 @@
             <Insets left="35.0" />
          </GridPane.margin>
       </Label>
-      <Label layoutX="25.0" layoutY="148.0" text="Prenom" GridPane.rowIndex="2">
+      <Label layoutX="25.0" layoutY="148.0" text="Nom" GridPane.rowIndex="2">
          <font>
             <Font name="Comic Sans MS Italic" size="18.0" />
          </font>
