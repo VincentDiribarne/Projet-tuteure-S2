@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.CheckMenuItem?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_Menu">
+<BorderPane minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" stylesheets="@MenuAndButtonStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_Menu">
    <center>
        <BorderPane minHeight="750.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <top>
@@ -88,7 +76,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez créer un exercice, ou en ouvrir un !" textAlignment="CENTER" wrappingWidth="257.669921875" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous pouvez créer un exercice, ou en ouvrir un, consultez la rubrique Exercice " textAlignment="CENTER" wrappingWidth="219.669921875" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -97,7 +85,7 @@
                      <children>
                         <ImageView id="imageRecons" fitHeight="399.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
-                              <Image url="@../Logo_Renconstitution.png" />
+                              <Image url="@../../Logo_Renconstitution.png" />
                            </image>
                         </ImageView>
                         <Label alignment="CENTER" contentDisplay="CENTER" text="Reconstitution">
@@ -120,7 +108,7 @@
    <top>
        <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
            <children>
-               <MenuBar snapToPixel="false">
+               <MenuBar cacheHint="SCALE" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" snapToPixel="false">
                    <menus>
                        <Menu mnemonicParsing="false" text="Exercice">
                            <items>
@@ -147,6 +135,9 @@
                    <VBox.margin>
                        <Insets />
                    </VBox.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
                </MenuBar>
            </children>
        </VBox>
