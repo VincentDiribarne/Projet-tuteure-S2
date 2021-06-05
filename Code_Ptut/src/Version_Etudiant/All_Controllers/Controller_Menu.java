@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
-
-import Version_Enseignant.All_Controllers.Controller_Importer_Ressource;
-import Version_Enseignant.All_Controllers.Controller_Page_Apercu;
-import Version_Enseignant.All_Controllers.Controller_Page_Des_Options;
 import Version_Etudiant.MainEtudiant;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

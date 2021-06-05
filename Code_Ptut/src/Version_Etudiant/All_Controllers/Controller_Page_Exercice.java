@@ -258,10 +258,18 @@ public class Controller_Page_Exercice implements Initializable{
 							}
 							// update timerLabel
 							time.setText(min +":"+ sec +"s");
-							if (sec <= 0 && min <=0) {
-								timer.stop();
-								return;
-							}
+							
+							//S'il ne reste plus de temps, on load la fenetre d'enregistrement
+							if (sec <= 0 && min<=0) {
+	                            timer.stop();
+	                            try {
+									loadEnregistrement();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+	                            return;
+	                        }
+
 
 						}
 					}));
@@ -288,6 +296,19 @@ public class Controller_Page_Exercice implements Initializable{
 					}));
 			timer.playFromStart();
 		}
+	}
+	
+	//Méthode qui survient lorsque le timer est écoulé en mode Evaluation
+	public void loadEnregistrement() throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
+		Stage stage = new Stage();
+		//On bloque sur cette fenêtre
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.UNDECORATED);
+		//On bloque le resize
+		stage.setResizable(false);
+		stage.setScene(new Scene(root, 500, 300));
+		stage.show();
 	}
 
 }
