@@ -87,6 +87,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Listes des mots pour l'étudiant
 	private ArrayList<String> lesMots = new ArrayList<>();
+	private ArrayList<String> lesMotsSensiCasse = new ArrayList<>();
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
 
 	@Override
@@ -126,7 +127,14 @@ public class Controller_Page_Exercice implements Initializable{
 			}
 		}
 
+		//On passe les mots comparatifs en minuscule
+
+		for(String word : lesMots) {
+			lesMotsSensiCasse.add(word.toLowerCase());
+		}
+
 		System.out.println(lesMots);
+		System.out.println(lesMotsSensiCasse);
 		System.out.println(lesMotsEtudiant);
 
 		//On load la consigne
@@ -155,9 +163,15 @@ public class Controller_Page_Exercice implements Initializable{
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
+			
 			titleTime.setText("Temps Ecoulé");
 			min = 00;
 			time.setText("00:00");
+			
+			//Si l'enseignant n'a pas souhaité autoriser l'affichage de la solution
+			if(solution == false) {
+				ButtonSolution.setVisible(false);
+			}
 		}
 
 		//On fait apparaître une fenêtre pour que l'étudiant rentre son nom et prénom en vue du futur enregistrement
@@ -298,13 +312,13 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode pur afficher l'aide proposée par l'enseignant
 	@FXML
 	public void affichageAide(ActionEvent event) {
-		//TODO
+		//TODO Faire l'affichage de l'aide
 	}
 
 	//Méthode pour afficher la solution
 	@FXML
 	public void affichageSolution() {
-		//TODO
+		//TODO Faire l'affichage de la solution
 	}
 
 	//Méthode pour quitter l'application
@@ -319,9 +333,18 @@ public class Controller_Page_Exercice implements Initializable{
 
 		String mot = motPropose.getText();
 
-		for(int i = 0; i < lesMots.size(); i++) {
-			if(lesMots.get(i).compareTo(mot) == 0) {
-				lesMotsEtudiant.set(i, mot);
+		if(sensiCasse == false) {
+			for(int i = 0; i < lesMots.size(); i++) {
+				if(lesMots.get(i).compareTo(mot) == 0) {
+					lesMotsEtudiant.set(i, mot);
+				}
+			}
+		} else {
+			mot = mot.toLowerCase();
+			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
+				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
+					lesMotsEtudiant.set(i, lesMots.get(i));
+				}
 			}
 		}
 
