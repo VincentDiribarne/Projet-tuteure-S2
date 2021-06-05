@@ -8,14 +8,17 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -25,7 +28,7 @@
           <menus>
               <Menu mnemonicParsing="false" text="Exercice">
                   <items>
-                      <MenuItem mnemonicParsing="false" text="Ouvrir" />
+                      <MenuItem mnemonicParsing="false" text="Ouvrir un exercice" />
                       <SeparatorMenuItem mnemonicParsing="false" />
                       <MenuItem mnemonicParsing="false" text="Enregistrer" />
                       <MenuItem mnemonicParsing="false" text="Enregistrer sous" />
@@ -42,7 +45,7 @@
               <Menu mnemonicParsing="false" text="Paramètres">
                   <items>
                       <MenuItem mnemonicParsing="false" text="Préférences" />
-                      <CheckMenuItem mnemonicParsing="false" text="DarkMode" />
+                      <CheckMenuItem mnemonicParsing="false" text="Mode Sombre" />
                   </items></Menu>
           </menus>
       </MenuBar>
@@ -57,7 +60,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Consigne" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Label prefHeight="35.0" prefWidth="390.0" text="Consigne de l'enseignant " GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <font>
                   <Font name="Comic Sans MS Italic" size="24.0" />
                </font>
@@ -73,7 +76,7 @@
                   <Font size="24.0" />
                </font>
             </TextArea>
-            <Label layoutX="55.0" layoutY="35.0" text="Texte" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Label layoutX="55.0" layoutY="35.0" text="Script de la vidéo" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <font>
                   <Font name="Comic Sans MS Italic" size="24.0" />
                </font>
@@ -81,7 +84,7 @@
                   <Insets left="45.0" top="40.0" />
                </GridPane.margin>
             </Label>
-            <Label layoutX="610.0" layoutY="375.0" text="Proposition" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+            <Label layoutX="610.0" layoutY="375.0" text="Vos propositions" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Comic Sans MS Italic" size="24.0" />
                </font>
@@ -114,7 +117,7 @@
                   <Insets bottom="100.0" left="140.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="motPropose" promptText="Rentrez ici les mots que vous entendez" style="-fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <TextField fx:id="motPropose" prefHeight="26.0" prefWidth="400.0" promptText="Entrez ici les mots que vous entendez " style="-fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="95.0" left="45.0" right="155.0" />
                </GridPane.margin>
@@ -127,12 +130,70 @@
                   <Insets bottom="95.0" right="45.0" />
                </GridPane.margin>
             </Button>
-            <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="playPause" mnemonicParsing="false" onAction="#playMedia" text="Play" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="imageView" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Bouton%20Play.png" />
+               </image></ImageView>
+            <Button mnemonicParsing="false" style="-fx-background-radius: 5; -fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1;" text="Aide(s)" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="45.0" top="305.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1; -fx-background-radius: 5;" text="Solution de l'exercice" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="45.0" top="305.0" />
+               </GridPane.margin>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="minutes" wrappingWidth="88.82421875" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="100.0" left="325.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Comic Sans MS Bold" size="24.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="32.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="458.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets top="350.0" />
                </GridPane.margin>
-            </Button>
+            </Rectangle>
+            <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Play.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="410.0" top="350.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="49.0" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Volume.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="100.0" top="350.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="34.0" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/FullScreen.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="410.0" top="350.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temps restant" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="250.0" top="350.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Text>
+            <Slider maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="98.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="250.0" top="350.0" />
+               </GridPane.margin>
+            </Slider>
          </children>
       </GridPane>
    </center>

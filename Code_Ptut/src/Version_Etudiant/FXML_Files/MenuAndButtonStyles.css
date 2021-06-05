@@ -2,7 +2,7 @@
 .table-view {
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
+    -fx-padding: 5 50 8 10;
 }
 
 .table-view .column-header-background {
@@ -39,7 +39,7 @@
 }
 
 .split-pane {
-    -fx-padding: 1 0 0 0;
+    -fx-padding: 15 15 8 10;
 }
 
 .menu-bar .label {
@@ -48,8 +48,13 @@
     -fx-opacity: 0.9;
 }
 
+.menu {
+    -fx-padding: 5 20 5 20; 
+}
+
 
 .text-field {
+    -fx-alignement: center;
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
 }
