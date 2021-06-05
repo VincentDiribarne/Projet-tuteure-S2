@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -69,7 +70,9 @@ public class Controller_Page_Exercice implements Initializable{
 	Image pause = new Image("file:./src/Image/Pause.png");
 	Image sonCoupe = new Image("file:./src/Image/VolumeCoupe.png");
 	Image sonPasCoupe = new Image("file:./src/Image/Volume.png");
-	@FXML private Slider slider;
+	Image reload = new Image("file:./src/Image/Reload.png");
+	@FXML private Slider sliderSon;
+	@FXML private Slider sliderVideo;
 	@FXML private ImageView son;
 
 	//Gestion du timer
@@ -77,20 +80,20 @@ public class Controller_Page_Exercice implements Initializable{
 	private Integer sec = 0;
 	private Integer min;
 	private boolean timerEstDeclenche = false;
-	
+
 	//Autres boutons
 	@FXML private Button ButtonAide;
 	@FXML private Button ButtonSolution;
-	
+
 	//Listes des mots pour l'étudiant
 	private ArrayList<String> lesMots = new ArrayList<>();
-
+	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		int i;
-		String mot = "";
+		String mot = "", motCrypte = "";
 
 		//On fait en sorte à ce que le texte ne dépasse pas du cadre
 		transcription.setWrapText(true);
@@ -105,14 +108,26 @@ public class Controller_Page_Exercice implements Initializable{
 				if(okRegex(contenuTranscription.charAt(i)) == true) {
 					transcription.setText(transcription.getText() + caractereOccul);
 					mot += contenuTranscription.charAt(i);
+					motCrypte += caractereOccul;
 				} else {
 					transcription.setText(transcription.getText() + contenuTranscription.charAt(i));
+
+					if(mot != "") {
+						lesMots.add(mot);
+						lesMotsEtudiant.add(motCrypte);
+					} else {
+						lesMots.add(contenuTranscription.charAt(i - 1) + "");
+						lesMotsEtudiant.add(contenuTranscription.charAt(i - 1) + "");
+					}
+
 					mot = "";
-					lesMots.add(mot);
+					motCrypte = "";
 				}
 			}
 		}
 
+		System.out.println(lesMots);
+		System.out.println(lesMotsEtudiant);
 
 		//On load la consigne
 		if(contenuConsigne != null) {
@@ -133,7 +148,7 @@ public class Controller_Page_Exercice implements Initializable{
 		if(evaluation == true) {
 			min = Integer.parseInt(nbMin);
 			time.setText(min + ":" + sec);
-			
+
 			//On masque les boutons qui ne sont présent que ne mode entrainement
 			ButtonAide.setVisible(false);
 			ButtonSolution.setVisible(false);
@@ -151,36 +166,69 @@ public class Controller_Page_Exercice implements Initializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		sliderChange();
-		
+
+		sliderSonChange();
+		sliderVideoChange();
 	}
-	
-	public void sliderChange() {
+
+	public void sliderSonChange() {
 		// Change le volume sonore selon la valeur du slider
-				slider.valueProperty().addListener((o -> {
-					mediaPlayer.setVolume(slider.getValue() / 100.0); 
-					
-					if(slider.getValue() == 0) {
-						son.setImage(sonCoupe);
-					} else {
-						son.setImage(sonPasCoupe);
-					}
-				}));
+		sliderSon.valueProperty().addListener((o -> {
+			mediaPlayer.setVolume(sliderSon.getValue() / 100.0); 
+
+			if(sliderSon.getValue() == 0) {
+				son.setImage(sonCoupe);
+			} else {
+				son.setImage(sonPasCoupe);
+			}
+		}));
 	}
-	
+
+	//Fonction qui fait avancer le slider en fonction de la video
+	public void sliderVideoChange() {
+
+		mediaPlayer.setOnReady(new Runnable() {
+
+			@Override
+			public void run() {
+				sliderVideo.setMax(mediaPlayer.getTotalDuration().toSeconds());
+			}
+		});
+
+		// Ecoute sur le slider. Quand il est modifié, modifie le temps du media player.
+		InvalidationListener sliderChangeListener = o -> {
+			Duration seekTo = Duration.seconds(sliderVideo.getValue());
+			mediaPlayer.seek(seekTo);
+		};
+		sliderVideo.valueProperty().addListener(sliderChangeListener);
+
+		// Lie le temps du media player au slider
+		mediaPlayer.currentTimeProperty().addListener(l -> {
+
+			sliderVideo.valueProperty().removeListener(sliderChangeListener);
+
+			// Met a jour la valeur de temps du média avec la position du slider.
+			Duration currentTime = mediaPlayer.getCurrentTime();
+			sliderVideo.setValue(currentTime.toSeconds());
+
+			// Réactivation de l'écoute du slider
+			sliderVideo.valueProperty().addListener(sliderChangeListener);
+
+		});
+	}
+
 	//Fonction qui permet de mute le son
 	@FXML
 	public void sonCoupe(MouseEvent event) {
-		
+
 		if(mediaPlayer.getVolume() != 0) {
 			son.setImage(sonCoupe);
 			mediaPlayer.setVolume(0);
 		} else {
 			son.setImage(sonPasCoupe);
-			mediaPlayer.setVolume(slider.getValue() / 100);
+			mediaPlayer.setVolume(sliderSon.getValue() / 100);
 		}
-		
+
 	}
 
 	//Fonction qui lance le media pour la premiere fois 
@@ -210,6 +258,7 @@ public class Controller_Page_Exercice implements Initializable{
 			mediaPlayer.play();
 			playOrPause.setImage(pause);
 		}
+
 	}
 
 	//Fonction qui regarde si le caractère est compatible avec la regex (toutes les lettres et chiffres)
@@ -218,6 +267,17 @@ public class Controller_Page_Exercice implements Initializable{
 		if(s.matches("[a-zA-Z0-9]")) {
 			return true;
 		} 
+		return false;
+	}
+
+	//Fonction qui regarde si le mot contient un caractère de ponctuation
+	private boolean regexPoint(String mot) {
+
+		for(int i = 0; i < mot.length(); i++) {
+			if((mot.charAt(i) + "").matches("[.,;!?]")) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -234,17 +294,17 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
 	}
-	
+
 	//Méthode pur afficher l'aide proposée par l'enseignant
 	@FXML
 	public void affichageAide(ActionEvent event) {
-		
+		//TODO
 	}
-	
+
 	//Méthode pour afficher la solution
 	@FXML
 	public void affichageSolution() {
-		
+		//TODO
 	}
 
 	//Méthode pour quitter l'application
@@ -257,13 +317,32 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void propositionMot(ActionEvent event) {
 
+		String mot = motPropose.getText();
+
+		for(int i = 0; i < lesMots.size(); i++) {
+			if(lesMots.get(i).compareTo(mot) == 0) {
+				lesMotsEtudiant.set(i, mot);
+			}
+		}
+
 		if(timerEstDeclenche == false) {
 			gestionTimer();
 			timerEstDeclenche = true;
 		}
 
-		//On réinitialise le TextField
-		motPropose.setText(null);
+		//On réinitialise le TextField et la transcription
+		motPropose.setText("");
+		transcription.setText("");
+
+		//On met à jour la transcription
+		for(String word : lesMotsEtudiant) {	
+			if(regexPoint(word)){
+				transcription.setText(transcription.getText() + word);
+			}
+			else {
+				transcription.setText(transcription.getText() + " " + word);
+			}
+		}
 	}
 
 	//Méthode permettant de créer un timer pour que l'étudiant voit le temps qui défile en mode Evaluation

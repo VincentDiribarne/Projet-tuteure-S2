@@ -189,13 +189,13 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
-                <Slider maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="98.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                <Slider fx:id="sliderSon" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="98.0" value="100.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                     <GridPane.margin>
                         <Insets right="60.0" top="350.0" />
                     </GridPane.margin>
                 </Slider>
 
-                <Slider fx:id="slider" prefHeight="14.0" prefWidth="98.0" value="100.0" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                <Slider fx:id="sliderVideo" prefHeight="14.0" prefWidth="98.0" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
