@@ -22,8 +22,8 @@
 					<menus>
 						<Menu mnemonicParsing="false" text="Exercice">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
-								<MenuItem mnemonicParsing="false" text="Ouvrir" />
+								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Créer un exercice" />
+								<MenuItem mnemonicParsing="false" text="Ouvrir un exercice" />
 								<SeparatorMenuItem mnemonicParsing="false" />
 								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
 								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
