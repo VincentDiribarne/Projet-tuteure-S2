@@ -77,6 +77,13 @@ public class Controller_Page_Exercice implements Initializable{
 	private Integer sec = 0;
 	private Integer min;
 	private boolean timerEstDeclenche = false;
+	
+	//Autres boutons
+	@FXML private Button ButtonAide;
+	@FXML private Button ButtonSolution;
+	
+	//Listes des mots pour l'étudiant
+	private ArrayList<String> lesMots = new ArrayList<>();
 
 
 	@Override
@@ -101,6 +108,7 @@ public class Controller_Page_Exercice implements Initializable{
 				} else {
 					transcription.setText(transcription.getText() + contenuTranscription.charAt(i));
 					mot = "";
+					lesMots.add(mot);
 				}
 			}
 		}
@@ -125,6 +133,10 @@ public class Controller_Page_Exercice implements Initializable{
 		if(evaluation == true) {
 			min = Integer.parseInt(nbMin);
 			time.setText(min + ":" + sec);
+			
+			//On masque les boutons qui ne sont présent que ne mode entrainement
+			ButtonAide.setVisible(false);
+			ButtonSolution.setVisible(false);
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
@@ -191,12 +203,12 @@ public class Controller_Page_Exercice implements Initializable{
 
 		if(mediaPlayer.getStatus() == Status.PLAYING) {
 			mediaPlayer.pause();
-			playOrPause.setImage(pause);
+			playOrPause.setImage(play);
 		}
 
 		if(mediaPlayer.getStatus() == Status.PAUSED) {
 			mediaPlayer.play();
-			playOrPause.setImage(play);
+			playOrPause.setImage(pause);
 		}
 	}
 
@@ -221,6 +233,18 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setResizable(false);
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
+	}
+	
+	//Méthode pur afficher l'aide proposée par l'enseignant
+	@FXML
+	public void affichageAide(ActionEvent event) {
+		
+	}
+	
+	//Méthode pour afficher la solution
+	@FXML
+	public void affichageSolution() {
+		
 	}
 
 	//Méthode pour quitter l'application

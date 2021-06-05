@@ -135,24 +135,16 @@
                <image>
                   <Image url="@../../Image/Bouton%20Play.png" />
                </image></ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-radius: 5; -fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1;" text="Aide(s)" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="ButtonAide" mnemonicParsing="false" onAction="#affichageAide" style="-fx-background-radius: 5; -fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1;" text="Aide(s)" GridPane.columnIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="45.0" top="305.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1; -fx-background-radius: 5;" text="Solution de l'exercice" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <Button fx:id="ButtonSolution" mnemonicParsing="false" onAction="#affichageSolution" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1; -fx-background-radius: 5;" text="Solution de l'exercice" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="45.0" top="305.0" />
                </GridPane.margin>
             </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="minutes" wrappingWidth="88.82421875" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets bottom="100.0" left="325.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Comic Sans MS Bold" size="24.0" />
-               </font>
-            </Text>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff000000" height="32.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="458.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets top="350.0" />
@@ -160,7 +152,7 @@
             </Rectangle>
             <ImageView fx:id="playOrPause" fitHeight="22.0" fitWidth="20.0" onMousePressed="#playOrPause" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../Image/Play.png" />
+                  <Image url="@../../Image/Pause.png" />
                </image>
                <GridPane.margin>
                   <Insets right="410.0" top="350.0" />
