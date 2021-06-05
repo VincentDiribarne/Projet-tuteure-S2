@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Version_Etudiant.DeplacementFenetre;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -24,8 +25,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -300,13 +304,22 @@ public class Controller_Page_Exercice implements Initializable{
 	public void popUpEnregistrement() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementApresouverture.fxml"));
 		Stage stage = new Stage();
+		Rectangle rect = new Rectangle(800,500);
+		rect.setArcHeight(20.0);
+		rect.setArcWidth(20.0);
+		root.setClip(rect);
+
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initStyle(StageStyle.TRANSPARENT);
+		Scene scene = new Scene(root, 800, 500);
+		scene.setFill(Color.TRANSPARENT);
+
 		//On bloque le resize
 		stage.setResizable(false);
-		stage.setScene(new Scene(root, 500, 300));
+		stage.setScene(scene);
 		stage.show();
+		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 	}
 
 	//Méthode pur afficher l'aide proposée par l'enseignant
