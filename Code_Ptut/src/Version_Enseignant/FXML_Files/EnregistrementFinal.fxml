@@ -19,8 +19,8 @@
 					<menus>
 						<Menu mnemonicParsing="false" text="Exercice">
 							<items>
-								<MenuItem mnemonicParsing="false" text="Nouveau" />
-								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+								<MenuItem mnemonicParsing="false" text="Créer un exercice" />
+								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
 								<SeparatorMenuItem mnemonicParsing="false" />
 								<MenuItem mnemonicParsing="false" text="Enregistrer" />
 								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />

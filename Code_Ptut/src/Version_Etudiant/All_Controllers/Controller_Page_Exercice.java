@@ -5,8 +5,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +25,8 @@ import javafx.scene.media.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class Controller_Page_Exercice implements Initializable{
 
@@ -55,14 +60,21 @@ public class Controller_Page_Exercice implements Initializable{
 
 	@FXML private Button playPause;
 	MediaPlayer mediaPlayer = new MediaPlayer(contenuMedia);
-	
+
 	private ArrayList<String> lesMots = new ArrayList<>();
+	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
+
+	private Timeline timer;
+	private Integer sec = 0;
+	private Integer min;
+	private boolean timerEstDeclenche = false;
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		int i;
-		String mot = "";
+		int i, check = 0;
+		String mot = "", m = "";
 
 		transcription.setWrapText(true);
 
@@ -71,19 +83,35 @@ public class Controller_Page_Exercice implements Initializable{
 
 			//Pour la transcription, on utilise le caractère d'occultation
 			for(i = 0; i < contenuTranscription.length(); i++) {
-				
+
 				//Si cela correspond bien à la regex, on occulte le mot
 				if(okRegex(contenuTranscription.charAt(i)) == true) {
 					transcription.setText(transcription.getText() + caractereOccul);
 					mot += contenuTranscription.charAt(i);
 				} else {
-					if(mot != "") {
-						lesMots.add(mot);
-					}
 					transcription.setText(transcription.getText() + contenuTranscription.charAt(i));
 					mot = "";
 				}
-			}	
+			}
+
+			for(int j = 0; j < contenuTranscription.length(); j++) {
+				if(contenuTranscription.charAt(j) != ' ') {
+					if(okRegex(contenuTranscription.charAt(j))) {
+						m += caractereOccul;
+					} else {
+						check = 1;
+					}
+				} else {
+					if(m != "") {
+						lesMotsEtudiant.add(m);
+						if(check == 1) {
+							lesMotsEtudiant.add(contenuTranscription.charAt(j - 1) + "");
+							check = 0;
+						}
+					}		
+					m = "";
+				}
+			}
 		}
 
 
@@ -101,15 +129,17 @@ public class Controller_Page_Exercice implements Initializable{
 		if(contenuImage != null) {
 			imageView.setImage(contenuImage);
 		}
-		
+
 		//On load le temps nécessaire si c'est en mode Evaluation
 		if(evaluation == true) {
-			time.setText(nbMin);
+			min = Integer.parseInt(nbMin);
+			time.setText(min + ":" + sec);
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
 			titleTime.setText("Temps Ecoulé");
-			time.setText("0");
+			min = 00;
+			time.setText("00:00");
 		}
 
 
@@ -133,6 +163,13 @@ public class Controller_Page_Exercice implements Initializable{
 			mediaPlayer.pause();
 		}
 
+
+		if(timerEstDeclenche == false) {
+			gestionTimer();
+			timerEstDeclenche = true;
+		}
+
+
 	}
 
 	//Fonction qui regarde si le caractère est compatible avec la regex (toutes les lettres et chiffres)
@@ -144,44 +181,113 @@ public class Controller_Page_Exercice implements Initializable{
 		return false;
 	}
 
+
 	//Méthode qui fait apparaître la popUp pour que l'étudiant rentre ses infos pour l'enregistrement
 	public void popUpEnregistrement() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementApresouverture.fxml"));
 		Stage stage = new Stage();
-		stage.setTitle("Enregistrement futur");
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.UNDECORATED);
 		//On bloque le resize
 		stage.setResizable(false);
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
 	}
-	
+
 	//Méthode pour quitter l'application
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
-	
+
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
 	public void propositionMot(ActionEvent event) {
-		
+
+		if(timerEstDeclenche == false) {
+			gestionTimer();
+			timerEstDeclenche = true;
+		}
+
+
 		String mot = motPropose.getText();
-		int longueurMot = mot.length(), index = 0;
-		
+		transcription.setText("");
+		System.out.println(lesMotsEtudiant);
+		System.out.println(lesMots);
+
 		for(String motCompa : lesMots) {
+
 			if(motCompa.compareTo(mot) == 0) {
-				System.out.println("Mot trouvé : " + mot);
+
+			}
+
+		}
+
+		//On réécrit le texte où l'étudiant à trouvé les mots
+		for(String m : lesMotsEtudiant) {
+			if(m == caractereOccul) {
+				transcription.setText(transcription.getText() + m + " ");
+			}
+			else {
+				transcription.deletePreviousChar();
+				transcription.setText(transcription.getText() + m + " ");
 			}
 		}
-		
+
+		//On réinitialise le TextField
 		motPropose.setText(null);
-		
-		for(String word : lesMots) {
-			System.out.print(word + " ");
+	}
+
+	//Méthode permettant de créer un timer pour que l'étudiant voit le temps qui défile en mode Evaluation
+	public void gestionTimer() {
+		timer = new Timeline();
+		timer.setCycleCount(Timeline.INDEFINITE);
+
+		if(evaluation == true) {
+			timer.getKeyFrames().add(
+					new KeyFrame(Duration.seconds(1),
+							new EventHandler<ActionEvent>() {
+						// KeyFrame event handler
+						@Override    
+						public void handle(ActionEvent arg0) {
+							sec--;
+							if (sec < 0) {
+								min--;
+								sec=59;
+							}
+							// update timerLabel
+							time.setText(min +":"+ sec +"s");
+							if (sec <= 0 && min <=0) {
+								timer.stop();
+								return;
+							}
+
+						}
+					}));
+			timer.playFromStart();
 		}
 		
+		if(entrainement == true) {
+			timer.getKeyFrames().add(
+					new KeyFrame(Duration.seconds(1),
+							new EventHandler<ActionEvent>() {
+						// KeyFrame event handler
+						@Override    
+						public void handle(ActionEvent arg0) {
+							sec++;
+							if (sec > 59) {
+								min++;
+								sec=00;
+							}
+
+							// update timerLabel
+							time.setText(min +":"+ sec +"s");
+
+						}
+					}));
+			timer.playFromStart();
+		}
 	}
 
 }
