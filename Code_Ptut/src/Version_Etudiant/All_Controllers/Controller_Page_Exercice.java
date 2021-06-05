@@ -324,14 +324,44 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Méthode pur afficher l'aide proposée par l'enseignant
 	@FXML
-	public void affichageAide(ActionEvent event) {
-		//TODO Faire l'affichage de l'aide
+	public void affichageAide() throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Aides.fxml"));
+		Stage stage = new Stage();
+		Rectangle rect = new Rectangle(400,600);
+		rect.setArcHeight(20.0);
+		rect.setArcWidth(20.0);
+		root.setClip(rect);
+
+		//On bloque sur cette fenêtre
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.TRANSPARENT);
+		Scene scene = new Scene(root, 400, 600);
+		scene.setFill(Color.TRANSPARENT);
+
+		stage.setScene(scene);
+		stage.show();
+		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 	}
 
 	//Méthode pour afficher la solution
 	@FXML
-	public void affichageSolution() {
-		//TODO Faire l'affichage de la solution
+	public void affichageSolution() throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Solution.fxml"));
+		Stage stage = new Stage();
+		Rectangle rect = new Rectangle(600,400);
+		rect.setArcHeight(20.0);
+		rect.setArcWidth(20.0);
+		root.setClip(rect);
+
+		//On bloque sur cette fenêtre
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.TRANSPARENT);
+		Scene scene = new Scene(root, 600, 400);
+		scene.setFill(Color.TRANSPARENT);
+
+		stage.setScene(scene);
+		stage.show();
+		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 	}
 
 	//Méthode pour quitter l'application
