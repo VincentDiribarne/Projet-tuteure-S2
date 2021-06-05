@@ -148,7 +148,7 @@ public class Controller_Enregistrement_Final implements Initializable {
 			}
 			
 			//S'il s'agit d'une extension mp3
-			if(getExtension(Controller_Importer_Ressource.contenuMedia.getSource()) == ".mp3") {
+			if(getExtension(Controller_Importer_Ressource.contenuMedia.getSource()).compareTo(".mp3") == 0) {
 				out.write(0);
 				out.write(longueurImage);
 				out.write(contenuImage);
@@ -271,6 +271,7 @@ public class Controller_Enregistrement_Final implements Initializable {
         if (posPoint == -1) {
             return null;
         }
+
         return filePath.substring(posPoint);
     }
 

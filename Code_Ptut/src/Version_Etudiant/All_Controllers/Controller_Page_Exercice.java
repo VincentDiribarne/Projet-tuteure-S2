@@ -167,11 +167,11 @@ public class Controller_Page_Exercice implements Initializable{
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
-			
+
 			titleTime.setText("Temps Ecoulé");
 			min = 00;
 			time.setText("00:00");
-			
+
 			//Si l'enseignant n'a pas souhaité autoriser l'affichage de la solution
 			if(solution == false) {
 				ButtonSolution.setVisible(false);
@@ -378,8 +378,17 @@ public class Controller_Page_Exercice implements Initializable{
 
 		if(sensiCasse == false) {
 			for(int i = 0; i < lesMots.size(); i++) {
-				if(lesMots.get(i).compareTo(mot) == 0) {
-					lesMotsEtudiant.set(i, mot);
+				//Si on autorise le remplacement partiel des mots
+				if(motIncomplet == true && lettres_2 == true) {
+					if(mot.length() >= 2) {
+						//for(int j = 0; j < mot.length(); j++) {
+							//lesMots.get
+						//}
+					}
+				} else {
+					if(lesMots.get(i).compareTo(mot) == 0) {
+						lesMotsEtudiant.set(i, mot);
+					}
 				}
 			}
 		} else {
