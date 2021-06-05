@@ -54,6 +54,8 @@ public class Controller_Menu implements Initializable{
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageExercice.fxml"));
         primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
+       	primaryStage.setMinHeight(800);
+        primaryStage.setMinWidth(1200);
         primaryStage.show();
 	}
 	
