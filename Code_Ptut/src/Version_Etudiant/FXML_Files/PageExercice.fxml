@@ -130,7 +130,8 @@
                   <Insets bottom="95.0" right="45.0" />
                </GridPane.margin>
             </Button>
-            <ImageView fx:id="imageView" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ImageView fx:id="firstPlay" fitHeight="47.0" fitWidth="50.0" onMousePressed="#firstPlay" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Bouton%20Play.png" />
                </image></ImageView>
@@ -157,7 +158,7 @@
                   <Insets top="350.0" />
                </GridPane.margin>
             </Rectangle>
-            <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="playOrPause" fitHeight="22.0" fitWidth="20.0" onMousePressed="#playOrPause" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Play.png" />
                </image>
@@ -165,7 +166,7 @@
                   <Insets right="410.0" top="350.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="49.0" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="son" fitHeight="26.0" fitWidth="49.0" onMousePressed="#sonCoupe" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Volume.png" />
                </image>
@@ -189,7 +190,7 @@
                   <Font name="System Italic" size="12.0" />
                </font>
             </Text>
-            <Slider maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="98.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Slider fx:id="slider" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="98.0" value="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="250.0" top="350.0" />
                </GridPane.margin>
