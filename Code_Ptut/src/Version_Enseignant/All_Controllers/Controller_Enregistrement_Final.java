@@ -147,15 +147,15 @@ public class Controller_Enregistrement_Final implements Initializable {
 				out.write(nbMin);
 			}
 			
-			//S'il s'agit d'une extension mp4
-			if(getExtension(Controller_Importer_Ressource.contenuMedia.getSource()) == "mp4") {
-				out.write(1);
-			}
 			//S'il s'agit d'une extension mp3
-			else {
+			if(getExtension(Controller_Importer_Ressource.contenuMedia.getSource()) == ".mp3") {
 				out.write(0);
 				out.write(longueurImage);
 				out.write(contenuImage);
+			}
+			//S'il s'agit d'une extension mp4
+			else {
+				out.write(1);
 			}
 
 			// On y écrit les données du media
@@ -271,7 +271,6 @@ public class Controller_Enregistrement_Final implements Initializable {
         if (posPoint == -1) {
             return null;
         }
-
         return filePath.substring(posPoint);
     }
 

@@ -5,8 +5,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class Controller_Page_Exercice implements Initializable{
 
@@ -59,6 +63,12 @@ public class Controller_Page_Exercice implements Initializable{
 
 	private ArrayList<String> lesMots = new ArrayList<>();
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
+	
+	private Timeline timer;
+	private Integer sec = 0;
+	private Integer min = Integer.parseInt(nbMin);
+	private boolean timerEstDeclenche = false;
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -122,12 +132,12 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//On load le temps nécessaire si c'est en mode Evaluation
 		if(evaluation == true) {
-			time.setText(nbMin);
+			time.setText(min + ":" + sec);
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
 			titleTime.setText("Temps Ecoulé");
-			time.setText("0");
+			time.setText("00:00");
 		}
 
 
@@ -149,6 +159,12 @@ public class Controller_Page_Exercice implements Initializable{
 		} else {
 			playPause.setText("Play");
 			mediaPlayer.pause();
+		}
+		
+		//On déclenche le timer si c'est la première fois qu'il appuie dessus
+		if(timerEstDeclenche == false) {
+			gestionTimerEval();
+			timerEstDeclenche = true;
 		}
 
 	}
@@ -185,6 +201,11 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
 	public void propositionMot(ActionEvent event) {
+		
+		if(timerEstDeclenche == false) {
+			gestionTimerEval();
+			timerEstDeclenche = true;
+		}
 
 		String mot = motPropose.getText();
 		transcription.setText("");
@@ -213,5 +234,34 @@ public class Controller_Page_Exercice implements Initializable{
 		//On réinitialise le TextField
 		motPropose.setText(null);
 	}
+	
+	//Méthode permettant de créer un timer pour que l'étudiant voit le temps qui défile en mode Evaluation
+	public void gestionTimerEval() {
+        timer = new Timeline();
+        timer.setCycleCount(Timeline.INDEFINITE);
+        timer.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1),
+                        new EventHandler<ActionEvent>() {
+                    // KeyFrame event handler
+                    @Override    
+                    public void handle(ActionEvent arg0) {
+                        sec--;
+                        if (sec < 0) {
+                            min--;
+                            sec=59;
+                        }
+                        // update timerLabel
+                        time.setText(min +":"+ sec +"s");
+                        if (sec <= 0 && min <=0) {
+                            timer.stop();
+                            return;
+                        }
+
+                    }
+                }));
+        timer.playFromStart();
+    }
+	
+	
 
 }

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.media.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
+<BorderPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
    <top>
       <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
 			<children>
@@ -59,7 +63,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nomExo" prefHeight="31.0" prefWidth="218.0">
+                  <TextField fx:id="nomExo" prefHeight="43.0" prefWidth="358.0" promptText="Rentrez ici le nom de l'exercice">
                      <font>
                         <Font size="20.0" />
                      </font></TextField>
@@ -78,13 +82,10 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="repertoire" editable="false" prefHeight="31.0" prefWidth="402.0">
+                  <TextField fx:id="repertoire" editable="false" prefHeight="43.0" prefWidth="722.0" promptText="Cliquez sur Parcourir pour choisir le répertoire où sera enregistré votre exercice">
                      <font>
                         <Font size="20.0" />
-                     </font>
-                     <tooltip>
-                        <Tooltip text="Cliquer sur le bouton Parcourir et sélectionnez le répertoire dans lequel vous voulez enregistrer votre exercice  " />
-                     </tooltip></TextField>
+                     </font></TextField>
                   <Button mnemonicParsing="false" onAction="#choisirRepertoire" text="Parcourir">
                      <font>
                         <Font size="20.0" />

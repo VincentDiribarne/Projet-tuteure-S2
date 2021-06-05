@@ -16,8 +16,8 @@
       					<menus>
       						<Menu mnemonicParsing="false" text="Exercice">
       							<items>
-      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Nouveau" />
-      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
+      								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Créer un exercice" />
+      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
       								<SeparatorMenuItem mnemonicParsing="false" />
       								<MenuItem mnemonicParsing="false" disable="true" text="Enregistrer" />
       								<MenuItem mnemonicParsing="false" disable="true" text="Enregistrer sous" />
@@ -62,7 +62,6 @@
             </Text>
             <ImageView fitHeight="250.0" fitWidth="250.0">
                <image>
-                  <Image url="Logo_Renconstitution.png" />
                </image>
             </ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution">
@@ -70,7 +69,7 @@
                   <Insets bottom="70.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si notre application vous plait, n'hesitez pas à la noter x)">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si notre application vous plaît, n'hesitez pas à la noter x)">
                <font>
                   <Font size="20.0" />
                </font>
@@ -84,7 +83,7 @@
    <left>
       <VBox alignment="CENTER" prefHeight="528.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez créer un exercice, ou en ouvrir un." textAlignment="CENTER" wrappingWidth="171.50244140625">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous pouvez créer un exercice, ou en ouvrir un déjà existant grâce à la rubrique Exercice." textAlignment="CENTER" wrappingWidth="171.50244140625">
                <VBox.margin>
                   <Insets left="100.0" />
                </VBox.margin>
