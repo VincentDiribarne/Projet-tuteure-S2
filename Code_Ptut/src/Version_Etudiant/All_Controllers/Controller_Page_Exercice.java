@@ -379,7 +379,14 @@ public class Controller_Page_Exercice implements Initializable{
 	public void propositionMot(ActionEvent event) {
 
 		String mot = motPropose.getText();
-		int cpt = 0;
+		int cpt = 0, remplacementPartiel = 0;
+
+		//On set la variable en fonction du nombre de lettres autorisées
+		if(lettres_2 == true) {
+			remplacementPartiel = 1;
+		} else if (lettres_3 == true) {
+			remplacementPartiel = 2;
+		}
 
 		//Si la sensibilité à la casse n'est pas activée
 		if(sensiCasse == false) {
@@ -388,45 +395,99 @@ public class Controller_Page_Exercice implements Initializable{
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
 				}
-				
+
 				//Si le remplacement partiel est autorisé
 				if(motIncomplet == true) {
 
-					// à partir de 2 lettres
-					if(lettres_2 == true) {
-						System.out.println("Ok lettre2");
-						if(mot.length() > 1) {
+					//Il faut que le mot de l'étudiant ait une certaine longueur
+					if(mot.length() > remplacementPartiel) {
+
+						//Si le mot est plus petit que le mot à découvrir
+						if(mot.length() < lesMots.get(i).length()) {
 							for(int j = 0; j < mot.length(); j++) {
 								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
-									System.out.println(mot.charAt(j));
-									System.out.println(lesMots.get(i).charAt(j));
 									cpt ++;
 								}
 							}
-							if(cpt == mot.length()) {
-								System.out.println(lesMots.get(i));
-								lesMotsEtudiant.set(i, lesMots.get(i));
+						}
+
+						//Si le mot est plus grand que le mot à découvrir
+						else {
+							for(int j = 0; j > lesMots.get(i).length(); j++) {
+								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
+									cpt ++;
+								}
 							}
 						}
-					}
-					
-					// à partir de 3 lettres
-					if(lettres_3 == true) {
-						System.out.println("Ok lettre3");
-						if(mot.length() > 2) {
+
+						//Si les premières lettres sont les mêmes
+						if(cpt == mot.length()) {
 							
+							//On "crypte" le mot
+							String word = mot;
+							
+							for(int z = 0; z < lesMots.get(i).length() - mot.length(); z++) {
+								word += caractereOccul;
+							}
+							
+							lesMotsEtudiant.set(i, word);
+							//On réinitialise le compteur
+							cpt = 0;
 						}
 					}
 				}
 
 			}
+
 		}
 		//Si la sensibilité à la casse est activée, on enlève les majuscules
 		else {
 			mot = mot.toLowerCase();
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
+				
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, lesMots.get(i));
+				}
+				
+				//Si le remplacement partiel est autorisé
+				if(motIncomplet == true) {
+
+					//Il faut que le mot de l'étudiant ait une certaine longueur
+					if(mot.length() > remplacementPartiel) {
+
+						//Si le mot est plus petit que le mot à découvrir
+						if(mot.length() < lesMotsSensiCasse.get(i).length()) {
+							for(int j = 0; j < mot.length(); j++) {
+								if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
+									cpt ++;
+								}
+							}
+						}
+
+						//Si le mot est plus grand que le mot à découvrir
+						else {
+							for(int j = 0; j > lesMotsSensiCasse.get(i).length(); j++) {
+								if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
+									cpt ++;
+								}
+							}
+						}
+
+						//Si les premières lettres sont les mêmes
+						if(cpt == mot.length()) {
+							
+							//On "crypte" le mot
+							String word = mot;
+							
+							for(int z = 0; z < lesMotsSensiCasse.get(i).length() - mot.length(); z++) {
+								word += caractereOccul;
+							}
+							
+							lesMotsEtudiant.set(i, word);
+							//On réinitialise le compteur
+							cpt = 0;
+						}
+					}
 				}
 			}
 		}
