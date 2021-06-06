@@ -129,9 +129,13 @@ public class Controller_Page_Exercice implements Initializable{
 					motCrypte = "";
 				}
 			}
+
+			//Si on arrive à la fin de la boucle, on ajoute quand meme le dernier mot
+			lesMots.add(mot);
+			lesMotsEtudiant.add(motCrypte);
 		}
 
-		//On passe les mots comparatifs en minuscule
+		//On passe les mots comparatifs en minuscule dans une autre liste
 
 		for(String word : lesMots) {
 			lesMotsSensiCasse.add(word.toLowerCase());
@@ -375,23 +379,50 @@ public class Controller_Page_Exercice implements Initializable{
 	public void propositionMot(ActionEvent event) {
 
 		String mot = motPropose.getText();
+		int cpt = 0;
 
+		//Si la sensibilité à la casse n'est pas activée
 		if(sensiCasse == false) {
 			for(int i = 0; i < lesMots.size(); i++) {
-				//Si on autorise le remplacement partiel des mots
-				if(motIncomplet == true && lettres_2 == true) {
-					if(mot.length() >= 2) {
-						//for(int j = 0; j < mot.length(); j++) {
-							//lesMots.get
-						//}
+
+				if(lesMots.get(i).compareTo(mot) == 0) {
+					lesMotsEtudiant.set(i, mot);
+				}
+				
+				//Si le remplacement partiel est autorisé
+				if(motIncomplet == true) {
+
+					// à partir de 2 lettres
+					if(lettres_2 == true) {
+						System.out.println("Ok lettre2");
+						if(mot.length() > 1) {
+							for(int j = 0; j < mot.length(); j++) {
+								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
+									System.out.println(mot.charAt(j));
+									System.out.println(lesMots.get(i).charAt(j));
+									cpt ++;
+								}
+							}
+							if(cpt == mot.length()) {
+								System.out.println(lesMots.get(i));
+								lesMotsEtudiant.set(i, lesMots.get(i));
+							}
+						}
 					}
-				} else {
-					if(lesMots.get(i).compareTo(mot) == 0) {
-						lesMotsEtudiant.set(i, mot);
+					
+					// à partir de 3 lettres
+					if(lettres_3 == true) {
+						System.out.println("Ok lettre3");
+						if(mot.length() > 2) {
+							
+						}
 					}
 				}
+
 			}
-		} else {
+		}
+		//Si la sensibilité à la casse est activée, on enlève les majuscules
+		else {
 			mot = mot.toLowerCase();
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
@@ -400,6 +431,7 @@ public class Controller_Page_Exercice implements Initializable{
 			}
 		}
 
+		//Si c'est la première fois que l'étudiant propose un mot, le timer se déclenche
 		if(timerEstDeclenche == false) {
 			gestionTimer();
 			timerEstDeclenche = true;
@@ -409,7 +441,7 @@ public class Controller_Page_Exercice implements Initializable{
 		motPropose.setText("");
 		transcription.setText("");
 
-		//On met à jour la transcription
+		//On met à jour la transcription grâce à la liste des mots de l'étudiant
 		for(String word : lesMotsEtudiant) {	
 			if(regexPoint(word)){
 				transcription.setText(transcription.getText() + word);
