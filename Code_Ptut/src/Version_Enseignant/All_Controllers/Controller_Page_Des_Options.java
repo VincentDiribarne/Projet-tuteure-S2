@@ -293,7 +293,7 @@ public class Controller_Page_Des_Options implements Initializable {
 			lettres_2 = true;
 			lettres_3 = false;
 		} else {
-			lettres_2 = false;
+			lettres_2 = true;
 		}
 	}
 
@@ -306,7 +306,7 @@ public class Controller_Page_Des_Options implements Initializable {
 			lettres_2 = false;
 		} 
 		else {
-			lettres_3 = false;
+			lettres_3 = true;
 		}
 	}
 

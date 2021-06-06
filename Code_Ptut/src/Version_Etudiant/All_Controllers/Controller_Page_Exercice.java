@@ -129,9 +129,13 @@ public class Controller_Page_Exercice implements Initializable{
 					motCrypte = "";
 				}
 			}
+
+			//Si on arrive à la fin de la boucle, on ajoute quand meme le dernier mot
+			lesMots.add(mot);
+			lesMotsEtudiant.add(motCrypte);
 		}
 
-		//On passe les mots comparatifs en minuscule
+		//On passe les mots comparatifs en minuscule dans une autre liste
 
 		for(String word : lesMots) {
 			lesMotsSensiCasse.add(word.toLowerCase());
@@ -167,11 +171,11 @@ public class Controller_Page_Exercice implements Initializable{
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
-			
+
 			titleTime.setText("Temps Ecoulé");
 			min = 00;
 			time.setText("00:00");
-			
+
 			//Si l'enseignant n'a pas souhaité autoriser l'affichage de la solution
 			if(solution == false) {
 				ButtonSolution.setVisible(false);
@@ -375,22 +379,120 @@ public class Controller_Page_Exercice implements Initializable{
 	public void propositionMot(ActionEvent event) {
 
 		String mot = motPropose.getText();
+		int cpt = 0, remplacementPartiel = 0;
 
+		//On set la variable en fonction du nombre de lettres autorisées
+		if(lettres_2 == true) {
+			remplacementPartiel = 1;
+		} else if (lettres_3 == true) {
+			remplacementPartiel = 2;
+		}
+
+		//Si la sensibilité à la casse n'est pas activée
 		if(sensiCasse == false) {
 			for(int i = 0; i < lesMots.size(); i++) {
+
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
 				}
+
+				//Si le remplacement partiel est autorisé
+				if(motIncomplet == true) {
+
+					//Il faut que le mot de l'étudiant ait une certaine longueur
+					if(mot.length() > remplacementPartiel) {
+
+						//Si le mot est plus petit que le mot à découvrir
+						if(mot.length() < lesMots.get(i).length()) {
+							for(int j = 0; j < mot.length(); j++) {
+								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
+									cpt ++;
+								}
+							}
+						}
+
+						//Si le mot est plus grand que le mot à découvrir
+						else {
+							for(int j = 0; j > lesMots.get(i).length(); j++) {
+								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
+									cpt ++;
+								}
+							}
+						}
+
+						//Si les premières lettres sont les mêmes
+						if(cpt == mot.length()) {
+							
+							//On "crypte" le mot
+							String word = mot;
+							
+							for(int z = 0; z < lesMots.get(i).length() - mot.length(); z++) {
+								word += caractereOccul;
+							}
+							
+							lesMotsEtudiant.set(i, word);
+							//On réinitialise le compteur
+							cpt = 0;
+						}
+					}
+				}
+
 			}
-		} else {
+
+		}
+		//Si la sensibilité à la casse est activée, on enlève les majuscules
+		else {
 			mot = mot.toLowerCase();
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
+				
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, lesMots.get(i));
+				}
+				
+				//Si le remplacement partiel est autorisé
+				if(motIncomplet == true) {
+
+					//Il faut que le mot de l'étudiant ait une certaine longueur
+					if(mot.length() > remplacementPartiel) {
+
+						//Si le mot est plus petit que le mot à découvrir
+						if(mot.length() < lesMotsSensiCasse.get(i).length()) {
+							for(int j = 0; j < mot.length(); j++) {
+								if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
+									cpt ++;
+								}
+							}
+						}
+
+						//Si le mot est plus grand que le mot à découvrir
+						else {
+							for(int j = 0; j > lesMotsSensiCasse.get(i).length(); j++) {
+								if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
+									cpt ++;
+								}
+							}
+						}
+
+						//Si les premières lettres sont les mêmes
+						if(cpt == mot.length()) {
+							
+							//On "crypte" le mot
+							String word = mot;
+							
+							for(int z = 0; z < lesMotsSensiCasse.get(i).length() - mot.length(); z++) {
+								word += caractereOccul;
+							}
+							
+							lesMotsEtudiant.set(i, word);
+							//On réinitialise le compteur
+							cpt = 0;
+						}
+					}
 				}
 			}
 		}
 
+		//Si c'est la première fois que l'étudiant propose un mot, le timer se déclenche
 		if(timerEstDeclenche == false) {
 			gestionTimer();
 			timerEstDeclenche = true;
@@ -400,7 +502,7 @@ public class Controller_Page_Exercice implements Initializable{
 		motPropose.setText("");
 		transcription.setText("");
 
-		//On met à jour la transcription
+		//On met à jour la transcription grâce à la liste des mots de l'étudiant
 		for(String word : lesMotsEtudiant) {	
 			if(regexPoint(word)){
 				transcription.setText(transcription.getText() + word);
