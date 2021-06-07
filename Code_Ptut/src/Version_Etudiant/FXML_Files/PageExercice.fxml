@@ -39,7 +39,6 @@
                 <Menu mnemonicParsing="false" text="Aide">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Tutoriel" />
-                        <MenuItem mnemonicParsing="false" text="A propos" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Paramètres">
@@ -66,7 +65,7 @@
                         <Insets bottom="210.0" left="45.0" right="45.0" />
                     </GridPane.margin>
                 </TextField>
-                <Label prefHeight="35.0" prefWidth="390.0" text="Consigne de l'enseignant " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                <Label prefHeight="35.0" prefWidth="288.0" text="Consigne de l'enseignant " GridPane.halignment="LEFT" GridPane.valignment="TOP">
                     <font>
                         <Font name="Comic Sans MS Italic" size="24.0" />
                     </font>
@@ -163,7 +162,7 @@
                     </cursor>
                 </Button>
 
-                <Button fx:id="ButtonSolution" mnemonicParsing="false" onAction="#affichageSolution" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1; -fx-background-radius: 5;" text="Solution de l'exercice" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                <Button fx:id="ButtonSolution" mnemonicParsing="false" onAction="#affichageSolution" prefHeight="32.0" prefWidth="217.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-border-width: 1; -fx-background-radius: 5;" text="Solution (Ferme l'exercice)" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                     <GridPane.margin>
                         <Insets bottom="210.0" right="45.0" />
                     </GridPane.margin>
@@ -230,6 +229,38 @@
                   <Insets bottom="145.0" right="200.0" />
                </GridPane.margin>
             </Label>
+            <ImageView fitHeight="35.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../../Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="330.0" top="50.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../../Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="250.0" top="50.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+               <image>
+                  <Image url="@../../Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="145.0" left="240.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <image>
+                  <Image url="@../../Image/Attention.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="215.0" right="265.0" />
+               </GridPane.margin>
+            </ImageView>
             </children>
         </GridPane>
     </center>
