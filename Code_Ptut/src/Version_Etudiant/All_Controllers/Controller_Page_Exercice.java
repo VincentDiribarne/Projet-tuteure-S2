@@ -89,7 +89,7 @@ public class Controller_Page_Exercice implements Initializable{
 	private ArrayList<String> lesMots = new ArrayList<>();
 	private ArrayList<String> lesMotsSensiCasse = new ArrayList<>();
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
-	
+
 	//Tout ce qui concerne la barre de progression
 	@FXML private ProgressBar progressBar;
 	@FXML private Label pourcentageMots;
@@ -99,7 +99,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		int i;
 		String mot = "", motCrypte = "";
 
@@ -142,7 +142,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		for(String word : lesMots) {
 			lesMotsSensiCasse.add(word.toLowerCase());
-			
+
 			if(!regexPoint(word)) {
 				nbMotsTotal++;
 			}
@@ -172,11 +172,10 @@ public class Controller_Page_Exercice implements Initializable{
 			ButtonAide.setVisible(false);
 			ButtonSolution.setVisible(false);
 			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
-			if(motDecouverts == false) {
-				progressBar.setVisible(false);
-				pourcentageMots.setVisible(false);
-				labelMotsDecouverts.setVisible(false);
-			}
+			progressBar.setVisible(false);
+			pourcentageMots.setVisible(false);
+			labelMotsDecouverts.setVisible(false);
+
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
@@ -189,14 +188,14 @@ public class Controller_Page_Exercice implements Initializable{
 			if(solution == false) {
 				ButtonSolution.setVisible(false);
 			}
-			
+
 			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
 			if(motDecouverts == false) {
 				progressBar.setVisible(false);
 				pourcentageMots.setVisible(false);
 				labelMotsDecouverts.setVisible(false);
 			}
-			
+
 		}
 
 		//On fait apparaître une fenêtre pour que l'étudiant rentre son nom et prénom en vue du futur enregistrement
@@ -394,7 +393,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
 	public void propositionMot(ActionEvent event) {
-		
+
 		String mot = motPropose.getText();
 		int cpt = 0, remplacementPartiel = 0;
 
@@ -412,7 +411,7 @@ public class Controller_Page_Exercice implements Initializable{
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
 					nbMotsDecouverts++;
-					
+
 					//Gestion de la progressBar
 					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
 					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
@@ -444,10 +443,10 @@ public class Controller_Page_Exercice implements Initializable{
 
 						//Si les premières lettres sont les mêmes
 						if(cpt == mot.length()) {
-							
+
 							//On "crypte" le mot
 							String word = mot;
-							
+
 							for(int z = 0; z < lesMots.get(i).length() - mot.length(); z++) {
 								word += caractereOccul;
 							}
@@ -465,11 +464,16 @@ public class Controller_Page_Exercice implements Initializable{
 		else {
 			mot = mot.toLowerCase();
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
-				
+
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, lesMots.get(i));
+					nbMotsDecouverts++;
+
+					//Gestion de la progressBar
+					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
+					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
 				}
-				
+
 				//Si le remplacement partiel est autorisé
 				if(motIncomplet == true) {
 
@@ -496,14 +500,14 @@ public class Controller_Page_Exercice implements Initializable{
 
 						//Si les premières lettres sont les mêmes
 						if(cpt == mot.length()) {
-							
+
 							//On "crypte" le mot
 							String word = mot;
-							
+
 							for(int z = 0; z < lesMotsSensiCasse.get(i).length() - mot.length(); z++) {
 								word += caractereOccul;
 							}
-							
+
 							lesMotsEtudiant.set(i, word);
 							//On réinitialise le compteur
 							cpt = 0;
@@ -530,6 +534,32 @@ public class Controller_Page_Exercice implements Initializable{
 			}
 			else {
 				transcription.setText(transcription.getText() + " " + word);
+			}
+		}
+
+		//On regarde si l'étudiant a terminé l'exercice
+		if(estTermine()) {
+			//TODO load la page finale
+		}
+	}
+
+	//Méthode qui regarde si l'étudiant a fini l'exercice
+	public boolean estTermine() {
+		
+		//S'il est en mode entrainement
+		if(entrainement == true) {
+			if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		//S'il est en mode evaluation
+		else {
+			if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100 || (min == 0 && sec == 0)){
+				return true;
+			} else {
+				return false;
 			}
 		}
 	}
