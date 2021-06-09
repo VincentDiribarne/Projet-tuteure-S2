@@ -9,10 +9,13 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@boutonBlanc.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
@@ -91,6 +94,50 @@
                   <Insets top="20.0" />
                </GridPane.margin>
             </Label>
+            <ImageView fitHeight="42.0" fitWidth="66.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets top="100.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Circle fill="#e8e8e8" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="100.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="100.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="#c3911f" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="300.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="#e8e8e8" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="300.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <ImageView fitHeight="42.0" fitWidth="66.0" layoutX="577.0" layoutY="167.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="200.0" top="100.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="42.0" fitWidth="66.0" layoutX="10.0" layoutY="117.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="200.0" top="100.0" />
+               </GridPane.margin>
+            </ImageView>
          </children>
       </GridPane>
    </center>
