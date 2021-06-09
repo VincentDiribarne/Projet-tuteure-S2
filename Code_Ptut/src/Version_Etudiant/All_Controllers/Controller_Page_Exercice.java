@@ -87,6 +87,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Autres boutons
 	@FXML private Button ButtonAide;
 	@FXML private Button ButtonSolution;
+	@FXML private ImageView alertSolution;
 
 	//Listes des mots pour l'étudiant
 	private ArrayList<String> lesMots = new ArrayList<>();
@@ -174,6 +175,7 @@ public class Controller_Page_Exercice implements Initializable{
 			//On masque les boutons qui ne sont présent que ne mode entrainement
 			ButtonAide.setVisible(false);
 			ButtonSolution.setVisible(false);
+			alertSolution.setVisible(false);
 			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
 			progressBar.setVisible(false);
 			pourcentageMots.setVisible(false);
@@ -190,6 +192,7 @@ public class Controller_Page_Exercice implements Initializable{
 			//Si l'enseignant n'a pas souhaité autoriser l'affichage de la solution
 			if(solution == false) {
 				ButtonSolution.setVisible(false);
+				alertSolution.setVisible(false);
 			}
 
 			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
@@ -595,6 +598,7 @@ public class Controller_Page_Exercice implements Initializable{
 							if (sec <= 0 && min<=0) {
 								timer.stop();
 								try {
+									mediaPlayer.stop();
 									loadEnregistrement();
 									enregistrementExo();
 								} catch (IOException e) {
@@ -647,13 +651,13 @@ public class Controller_Page_Exercice implements Initializable{
 	public void enregistrementExo() throws IOException {
 		
 		File file = new File(Controller_EnregistrementApresOuverture.repertoireEtudiant + "\\" + Controller_EnregistrementApresOuverture.nomEtudiant 
-				+ "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".pdf");
+				+ "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".bin");
 		FileWriter fwrite = new FileWriter(file);
 		BufferedWriter buffer = new BufferedWriter(fwrite);
 		
 		buffer.write(transcription.getText());
 		buffer.newLine();
-		buffer.write(Double.toString(progressBar.getProgress()) + '%');
+		buffer.write(Double.toString(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)) + '%');
 		
 		buffer.close();
 		fwrite.close();

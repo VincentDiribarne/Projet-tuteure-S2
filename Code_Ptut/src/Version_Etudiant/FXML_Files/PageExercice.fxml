@@ -253,7 +253,7 @@
                   <Insets bottom="145.0" left="240.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="alertSolution" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <image>
                   <Image url="@../../Image/Attention.png" />
                </image>
