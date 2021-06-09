@@ -18,7 +18,12 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 	@FXML private TextField nom;
 	@FXML private TextField prenom;
 	@FXML private TextField repertoire;
-	@FXML private Button ok;
+	@FXML private Button preEnregistrement;
+	
+	//Variables pour stocker les informations relatives à l'etudiant
+	public static String nomEtudiant;
+	public static String prenEtudiant;
+	public static String repertoireEtudiant;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -30,9 +35,9 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty()) {
-					ok.setDisable(true);
+					preEnregistrement.setDisable(true);
 				} else {
-					ok.setDisable(false);
+					preEnregistrement.setDisable(false);
 				}
 			}
 		});
@@ -43,9 +48,9 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty()) {
-					ok.setDisable(true);
+					preEnregistrement.setDisable(true);
 				} else {
-					ok.setDisable(false);
+					preEnregistrement.setDisable(false);
 				}
 			}
 		});
@@ -56,9 +61,9 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty()) {
-					ok.setDisable(true);
+					preEnregistrement.setDisable(true);
 				} else {
-					ok.setDisable(false);
+					preEnregistrement.setDisable(false);
 				}
 			}
 		});
@@ -78,9 +83,13 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 		}
 	}
 	
-	//Méthode qui permet de quitter la popUp, un fois les TextFields remplis
+	//Méthode qui permet de quitter la popUp, un fois les TextFields remplis et de sauvegarder les infos
 	@FXML
 	public void quitter(ActionEvent event) {
+		nomEtudiant = nom.getText();
+		prenEtudiant = prenom.getText();
+		repertoireEtudiant = repertoire.getText();
+		
 		nom.getScene().getWindow().hide();
 	}
 	

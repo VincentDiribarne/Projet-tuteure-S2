@@ -1,5 +1,8 @@
 package Version_Etudiant.All_Controllers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -84,6 +87,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Autres boutons
 	@FXML private Button ButtonAide;
 	@FXML private Button ButtonSolution;
+	@FXML private ImageView alertSolution;
 
 	//Listes des mots pour l'étudiant
 	private ArrayList<String> lesMots = new ArrayList<>();
@@ -171,6 +175,7 @@ public class Controller_Page_Exercice implements Initializable{
 			//On masque les boutons qui ne sont présent que ne mode entrainement
 			ButtonAide.setVisible(false);
 			ButtonSolution.setVisible(false);
+			alertSolution.setVisible(false);
 			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
 			progressBar.setVisible(false);
 			pourcentageMots.setVisible(false);
@@ -187,6 +192,7 @@ public class Controller_Page_Exercice implements Initializable{
 			//Si l'enseignant n'a pas souhaité autoriser l'affichage de la solution
 			if(solution == false) {
 				ButtonSolution.setVisible(false);
+				alertSolution.setVisible(false);
 			}
 
 			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
@@ -382,6 +388,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
+		
 	}
 
 	//Méthode pour quitter l'application
@@ -546,6 +553,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui regarde si l'étudiant a fini l'exercice
 	public boolean estTermine() {
 
+		//L'exercice est terminé s'il l'étudiant a découvert tous les mots
 		if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
 			return true;
 		} else {
@@ -590,7 +598,9 @@ public class Controller_Page_Exercice implements Initializable{
 							if (sec <= 0 && min<=0) {
 								timer.stop();
 								try {
+									mediaPlayer.stop();
 									loadEnregistrement();
+									enregistrementExo();
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
@@ -635,6 +645,22 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setResizable(false);
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
+	}
+	
+	//Méthode qui va enregistrer l'exercice de l'étudiant
+	public void enregistrementExo() throws IOException {
+		
+		File file = new File(Controller_EnregistrementApresOuverture.repertoireEtudiant + "\\" + Controller_EnregistrementApresOuverture.nomEtudiant 
+				+ "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".bin");
+		FileWriter fwrite = new FileWriter(file);
+		BufferedWriter buffer = new BufferedWriter(fwrite);
+		
+		buffer.write(transcription.getText());
+		buffer.newLine();
+		buffer.write(Double.toString(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)) + '%');
+		
+		buffer.close();
+		fwrite.close();
 	}
 
 }
