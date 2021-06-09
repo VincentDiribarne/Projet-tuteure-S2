@@ -24,9 +24,6 @@
                    <items>
                        <MenuItem mnemonicParsing="false" text="Ouvrir un exercice" />
                        <SeparatorMenuItem mnemonicParsing="false" />
-                       <MenuItem mnemonicParsing="false" text="Enregistrer" />
-                       <MenuItem mnemonicParsing="false" text="Enregistrer sous" />
-                       <SeparatorMenuItem mnemonicParsing="false" />
                        <MenuItem mnemonicParsing="false" text="Quitter" />
                    </items>
                </Menu>

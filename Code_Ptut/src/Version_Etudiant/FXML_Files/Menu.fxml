@@ -142,9 +142,6 @@
                            <items>
                                <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
                                <SeparatorMenuItem mnemonicParsing="false" />
-                               <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
-                               <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
-                               <SeparatorMenuItem mnemonicParsing="false" />
                                <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
                            </items>
                        </Menu>
