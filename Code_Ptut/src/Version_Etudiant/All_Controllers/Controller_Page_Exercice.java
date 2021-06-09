@@ -412,6 +412,7 @@ public class Controller_Page_Exercice implements Initializable{
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
 					nbMotsDecouverts++;
+					System.out.println(nbMotsDecouverts);
 
 					//Gestion de la progressBar
 					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
@@ -422,7 +423,7 @@ public class Controller_Page_Exercice implements Initializable{
 				if(motIncomplet == true) {
 
 					//Il faut que le mot de l'étudiant ait une certaine longueur
-					if(mot.length() > remplacementPartiel) {
+					if(mot.length() > remplacementPartiel && lesMots.get(i).length() >= 4) {
 
 						//Si le mot est plus petit que le mot à découvrir
 						if(mot.length() < lesMots.get(i).length()) {
@@ -469,6 +470,7 @@ public class Controller_Page_Exercice implements Initializable{
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, lesMots.get(i));
 					nbMotsDecouverts++;
+					System.out.println(nbMotsDecouverts);
 
 					//Gestion de la progressBar
 					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
@@ -479,7 +481,7 @@ public class Controller_Page_Exercice implements Initializable{
 				if(motIncomplet == true) {
 
 					//Il faut que le mot de l'étudiant ait une certaine longueur
-					if(mot.length() > remplacementPartiel) {
+					if(mot.length() > remplacementPartiel && lesMots.get(i).length() >= 4) {
 
 						//Si le mot est plus petit que le mot à découvrir
 						if(mot.length() < lesMotsSensiCasse.get(i).length()) {
