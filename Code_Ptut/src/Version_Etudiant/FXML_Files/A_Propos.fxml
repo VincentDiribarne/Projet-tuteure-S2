@@ -23,36 +23,36 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <ImageView fitHeight="287.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@../../Image/ImagePP.jpg" />
+            <Image url="@../../Image/Jeremy.jpg" />
          </image>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <ImageView fitHeight="260.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
          <image>
-            <Image url="@../../Image/ImagePP.jpg" />
+            <Image url="@../../Image/Trystan.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <ImageView fitHeight="260.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@../../Image/ImagePP.jpg" />
+            <Image url="@../../Image/Bastien.jpg" />
          </image>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <ImageView fitHeight="187.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
          <image>
-            <Image url="@../../Image/ImagePP.jpg" />
+            <Image url="@../../Image/Vincent.jpg" />
          </image>
       </ImageView>
       <Label text="A Propos" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -72,15 +72,15 @@
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vincent est un étudiant de l'IUT de Laval. C'est celui qui s'est occupé du côté visuel de l'application" textAlignment="JUSTIFY" wrappingWidth="150.79999160766602" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets top="300.0" />
+            <Insets top="360.0" />
          </GridPane.margin>
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clément" textAlignment="JUSTIFY" wrappingWidth="148.08007049560547" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clément, 18 ans , Etudiant à l'iut de Laval, j'ai bossé sur les différents dossiers (Spécification, Besoins,test) et le manuel utilisateur" textAlignment="JUSTIFY" wrappingWidth="157.6800765991211" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets top="360.0" />
+            <Insets top="400.0" />
          </GridPane.margin>
          <font>
             <Font size="14.0" />
@@ -88,29 +88,29 @@
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bastien est le chef du projet. Il s'est occupé de gérer le groupe ainsi que coder des fonctionnalités" textAlignment="JUSTIFY" wrappingWidth="149.199951171875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets top="300.0" />
+            <Insets top="360.0" />
          </GridPane.margin>
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trystan" textAlignment="JUSTIFY" wrappingWidth="148.08007049560547" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <GridPane.margin>
-            <Insets top="300.0" />
-         </GridPane.margin>
-      </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jérémy" textAlignment="JUSTIFY" wrappingWidth="148.08007049560547" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Je suis Trystan, j'ai 18 et je suis étudiant à l'IUT de Laval. J'ai principalement travailler sur les dossiers (Spécification, Besoins, Test et le Rapport Final)" textAlignment="JUSTIFY" wrappingWidth="162.48009538650513" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
          <GridPane.margin>
-            <Insets top="300.0" />
+            <Insets top="380.0" />
          </GridPane.margin>
       </Text>
-      <ImageView fitHeight="280.0" fitWidth="263.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Je m'appelle Jérémy, j'ai 18 ans. Je suis étudiant à l'IUT de Laval. J'ai travaillé sur l'analyse des risques du projet et à la conception de l'interface Enseignant." textAlignment="JUSTIFY" wrappingWidth="196.8801177740097" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="370.0" />
+         </GridPane.margin>
+      </Text>
+      <ImageView fitHeight="260.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
             <Image url="@../../Image/Clement.jpg" />
          </image>
