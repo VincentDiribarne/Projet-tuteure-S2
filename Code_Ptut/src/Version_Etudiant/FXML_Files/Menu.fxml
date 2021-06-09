@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -90,13 +91,16 @@
                         <Insets />
                      </GridPane.margin>
                   </Text>
-                  <ImageView fitHeight="55.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                  <ImageView fx:id="handicap" fitHeight="55.0" fitWidth="89.0" onMouseEntered="#grossissementHandicap" onMouseExited="#retrecissementHandicap" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../../Image/Fauteuil_Roulant.png" />
                      </image>
                      <GridPane.margin>
-                        <Insets right="10.0" />
+                        <Insets right="15.0" top="10.0" />
                      </GridPane.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
             </GridPane>
@@ -147,7 +151,7 @@
                        <Menu mnemonicParsing="false" text="Aide">
                            <items>
                                <MenuItem mnemonicParsing="false" text="Tutoriel" />
-                               <MenuItem mnemonicParsing="false" onAction="#aPropos" text="A propos" />
+                               <MenuItem mnemonicParsing="false" text="A propos" />
                            </items>
                        </Menu>
                        <Menu mnemonicParsing="false" text="Paramètres">

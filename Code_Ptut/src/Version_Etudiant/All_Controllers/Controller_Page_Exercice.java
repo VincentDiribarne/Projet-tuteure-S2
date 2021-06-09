@@ -1,5 +1,8 @@
 package Version_Etudiant.All_Controllers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -382,6 +385,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
+		
 	}
 
 	//Méthode pour quitter l'application
@@ -546,6 +550,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui regarde si l'étudiant a fini l'exercice
 	public boolean estTermine() {
 
+		//L'exercice est terminé s'il l'étudiant a découvert tous les mots
 		if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
 			return true;
 		} else {
@@ -591,6 +596,7 @@ public class Controller_Page_Exercice implements Initializable{
 								timer.stop();
 								try {
 									loadEnregistrement();
+									enregistrementExo();
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
@@ -635,6 +641,22 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setResizable(false);
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
+	}
+	
+	//Méthode qui va enregistrer l'exercice de l'étudiant
+	public void enregistrementExo() throws IOException {
+		
+		File file = new File(Controller_EnregistrementApresOuverture.repertoireEtudiant + "\\" + Controller_EnregistrementApresOuverture.nomEtudiant 
+				+ "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".pdf");
+		FileWriter fwrite = new FileWriter(file);
+		BufferedWriter buffer = new BufferedWriter(fwrite);
+		
+		buffer.write(transcription.getText());
+		buffer.newLine();
+		buffer.write(Double.toString(progressBar.getProgress()) + '%');
+		
+		buffer.close();
+		fwrite.close();
 	}
 
 }
