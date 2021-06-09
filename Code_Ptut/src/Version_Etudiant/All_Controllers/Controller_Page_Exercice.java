@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Version_Etudiant.DeplacementFenetre;
-import Version_Etudiant.MainEtudiant;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -412,7 +411,6 @@ public class Controller_Page_Exercice implements Initializable{
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
 					nbMotsDecouverts++;
-					System.out.println(nbMotsDecouverts);
 
 					//Gestion de la progressBar
 					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
@@ -470,7 +468,6 @@ public class Controller_Page_Exercice implements Initializable{
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, lesMots.get(i));
 					nbMotsDecouverts++;
-					System.out.println(nbMotsDecouverts);
 
 					//Gestion de la progressBar
 					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
