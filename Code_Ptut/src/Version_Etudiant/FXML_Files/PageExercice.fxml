@@ -208,12 +208,12 @@
                         <Insets bottom="220.0" left="90.0" right="220.0" />
                     </GridPane.margin>
                 </Slider>
-            <ProgressBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="330.0" progress="0.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ProgressBar fx:id="progressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="330.0" progress="0.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="120.0" />
                </GridPane.margin>
             </ProgressBar>
-            <Label text="0%" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label fx:id="pourcentageMots" text="0%" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="120.0" />
                </GridPane.margin>
@@ -221,7 +221,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Mots découverts" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label fx:id="labelMotsDecouverts" text="Mots découverts" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Calibri Italic" size="18.0" />
                </font>

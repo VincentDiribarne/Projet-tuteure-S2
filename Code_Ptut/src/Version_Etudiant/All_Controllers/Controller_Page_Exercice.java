@@ -17,11 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -94,6 +90,13 @@ public class Controller_Page_Exercice implements Initializable{
 	private ArrayList<String> lesMotsSensiCasse = new ArrayList<>();
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
 
+	//Tout ce qui concerne la barre de progression
+	@FXML private ProgressBar progressBar;
+	@FXML private Label pourcentageMots;
+	@FXML private Label labelMotsDecouverts;
+	private float nbMotsDecouverts = 0;
+	private float nbMotsTotal;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -139,11 +142,11 @@ public class Controller_Page_Exercice implements Initializable{
 
 		for(String word : lesMots) {
 			lesMotsSensiCasse.add(word.toLowerCase());
-		}
 
-		System.out.println(lesMots);
-		System.out.println(lesMotsSensiCasse);
-		System.out.println(lesMotsEtudiant);
+			if(!regexPoint(word)) {
+				nbMotsTotal++;
+			}
+		}
 
 		//On load la consigne
 		if(contenuConsigne != null) {
@@ -168,6 +171,11 @@ public class Controller_Page_Exercice implements Initializable{
 			//On masque les boutons qui ne sont présent que ne mode entrainement
 			ButtonAide.setVisible(false);
 			ButtonSolution.setVisible(false);
+			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
+			progressBar.setVisible(false);
+			pourcentageMots.setVisible(false);
+			labelMotsDecouverts.setVisible(false);
+
 		} 
 		//Sinon cela veut dire que l'on est en mode Entrainement
 		else {
@@ -180,6 +188,14 @@ public class Controller_Page_Exercice implements Initializable{
 			if(solution == false) {
 				ButtonSolution.setVisible(false);
 			}
+
+			//Si l'enseignant n'a pas souhaité l'affichage de mots découverts en temps réel
+			if(motDecouverts == false) {
+				progressBar.setVisible(false);
+				pourcentageMots.setVisible(false);
+				labelMotsDecouverts.setVisible(false);
+			}
+
 		}
 
 		//On fait apparaître une fenêtre pour que l'étudiant rentre son nom et prénom en vue du futur enregistrement
@@ -376,7 +392,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
-	public void propositionMot(ActionEvent event) {
+	public void propositionMot(ActionEvent event) throws IOException {
 
 		String mot = motPropose.getText();
 		int cpt = 0, remplacementPartiel = 0;
@@ -394,13 +410,18 @@ public class Controller_Page_Exercice implements Initializable{
 
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
+					nbMotsDecouverts++;
+
+					//Gestion de la progressBar
+					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
+					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
 				}
 
 				//Si le remplacement partiel est autorisé
 				if(motIncomplet == true) {
 
 					//Il faut que le mot de l'étudiant ait une certaine longueur
-					if(mot.length() > remplacementPartiel) {
+					if(mot.length() > remplacementPartiel && lesMots.get(i).length() >= 4) {
 
 						//Si le mot est plus petit que le mot à découvrir
 						if(mot.length() < lesMots.get(i).length()) {
@@ -422,14 +443,13 @@ public class Controller_Page_Exercice implements Initializable{
 
 						//Si les premières lettres sont les mêmes
 						if(cpt == mot.length()) {
-							
+
 							//On "crypte" le mot
 							String word = mot;
-							
+
 							for(int z = 0; z < lesMots.get(i).length() - mot.length(); z++) {
 								word += caractereOccul;
 							}
-							
 							lesMotsEtudiant.set(i, word);
 							//On réinitialise le compteur
 							cpt = 0;
@@ -444,16 +464,21 @@ public class Controller_Page_Exercice implements Initializable{
 		else {
 			mot = mot.toLowerCase();
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
-				
+
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, lesMots.get(i));
+					nbMotsDecouverts++;
+
+					//Gestion de la progressBar
+					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
+					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
 				}
-				
+
 				//Si le remplacement partiel est autorisé
 				if(motIncomplet == true) {
 
 					//Il faut que le mot de l'étudiant ait une certaine longueur
-					if(mot.length() > remplacementPartiel) {
+					if(mot.length() > remplacementPartiel && lesMots.get(i).length() >= 4) {
 
 						//Si le mot est plus petit que le mot à découvrir
 						if(mot.length() < lesMotsSensiCasse.get(i).length()) {
@@ -475,14 +500,14 @@ public class Controller_Page_Exercice implements Initializable{
 
 						//Si les premières lettres sont les mêmes
 						if(cpt == mot.length()) {
-							
+
 							//On "crypte" le mot
 							String word = mot;
-							
+
 							for(int z = 0; z < lesMotsSensiCasse.get(i).length() - mot.length(); z++) {
 								word += caractereOccul;
 							}
-							
+
 							lesMotsEtudiant.set(i, word);
 							//On réinitialise le compteur
 							cpt = 0;
@@ -511,7 +536,35 @@ public class Controller_Page_Exercice implements Initializable{
 				transcription.setText(transcription.getText() + " " + word);
 			}
 		}
+
+		//On regarde si l'étudiant a terminé l'exercice
+		if(estTermine()) {
+			timeFinish();
+		}
 	}
+
+	//Méthode qui regarde si l'étudiant a fini l'exercice
+	public boolean estTermine() {
+
+		if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	//Méthode qui va load le temps écoulé pour le mode évaluation
+	public void timeFinish() throws IOException {
+		Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
+		//On bloque sur cette fenêtre
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.TRANSPARENT);
+		stage.setScene(new Scene(root,  400, 400));
+		stage.show();
+	}
+
 
 	//Méthode permettant de créer un timer pour que l'étudiant voit le temps qui défile en mode Evaluation
 	public void gestionTimer() {
