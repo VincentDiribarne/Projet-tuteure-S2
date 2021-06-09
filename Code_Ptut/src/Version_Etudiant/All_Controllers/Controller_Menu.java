@@ -96,7 +96,7 @@ public class Controller_Menu implements Initializable{
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
 			aide = chaine(fin.readNBytes(nombreOctetALire));
 			// On met les aides dans le textField associé
-			Controller_Affichage_Aide.contenuAide = aide;
+			Controller_Page_Aides.contenuAide = aide;
 
 			// On récupère le caractère d'occultation
 			caraOccul = chaine(fin.readNBytes(1));

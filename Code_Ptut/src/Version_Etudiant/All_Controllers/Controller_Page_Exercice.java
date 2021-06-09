@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Version_Etudiant.DeplacementFenetre;
+import Version_Etudiant.MainEtudiant;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -392,7 +393,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
-	public void propositionMot(ActionEvent event) {
+	public void propositionMot(ActionEvent event) throws IOException {
 
 		String mot = motPropose.getText();
 		int cpt = 0, remplacementPartiel = 0;
@@ -539,30 +540,32 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//On regarde si l'étudiant a terminé l'exercice
 		if(estTermine()) {
-			//TODO load la page finale
+			timeFinish();
 		}
 	}
 
 	//Méthode qui regarde si l'étudiant a fini l'exercice
 	public boolean estTermine() {
-		
-		//S'il est en mode entrainement
-		if(entrainement == true) {
-			if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
-				return true;
-			} else {
-				return false;
-			}
+
+		if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
+			return true;
+		} else {
+			return false;
 		}
-		//S'il est en mode evaluation
-		else {
-			if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100 || (min == 0 && sec == 0)){
-				return true;
-			} else {
-				return false;
-			}
-		}
+
 	}
+
+	//Méthode qui va load le temps écoulé pour le mode évaluation
+	public void timeFinish() throws IOException {
+		Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
+		//On bloque sur cette fenêtre
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.TRANSPARENT);
+		stage.setScene(new Scene(root,  400, 400));
+		stage.show();
+	}
+
 
 	//Méthode permettant de créer un timer pour que l'étudiant voit le temps qui défile en mode Evaluation
 	public void gestionTimer() {
