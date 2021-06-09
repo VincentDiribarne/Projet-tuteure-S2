@@ -19,13 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Controller_Page_Accueil implements Initializable {
 
 	@FXML
-	Label RecupScene;
+	Text RecupScene;
 
 	// Méthode d'initialisation de la page
 	@Override
