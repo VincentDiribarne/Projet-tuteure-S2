@@ -15,7 +15,8 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="278.200033569336" minHeight="10.0" prefHeight="222.3999816894531" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="192.59998168945316" minHeight="10.0" prefHeight="173.60001831054686" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label text="Affichage de la solution" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -26,12 +27,12 @@
             <Insets top="10.0" />
          </GridPane.margin>
       </Label>
-      <TextArea fx:id="affichageSolution" prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 15;" wrapText="true" GridPane.columnIndex="1">
+      <TextArea fx:id="affichageSolution" editable="false" prefHeight="119.0" prefWidth="506.0" style="-fx-border-radius: 15;" wrapText="true" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets bottom="50.0" left="45.0" right="45.0" top="75.0" />
+            <Insets bottom="20.0" left="45.0" right="45.0" top="75.0" />
          </GridPane.margin>
       </TextArea>
-      <Button fx:id="closeSol" mnemonicParsing="false" onAction="#closeSolution" prefHeight="25.0" prefWidth="100.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1;" text="Quitter" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+      <Button fx:id="closeSol" mnemonicParsing="false" onAction="#closeSolution" prefHeight="25.0" prefWidth="100.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1;" text="Quitter" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="10.0" right="10.0" />
          </GridPane.margin>
@@ -39,5 +40,10 @@
             <Font name="Calibri" size="14.0" />
          </font>
       </Button>
+      <TextArea fx:id="affichageMotsEtudiants" prefHeight="123.0" prefWidth="506.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="50.0" left="45.0" right="45.0" top="20.0" />
+         </GridPane.margin>
+      </TextArea>
    </children>
 </GridPane>
