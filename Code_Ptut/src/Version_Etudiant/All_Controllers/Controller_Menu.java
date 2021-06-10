@@ -77,7 +77,6 @@ public class Controller_Menu implements Initializable{
 	}
 
 
-
 	// Fonction qui va load les informations du fichier sélectionné dans les
 	// différents TextField...
 	public void decrypte(File file) throws IOException {

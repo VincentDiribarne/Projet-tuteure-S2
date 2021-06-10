@@ -256,7 +256,7 @@
                   <Insets right="200.0" top="118.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="toolTipOccul" fitHeight="41.0" fitWidth="23.0" onMouseEntered="#tipOcculEnter" onMouseExited="#tipOcculExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -264,7 +264,7 @@
                   <Insets left="20.0" top="120.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipEntr" fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" onMouseEntered="#tipEntrEnter" onMouseExited="#tipEntrExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -272,7 +272,7 @@
                   <Insets right="265.0" top="18.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="toolTipSensi" fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" onMouseEntered="#tipSensiEnter" onMouseExited="#tipSensiExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -280,7 +280,7 @@
                   <Insets left="20.0" top="220.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="10.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipEval" fitHeight="41.0" fitWidth="23.0" layoutX="10.0" layoutY="571.0" onMouseEntered="#tipEvalEnter" onMouseExited="#tipEvalExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -288,7 +288,7 @@
                   <Insets left="750.0" top="18.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipNbMin" fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="410.0" onMouseEntered="#tipMinEnter" onMouseExited="#tipMinExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -296,7 +296,7 @@
                   <Insets left="750.0" top="82.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipMotDecouvert" fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="474.0" onMouseEntered="#tipMotDecouvertEnter" onMouseExited="#tipMotDecouvertExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -304,7 +304,7 @@
                   <Insets right="265.0" top="84.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipSolution" fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="410.0" onMouseEntered="#tipSolutionEnter" onMouseExited="#tipSolutionExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -312,7 +312,7 @@
                   <Insets right="265.0" top="152.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipMotIncomplet" fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="544.0" onMouseEntered="#tipMotIncompletEnter" onMouseExited="#tipMotIncompletExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>

@@ -18,10 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Controller_Page_Des_Options implements Initializable {
 
@@ -59,6 +62,16 @@ public class Controller_Page_Des_Options implements Initializable {
 	public static boolean motIncomplet;
 	public static boolean lettres_2;
 	public static boolean lettres_3;
+	
+	//Toutes les variables des tooltip
+	@FXML private ImageView toolTipOccul;
+	@FXML private ImageView toolTipSensi;
+	@FXML private ImageView toolTipEntr;
+	@FXML private ImageView toolTipEval;
+	@FXML private ImageView toolTipNbMin;
+	@FXML private ImageView toolTipMotDecouvert;
+	@FXML private ImageView toolTipSolution;
+	@FXML private ImageView toolTipMotIncomplet;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -389,5 +402,111 @@ public class Controller_Page_Des_Options implements Initializable {
 			motDecouverts = false;
 		}
 	}
+	
+	/////// Toutes les méthodes concernant les toolTip///////////////
+	//Méthode pour afficher une tooltip et agrandir l'image
+	public void affichageToolTip(ImageView image, String description) {
+		Tooltip t = new Tooltip(description);
+		t.setShowDelay(Duration.seconds(0.2));
+		image.setFitWidth(image.getFitWidth() + 2);
+		image.setFitHeight(image.getFitHeight() + 2);
+		Tooltip.install(image, t);
+	}
+	
+	//Méthode pour rétrcir une image
+	public void adaptationImage(ImageView image) {
+		image.setFitWidth(image.getFitWidth() - 2);
+		image.setFitHeight(image.getFitHeight() - 2);
+	}
+	
+	
+	//Pour le caractère d'oocultation du texte
+	@FXML
+	public void tipOcculEnter() {
+		affichageToolTip(toolTipOccul, "Ce caractère servira à crypter le script de votre document");
+	}
+	
+	@FXML
+	public void tipOcculExit() {
+		adaptationImage(toolTipOccul);
+	}
+	
+	//Pour la sensibilité à la casse
+	@FXML
+	public void tipSensiEnter() {
+		affichageToolTip(toolTipSensi, "Activer la sensibilité à la casse signifie prendre en compte la différence entre minuscule et majuscule");
+	}
+	
+	@FXML
+	public void tipSensiExit() {
+		adaptationImage(toolTipSensi);
+	}
+	
+	//Pour le mode Evaluation
+	@FXML
+	public void tipEvalEnter() {
+		affichageToolTip(toolTipEval, "Le mode Evaluation n'autorise aucune aide pour l'étudiant");
+	}
+	
+	@FXML
+	public void tipEvalExit() {
+		adaptationImage(toolTipEval);
+	}
+	
+	//Pour le nombre de minutes à rentrer par le professeur
+	@FXML
+	public void tipMinEnter() {
+		affichageToolTip(toolTipNbMin, "Le nombre de minutes dont l'élève disposera pour faire l'exercice");
+	}
+	
+	@FXML
+	public void tipMinExit() {
+		adaptationImage(toolTipNbMin);
+	}
+	
+	//Pour le mode Entrainement
+	@FXML
+	public void tipEntrEnter() {
+		affichageToolTip(toolTipEntr, "Le mode Entraînement autorise ou non ceratiens options (listées ci-dessous)");
+	}
+	
+	@FXML
+	public void tipEntrExit() {
+		adaptationImage(toolTipEntr);
+	}
+	
+	//Pour l'affichage du nombre de mot découvert
+	@FXML
+	public void tipMotDecouvertEnter() {
+		affichageToolTip(toolTipMotDecouvert, "Cette option permet à l'étudiant de voir en temps réel le nombre de mots qu'il a trouvé");
+	}
+	
+	@FXML
+	public void tipMotDecouvertExit() {
+		adaptationImage(toolTipMotDecouvert);
+	}
+	
+	//Pour l'autorisation de l'affichage de la solution
+	@FXML
+	public void tipSolutionEnter() {
+		affichageToolTip(toolTipSolution, "Autoriser à ce que l'étudiant puisse consulter la solution pendant l'exercice");
+	}
+	
+	@FXML
+	public void tipSolutionExit() {
+		adaptationImage(toolTipSolution);
+	}
+	
+	//Pour le remplacement partiel
+	@FXML
+	public void tipMotIncompletEnter() {
+		affichageToolTip(toolTipMotIncomplet, "Autoriser le remplacement partiel des mots à partir d'un nombre minimum de lettres");
+	}
+	
+	@FXML
+	public void tipMotIncompletExit() {
+		adaptationImage(toolTipMotIncomplet);
+	}
+	
 
 }

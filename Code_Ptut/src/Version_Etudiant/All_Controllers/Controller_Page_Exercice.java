@@ -423,7 +423,7 @@ public class Controller_Page_Exercice implements Initializable{
 		}
 
 		//Si la sensibilité à la casse n'est pas activée
-		if(sensiCasse == false) {
+		if(sensiCasse == true) {
 			for(int i = 0; i < lesMots.size(); i++) {
 
 				if(lesMots.get(i).compareTo(mot) == 0) {
