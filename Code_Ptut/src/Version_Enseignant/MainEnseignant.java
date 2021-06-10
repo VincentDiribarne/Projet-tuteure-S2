@@ -18,7 +18,7 @@ public class MainEnseignant extends Application {
 	
     @Override
     public void start(Stage primaryStage) throws Exception{
-         root = FXMLLoader.load(getClass().getResource("FXML_Files/PageAccueil.fxml"));
+         root = FXMLLoader.load(getClass().getResource("FXML_Files/Menu.fxml"));
          primaryStage.setTitle("Reconstitution - Version Enseignante");
          
          //On affiche le plein écran
@@ -31,7 +31,6 @@ public class MainEnseignant extends Application {
          
          primaryStage.setScene(new Scene(root, width, height));
          primaryStage.show();
-        
     }
     public static void main(String[] args) {
         launch(args);

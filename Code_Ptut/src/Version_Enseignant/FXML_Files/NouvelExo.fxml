@@ -9,16 +9,140 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@boutonBlanc.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Répertoire" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField id="parcourirTextField" fx:id="repertoire" editable="false" prefHeight="43.0" prefWidth="722.0" promptText="Cliquez sur Parcourir pour choisir le répertoire où sera enregistré votre exercice" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="45.0" left="250.0" right="220.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField id="NomExercice" fx:id="nomExo" prefHeight="44.0" prefWidth="553.0" promptText="Rentrez ici le nom de l'exercice" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="250.0" right="220.0" top="45.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button id="annuler" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="44.0" prefWidth="170.0" text="Annuler" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="Nom de l'exercice" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="80.0" top="50.0" />
+               </GridPane.margin>
+            </Label>
+            <Button id="parcourir" mnemonicParsing="false" onAction="#choisirRepertoire" prefHeight="48.0" prefWidth="115.0" text="Parcourir" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="45.0" right="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="confirmer" fx:id="okNouvelExo" disable="true" mnemonicParsing="false" onAction="#pageImportationRessource" prefHeight="44.0" prefWidth="170.0" text="Confirmer" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="Créer un Exercice" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="36.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </Label>
+            <ImageView fitHeight="42.0" fitWidth="66.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets top="100.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Circle fill="#e8e8e8" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="100.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="100.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="#c3911f" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="300.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="#e8e8e8" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="300.0" top="100.0" />
+               </GridPane.margin>
+            </Circle>
+            <ImageView fitHeight="42.0" fitWidth="66.0" layoutX="577.0" layoutY="167.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="200.0" top="100.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="42.0" fitWidth="66.0" layoutX="10.0" layoutY="117.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="200.0" top="100.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+   </center>
    <top>
-      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
-			<children>
-				<MenuBar snapToPixel="false">
+				<MenuBar snapToPixel="false" stylesheets="@MenuAndButtonStyles.css" BorderPane.alignment="CENTER">
 					<menus>
 						<Menu mnemonicParsing="false" text="Exercice">
 							<items>
@@ -38,81 +162,12 @@
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Paramètres">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
-                     </items></Menu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+               </items>
+            </Menu>
 					</menus>
-					<VBox.margin>
-						<Insets />
-					</VBox.margin>
 				</MenuBar>
-			</children>
-		</VBox>
    </top>
-   <center>
-      <VBox prefHeight="668.0" prefWidth="855.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Nom de l'exercice">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="nomExo" prefHeight="43.0" prefWidth="358.0" promptText="Rentrez ici le nom de l'exercice">
-                     <font>
-                        <Font size="20.0" />
-                     </font></TextField>
-               </children>
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">
-               <children>
-                  <Label text="Répertoire">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="repertoire" editable="false" prefHeight="43.0" prefWidth="722.0" promptText="Cliquez sur Parcourir pour choisir le répertoire où sera enregistré votre exercice">
-                     <font>
-                        <Font size="20.0" />
-                     </font></TextField>
-                  <Button mnemonicParsing="false" onAction="#choisirRepertoire" text="Parcourir">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#retourAccueil" text="Annuler">
-                     <HBox.margin>
-                        <Insets right="50.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="okNouvelExo" disable="true" mnemonicParsing="false" onAction="#pageImportationRessource" text="Ok">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
 </BorderPane>

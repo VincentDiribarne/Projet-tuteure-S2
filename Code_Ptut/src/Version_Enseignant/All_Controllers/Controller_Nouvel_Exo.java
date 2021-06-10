@@ -119,7 +119,7 @@ public class Controller_Nouvel_Exo implements Initializable{
 
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////		METHDOES SPECIFIQUES A LA PAGE		////////////////////////////////////////
+	////////////////////////////////		METHODES SPECIFIQUES A LA PAGE		////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//Bouton Nouveau qui permet de créer un nouvel exercice
@@ -134,7 +134,7 @@ public class Controller_Nouvel_Exo implements Initializable{
 	@FXML
 	public void retourAccueil() throws IOException {
 		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageAccueil.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
 	}

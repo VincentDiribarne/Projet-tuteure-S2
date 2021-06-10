@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,7 +27,7 @@ public class Controller_Page_Apercu implements Initializable{
 	//Page Apercu
 	@FXML private TextField texteConsigne;
 	@FXML private TextField texteTranscription;
-	@FXML private TextField texteAide;
+	@FXML private TextArea texteAide;
 	@FXML private MediaView MediaViewApercu;
 	@FXML private Button okApercu;
 	@FXML private ImageView imageViewApercu;
@@ -161,6 +162,4 @@ public class Controller_Page_Apercu implements Initializable{
 			primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 			primaryStage.show();
 		}
-		
-
 }

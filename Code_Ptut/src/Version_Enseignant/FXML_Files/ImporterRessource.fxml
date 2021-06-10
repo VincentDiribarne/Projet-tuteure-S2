@@ -1,105 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Importer_Ressource">
-   <top>
-      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
-         <children>
-      				<MenuBar snapToPixel="false">
-      					<menus>
-      						<Menu mnemonicParsing="false" text="Exercice">
-      							<items>
-      								<MenuItem mnemonicParsing="false" text="Créer un exercice" />
-      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
-      								<SeparatorMenuItem mnemonicParsing="false" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
-      								<SeparatorMenuItem mnemonicParsing="false" />
-      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
-      							</items>
-      						</Menu>
-      						<Menu mnemonicParsing="false" text="Aide">
-      							<items>
-      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
-      								<MenuItem mnemonicParsing="false" text="A propos" />
-      							</items>
-      						</Menu>
-      						<Menu mnemonicParsing="false" text="Paramètres">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
-                     </items></Menu>
-      					</menus>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-      				</MenuBar>
-         </children>
-      </VBox>
-   </top>
+<BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Importer_Ressource">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-style: solid;" BorderPane.alignment="CENTER">
+      <GridPane stylesheets="@boutonBlanc.css" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#importerRessource" text="Sélectionner une ressource audio ou video">
-               <VBox.margin>
-                  <Insets bottom="20.0" top="20.0" />
-               </VBox.margin>
+            <TextField editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="674.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-background-color: transparent; -fx-border-radius: 15;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="250.0" right="250.0" />
+               </GridPane.margin>
+            </TextField>
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="440.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <viewport>
+                  <Rectangle2D minX="150.0" />
+               </viewport></MediaView>
+            <ImageView fx:id="imageAudio" fitHeight="200.0" fitWidth="440.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#importerRessource" text="Sélectionner une ressource audio ou video" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="280.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="playPause" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playOrPause" prefHeight="25.0" prefWidth="76.0" text="Play" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="538.0" top="290.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Image/Play.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button mnemonicParsing="false" onAction="#pageNouvelExo" prefHeight="36.0" prefWidth="180.0" text="Retour" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="20.0" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
+               </GridPane.margin>
             </Button>
-            <ImageView fx:id="imageAudio" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
-            <MediaView fx:id="mediaView" fitHeight="100.0" fitWidth="100.0">
-               <VBox.margin>
-                  <Insets bottom="30.0" />
-               </VBox.margin>
-            </MediaView>
-            <Slider fx:id="progressBar" maxWidth="500.0" prefHeight="18.0" prefWidth="119.0">
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
+            <Slider fx:id="progressBar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="330.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="370.0" right="480.0" top="290.0" />
+               </GridPane.margin></Slider>
+            <Button fx:id="okImport" disable="true" mnemonicParsing="false" onAction="#pageApercu" prefHeight="36.0" prefWidth="180.0" text="Continuer" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Circle fill="#239430" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="300.0" top="150.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="300.0" top="150.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="100.0" top="150.0" />
+               </GridPane.margin>
+            </Circle>
+            <Circle fill="#c3911f" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="100.0" top="150.0" />
+               </GridPane.margin>
+            </Circle>
+            <ImageView fitHeight="40.0" fitWidth="68.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets top="147.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="68.0" layoutX="576.0" layoutY="157.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../../Image/Trait_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="200.0" top="147.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="68.0" layoutX="576.0" layoutY="157.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <image>
+                  <Image url="@../../Image/Trait_Vert.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="200.0" top="147.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Image/Volume.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="390.0" top="290.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Slider maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="85.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="820.0" right="300.0" top="290.0" />
+               </GridPane.margin>
             </Slider>
-            <Button fx:id="playPause" mnemonicParsing="false" onAction="#playOrPause" text="Play">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin></Button>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#pageNouvelExo" text="Retour">
-                     <HBox.margin>
-                        <Insets bottom="20.0" right="300.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="okImport" disable="true" mnemonicParsing="false" onAction="#pageApercu" text="Ok">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="20.0" />
-                     </HBox.margin></Button>
-               </children>
-            </HBox>
+            <Label text="Importer une ressource" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </Label>
          </children>
-         <BorderPane.margin>
-            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
-         </BorderPane.margin>
-      </VBox>
+      </GridPane>
    </center>
+   <top>
+				<MenuBar snapToPixel="false" stylesheets="@MenuAndButtonStyles.css" BorderPane.alignment="CENTER">
+					<menus>
+						<Menu mnemonicParsing="false" text="Exercice">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Créer un exercice" />
+								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Aide">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+								<MenuItem mnemonicParsing="false" text="A propos" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Paramètres">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+               </items>
+            </Menu>
+					</menus>
+				</MenuBar>
+   </top>
 </BorderPane>
