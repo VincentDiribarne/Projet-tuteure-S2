@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Version_Etudiant.DeplacementFenetre;
+import Version_Etudiant.MainEtudiant;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -100,6 +101,13 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML private Label labelMotsDecouverts;
 	private float nbMotsDecouverts = 0;
 	private float nbMotsTotal;
+
+	//Tooltip
+	@FXML private ImageView questionConsigne;
+	@FXML private ImageView questionTranscription;
+	@FXML private ImageView questionProposition;
+
+	@FXML private CheckMenuItem dark;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -372,6 +380,9 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode pour afficher la solution
 	@FXML
 	public void affichageSolution() throws IOException {
+
+		retourMenu();
+
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Solution.fxml"));
 		Stage stage = new Stage();
 		Rectangle rect = new Rectangle(600,400);
@@ -388,7 +399,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
-		
+
 	}
 
 	//Méthode pour quitter l'application
@@ -546,7 +557,11 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//On regarde si l'étudiant a terminé l'exercice
 		if(estTermine()) {
-			timeFinish();
+
+			//Si c'est le cas, on enregistre son exercice, puis on load une popUp
+			retourMenu();
+			finExercice();
+			enregistrementExo();
 		}
 	}
 
@@ -563,12 +578,13 @@ public class Controller_Page_Exercice implements Initializable{
 	}
 
 	//Méthode qui va load le temps écoulé pour le mode évaluation
-	public void timeFinish() throws IOException {
+	public void finExercice() throws IOException {
 		Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ValidationEnregistrement.fxml"));
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
+		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 		stage.setScene(new Scene(root,  400, 400));
 		stage.show();
 	}
@@ -598,7 +614,7 @@ public class Controller_Page_Exercice implements Initializable{
 							if (sec <= 0 && min<=0) {
 								timer.stop();
 								try {
-									mediaPlayer.stop();
+									retourMenu();
 									loadEnregistrement();
 									enregistrementExo();
 								} catch (IOException e) {
@@ -636,31 +652,106 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Méthode qui survient lorsque le timer est écoulé en mode Evaluation
 	public void loadEnregistrement() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
 		Stage stage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.UNDECORATED);
+		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 		//On bloque le resize
 		stage.setResizable(false);
 		stage.setScene(new Scene(root, 500, 300));
 		stage.show();
 	}
-	
+
 	//Méthode qui va enregistrer l'exercice de l'étudiant
 	public void enregistrementExo() throws IOException {
-		
+
 		File file = new File(Controller_EnregistrementApresOuverture.repertoireEtudiant + "\\" + Controller_EnregistrementApresOuverture.nomEtudiant 
 				+ "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".bin");
 		FileWriter fwrite = new FileWriter(file);
 		BufferedWriter buffer = new BufferedWriter(fwrite);
-		
+
 		buffer.write(transcription.getText());
 		buffer.newLine();
 		buffer.write(Double.toString(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)) + '%');
-		
+
 		buffer.close();
 		fwrite.close();
 	}
 
+	//Méthode pour retourner au menu
+	public void retourMenu() throws IOException {
+		Stage stage = (Stage) alertSolution.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
+		stage.setScene(new Scene(root,  MainEtudiant.width, MainEtudiant.height - 60));
+		stage.show();
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	//Méthode pour affiicher une toolTip consigne + redimension d'image
+	@FXML
+	public void tipConsigneEnter() {
+		Tooltip t = new Tooltip("Il s'agit de la consigne donnée par le professeur");
+		t.setShowDelay(Duration.seconds(0.2));
+		questionConsigne.setFitWidth(questionConsigne.getFitWidth() + 2);
+		questionConsigne.setFitHeight(questionConsigne.getFitHeight() + 2);
+		Tooltip.install(questionConsigne, t);
+	}
+
+	//Méthode pour redimensionner l'image de la consigne quand on sort du champ
+	@FXML
+	public void tipConsigneExit() {
+		questionConsigne.setFitWidth(questionConsigne.getFitWidth() - 2);
+		questionConsigne.setFitHeight(questionConsigne.getFitHeight() - 2);
+	}
+
+	//Méthode pour affiicher une toolTip transcription + redimension d'image
+	@FXML
+	public void tipTranscriptionEnter() {
+		Tooltip t = new Tooltip("Il s'agit du script de la vidéo que vous devez essayer de retrouver");
+		t.setShowDelay(Duration.seconds(0.2));
+		questionTranscription.setFitWidth(questionTranscription.getFitWidth() + 2);
+		questionTranscription.setFitHeight(questionTranscription.getFitHeight() + 2);
+		Tooltip.install(questionTranscription, t);
+	}
+
+	//Méthode pour redimensionner l'image de la transcription quand on sort du champ
+	@FXML
+	public void tipTranscriptionExit() {
+		questionTranscription.setFitWidth(questionTranscription.getFitWidth() - 2);
+		questionTranscription.setFitHeight(questionTranscription.getFitHeight() - 2);
+	}
+
+	//Méthode pour affiicher une toolTip transcription + redimension d'image
+	@FXML
+	public void tipPropositionEnter() {
+		Tooltip t = new Tooltip("Rentrez ici les mots que vous pensez entendre dans le document audio ou vidéo");
+		t.setShowDelay(Duration.seconds(0.2));
+		questionProposition.setFitWidth(questionProposition.getFitWidth() + 2);
+		questionProposition.setFitHeight(questionProposition.getFitHeight() + 2);
+		Tooltip.install(questionProposition, t);
+	}
+
+	//Méthode pour redimensionner l'image de la transcription quand on sort du champ
+	@FXML
+	public void tipPropositionExit() {
+		questionProposition.setFitWidth(questionProposition.getFitWidth() - 2);
+		questionProposition.setFitHeight(questionProposition.getFitHeight() - 2);
+	}
+
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+
+		if(dark.isSelected()) {
+			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			Controller_Menu.isDark = true;
+		} else {
+			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			Controller_Menu.isDark = false;
+		}
+	}
 }

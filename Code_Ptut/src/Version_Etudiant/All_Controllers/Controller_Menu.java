@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,11 +29,14 @@ public class Controller_Menu implements Initializable{
 
 	//A propos
 	@FXML private Label recuperation;
+	
+	@FXML private CheckMenuItem dark;
+	
+	public static boolean isDark = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	//Fonction pour quitter l'application
@@ -234,25 +238,26 @@ public class Controller_Menu implements Initializable{
 		fin.close();
 	}
 
-	/*@FXML
+	@FXML
 	public void aPropos(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
+		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height - 60));
+		primaryStage.setMaximized(true);
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(1200);
+		primaryStage.show();
+	}
+
+	@FXML
+	public void retourMenu(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) recuperation.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
 		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
 		primaryStage.show();
-	}*/
-
-	/*@FXML
-		public void retourMenu(ActionEvent event) throws IOException {
-			Stage primaryStage = (Stage) recuperation.getScene().getWindow();
-	        Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
-	        primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
-	        primaryStage.setMinHeight(800);
-	        primaryStage.setMinWidth(1200);
-	        primaryStage.show();
-		}*/
+	}
 
 	@FXML
 	public void grossissementHandicap() {
@@ -265,6 +270,22 @@ public class Controller_Menu implements Initializable{
 		handicap.setFitWidth(handicap.getFitWidth() - 25);
 		handicap.setFitHeight(handicap.getFitHeight() - 25);
 	}
+	
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+		
+		if(dark.isSelected()) {
+			recupScene.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			recupScene.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			isDark = true;
+		} else {
+			recupScene.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			recupScene.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			isDark = false;
+		}
+	}
+	
 }
 
 

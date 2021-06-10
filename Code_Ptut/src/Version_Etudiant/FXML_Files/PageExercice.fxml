@@ -43,7 +43,7 @@
                 <Menu mnemonicParsing="false" text="Paramètres">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Préférences" />
-                        <CheckMenuItem mnemonicParsing="false" text="Mode Sombre" />
+                        <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                     </items>
                 </Menu>
             </menus>
@@ -228,7 +228,7 @@
                   <Insets bottom="145.0" right="200.0" />
                </GridPane.margin>
             </Label>
-            <ImageView fitHeight="35.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <ImageView fx:id="questionConsigne" fitHeight="35.0" fitWidth="20.0" onMouseEntered="#tipConsigneEnter" onMouseExited="#tipConsigneExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -236,7 +236,7 @@
                   <Insets left="330.0" top="50.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="35.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <ImageView fx:id="questionTranscription" fitHeight="35.0" fitWidth="20.0" onMouseEntered="#tipTranscriptionEnter" onMouseExited="#tipTranscriptionExit" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -244,7 +244,7 @@
                   <Insets left="250.0" top="50.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="35.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="questionProposition" fitHeight="35.0" fitWidth="20.0" onMouseEntered="#tipPropositionEnter" onMouseExited="#tipPropositionExit" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
