@@ -220,15 +220,6 @@ public class Controller_Enregistrement_Final implements Initializable {
 		primaryStage.show();
 	}
 
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
 	// Bouton DarkMode qui met en darkMode l'application
 	@FXML
 	public void darkMode() {
@@ -246,7 +237,7 @@ public class Controller_Enregistrement_Final implements Initializable {
 	@FXML
 	public void annuler(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageAccueil.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
 		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
 		primaryStage.show();
 	}

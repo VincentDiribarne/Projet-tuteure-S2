@@ -151,7 +151,7 @@
 						<Insets bottom="10.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEvaluation" alignment="CENTER" prefHeight="16.0" prefWidth="980.0" visible="false">
+				<HBox fx:id="modeEvaluation" alignment="CENTER" prefHeight="16.0" prefWidth="980.0">
 					<children>
 						<Label text="Limite de temps">
 							<HBox.margin>
@@ -169,7 +169,7 @@
 						<Insets bottom="5.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEntrainement" alignment="CENTER" prefHeight="50.0" prefWidth="980.0" visible="false">
+				<HBox fx:id="modeEntrainement" alignment="CENTER" prefHeight="50.0" prefWidth="980.0">
 					<children>
 						<Label text="Affichage de la solution">
 							<HBox.margin>
@@ -182,7 +182,7 @@
 						<Insets bottom="5.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEntrainement1" alignment="CENTER" prefHeight="51.0" prefWidth="1080.0" visible="false">
+				<HBox fx:id="modeEntrainement1" alignment="CENTER" prefHeight="51.0" prefWidth="1080.0">
 					<children>
 						<Label text="Affichage du nombre de mots découverts">
 							<HBox.margin>
@@ -195,7 +195,7 @@
 						<Insets bottom="5.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEntrainement2" alignment="CENTER" prefHeight="65.0" prefWidth="1080.0" visible="false">
+				<HBox fx:id="modeEntrainement2" alignment="CENTER" prefHeight="65.0" prefWidth="1080.0">
 					<children>
 						<Label text="Mot incomplet">
 							<HBox.margin>
@@ -208,7 +208,7 @@
 						<Insets bottom="5.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEntrainement3" alignment="CENTER" prefHeight="76.0" prefWidth="980.0" visible="false">
+				<HBox fx:id="modeEntrainement3" alignment="CENTER" prefHeight="76.0" prefWidth="980.0">
 					<children>
 						<Label text="2 lettres minimum">
 							<padding>
@@ -221,7 +221,7 @@
 						<Insets bottom="5.0" left="50.0" right="50.0" />
 					</VBox.margin>
 				</HBox>
-				<HBox fx:id="modeEntrainement4" alignment="CENTER" prefHeight="66.0" prefWidth="980.0" visible="false">
+				<HBox fx:id="modeEntrainement4" alignment="CENTER" prefHeight="66.0" prefWidth="980.0">
 					<children>
 						<Label text="3 lettres minimum">
 							<padding>

@@ -34,18 +34,6 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML
 	private RadioButton radioButton3Lettres;
 	@FXML
-	private HBox modeEntrainement;
-	@FXML
-	private HBox modeEntrainement1;
-	@FXML
-	private HBox modeEntrainement2;
-	@FXML
-	private HBox modeEntrainement3;
-	@FXML
-	private HBox modeEntrainement4;
-	@FXML
-	private HBox modeEvaluation;
-	@FXML
 	private TextField CaraOccul;
 	@FXML
 	private TextField nbMinute;
@@ -75,67 +63,66 @@ public class Controller_Page_Des_Options implements Initializable {
 	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		//Pour la fonction ouvrir
 		//On met le caractère d'occultation 
 		if(caraOccul != null) {
 			CaraOccul.setText(caraOccul);
 		}
-		
+
 		//On met la sensibilité à la casse si celle-ci est activée
 		if(sensiCasse == true) {
 			sensibiliteCasse.setSelected(true);
 		}
-		
+
 		//On met le bon mode
 		//Entrainement
 		if(entrainement == true) {
 			radioButtonEntrainement.setSelected(true);
-			
-			//On affiche ce qui est en rapport avec le mode Entrainement
-			modeEntrainement.setVisible(true);
-			modeEntrainement1.setVisible(true);
-			modeEntrainement2.setVisible(true);
-			
+
+			//On met disable ce qui concerne le mode Evaluation
+			nbMinute.setDisable(true);
+
 			//Si l'affichage de la solution est autorisé
 			if(solution == true) {
 				checkBoxSolution.setSelected(true);
 			}
-			
+
 			//Si l'affichage du nombre de mots découverts en temps réel est autorisé
 			if(motDecouverts == true) {
 				checkBoxMotsDecouverts.setSelected(true);
 			}
-			
+
 			//Si l'option mot incomplet est autorisé
 			if(motIncomplet ==  true) {
 				checkBoxMotIncomplet.setSelected(true);
-				
-				modeEntrainement3.setVisible(true);
-				modeEntrainement4.setVisible(true);
-				
+
 				//Si c'est pour deux lettres
 				if(lettres_2 == true) {
 					radioButton2Lettres.setSelected(true);
 				}
-				
+
 				//Si c'est pour trois lettres
 				if(lettres_3 == true) {
 					radioButton3Lettres.setSelected(true);
 				}
-				
+
 			}
 		}
-		
+
 		//Evaluation
 		if(evaluation == true) {
 			radioButtonEvaluation.setSelected(true);
-			
-			//On met le nombre de minutes et on l'affiche
-			modeEvaluation.setVisible(true);
+
+			//On met disable ce qui concerne le mode Entrainement
+			checkBoxMotsDecouverts.setDisable(true);
+			checkBoxMotIncomplet.setDisable(true);
+			checkBoxSolution.setDisable(true);
+			radioButton2Lettres.setDisable(true);
+			radioButton3Lettres.setDisable(true);
 			nbMinute.setText(nbMin);
 		}
-		
+
 	}
 
 	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
@@ -195,7 +182,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML
 	public void selectionModeEvaluation(ActionEvent event) {
 		// On fait apparaître ce qui concerne le mode Evaluation
-		modeEvaluation.setVisible(true);
+		nbMinute.setDisable(false);
 		evaluation = true;
 
 		// On enlève les sélections du mode entrainement et on passe les variables à false
@@ -210,12 +197,12 @@ public class Controller_Page_Des_Options implements Initializable {
 		radioButton3Lettres.setSelected(false);
 		lettres_3 = false;
 
-		// On cache ce qui concerne le mode Entraînement
-		modeEntrainement.setVisible(false);
-		modeEntrainement1.setVisible(false);
-		modeEntrainement2.setVisible(false);
-		modeEntrainement3.setVisible(false);
-		modeEntrainement4.setVisible(false);
+		//On met disable ce qui concerne le mode Entrainement
+		checkBoxMotsDecouverts.setDisable(true);
+		checkBoxMotIncomplet.setDisable(true);
+		checkBoxSolution.setDisable(true);
+		radioButton2Lettres.setDisable(true);
+		radioButton3Lettres.setDisable(true);
 
 		// On regarde si l'autre bouton est sélectionné, si c'est le cas on le
 		// déselectionne
@@ -227,9 +214,8 @@ public class Controller_Page_Des_Options implements Initializable {
 		// Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode
 		// Evaluation
 		if (!radioButtonEvaluation.isSelected()) {
-			modeEvaluation.setVisible(false);
 			evaluation = false;
-			
+
 			//on vide le textField
 			nbMinute.setText(null);
 		}
@@ -239,12 +225,15 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML
 	public void selectionModeEntrainement(ActionEvent event) {
 		// On fait apparaître ce qui concerne le mode Entrainement
-		modeEntrainement.setVisible(true);
-		modeEntrainement1.setVisible(true);
-		modeEntrainement2.setVisible(true);
+		//On met disable ce qui concerne le mode Entrainement
+		checkBoxMotsDecouverts.setDisable(false);
+		checkBoxMotIncomplet.setDisable(false);
+		checkBoxSolution.setDisable(false);
+		radioButton2Lettres.setDisable(false);
+		radioButton3Lettres.setDisable(false);
 
 		// On cache ce qui concerne le mode Evaluation
-		modeEvaluation.setVisible(false);
+		nbMinute.setDisable(true);
 		entrainement = true;
 
 		// On réinitialise le nombre de minutes
@@ -260,12 +249,13 @@ public class Controller_Page_Des_Options implements Initializable {
 		// Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode
 		// Entrainement
 		if (!radioButtonEntrainement.isSelected()) {
-			modeEntrainement.setVisible(false);
-			modeEntrainement1.setVisible(false);
-			modeEntrainement2.setVisible(false);
-			modeEntrainement3.setVisible(false);
-			modeEntrainement4.setVisible(false);
 			
+			checkBoxMotsDecouverts.setDisable(true);
+			checkBoxMotIncomplet.setDisable(true);
+			checkBoxSolution.setDisable(true);
+			radioButton2Lettres.setDisable(true);
+			radioButton3Lettres.setDisable(true);
+
 			// On enlève les sélections du mode entrainement et on passe les variables à false
 			checkBoxMotIncomplet.setSelected(false);
 			motIncomplet = false;
@@ -280,7 +270,7 @@ public class Controller_Page_Des_Options implements Initializable {
 
 			entrainement = false;
 		}
-		
+
 	}
 
 	// Gestion de si je sélectionne une nombre de lettres minimum autorisé, l'autre
@@ -301,7 +291,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	public void selection3Lettres(ActionEvent event) {
 		if (radioButton2Lettres.isSelected()) {
 			radioButton2Lettres.setSelected(false);
-			
+
 			lettres_3 = true;
 			lettres_2 = false;
 		} 
@@ -336,8 +326,9 @@ public class Controller_Page_Des_Options implements Initializable {
 
 		// Si on coche le radioButton
 		if (checkBoxMotIncomplet.isSelected()) {
-			modeEntrainement3.setVisible(true);
-			modeEntrainement4.setVisible(true);
+
+			radioButton2Lettres.setDisable(false);
+			radioButton3Lettres.setDisable(false);
 
 			// on passe à true
 			motIncomplet = true;
@@ -345,12 +336,12 @@ public class Controller_Page_Des_Options implements Initializable {
 		// Si on le décoche
 		if (!checkBoxMotIncomplet.isSelected()) {
 			// on le cache
-			modeEntrainement3.setVisible(false);
-			modeEntrainement4.setVisible(false);
+			radioButton2Lettres.setDisable(true);
+			radioButton3Lettres.setDisable(true);
 			// on les déselectionne et on repasse les variables à false
 			radioButton2Lettres.setSelected(false);
 			radioButton3Lettres.setSelected(false);
-			
+
 			lettres_2 = false;
 			lettres_3 = false;
 

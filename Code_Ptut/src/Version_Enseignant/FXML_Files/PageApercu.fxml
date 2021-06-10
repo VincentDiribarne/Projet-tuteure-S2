@@ -70,7 +70,7 @@
                         <Insets left="40.0" top="55.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="texteTranscription" alignment="TOP_LEFT" onMouseClicked="#editionTranscription" prefHeight="54.0" prefWidth="480.0" promptText="Mettez les aides ici (non obligatoire). Elles ne sont pas disponible en mode évaluation" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                  <TextField fx:id="texteAide" alignment="TOP_LEFT" prefHeight="54.0" prefWidth="480.0" promptText="Mettez les aides ici (non obligatoire). Elles ne sont pas disponible en mode évaluation" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="95.0" left="40.0" right="80.0" />
                      </GridPane.margin>
@@ -83,7 +83,7 @@
                         <Insets top="85.0" />
                      </GridPane.margin>
                   </MediaView>
-                  <TextField fx:id="texteConsigne" alignment="TOP_LEFT" onMouseClicked="#editionConsigne" prefHeight="48.0" promptText="Mettez votre consigne ici" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <TextField fx:id="texteConsigne" alignment="TOP_LEFT" prefHeight="48.0" promptText="Mettez votre consigne ici" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <GridPane.margin>
                         <Insets left="40.0" right="80.0" top="50.0" />
                      </GridPane.margin>
@@ -136,7 +136,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <TextArea fx:id="texteAide" onMouseClicked="#editionAide" promptText="Mettez le script ici !" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <TextArea fx:id="texteTranscription" promptText="Mettez le script ici !" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="220.0" left="40.0" right="80.0" top="165.0" />
                      </GridPane.margin>

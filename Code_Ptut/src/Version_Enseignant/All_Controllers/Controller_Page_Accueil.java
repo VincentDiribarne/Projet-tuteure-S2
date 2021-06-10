@@ -55,15 +55,45 @@ public class Controller_Page_Accueil implements Initializable {
 		decrypte(selectedFile);
 		
 		//On met le nom du fichier dans le TextField associé
-		Controller_Nouvel_Exo.contenuNomExo = selectedFile.getName();
+		Controller_Nouvel_Exo.contenuNomExo = stripExtension(selectedFile);
 		
 		//On met le répertoire du fichier dans le TextField associé
-		Controller_Nouvel_Exo.contenuRepertoire = selectedFile.getAbsolutePath();
+		Controller_Nouvel_Exo.contenuRepertoire = stripPath(selectedFile);
 		
 		//On load la page d'après
 		pageNouvelExo();
 	}
 
+	//Méthode qui va enlever l'extension du fichier
+	public static String stripExtension(File file) {
+        if (file == null) {
+            return null;
+        }
+        String name = file.getName();
+
+        int posPoint = name.lastIndexOf(".");
+
+        if (posPoint == -1) {
+            return name;
+        }
+
+        return name.substring(0, posPoint);
+    }
+	
+	public static String stripPath(File file) {
+        if (file == null) {
+            return null;
+        }
+        String name = file.getAbsolutePath();
+
+        int posPoint = name.lastIndexOf("\\");
+
+        if (posPoint == -1) {
+            return name;
+        }
+
+        return name.substring(0, posPoint);
+    }
 	
 	// Fonction qui va load les informations du fichier sélectionné dans les
 	// différents TextField...
