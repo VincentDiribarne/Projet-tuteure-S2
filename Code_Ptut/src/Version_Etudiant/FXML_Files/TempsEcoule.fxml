@@ -26,7 +26,7 @@
             <Insets top="10.0" />
          </GridPane.margin>
       </Label>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Votre exercice est en cours d'enregistrement" textAlignment="CENTER" wrappingWidth="330.822265625" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Votre exercice a bien été enregistré" textAlignment="CENTER" wrappingWidth="330.822265625" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
          <font>
             <Font name="Comic Sans MS" size="14.0" />
          </font>
@@ -36,7 +36,7 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" onAction="#retourAccueil" prefHeight="25.0" prefWidth="82.0" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1;" text="Quitter" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button mnemonicParsing="false" onAction="#retourAccueil" prefHeight="27.0" prefWidth="55.0" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1;" text="Ok" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="20.0" />
          </GridPane.margin>

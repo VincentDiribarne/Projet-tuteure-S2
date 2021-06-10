@@ -31,7 +31,6 @@ public class Controller_Menu implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -234,25 +233,26 @@ public class Controller_Menu implements Initializable{
 		fin.close();
 	}
 
-	/*@FXML
+	@FXML
 	public void aPropos(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
+		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height - 60));
+		primaryStage.setMaximized(true);
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(1200);
+		primaryStage.show();
+	}
+
+	@FXML
+	public void retourMenu(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) recuperation.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
 		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
 		primaryStage.show();
-	}*/
-
-	/*@FXML
-		public void retourMenu(ActionEvent event) throws IOException {
-			Stage primaryStage = (Stage) recuperation.getScene().getWindow();
-	        Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
-	        primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
-	        primaryStage.setMinHeight(800);
-	        primaryStage.setMinWidth(1200);
-	        primaryStage.show();
-		}*/
+	}
 
 	@FXML
 	public void grossissementHandicap() {
