@@ -378,6 +378,9 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode pour afficher la solution
 	@FXML
 	public void affichageSolution() throws IOException {
+		
+		retourMenu();
+		
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Solution.fxml"));
 		Stage stage = new Stage();
 		Rectangle rect = new Rectangle(600,400);
