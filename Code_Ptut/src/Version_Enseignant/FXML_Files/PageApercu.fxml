@@ -8,141 +8,204 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Apercu">
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@boutonBlanc.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Page_Apercu">
    <top>
-      <VBox prefHeight="32.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
-         <children>
-      				<MenuBar snapToPixel="false">
-      					<menus>
-      						<Menu mnemonicParsing="false" text="Exercice">
-      							<items>
-      								<MenuItem mnemonicParsing="false" text="Créer un exercice" />
-      								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
-      								<SeparatorMenuItem mnemonicParsing="false" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer" />
-      								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
-      								<SeparatorMenuItem mnemonicParsing="false" />
-      								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
-      							</items>
-      						</Menu>
-      						<Menu mnemonicParsing="false" text="Aide">
-      							<items>
-      								<MenuItem mnemonicParsing="false" text="Tutoriel" />
-      								<MenuItem mnemonicParsing="false" text="A propos" />
-      							</items>
-      						</Menu>
-      						<Menu mnemonicParsing="false" text="Paramètres">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                        <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
-                     </items></Menu>
-      					</menus>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-      				</MenuBar>
-         </children>
-      </VBox>
+				<MenuBar snapToPixel="false" stylesheets="@MenuAndButtonStyles.css" BorderPane.alignment="CENTER">
+					<menus>
+						<Menu mnemonicParsing="false" text="Exercice">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Créer un exercice" />
+								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem mnemonicParsing="false" text="Enregistrer" />
+								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
+								<SeparatorMenuItem mnemonicParsing="false" />
+								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Aide">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+								<MenuItem mnemonicParsing="false" text="A propos" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Paramètres">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+               </items>
+            </Menu>
+					</menus>
+				</MenuBar>
    </top>
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="584.0" prefWidth="1296.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Aperçu">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <GridPane stylesheets="@boutonBlanc.css" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <ImageView fx:id="imageViewApercu" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                  <MediaView fx:id="MediaViewApercu" fitHeight="200.0" fitWidth="400.0">
-                     <HBox.margin>
-                        <Insets left="100.0" right="200.0" />
-                     </HBox.margin>
+                  <Label text="Aperçu" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="40.0" top="55.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="texteTranscription" alignment="TOP_LEFT" onMouseClicked="#editionTranscription" prefHeight="54.0" prefWidth="480.0" promptText="Mettez les aides ici (non obligatoire). Elles ne sont pas disponible en mode évaluation" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="95.0" left="40.0" right="80.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <MediaView fx:id="MediaViewApercu" fitHeight="240.0" fitWidth="460.0" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets top="85.0" />
+                     </GridPane.margin>
                   </MediaView>
-                  <VBox prefHeight="200.0" prefWidth="301.0">
-                     <children>
-                        <Label text="Consigne">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="texteConsigne" alignment="TOP_LEFT" onMouseClicked="#editionConsigne" prefHeight="134.0" prefWidth="407.0">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#validationConsigne" text="Valider" />
-                     </children>
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="25.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="187.0" prefWidth="1296.0">
-               <children>
-                  <VBox prefHeight="177.0" prefWidth="818.0">
-                     <HBox.margin>
-                        <Insets left="100.0" right="200.0" />
-                     </HBox.margin>
-                     <children>
-                        <Label text="Aides" />
-                        <TextField fx:id="texteAide" alignment="TOP_LEFT" onMouseClicked="#editionAide" prefHeight="134.0" prefWidth="301.0">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#validationAide" text="Valider" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="177.0" prefWidth="725.0">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <children>
-                        <Label text="Transcription" />
-                        <TextField fx:id="texteTranscription" alignment="TOP_LEFT" onMouseClicked="#editionTranscription" prefHeight="128.0" prefWidth="314.0">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" onAction="#validationTranscription" text="Valider" />
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="25.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="1080.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#pageImporterRessource" text="Retour">
-                     <HBox.margin>
-                        <Insets right="500.0" />
-                     </HBox.margin>
+                  <TextField fx:id="texteConsigne" alignment="TOP_LEFT" onMouseClicked="#editionConsigne" prefHeight="48.0" promptText="Mettez votre consigne ici" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="40.0" right="80.0" top="50.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label text="Transcription" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="Comic Sans MS" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="40.0" top="135.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Consigne" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="Comic Sans MS" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="40.0" top="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Aides" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Comic Sans MS" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="150.0" left="40.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <ImageView fx:id="imageViewApercu" fitHeight="240.0" fitWidth="460.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets top="85.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <Button fx:id="okApercu" alignment="CENTER" mnemonicParsing="false" onAction="#pageOptions" prefHeight="25.0" prefWidth="120.0" text="Continuer" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="20.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="okApercu" alignment="CENTER" mnemonicParsing="false" onAction="#pageOptions" text="Ok" />
+                  <Button mnemonicParsing="false" onAction="#pageImporterRessource" prefHeight="25.0" prefWidth="120.0" text="Retour" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <TextArea fx:id="texteAide" onMouseClicked="#editionAide" promptText="Mettez le script ici !" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="220.0" left="40.0" right="80.0" top="165.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
                </children>
-               <VBox.margin>
-                  <Insets bottom="25.0" top="25.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
+            </GridPane>
+         </center>
+         <top>
+            <GridPane prefHeight="156.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="51.0" prefWidth="324.0" text="Créer un exercice" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Circle fill="#239430" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="300.0" />
+                     </GridPane.margin>
+                  </Circle>
+                  <Circle fill="#239430" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="100.0" />
+                     </GridPane.margin>
+                  </Circle>
+                  <Circle fill="#c3911f" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets left="100.0" />
+                     </GridPane.margin>
+                  </Circle>
+                  <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </Circle>
+                  <ImageView fitHeight="72.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../../Image/Trait_Noir.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets left="200.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="577.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../../Image/Trait_Vert.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets right="200.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="677.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../../Image/Trait_Vert.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </top>
+      </BorderPane>
    </center>
 </BorderPane>
