@@ -67,7 +67,6 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 				}
 			}
 		});
-
 	}
 	
 	

@@ -30,8 +30,9 @@ public class MainEtudiant extends Application{
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         width=screenBounds.getWidth();
         height=screenBounds.getHeight();
-        
-        primaryStage.setScene(new Scene(root, width, height));
+        Scene scene = new Scene(root, width, height);
+        scene.getStylesheets().addAll(getClass().getResource("FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

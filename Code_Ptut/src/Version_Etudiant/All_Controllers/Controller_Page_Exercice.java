@@ -107,6 +107,8 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML private ImageView questionTranscription;
 	@FXML private ImageView questionProposition;
 
+	@FXML private CheckMenuItem dark;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -378,9 +380,9 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode pour afficher la solution
 	@FXML
 	public void affichageSolution() throws IOException {
-		
+
 		retourMenu();
-		
+
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Solution.fxml"));
 		Stage stage = new Stage();
 		Rectangle rect = new Rectangle(600,400);
@@ -736,5 +738,20 @@ public class Controller_Page_Exercice implements Initializable{
 	public void tipPropositionExit() {
 		questionProposition.setFitWidth(questionProposition.getFitWidth() - 2);
 		questionProposition.setFitHeight(questionProposition.getFitHeight() - 2);
+	}
+
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+
+		if(dark.isSelected()) {
+			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			Controller_Menu.isDark = true;
+		} else {
+			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			Controller_Menu.isDark = false;
+		}
 	}
 }
