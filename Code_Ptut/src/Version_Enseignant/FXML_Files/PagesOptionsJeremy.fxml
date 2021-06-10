@@ -11,6 +11,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -221,7 +222,69 @@
                   <Insets left="750.0" />
                </GridPane.margin>
             </Button>
-            <ImageView fitHeight="48.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="180.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="180.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="180.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="180.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="110.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets right="150.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../Documents/GitHub/Projet-tuteure-S2/Code_Ptut/src/Image/Aide_Noir.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
    </center>
