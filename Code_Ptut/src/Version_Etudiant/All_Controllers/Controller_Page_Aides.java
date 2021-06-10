@@ -22,7 +22,7 @@ public class Controller_Page_Aides implements Initializable {
 
 		affichageAide.setWrapText(true);
 		affichageAide.setText(contenuAide);
-
+		
 	}
 
 	@FXML
