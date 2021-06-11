@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,6 +47,8 @@ public class Controller_Importer_Ressource implements Initializable {
 
 	public static Media contenuMedia;
 	public static Image contenuImage;
+	
+	@FXML private CheckMenuItem dark;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -100,20 +103,6 @@ public class Controller_Importer_Ressource implements Initializable {
 		// TODO Chargez l'exercice dans la page
 	}
 
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) playPause.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
-	// Bouton DarkMode qui met en darkMode l'application
-	@FXML
-	public void darkMode() {
-		// TODO faire le DarkMode
-	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////       METHDOES SPECIFIQUES A LA PAGE       ////////////////////////////////////////
@@ -236,7 +225,9 @@ public class Controller_Importer_Ressource implements Initializable {
 	public void pageNouvelExo(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		primaryStage.setScene(new Scene(root, 1200, 800));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 		primaryStage.show();
 	}
 
@@ -248,7 +239,38 @@ public class Controller_Importer_Ressource implements Initializable {
 		
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageApercu.fxml"));
-		primaryStage.setScene(new Scene(root, 1200, 800));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 		primaryStage.show();
+	}
+	
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+
+		if(dark.isSelected()) {
+			okImport.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okImport.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			Controller_Page_Accueil.isDark = true;
+		} else {
+			okImport.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			okImport.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			Controller_Page_Accueil.isDark = false;
+		}
+		
+	}
+
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(Controller_Page_Accueil.isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
+		}
 	}
 }

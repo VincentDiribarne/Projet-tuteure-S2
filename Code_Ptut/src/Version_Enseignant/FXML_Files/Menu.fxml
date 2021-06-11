@@ -150,7 +150,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Paramètres">
                             <items>
-                                <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                                <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
                             </items></Menu>
                     </menus>
                     <VBox.margin>

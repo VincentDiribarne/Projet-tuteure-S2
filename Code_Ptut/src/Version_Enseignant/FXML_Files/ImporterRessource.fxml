@@ -156,9 +156,6 @@
 								<MenuItem mnemonicParsing="false" text="Créer un exercice" />
 								<MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
 								<SeparatorMenuItem mnemonicParsing="false" />
-								<MenuItem mnemonicParsing="false" text="Enregistrer" />
-								<MenuItem mnemonicParsing="false" text="Enregistrer sous" />
-								<SeparatorMenuItem mnemonicParsing="false" />
 								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
 							</items>
 						</Menu>
@@ -170,8 +167,7 @@
 						</Menu>
 						<Menu mnemonicParsing="false" text="Paramètres">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                  <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                  <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
                </items>
             </Menu>
 					</menus>

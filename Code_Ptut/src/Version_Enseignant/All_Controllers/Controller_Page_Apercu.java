@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -40,6 +41,8 @@ public class Controller_Page_Apercu implements Initializable {
 	public static String contenuConsigne;
 	public static String contenuTranscription;
 	public static String contenuAide;
+
+	@FXML private CheckMenuItem dark;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -87,27 +90,15 @@ public class Controller_Page_Apercu implements Initializable {
 		// TODO Chargez l'exercice dans la page
 	}
 
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
-	// Bouton DarkMode qui met en darkMode l'application
-	@FXML
-	public void darkMode() {
-		// TODO faire le DarkMode
-	}
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)
 	@FXML
 	public void pageImporterRessource(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ImporterRessource.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		darkModeActivation(scene);
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 
@@ -122,7 +113,49 @@ public class Controller_Page_Apercu implements Initializable {
 
 		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageOptions.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
+	}
+
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+
+		if(dark.isSelected()) {
+			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okApercu.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			Controller_Page_Accueil.isDark = true;
+		} else {
+			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			okApercu.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			Controller_Page_Accueil.isDark = false;
+		}
+
+	}
+
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(Controller_Page_Accueil.isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
+		}
+	}
+
+	// Méthode qui va ouvrir la page à propos
+	@FXML
+	public void aPropos(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 		primaryStage.show();
 	}
 }

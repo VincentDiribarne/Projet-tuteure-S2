@@ -62,7 +62,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	public static boolean motIncomplet;
 	public static boolean lettres_2;
 	public static boolean lettres_3;
-	
+
 	//Toutes les variables des tooltip
 	@FXML private ImageView toolTipOccul;
 	@FXML private ImageView toolTipSensi;
@@ -72,6 +72,8 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML private ImageView toolTipMotDecouvert;
 	@FXML private ImageView toolTipSolution;
 	@FXML private ImageView toolTipMotIncomplet;
+
+	@FXML private CheckBox dark;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -154,23 +156,15 @@ public class Controller_Page_Des_Options implements Initializable {
 		fileChooser.showOpenDialog(null);
 		// TODO Chargez l'exercice dans la page
 	}
-
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
+	
 	// Bouton qui fait retourner l'enseignant à la page d'apercu (bouton retour)
 	@FXML
 	public void pageApercu(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageApercu.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 	}
 
 	@FXML
@@ -181,15 +175,12 @@ public class Controller_Page_Des_Options implements Initializable {
 
 		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementFinal.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 		primaryStage.show();
 	}
 
-	// Bouton DarkMode qui met en darkMode l'application
-	@FXML
-	public void darkMode() {
-		// TODO faire le DarkMode
-	}
 
 	// Gestion de si je sélectionne un mode, l'autre se décoche
 	@FXML
@@ -262,7 +253,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		// Dans le cas d'une déselection du bouton, on retire ce qui concerne le mode
 		// Entrainement
 		if (!radioButtonEntrainement.isSelected()) {
-			
+
 			checkBoxMotsDecouverts.setDisable(true);
 			checkBoxMotIncomplet.setDisable(true);
 			checkBoxSolution.setDisable(true);
@@ -402,7 +393,7 @@ public class Controller_Page_Des_Options implements Initializable {
 			motDecouverts = false;
 		}
 	}
-	
+
 	/////// Toutes les méthodes concernant les toolTip///////////////
 	//Méthode pour afficher une tooltip et agrandir l'image
 	public void affichageToolTip(ImageView image, String description) {
@@ -412,101 +403,141 @@ public class Controller_Page_Des_Options implements Initializable {
 		image.setFitHeight(image.getFitHeight() + 2);
 		Tooltip.install(image, t);
 	}
-	
+
 	//Méthode pour rétrcir une image
 	public void adaptationImage(ImageView image) {
 		image.setFitWidth(image.getFitWidth() - 2);
 		image.setFitHeight(image.getFitHeight() - 2);
 	}
-	
-	
+
+
 	//Pour le caractère d'oocultation du texte
 	@FXML
 	public void tipOcculEnter() {
 		affichageToolTip(toolTipOccul, "Ce caractère servira à crypter le script de votre document");
 	}
-	
+
 	@FXML
 	public void tipOcculExit() {
 		adaptationImage(toolTipOccul);
 	}
-	
+
 	//Pour la sensibilité à la casse
 	@FXML
 	public void tipSensiEnter() {
 		affichageToolTip(toolTipSensi, "Activer la sensibilité à la casse signifie prendre en compte la différence entre minuscule et majuscule");
 	}
-	
+
 	@FXML
 	public void tipSensiExit() {
 		adaptationImage(toolTipSensi);
 	}
-	
+
 	//Pour le mode Evaluation
 	@FXML
 	public void tipEvalEnter() {
 		affichageToolTip(toolTipEval, "Le mode Evaluation n'autorise aucune aide pour l'étudiant");
 	}
-	
+
 	@FXML
 	public void tipEvalExit() {
 		adaptationImage(toolTipEval);
 	}
-	
+
 	//Pour le nombre de minutes à rentrer par le professeur
 	@FXML
 	public void tipMinEnter() {
 		affichageToolTip(toolTipNbMin, "Le nombre de minutes dont l'élève disposera pour faire l'exercice");
 	}
-	
+
 	@FXML
 	public void tipMinExit() {
 		adaptationImage(toolTipNbMin);
 	}
-	
+
 	//Pour le mode Entrainement
 	@FXML
 	public void tipEntrEnter() {
 		affichageToolTip(toolTipEntr, "Le mode Entraînement autorise ou non ceratiens options (listées ci-dessous)");
 	}
-	
+
 	@FXML
 	public void tipEntrExit() {
 		adaptationImage(toolTipEntr);
 	}
-	
+
 	//Pour l'affichage du nombre de mot découvert
 	@FXML
 	public void tipMotDecouvertEnter() {
 		affichageToolTip(toolTipMotDecouvert, "Cette option permet à l'étudiant de voir en temps réel le nombre de mots qu'il a trouvé");
 	}
-	
+
 	@FXML
 	public void tipMotDecouvertExit() {
 		adaptationImage(toolTipMotDecouvert);
 	}
-	
+
 	//Pour l'autorisation de l'affichage de la solution
 	@FXML
 	public void tipSolutionEnter() {
 		affichageToolTip(toolTipSolution, "Autoriser à ce que l'étudiant puisse consulter la solution pendant l'exercice");
 	}
-	
+
 	@FXML
 	public void tipSolutionExit() {
 		adaptationImage(toolTipSolution);
 	}
-	
+
 	//Pour le remplacement partiel
 	@FXML
 	public void tipMotIncompletEnter() {
 		affichageToolTip(toolTipMotIncomplet, "Autoriser le remplacement partiel des mots à partir d'un nombre minimum de lettres");
 	}
-	
+
 	@FXML
 	public void tipMotIncompletExit() {
 		adaptationImage(toolTipMotIncomplet);
 	}
-	
+
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+
+		if(dark.isSelected()) {
+			CaraOccul.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			CaraOccul.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			Controller_Page_Accueil.isDark = true;
+		} else {
+			CaraOccul.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			CaraOccul.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			Controller_Page_Accueil.isDark = false;
+		}
+
+	}
+
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(Controller_Page_Accueil.isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
+		}
+	}
+
+	// Méthode qui va ouvrir la page à propos
+	@FXML
+	public void aPropos(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) CaraOccul.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
+	}
+
 
 }
