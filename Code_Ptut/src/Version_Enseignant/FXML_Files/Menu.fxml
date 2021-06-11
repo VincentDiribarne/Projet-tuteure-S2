@@ -100,22 +100,29 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesitez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesitez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
                         <Font name="Corbel" size="20.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V1.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V1.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets right="10.0" />
+                        <Insets bottom="2.0" right="10.0" />
                      </GridPane.margin>
                   </Text>
+                  <ImageView fitHeight="33.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <image>
+                        <Image url="@../../Image/IUT_Laval.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </ImageView>
                </children>
             </GridPane>
          </bottom>
