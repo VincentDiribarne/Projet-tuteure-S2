@@ -24,6 +24,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
@@ -288,6 +290,7 @@ public class Controller_Page_Exercice implements Initializable{
 	public void firstPlay(MouseEvent event) {
 
 		mediaPlayer.play();
+		setKeyboardShortcut();
 
 		if(timerEstDeclenche == false) {
 			gestionTimer();
@@ -602,7 +605,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
-		Scene scene = new Scene(root,  400, 400);
+		Scene scene = new Scene(root, 320, 150);
 		stage.setScene(scene);
 		darkModeActivation(scene);
 		stage.show();
@@ -776,5 +779,36 @@ public class Controller_Page_Exercice implements Initializable{
 			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			Controller_Menu.isDark = false;
 		}
+	}
+	
+	
+	private void setKeyboardShortcut() {
+		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.SPACE) {
+					if (mediaView.getMediaPlayer().getStatus() == Status.PAUSED) {
+						mediaView.getMediaPlayer().play();
+					}
+					if (mediaView.getMediaPlayer().getStatus() == Status.PLAYING) {
+						mediaView.getMediaPlayer().pause();
+					}
+				}
+				if (event.getCode() == KeyCode.RIGHT && mediaView.getMediaPlayer().getTotalDuration().greaterThan(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)))) {
+					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)));
+				}
+				if (event.getCode() == KeyCode.LEFT && new Duration(0).lessThan(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)))) {
+					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)));
+				}
+				if (event.getCode() == KeyCode.UP && mediaView.getMediaPlayer().getVolume() <= 1-0.1) {
+					sliderSon.setValue(sliderSon.getValue() + 3);
+				}
+				if (event.getCode() == KeyCode.DOWN && mediaView.getMediaPlayer().getVolume() >= 0 + 0.1) {
+					sliderSon.setValue(sliderSon.getValue() - 3);
+				}
+			}
+
+		});
+
 	}
 }

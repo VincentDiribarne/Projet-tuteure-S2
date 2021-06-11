@@ -90,14 +90,6 @@
                         <Insets />
                      </GridPane.margin>
                   </Text>
-                  <ImageView fitHeight="55.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../../Image/Fauteuil_Roulant.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </ImageView>
                </children>
             </GridPane>
          </top>
@@ -150,7 +142,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Paramètres">
                             <items>
-                                <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                                <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                             </items></Menu>
                     </menus>
                     <VBox.margin>

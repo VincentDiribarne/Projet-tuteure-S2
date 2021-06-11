@@ -35,12 +35,12 @@
 						<Menu mnemonicParsing="false" text="Aide">
 							<items>
 								<MenuItem mnemonicParsing="false" text="Tutoriel" />
-								<MenuItem mnemonicParsing="false" onAction="#aPropos" text="A propos" />
+								<MenuItem disable="true" mnemonicParsing="false" text="A propos" />
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Paramètres">
                <items>
-                  <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                  <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                </items>
             </Menu>
 					</menus>

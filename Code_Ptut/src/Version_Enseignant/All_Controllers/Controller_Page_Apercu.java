@@ -148,14 +148,4 @@ public class Controller_Page_Apercu implements Initializable {
 		}
 	}
 
-	// Méthode qui va ouvrir la page à propos
-	@FXML
-	public void aPropos(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
-		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
-		primaryStage.setScene(scene);
-		darkModeActivation(scene);
-		primaryStage.show();
-	}
 }

@@ -268,18 +268,6 @@ public class Controller_Menu implements Initializable{
 		primaryStage.setMinWidth(1200);
 		primaryStage.show();
 	}
-
-	@FXML
-	public void grossissementHandicap() {
-		handicap.setFitWidth(handicap.getFitWidth() + 25);
-		handicap.setFitHeight(handicap.getFitHeight() + 25);
-	}
-
-	@FXML
-	public void retrecissementHandicap() {
-		handicap.setFitWidth(handicap.getFitWidth() - 25);
-		handicap.setFitHeight(handicap.getFitHeight() - 25);
-	}
 	
 	//Méthode pour passer ou non le darkMode
 	@FXML

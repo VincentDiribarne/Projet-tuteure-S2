@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
+import Version_Etudiant.DeplacementFenetre;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -187,7 +189,8 @@ public class Controller_Page_Des_Options implements Initializable {
 
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ValidationEnregistrement.fxml"));
-		Scene scene = new Scene(root, 400, 400);
+		Scene scene = new Scene(root, 320, 150);
+		DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
 		//On bloque sur cette fenêtre
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -543,16 +546,6 @@ public class Controller_Page_Des_Options implements Initializable {
 		}
 	}
 
-	// Méthode qui va ouvrir la page à propos
-	@FXML
-	public void aPropos(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) CaraOccul.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
-		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
-		primaryStage.setScene(scene);
-		darkModeActivation(scene);
-		primaryStage.show();
-	}
 
 
 }

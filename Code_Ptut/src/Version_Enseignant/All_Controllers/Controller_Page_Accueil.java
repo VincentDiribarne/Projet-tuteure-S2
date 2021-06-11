@@ -243,6 +243,9 @@ public class Controller_Page_Accueil implements Initializable {
 
 			// On récupère ensuite le media
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			
+			//On met à null l'image car il n'y en a pas
+			Controller_Importer_Ressource.contenuImage = null;
 
 			tmpFile = File.createTempFile("data", ".mp4");
 
