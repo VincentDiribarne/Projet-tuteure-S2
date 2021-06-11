@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +14,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class Controller_Page_Des_Options implements Initializable {
@@ -73,7 +73,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML private ImageView toolTipSolution;
 	@FXML private ImageView toolTipMotIncomplet;
 
-	@FXML private CheckBox dark;
+	@FXML private CheckMenuItem dark;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -156,7 +156,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		fileChooser.showOpenDialog(null);
 		// TODO Chargez l'exercice dans la page
 	}
-	
+
 	// Bouton qui fait retourner l'enseignant à la page d'apercu (bouton retour)
 	@FXML
 	public void pageApercu(ActionEvent event) throws IOException {
@@ -167,15 +167,30 @@ public class Controller_Page_Des_Options implements Initializable {
 		darkModeActivation(scene);
 	}
 
+	//Méthode pour retourner au menu
+	public void retourMenu() throws IOException {
+		Stage stage = (Stage) CaraOccul.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
+		Scene scene = new Scene(root,  MainEnseignant.width, MainEnseignant.height - 60);
+		stage.setScene(scene);
+		darkModeActivation(scene);
+		stage.show();
+	}
+
 	@FXML
 	public void pageEnregistrementFinal(ActionEvent event) throws IOException {
 		// Quand on passe à la page suivante, on mémorise les informations des options
 		caraOccul = CaraOccul.getText();
 		nbMin = nbMinute.getText();
+		
+		retourMenu();
 
-		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementFinal.fxml"));
-		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ValidationEnregistrement.fxml"));
+		Scene scene = new Scene(root, 400, 400);
+		//On bloque sur cette fenêtre
+		primaryStage.initModality(Modality.APPLICATION_MODAL);
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		primaryStage.setScene(scene);
 		darkModeActivation(scene);
 		primaryStage.show();
