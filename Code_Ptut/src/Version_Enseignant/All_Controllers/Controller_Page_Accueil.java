@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
+import Version_Etudiant.MainEtudiant;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,9 @@ import javafx.stage.Stage;
 public class Controller_Page_Accueil implements Initializable {
 
 	@FXML
-	Text RecupScene;
+	private Text RecupScene;
+	@FXML
+	private Label recupScene;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -45,56 +48,56 @@ public class Controller_Page_Accueil implements Initializable {
 	// créé auparavant
 	@FXML
 	public void ouvrir(ActionEvent event) throws IOException {
-		
+
 		FileChooser fileChooser = new FileChooser();
 		File selectedFile = new File("");
 		fileChooser.setTitle("Ouvrez votre exercice");
-		
+
 		// Appel de la fonction décrypte pour la fichier sélectionné
 		selectedFile = fileChooser.showOpenDialog(null);
 		decrypte(selectedFile);
-		
-		//On met le nom du fichier dans le TextField associé
+
+		// On met le nom du fichier dans le TextField associé
 		Controller_Nouvel_Exo.contenuNomExo = stripExtension(selectedFile);
-		
-		//On met le répertoire du fichier dans le TextField associé
+
+		// On met le répertoire du fichier dans le TextField associé
 		Controller_Nouvel_Exo.contenuRepertoire = stripPath(selectedFile);
-		
-		//On load la page d'après
+
+		// On load la page d'après
 		pageNouvelExo();
 	}
 
-	//Méthode qui va enlever l'extension du fichier
+	// Méthode qui va enlever l'extension du fichier
 	public static String stripExtension(File file) {
-        if (file == null) {
-            return null;
-        }
-        String name = file.getName();
+		if (file == null) {
+			return null;
+		}
+		String name = file.getName();
 
-        int posPoint = name.lastIndexOf(".");
+		int posPoint = name.lastIndexOf(".");
 
-        if (posPoint == -1) {
-            return name;
-        }
+		if (posPoint == -1) {
+			return name;
+		}
 
-        return name.substring(0, posPoint);
-    }
-	
+		return name.substring(0, posPoint);
+	}
+
 	public static String stripPath(File file) {
-        if (file == null) {
-            return null;
-        }
-        String name = file.getAbsolutePath();
+		if (file == null) {
+			return null;
+		}
+		String name = file.getAbsolutePath();
 
-        int posPoint = name.lastIndexOf("\\");
+		int posPoint = name.lastIndexOf("\\");
 
-        if (posPoint == -1) {
-            return name;
-        }
+		if (posPoint == -1) {
+			return name;
+		}
 
-        return name.substring(0, posPoint);
-    }
-	
+		return name.substring(0, posPoint);
+	}
+
 	// Fonction qui va load les informations du fichier sélectionné dans les
 	// différents TextField...
 	public void decrypte(File file) throws IOException {
@@ -207,50 +210,50 @@ public class Controller_Page_Accueil implements Initializable {
 				Controller_Page_Des_Options.lettres_3 = false;
 			}
 		}
-		
-		//On regarde l'extension du media
+
+		// On regarde l'extension du media
 		extension = ByteBuffer.wrap(fin.readNBytes(1)).get();
-		
-		//Si c'est un mp3, on doit déchiffrer l'image
-		if(extension == 0) {
-			
+
+		// Si c'est un mp3, on doit déchiffrer l'image
+		if (extension == 0) {
+
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
-			
+
 			File tmpFileImage = File.createTempFile("data", ".png");
 			FileOutputStream ecritureFileImage = new FileOutputStream(tmpFileImage);
 			ecritureFileImage.write(fin.readNBytes(nombreOctetALire));
 			ecritureFileImage.close();
-			
+
 			Controller_Importer_Ressource.contenuImage = new Image(tmpFileImage.toURI().toString());
-			
-			//On efface le fichier temporaire
+
+			// On efface le fichier temporaire
 			tmpFileImage.deleteOnExit();
-			
-			//On lit le mp3
+
+			// On lit le mp3
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
-			
+
 			tmpFile = File.createTempFile("data", ".mp3");
 
-		} 
-		//Sinon c'est un mp4
+		}
+		// Sinon c'est un mp4
 		else {
-			
-			//On récupère ensuite le media
+
+			// On récupère ensuite le media
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
-			
+
 			tmpFile = File.createTempFile("data", ".mp4");
 
 		}
-		
+
 		FileOutputStream ecritureFile = new FileOutputStream(tmpFile);
 		ecritureFile.write(fin.readAllBytes());
 		ecritureFile.close();
-		
+
 		Controller_Importer_Ressource.contenuMedia = new Media(tmpFile.toURI().toString());
-		
-		//On efface le fichier temporaire
+
+		// On efface le fichier temporaire
 		tmpFile.deleteOnExit();
-		
+
 		// Fermeture du fichier
 		fin.close();
 	}
@@ -270,16 +273,6 @@ public class Controller_Page_Accueil implements Initializable {
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setMaximized(true);
 		primaryStage.show();
-
-	}
-
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
 	}
 
 	// Bouton DarkMode qui met en darkMode l'application
@@ -288,4 +281,28 @@ public class Controller_Page_Accueil implements Initializable {
 		// TODO faire le DarkMode
 	}
 
+	// Méthode qui va ouvrir la page à propos
+	@FXML
+	public void aPropos(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
+		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height - 60);
+		primaryStage.setScene(scene);
+
+		primaryStage.setMaximized(true);
+		primaryStage.show();
+	}
+
+	// Méthode qui permet de retourner au menu depuis la page à propos
+	@FXML
+	public void retourMenu(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
+		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
+		primaryStage.setScene(scene);
+
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(1200);
+		primaryStage.show();
+	}
 }
