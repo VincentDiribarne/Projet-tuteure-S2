@@ -267,8 +267,10 @@ public class Controller_Page_Accueil implements Initializable {
 	public void pageNouvelExo() throws IOException {
 		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setMaximized(true);
 		primaryStage.show();
+
 	}
 
 	// Bouton Préférences qui emmène sur la page des paramètres

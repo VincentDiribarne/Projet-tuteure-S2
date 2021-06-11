@@ -65,7 +65,11 @@ public class Controller_Menu implements Initializable{
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageExercice.fxml"));
 		primaryStage.setMaximized(true);
-		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
+		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
+		
+		darkModeActivation(scene);
+		
+		primaryStage.setScene(scene);		
 		primaryStage.show();
 	}
 
@@ -241,7 +245,11 @@ public class Controller_Menu implements Initializable{
 	public void aPropos(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
-		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height - 60));
+		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height - 60);
+		primaryStage.setScene(scene);
+		
+		darkModeActivation(scene);
+		
 		primaryStage.setMaximized(true);
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
@@ -252,7 +260,10 @@ public class Controller_Menu implements Initializable{
 	public void retourMenu(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recuperation.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
-		primaryStage.setScene(new Scene(root, MainEtudiant.width, MainEtudiant.height));
+		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
+		primaryStage.setScene(scene);
+		
+		darkModeActivation(scene);
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
 		primaryStage.show();
@@ -282,6 +293,19 @@ public class Controller_Menu implements Initializable{
 			recupScene.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
 			recupScene.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			isDark = false;
+		}
+	}
+	
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
 		}
 	}
 	

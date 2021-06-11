@@ -127,10 +127,9 @@ public class Controller_Nouvel_Exo implements Initializable{
 	public void pageNouvelExo() throws IOException {
 		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		Scene scene = new Scene(root, 1200, 800);
-		primaryStage.setScene(scene);
-		primaryStage.setMinWidth(1200);
-		primaryStage.setMinHeight(800);
+
+		primaryStage.setMaximized(true);
+		primaryStage.setScene(new Scene(root));
 
 		primaryStage.show();
 	}

@@ -348,12 +348,26 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initStyle(StageStyle.TRANSPARENT);
 		Scene scene = new Scene(root, 800, 500);
 		scene.setFill(Color.TRANSPARENT);
+		darkModeActivation(scene);
 
 		//On bloque le resize
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
+	}
+
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(Controller_Menu.isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
+		}
 	}
 
 	//Méthode pur afficher l'aide proposée par l'enseignant
@@ -371,6 +385,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initStyle(StageStyle.TRANSPARENT);
 		Scene scene = new Scene(root, 400, 600);
 		scene.setFill(Color.TRANSPARENT);
+		darkModeActivation(scene);
 
 		stage.setScene(scene);
 		stage.show();
@@ -395,6 +410,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initStyle(StageStyle.TRANSPARENT);
 		Scene scene = new Scene(root, 600, 400);
 		scene.setFill(Color.TRANSPARENT);
+		darkModeActivation(scene);
 
 		stage.setScene(scene);
 		stage.show();
@@ -585,7 +601,9 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
-		stage.setScene(new Scene(root,  400, 400));
+		Scene scene = new Scene(root,  400, 400);
+		stage.setScene(scene);
+		darkModeActivation(scene);
 		stage.show();
 	}
 
@@ -660,7 +678,9 @@ public class Controller_Page_Exercice implements Initializable{
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 		//On bloque le resize
 		stage.setResizable(false);
-		stage.setScene(new Scene(root, 500, 300));
+		Scene scene = new Scene(root, 500, 300);
+		stage.setScene(scene);
+		darkModeActivation(scene);
 		stage.show();
 	}
 
@@ -684,7 +704,9 @@ public class Controller_Page_Exercice implements Initializable{
 	public void retourMenu() throws IOException {
 		Stage stage = (Stage) alertSolution.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
-		stage.setScene(new Scene(root,  MainEtudiant.width, MainEtudiant.height - 60));
+		Scene scene = new Scene(root,  MainEtudiant.width, MainEtudiant.height - 60);
+		stage.setScene(scene);
+		darkModeActivation(scene);
 		stage.show();
 	}
 

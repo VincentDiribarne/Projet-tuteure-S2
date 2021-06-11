@@ -153,7 +153,6 @@
                        </Menu>
                        <Menu mnemonicParsing="false" text="Paramètres">
                            <items>
-                               <MenuItem mnemonicParsing="false" text="Préférences" />
                                <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                            </items></Menu>
                    </menus>
