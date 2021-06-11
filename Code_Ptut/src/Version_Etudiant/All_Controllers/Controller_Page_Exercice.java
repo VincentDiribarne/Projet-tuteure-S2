@@ -1,41 +1,31 @@
 package Version_Etudiant.All_Controllers;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import Version_Etudiant.DeplacementFenetre;
-import Version_Etudiant.MainEtudiant;
+import Version_Etudiant.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 import javafx.util.Duration;
 
 public class Controller_Page_Exercice implements Initializable{
@@ -341,7 +331,7 @@ public class Controller_Page_Exercice implements Initializable{
 	public void popUpEnregistrement() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementApresouverture.fxml"));
 		Stage stage = new Stage();
-		Rectangle rect = new Rectangle(800,500);
+		Rectangle rect = new Rectangle(900,500);
 		rect.setArcHeight(20.0);
 		rect.setArcWidth(20.0);
 		root.setClip(rect);
@@ -349,7 +339,7 @@ public class Controller_Page_Exercice implements Initializable{
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
-		Scene scene = new Scene(root, 800, 500);
+		Scene scene = new Scene(root, 900, 500);
 		scene.setFill(Color.TRANSPARENT);
 		darkModeActivation(scene);
 
@@ -429,7 +419,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
 	@FXML
-	public void propositionMot(ActionEvent event) throws IOException {
+	public void propositionMot() throws IOException {
 
 		String mot = motPropose.getText();
 		int cpt = 0, remplacementPartiel = 0;
@@ -564,11 +554,20 @@ public class Controller_Page_Exercice implements Initializable{
 		motPropose.setText("");
 		transcription.setText("");
 
-		//On met à jour la transcription grâce à la liste des mots de l'étudiant
-		for(String word : lesMotsEtudiant) {	
-			if(regexPoint(word)){
+		//On met à jour la transcription grâce à la liste des mots de l'étudiant		
+		for(int o = 0; o < lesMotsEtudiant.size(); o++) {
+			
+			String word = lesMotsEtudiant.get(o);
+			
+			//Si c'est le premier mot, on ne met pas d'espace avant
+			if(o == 0) {
+				transcription.setText(word);
+			}
+			//Si cela correspond à de la ponctuation
+			else if(regexPoint(word)){
 				transcription.setText(transcription.getText() + word);
 			}
+			//Si c'est un mot "normal"
 			else {
 				transcription.setText(transcription.getText() + " " + word);
 			}
@@ -605,7 +604,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
-		Scene scene = new Scene(root, 320, 150);
+		Scene scene = new Scene(root, 350, 180);
 		stage.setScene(scene);
 		darkModeActivation(scene);
 		stage.show();
@@ -691,8 +690,8 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui va enregistrer l'exercice de l'étudiant
 	public void enregistrementExo() throws IOException {
 
-		File file = new File(Controller_EnregistrementApresOuverture.repertoireEtudiant + "\\" + Controller_EnregistrementApresOuverture.nomEtudiant 
-				+ "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".bin");
+		File file = new File(Controller_EnregistrementApresOuverture.repertoireEtudiant + "\\" + Controller_EnregistrementApresOuverture.nomExo
+				+ "_" + Controller_EnregistrementApresOuverture.nomEtudiant + "_" + Controller_EnregistrementApresOuverture.prenEtudiant + ".rct");
 		FileWriter fwrite = new FileWriter(file);
 		BufferedWriter buffer = new BufferedWriter(fwrite);
 
@@ -809,9 +808,27 @@ public class Controller_Page_Exercice implements Initializable{
 				if (event.getCode() == KeyCode.DOWN) {
 					sliderSon.setValue(sliderSon.getValue() - 3);
 				}
+				
+				if (event.getCode() == KeyCode.ENTER) {
+					if(!motPropose.getText().isEmpty()) {
+						try {
+							propositionMot();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 
 		});
+		
+	}
+	
+	public ArrayList<String> getLesMots() {
+		return lesMots;
+	}
 
+	public ArrayList<String> getLesMotsEtudiant() {
+		return lesMotsEtudiant;
 	}
 }

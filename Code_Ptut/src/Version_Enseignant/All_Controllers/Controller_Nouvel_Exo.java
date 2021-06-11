@@ -119,15 +119,6 @@ public class Controller_Nouvel_Exo implements Initializable{
 		darkModeActivation(scene);
 		primaryStage.show();
 	}
-
-	//Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà créé auparavant
-	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		//TODO Chargez l'exercice dans la page
-	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////		METHODES SPECIFIQUES A LA PAGE		////////////////////////////////////////

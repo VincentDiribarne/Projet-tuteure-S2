@@ -124,17 +124,6 @@ public class Controller_Importer_Ressource implements Initializable {
 			primaryStage.show();
 		}
 
-	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
-	// créé auparavant
-	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		// TODO Chargez l'exercice dans la page
-	}
-
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////       METHDOES SPECIFIQUES A LA PAGE       ////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -301,7 +290,9 @@ public class Controller_Importer_Ressource implements Initializable {
 	// Méthode pour charger la page nouvelExo (bouton retour)
 	@FXML
 	public void pageNouvelExo(ActionEvent event) throws IOException {
-		mediaPlayer.stop();
+		if(media != null) {
+			mediaPlayer.stop();
+		}
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
@@ -381,6 +372,23 @@ public class Controller_Importer_Ressource implements Initializable {
 			}
 
 		});
+
+	}
+	
+	//Bouton Nouveau qui permet de créer un nouvel exercice
+	@FXML
+	public void pageNouvelExoNouv() throws IOException {
+		
+		Controller_Nouvel_Exo.contenuNomExo = null;
+		Controller_Nouvel_Exo.contenuRepertoire = null;
+		
+		Stage primaryStage = (Stage) playPause.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setMaximized(true);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
 
 	}
 }
