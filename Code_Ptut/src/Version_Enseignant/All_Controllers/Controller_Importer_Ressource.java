@@ -236,7 +236,7 @@ public class Controller_Importer_Ressource implements Initializable {
 	public void pageNouvelExo(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.setScene(new Scene(root, 1200, 800));
 		primaryStage.show();
 	}
 
@@ -248,7 +248,7 @@ public class Controller_Importer_Ressource implements Initializable {
 		
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageApercu.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
+		primaryStage.setScene(new Scene(root, 1200, 800));
 		primaryStage.show();
 	}
 }

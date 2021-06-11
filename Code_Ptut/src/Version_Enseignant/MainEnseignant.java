@@ -22,14 +22,11 @@ public class MainEnseignant extends Application {
          primaryStage.setTitle("Reconstitution - Version Enseignante");
          
          //On affiche le plein écran
-         primaryStage.setMaximized(true);
-
-         //On récupère la largeur et la hauteur de l'écran
-         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-         width=screenBounds.getWidth();
-         height=screenBounds.getHeight();
+         //primaryStage.setMaximized(true);
          
-         primaryStage.setScene(new Scene(root, width, height));
+         primaryStage.setScene(new Scene(root, 1200, 800));
+         /*primaryStage.setMinWidth(1250);
+         primaryStage.setMinHeight(850);*/
          primaryStage.show();
     }
     public static void main(String[] args) {
