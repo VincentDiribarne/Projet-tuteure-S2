@@ -1,0 +1,8 @@
+.button,
+#parcourirTextField,
+#NomExercice {
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-background-radius: 10;
+}
