@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
-import Version_Etudiant.DeplacementFenetre;
+import Version_Enseignant.DeplacementFenetre;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

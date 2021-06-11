@@ -789,10 +789,13 @@ public class Controller_Page_Exercice implements Initializable{
 				if (event.getCode() == KeyCode.SPACE) {
 					if (mediaView.getMediaPlayer().getStatus() == Status.PAUSED) {
 						mediaView.getMediaPlayer().play();
+						playOrPause.setImage(pause);
 					}
 					if (mediaView.getMediaPlayer().getStatus() == Status.PLAYING) {
 						mediaView.getMediaPlayer().pause();
+						playOrPause.setImage(play);
 					}
+					
 				}
 				if (event.getCode() == KeyCode.RIGHT && mediaView.getMediaPlayer().getTotalDuration().greaterThan(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)))) {
 					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)));
@@ -800,10 +803,10 @@ public class Controller_Page_Exercice implements Initializable{
 				if (event.getCode() == KeyCode.LEFT && new Duration(0).lessThan(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)))) {
 					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)));
 				}
-				if (event.getCode() == KeyCode.UP && mediaView.getMediaPlayer().getVolume() <= 1-0.1) {
+				if (event.getCode() == KeyCode.UP) {
 					sliderSon.setValue(sliderSon.getValue() + 3);
 				}
-				if (event.getCode() == KeyCode.DOWN && mediaView.getMediaPlayer().getVolume() >= 0 + 0.1) {
+				if (event.getCode() == KeyCode.DOWN) {
 					sliderSon.setValue(sliderSon.getValue() - 3);
 				}
 			}

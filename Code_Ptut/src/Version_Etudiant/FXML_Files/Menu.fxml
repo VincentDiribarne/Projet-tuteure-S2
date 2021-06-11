@@ -103,7 +103,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesirez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesitez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Corbel" size="20.0" />
                      </font>
