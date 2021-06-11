@@ -90,14 +90,6 @@
                         <Insets />
                      </GridPane.margin>
                   </Text>
-                  <ImageView fitHeight="55.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../../Image/Fauteuil_Roulant.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </ImageView>
                </children>
             </GridPane>
          </top>
@@ -139,22 +131,18 @@
                                 <MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Créer un exercice" />
                                 <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
                                 <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
-                                <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
-                                <SeparatorMenuItem mnemonicParsing="false" />
                                 <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Aide">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Tutoriel" />
-                                <MenuItem mnemonicParsing="false" text="A propos" />
+                                <MenuItem mnemonicParsing="false" onAction="#aPropos" text="A propos" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Paramètres">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                                <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                                <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                             </items></Menu>
                     </menus>
                     <VBox.margin>

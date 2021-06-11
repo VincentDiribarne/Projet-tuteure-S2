@@ -135,7 +135,7 @@
                   <Insets top="20.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="nbMinute" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="52.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <TextField fx:id="nbMinute" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#RestrictionChiffre" prefHeight="30.0" prefWidth="52.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="500.0" top="80.0" />
                </GridPane.margin>
@@ -153,7 +153,7 @@
                   <Insets right="200.0" top="155.0" />
                </GridPane.margin>
             </CheckBox>
-            <CheckBox fx:id="checkBoxMotImcomplet" mnemonicParsing="false" onAction="#motImcomplet" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <CheckBox fx:id="checkBoxMotIncomplet" mnemonicParsing="false" onAction="#motIncomplet" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="200.0" top="205.0" />
                </GridPane.margin>
@@ -163,22 +163,22 @@
                   <Insets right="200.0" top="87.0" />
                </GridPane.margin>
             </CheckBox>
-            <RadioButton fx:id="radioButton2Lettres" mnemonicParsing="false" onAction="#selection2Lettres" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <RadioButton fx:id="radioButtonEntrainement" mnemonicParsing="false" onAction="#selectionModeEntrainement" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="100.0" top="20.0" />
                </GridPane.margin>
             </RadioButton>
-            <RadioButton fx:id="radioButton3Lettres" mnemonicParsing="false" onAction="#selection3Lettres" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <RadioButton fx:id="radioButton3Lettres" disable="true" mnemonicParsing="false" onAction="#selection3Lettres" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="200.0" top="253.0" />
                </GridPane.margin>
             </RadioButton>
-            <RadioButton fx:id="radioButtonEvaluation" mnemonicParsing="false" onAction="#selectionModeEvaluation" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <RadioButton fx:id="radioButton2Lettres" disable="true" mnemonicParsing="false" onAction="#selection2Lettres" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="200.0" top="228.0" />
                </GridPane.margin>
             </RadioButton>
-            <RadioButton fx:id="radioButtonEntrainement" mnemonicParsing="false" onAction="#selectionModeEntrainement" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <RadioButton fx:id="radioButtonEvaluation" mnemonicParsing="false" onAction="#selectionModeEvaluation" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="100.0" top="20.0" />
                </GridPane.margin>
@@ -204,7 +204,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="enregistrer" mnemonicParsing="false" onAction="#pageEnregistrementFinal" prefHeight="29.0" prefWidth="130.0" text="Continuer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Button fx:id="enregistrer" mnemonicParsing="false" onAction="#pageEnregistrementFinal" prefHeight="29.0" prefWidth="130.0" text="Enregistrer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="20.0" right="20.0" />
                </GridPane.margin>
@@ -256,7 +256,7 @@
                   <Insets right="200.0" top="118.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="toolTipOccul" fitHeight="41.0" fitWidth="23.0" onMouseEntered="#tipOcculEnter" onMouseExited="#tipOcculExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -264,7 +264,7 @@
                   <Insets left="20.0" top="120.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipEntr" fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" onMouseEntered="#tipEntrEnter" onMouseExited="#tipEntrExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -272,7 +272,7 @@
                   <Insets right="265.0" top="18.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ImageView fx:id="toolTipSensi" fitHeight="41.0" fitWidth="23.0" layoutX="459.0" layoutY="250.0" onMouseEntered="#tipSensiEnter" onMouseExited="#tipSensiExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -280,7 +280,7 @@
                   <Insets left="20.0" top="220.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="10.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipEval" fitHeight="41.0" fitWidth="23.0" layoutX="10.0" layoutY="571.0" onMouseEntered="#tipEvalEnter" onMouseExited="#tipEvalExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -288,7 +288,7 @@
                   <Insets left="750.0" top="18.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipNbMin" fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="410.0" onMouseEntered="#tipMinEnter" onMouseExited="#tipMinExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -296,7 +296,7 @@
                   <Insets left="750.0" top="82.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipMotDecouvert" fitHeight="41.0" fitWidth="23.0" layoutX="974.0" layoutY="474.0" onMouseEntered="#tipMotDecouvertEnter" onMouseExited="#tipMotDecouvertExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -304,7 +304,7 @@
                   <Insets right="265.0" top="84.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipSolution" fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="410.0" onMouseEntered="#tipSolutionEnter" onMouseExited="#tipSolutionExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -312,7 +312,7 @@
                   <Insets right="265.0" top="152.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="544.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <ImageView fx:id="toolTipMotIncomplet" fitHeight="41.0" fitWidth="23.0" layoutX="466.0" layoutY="544.0" onMouseEntered="#tipMotIncompletEnter" onMouseExited="#tipMotIncompletExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <image>
                   <Image url="@../../Image/Aide_Noir.png" />
                </image>
@@ -336,22 +336,18 @@
                   <MenuItem mnemonicParsing="false" text="Créer un exercice" />
                   <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir un exercice" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Enregistrer" />
-                  <MenuItem mnemonicParsing="false" text="Enregistrer sous" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Aide">
                <items>
                   <MenuItem mnemonicParsing="false" text="Tutoriel" />
-                  <MenuItem mnemonicParsing="false" text="A propos" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="A propos" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Paramètres">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                  <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                  <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                </items>
             </Menu>
          </menus>

@@ -7,23 +7,24 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -35,6 +36,7 @@ public class Controller_Importer_Ressource implements Initializable {
 	@FXML
 	private MediaView mediaView;
 	public MediaPlayer mediaPlayer;
+	public Media media;
 	@FXML
 	private ImageView imageAudio;
 	@FXML
@@ -44,8 +46,16 @@ public class Controller_Importer_Ressource implements Initializable {
 	@FXML
 	private Button okImport;
 
+	@FXML
+	private Slider sliderSon;
+	@FXML private ImageView son;
+	Image sonCoupe = new Image("file:./src/Image/VolumeCoupe.png");
+	Image sonPasCoupe = new Image("file:./src/Image/Volume.png");
+
 	public static Media contenuMedia;
 	public static Image contenuImage;
+
+	@FXML private CheckMenuItem dark;
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -53,17 +63,18 @@ public class Controller_Importer_Ressource implements Initializable {
 
 		// On rempli les champs s'il ne sont pas null (si l'enseignant revient en arrière)
 		if (contenuMedia != null) {
+			media = contenuMedia;
 			mediaPlayer = new MediaPlayer(contenuMedia);
 			mediaView.setMediaPlayer(mediaPlayer);
 
 			// On réduit le ImageView
-			imageAudio.setFitWidth(5);
-			imageAudio.setFitHeight(5);
+			imageAudio.setFitWidth(0);
+			imageAudio.setFitHeight(0);
 
 			// On agrandit le MediaView
 			mediaView.setFitWidth(500);
 			mediaView.setFitHeight(300);
-			
+
 			//On met le bouton disponible
 			okImport.setDisable(false);
 		}
@@ -72,8 +83,8 @@ public class Controller_Importer_Ressource implements Initializable {
 			imageAudio.setImage(contenuImage);
 
 			// On réduit le mediaView
-			mediaView.setFitWidth(5);
-			mediaView.setFitHeight(5);
+			mediaView.setFitWidth(0);
+			mediaView.setFitHeight(0);
 
 			// On agrandit le ImageView
 			imageAudio.setFitWidth(500);
@@ -100,20 +111,6 @@ public class Controller_Importer_Ressource implements Initializable {
 		// TODO Chargez l'exercice dans la page
 	}
 
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) playPause.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
-	// Bouton DarkMode qui met en darkMode l'application
-	@FXML
-	public void darkMode() {
-		// TODO faire le DarkMode
-	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////       METHDOES SPECIFIQUES A LA PAGE       ////////////////////////////////////////
@@ -123,7 +120,7 @@ public class Controller_Importer_Ressource implements Initializable {
 	// l'enseignant choisisse la ressource
 	@FXML
 	public void importerRessource(ActionEvent event) throws IOException {
-		
+
 		FileChooser fileChooser = new FileChooser();
 		FileChooser fileChooserImage = new FileChooser();
 		// La variable path va contenir l'URL du fichier
@@ -136,7 +133,7 @@ public class Controller_Importer_Ressource implements Initializable {
 		File selectedFile = new File("");
 		selectedFile = fileChooser.showOpenDialog(null);
 		path = selectedFile.toURI().toURL().toExternalForm();
-		Media media = new Media(path);
+		media = new Media(path);
 		mediaPlayer = new MediaPlayer(media);
 
 		//On mémorise le contenu du media
@@ -153,8 +150,8 @@ public class Controller_Importer_Ressource implements Initializable {
 		if (extension.compareTo(".mp4") == 0) {
 
 			// On réduit le ImageView
-			imageAudio.setFitWidth(5);
-			imageAudio.setFitHeight(5);
+			imageAudio.setFitWidth(0);
+			imageAudio.setFitHeight(0);
 
 			// On agrandit le MediaView
 			mediaView.setFitWidth(500);
@@ -166,8 +163,8 @@ public class Controller_Importer_Ressource implements Initializable {
 		if (extension.compareTo(".mp3") == 0) {
 
 			// On réduit le mediaView
-			mediaView.setFitWidth(5);
-			mediaView.setFitHeight(5);
+			mediaView.setFitWidth(0);
+			mediaView.setFitHeight(0);
 
 			// On agrandit le ImageView
 			imageAudio.setFitWidth(500);
@@ -192,36 +189,83 @@ public class Controller_Importer_Ressource implements Initializable {
 		mediaView.setMediaPlayer(mediaPlayer);
 		okImport.setDisable(false);
 
-		// Gestion de la progressBar
+		sliderSonChange();
+		sliderVideoChange();
+		setKeyboardShortcut();
+	}
+
+	public void sliderSonChange() {
+		// Change le volume sonore selon la valeur du slider
+		sliderSon.valueProperty().addListener((o -> {
+			mediaPlayer.setVolume(sliderSon.getValue() / 100.0); 
+
+			if(sliderSon.getValue() == 0) {
+				son.setImage(sonCoupe);
+			} else {
+				son.setImage(sonPasCoupe);
+			}
+		}));
+	}
+
+	//Fonction qui permet de mute le son
+	@FXML
+	public void sonCoupe(MouseEvent event) {
+
+		if(mediaPlayer.getVolume() != 0) {
+			son.setImage(sonCoupe);
+			mediaPlayer.setVolume(0);
+		} else {
+			son.setImage(sonPasCoupe);
+			mediaPlayer.setVolume(sliderSon.getValue() / 100);
+		}
+
+	}
+
+	//Fonction qui fait avancer le slider en fonction de la video
+	public void sliderVideoChange() {
+
+		Duration total = media.getDuration();
+		progressBar.setMax(total.toSeconds());
+
 		mediaPlayer.setOnReady(new Runnable() {
 			@Override
 			public void run() {
-				progressBar.setMax(mediaPlayer.getTotalDuration().toSeconds());
+				Duration total = media.getDuration();
+				progressBar.setMax(total.toSeconds());
 			}
 		});
 
-		InvalidationListener sliderChangeListener = o -> {
-			Duration seekTo = Duration.seconds(progressBar.getValue());
-			mediaPlayer.seek(seekTo);
-		};
-
-		progressBar.valueProperty().addListener(sliderChangeListener);
-
-		mediaPlayer.currentTimeProperty().addListener(l -> {
-
-			progressBar.valueProperty().removeListener(sliderChangeListener);
-
-			Duration currentTime = mediaPlayer.getCurrentTime();
-			progressBar.setValue(currentTime.toSeconds());
-
-			progressBar.valueProperty().addListener(sliderChangeListener);
+		mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+			@Override
+			public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+				progressBar.setValue(newValue.toSeconds());
+			}
 		});
 
+		progressBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mediaPlayer.seek(Duration.seconds(progressBar.getValue()));
+			}
+		});
+
+		progressBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mediaPlayer.seek(Duration.seconds(progressBar.getValue()));
+			}
+		});
+		
 	}
 
 	// Fonction qui permet à l'enseignant de visualiser sa video ou son son
 	@FXML
 	public void playOrPause() {
+
+		sliderSonChange();
+		sliderVideoChange();
+		setKeyboardShortcut();
+		
 		if (mediaPlayer.getStatus() == Status.PAUSED || mediaPlayer.getStatus() == Status.READY) {
 			mediaPlayer.play();
 			playPause.setText("Pause");
@@ -234,9 +278,12 @@ public class Controller_Importer_Ressource implements Initializable {
 	// Méthode pour charger la page nouvelExo (bouton retour)
 	@FXML
 	public void pageNouvelExo(ActionEvent event) throws IOException {
+		mediaPlayer.stop();
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		primaryStage.setScene(new Scene(root, 1200, 800));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 		primaryStage.show();
 	}
 
@@ -245,10 +292,71 @@ public class Controller_Importer_Ressource implements Initializable {
 	public void pageApercu(ActionEvent event) throws IOException {
 		//on récupère le media
 		contenuMedia = mediaPlayer.getMedia();
-		
+
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageApercu.fxml"));
-		primaryStage.setScene(new Scene(root, 1200, 800));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
 		primaryStage.show();
+	}
+
+	//Méthode pour passer ou non le darkMode
+	@FXML
+	public void darkMode() {
+
+		if(dark.isSelected()) {
+			okImport.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okImport.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			Controller_Page_Accueil.isDark = true;
+		} else {
+			okImport.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			okImport.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			Controller_Page_Accueil.isDark = false;
+		}
+
+	}
+
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(Controller_Page_Accueil.isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
+		}
+	}
+
+	private void setKeyboardShortcut() {
+		imageAudio.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.SPACE) {
+					if (mediaView.getMediaPlayer().getStatus() == Status.PAUSED) {
+						mediaView.getMediaPlayer().play();
+					}
+					if (mediaView.getMediaPlayer().getStatus() == Status.PLAYING) {
+						mediaView.getMediaPlayer().pause();
+					}
+				}
+				if (event.getCode() == KeyCode.RIGHT && mediaView.getMediaPlayer().getTotalDuration().greaterThan(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)))) {
+					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)));
+				}
+				if (event.getCode() == KeyCode.LEFT && new Duration(0).lessThan(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)))) {
+					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)));
+				}
+				if (event.getCode() == KeyCode.UP && mediaView.getMediaPlayer().getVolume() <= 1-0.1) {
+					sliderSon.setValue(sliderSon.getValue() + 3);
+				}
+				if (event.getCode() == KeyCode.DOWN && mediaView.getMediaPlayer().getVolume() >= 0 + 0.1) {
+					sliderSon.setValue(sliderSon.getValue() - 3);
+				}
+			}
+
+		});
+
 	}
 }

@@ -9,18 +9,11 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
 
-
-import Version_Enseignant.MainEnseignant;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class Controller_Enregistrement_Final implements Initializable {
 
@@ -200,55 +193,10 @@ public class Controller_Enregistrement_Final implements Initializable {
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
-
-	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
-	// créé auparavant
+	
 	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		// TODO Chargez l'exercice dans la page
-	}
-
-	// Bouton Nouveau qui permet de créer un nouvel exercice
-	@FXML
-	public void pageNouvelExo() throws IOException {
-		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
-	// Bouton Préférences qui emmène sur la page des paramètres
-	@FXML
-	public void preferences(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
-	// Bouton DarkMode qui met en darkMode l'application
-	@FXML
-	public void darkMode() {
-		// TODO faire le DarkMode
-	}
-
-	@FXML
-	public void pageParametres(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageDesParametres.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
-	}
-
-	@FXML
-	public void annuler(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageAccueil.fxml"));
-		primaryStage.setScene(new Scene(root, MainEnseignant.width, MainEnseignant.height));
-		primaryStage.show();
+	public void okay() {
+		recupScene.getScene().getWindow().hide();
 	}
 
 	//Méthode qui récupère la lonngueur en byte d'une chaine de caractère

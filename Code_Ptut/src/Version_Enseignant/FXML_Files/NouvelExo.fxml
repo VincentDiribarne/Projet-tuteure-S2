@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@boutonBlanc.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
+<BorderPane minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" stylesheets="@boutonBlanc.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_Nouvel_Exo">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -149,22 +149,18 @@
 								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Créer un exercice" />
 								<MenuItem mnemonicParsing="false" text="Ouvrir un exercice" />
 								<SeparatorMenuItem mnemonicParsing="false" />
-								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer" />
-								<MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous" />
-								<SeparatorMenuItem mnemonicParsing="false" />
 								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Aide">
 							<items>
 								<MenuItem mnemonicParsing="false" text="Tutoriel" />
-								<MenuItem mnemonicParsing="false" text="A propos" />
+								<MenuItem disable="true" mnemonicParsing="false" text="A propos" />
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Paramètres">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#preferences" text="Préférences" />
-                  <CheckMenuItem mnemonicParsing="false" onAction="#darkMode" text="DarkMode" />
+                  <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                </items>
             </Menu>
 					</menus>

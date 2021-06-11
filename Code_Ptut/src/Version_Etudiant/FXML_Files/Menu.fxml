@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -91,17 +90,6 @@
                         <Insets />
                      </GridPane.margin>
                   </Text>
-                  <ImageView fx:id="handicap" fitHeight="55.0" fitWidth="89.0" onMouseEntered="#grossissementHandicap" onMouseExited="#retrecissementHandicap" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../../Image/Fauteuil_Roulant.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets right="15.0" top="10.0" />
-                     </GridPane.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
                </children>
             </GridPane>
          </top>
@@ -115,7 +103,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesirez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fill="#e80000" strokeType="OUTSIDE" strokeWidth="0.0" text="N'hesitez pas à noter l'application, si elle vous plait" textAlignment="CENTER" wrappingWidth="505.02734375" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Corbel" size="20.0" />
                      </font>
@@ -153,7 +141,6 @@
                        </Menu>
                        <Menu mnemonicParsing="false" text="Paramètres">
                            <items>
-                               <MenuItem mnemonicParsing="false" text="Préférences" />
                                <CheckMenuItem fx:id="dark" mnemonicParsing="false" onAction="#darkMode" text="Mode Sombre" />
                            </items></Menu>
                    </menus>

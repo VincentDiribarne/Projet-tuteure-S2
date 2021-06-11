@@ -24,6 +24,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
@@ -288,6 +290,7 @@ public class Controller_Page_Exercice implements Initializable{
 	public void firstPlay(MouseEvent event) {
 
 		mediaPlayer.play();
+		setKeyboardShortcut();
 
 		if(timerEstDeclenche == false) {
 			gestionTimer();
@@ -348,12 +351,26 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initStyle(StageStyle.TRANSPARENT);
 		Scene scene = new Scene(root, 800, 500);
 		scene.setFill(Color.TRANSPARENT);
+		darkModeActivation(scene);
 
 		//On bloque le resize
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
+	}
+
+	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	public void darkModeActivation(Scene scene) {
+		if(Controller_Menu.isDark) {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			dark.setSelected(true);
+		} else {
+			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			dark.setSelected(false);
+		}
 	}
 
 	//Méthode pur afficher l'aide proposée par l'enseignant
@@ -371,6 +388,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initStyle(StageStyle.TRANSPARENT);
 		Scene scene = new Scene(root, 400, 600);
 		scene.setFill(Color.TRANSPARENT);
+		darkModeActivation(scene);
 
 		stage.setScene(scene);
 		stage.show();
@@ -395,6 +413,7 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initStyle(StageStyle.TRANSPARENT);
 		Scene scene = new Scene(root, 600, 400);
 		scene.setFill(Color.TRANSPARENT);
+		darkModeActivation(scene);
 
 		stage.setScene(scene);
 		stage.show();
@@ -423,7 +442,7 @@ public class Controller_Page_Exercice implements Initializable{
 		}
 
 		//Si la sensibilité à la casse n'est pas activée
-		if(sensiCasse == false) {
+		if(sensiCasse == true) {
 			for(int i = 0; i < lesMots.size(); i++) {
 
 				if(lesMots.get(i).compareTo(mot) == 0) {
@@ -570,6 +589,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//L'exercice est terminé s'il l'étudiant a découvert tous les mots
 		if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
+			mediaPlayer.stop();
 			return true;
 		} else {
 			return false;
@@ -585,7 +605,9 @@ public class Controller_Page_Exercice implements Initializable{
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
-		stage.setScene(new Scene(root,  400, 400));
+		Scene scene = new Scene(root, 320, 150);
+		stage.setScene(scene);
+		darkModeActivation(scene);
 		stage.show();
 	}
 
@@ -660,7 +682,9 @@ public class Controller_Page_Exercice implements Initializable{
 		DeplacementFenetre.deplacementFenetre((Pane) root, stage);
 		//On bloque le resize
 		stage.setResizable(false);
-		stage.setScene(new Scene(root, 500, 300));
+		Scene scene = new Scene(root, 500, 300);
+		stage.setScene(scene);
+		darkModeActivation(scene);
 		stage.show();
 	}
 
@@ -684,7 +708,9 @@ public class Controller_Page_Exercice implements Initializable{
 	public void retourMenu() throws IOException {
 		Stage stage = (Stage) alertSolution.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
-		stage.setScene(new Scene(root,  MainEtudiant.width, MainEtudiant.height - 60));
+		Scene scene = new Scene(root,  MainEtudiant.width, MainEtudiant.height - 60);
+		stage.setScene(scene);
+		darkModeActivation(scene);
 		stage.show();
 	}
 
@@ -753,5 +779,39 @@ public class Controller_Page_Exercice implements Initializable{
 			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			Controller_Menu.isDark = false;
 		}
+	}
+	
+	
+	private void setKeyboardShortcut() {
+		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.SPACE) {
+					if (mediaView.getMediaPlayer().getStatus() == Status.PAUSED) {
+						mediaView.getMediaPlayer().play();
+						playOrPause.setImage(pause);
+					}
+					if (mediaView.getMediaPlayer().getStatus() == Status.PLAYING) {
+						mediaView.getMediaPlayer().pause();
+						playOrPause.setImage(play);
+					}
+					
+				}
+				if (event.getCode() == KeyCode.RIGHT && mediaView.getMediaPlayer().getTotalDuration().greaterThan(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)))) {
+					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)));
+				}
+				if (event.getCode() == KeyCode.LEFT && new Duration(0).lessThan(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)))) {
+					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().subtract(new Duration(5000)));
+				}
+				if (event.getCode() == KeyCode.UP) {
+					sliderSon.setValue(sliderSon.getValue() + 3);
+				}
+				if (event.getCode() == KeyCode.DOWN) {
+					sliderSon.setValue(sliderSon.getValue() - 3);
+				}
+			}
+
+		});
+
 	}
 }
