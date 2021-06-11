@@ -204,7 +204,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="enregistrer" mnemonicParsing="false" onAction="#pageEnregistrementFinal" prefHeight="29.0" prefWidth="130.0" text="Enregistrer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Button fx:id="enregistrer" disable="true" mnemonicParsing="false" onAction="#pageEnregistrementFinal" prefHeight="29.0" prefWidth="130.0" text="Enregistrer" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="20.0" right="20.0" />
                </GridPane.margin>

@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import Version_Enseignant.MainEnseignant;
 import Version_Enseignant.DeplacementFenetre;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -140,13 +144,76 @@ public class Controller_Page_Des_Options implements Initializable {
 			nbMinute.setText(nbMin);
 		}
 
+		checkMode();
+
 	}
 
-	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
-	// sur toutes les pages)
+	//Listener qui vérifie qu'au moins un mode a été coché avant de passer à la suite
+	private void checkMode() {
+
+		//Pour le TextField du caractère d'occultation
+		CaraOccul.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				if(!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || radioButtonEvaluation.isSelected())) {
+					enregistrer.setDisable(false);
+				} else {
+					enregistrer.setDisable(true);
+				}
+
+			}
+		});
+
+		//Pour le radioButton du mode entrainement
+		radioButtonEntrainement.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+				if (!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || radioButtonEvaluation.isSelected())) { 
+					enregistrer.setDisable(false);
+				} else {
+					enregistrer.setDisable(true);
+				}
+			}
+		});
+
+		//Pour le radioButton du mode évaluation
+		radioButtonEvaluation.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+				if (!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || radioButtonEvaluation.isSelected())) { 
+					enregistrer.setDisable(false);
+				} else {
+					enregistrer.setDisable(true);
+				}
+			}
+		});
+
+	}
+
+
+	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
 	@FXML
-	public void quitter(ActionEvent event) {
-		Platform.exit();
+	public void quitter(ActionEvent event) throws IOException {
+
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+		Scene scene = new Scene(root, 400, 200);
+		//On bloque sur cette fenêtre
+		primaryStage.initModality(Modality.APPLICATION_MODAL);
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
+		scene.setFill(Color.TRANSPARENT);
+
+		//Bordure
+		Rectangle rect = new Rectangle(400,200); 
+		rect.setArcHeight(20.0); 
+		rect.setArcWidth(20.0);  
+		root.setClip(rect);
+
+		DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
 	}
 
 	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
@@ -184,7 +251,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		// Quand on passe à la page suivante, on mémorise les informations des options
 		caraOccul = CaraOccul.getText();
 		nbMin = nbMinute.getText();
-		
+
 		retourMenu();
 
 		Stage primaryStage = new Stage();
@@ -240,6 +307,7 @@ public class Controller_Page_Des_Options implements Initializable {
 
 			//on vide le textField
 			nbMinute.setText(null);
+			nbMinute.setDisable(true);
 		}
 
 	}

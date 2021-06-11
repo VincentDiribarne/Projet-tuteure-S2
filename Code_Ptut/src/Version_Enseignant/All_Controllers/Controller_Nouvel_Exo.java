@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
+import Version_Etudiant.DeplacementFenetre;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,9 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Controller_Nouvel_Exo implements Initializable{
 
@@ -92,8 +98,26 @@ public class Controller_Nouvel_Exo implements Initializable{
 
 	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
 	@FXML
-	public void quitter(ActionEvent event) {
-		Platform.exit();
+	public void quitter(ActionEvent event) throws IOException {
+		
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+		Scene scene = new Scene(root, 400, 200);
+		//On bloque sur cette fenêtre
+		primaryStage.initModality(Modality.APPLICATION_MODAL);
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
+		scene.setFill(Color.TRANSPARENT);
+		
+		//Bordure
+		Rectangle rect = new Rectangle(400,200); 
+		rect.setArcHeight(20.0); 
+		rect.setArcWidth(20.0);  
+		root.setClip(rect);
+		
+		DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
 	}
 
 	//Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà créé auparavant

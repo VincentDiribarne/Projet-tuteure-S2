@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="180.0" maxWidth="300.0" minHeight="180.0" minWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="180.0" maxWidth="300.0" minHeight="180.0" minWidth="300.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Enseignant.All_Controllers.Controller_ConfirmationQuitter">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -42,7 +42,7 @@
             <Insets />
          </GridPane.margin>
       </Text>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-border-color: black;" text="Annuler" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button mnemonicParsing="false" onAction="#annuler" prefHeight="30.0" prefWidth="100.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-border-color: black;" text="Annuler" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="10.0" left="25.0" />
          </GridPane.margin>
@@ -50,7 +50,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="100.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 1; -fx-border-color: black;" text="Quitter" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <Button fx:id="recupScene" mnemonicParsing="false" onAction="#quitter" prefHeight="29.0" prefWidth="100.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 1; -fx-border-color: black;" text="Quitter" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="10.0" right="25.0" />
          </GridPane.margin>
