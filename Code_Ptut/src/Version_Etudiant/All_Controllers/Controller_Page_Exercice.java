@@ -586,6 +586,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//L'exercice est terminé s'il l'étudiant a découvert tous les mots
 		if(Math.round((nbMotsDecouverts / nbMotsTotal) * 100) == 100){
+			mediaPlayer.stop();
 			return true;
 		} else {
 			return false;
