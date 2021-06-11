@@ -102,17 +102,11 @@ public class Controller_Page_Apercu implements Initializable {
 			darkModeActivation(scene);
 			primaryStage.show();
 		}
-
-	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
-	// créé auparavant
+		
 	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		// TODO Chargez l'exercice dans la page
+	public void pageNouvelExo() {
+		
 	}
-
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)
 	@FXML

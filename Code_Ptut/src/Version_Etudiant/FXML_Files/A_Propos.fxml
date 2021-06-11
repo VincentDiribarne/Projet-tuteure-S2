@@ -62,7 +62,7 @@
          <GridPane.margin>
             <Insets top="10.0" />
          </GridPane.margin></Label>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cette application a été crée par 5 étudiants lors que la réalisation d'un projet tutoré" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cette application a été créée par 5 étudiants de l'IUT de LAVAL lors de la réalisation d'un projet tuteuré" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="100.0" />
          </GridPane.margin>
@@ -86,7 +86,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bastien est le chef du projet. Il s'est occupé de gérer le groupe ainsi que coder des fonctionnalités" textAlignment="JUSTIFY" wrappingWidth="149.199951171875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bastien est le chef du projet. Il s'est occupé de gérer le groupe ainsi que coder les fonctionnalités" textAlignment="JUSTIFY" wrappingWidth="149.199951171875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets top="360.0" />
          </GridPane.margin>
@@ -94,7 +94,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Je suis Trystan, j'ai 18 et je suis étudiant à l'IUT de Laval. J'ai principalement travailler sur les dossiers (Spécification, Besoins, Test et le Rapport Final)" textAlignment="JUSTIFY" wrappingWidth="162.48009538650513" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Je suis Trystan, j'ai 18 ans et je suis étudiant à l'IUT de Laval. J'ai principalement travailler sur les dossiers (Spécification, Besoins, Test et le Rapport Final)" textAlignment="JUSTIFY" wrappingWidth="162.48009538650513" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
