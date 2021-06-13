@@ -1,5 +1,14 @@
+.button,
+#parcourirTextField,
+#NomExercice {
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-background-radius: 10;
+}
 
-.table-view {
+/*.table-view {
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5 50 8 10;
@@ -40,7 +49,7 @@
 
 .split-pane {
     -fx-padding: 15 15 8 10;
-}
+}*/
 
 .menu-bar .label {
     -fx-font-size: 14pt;
@@ -52,46 +61,8 @@
     -fx-padding: 5 20 5 20; 
 }
 
-
 .text-field {
     -fx-alignement: center;
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-}
-
-/* 
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-.button {
-    -fx-padding: 5 22 5 22;   
-    -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-
-.button:focused {
-    -fx-border-color: white, white;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 1);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
-
-.button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-text-fill: white;
-}
-
-.button:default {
-    -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
-}
-
-.button:default:hover {
-    -fx-background-color: derive(-fx-focus-color,30%);
 }
