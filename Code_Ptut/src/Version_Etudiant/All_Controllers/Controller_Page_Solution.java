@@ -1,6 +1,7 @@
 package Version_Etudiant.All_Controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
@@ -25,7 +26,6 @@ public class Controller_Page_Solution implements Initializable {
 
 		//On déclare une TextArea spéciale
 		InlineCssTextArea css = new InlineCssTextArea();
-		css = colorTextArea(css);
 		css.setEditable(false);
         css.setPrefSize(500, 250);
         css.setLayoutX(anchor.getLayoutX());
@@ -41,12 +41,22 @@ public class Controller_Page_Solution implements Initializable {
 		closeSol.getScene().getWindow().hide();
 	}
 	
-	private InlineCssTextArea colorTextArea(InlineCssTextArea css){
+	/*private InlineCssTextArea colorTextArea(InlineCssTextArea css){
+		
+		String word = "";
+		
         for(int i = 0; i < c.getLesMotsEtudiant().size(); i++){
-                css.setStyle(lesMotsEtudiant.get = from, word.getIndex() + word.getLength() = to, "-fx-fill:  #5CA4DA;" + "-fx-font-weight: bold;");
+        	
+        	for(int o = 0; o < c.getLesMotsEtudiant().get(i).length(); o++) {
+        		word += Controller_Page_Exercice.caractereOccul;
+        	}
+        	
+        	if(c.getLesMotsEtudiant().get(i).compareTo(word) == 0) {
+                css.setStyle(lesMotsEtudiant.get, word.getIndex() + word.getLength(), "-fx-fill:  #5CA4DA;" + "-fx-font-weight: bold;");
+        	}
         }
 
         return css;
-    }
+    }*/
 
 }

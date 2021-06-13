@@ -266,6 +266,19 @@ public class Controller_Page_Des_Options implements Initializable {
 		primaryStage.show();
 	}
 
+	@FXML
+	public void pageNouvelExo() throws IOException {
+		//Réinitialisation des variables
+		Controller_Page_Accueil c = new Controller_Page_Accueil();
+		c.delete();
+		Stage primaryStage = (Stage) CaraOccul.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
+	}
+
 
 	// Gestion de si je sélectionne un mode, l'autre se décoche
 	@FXML

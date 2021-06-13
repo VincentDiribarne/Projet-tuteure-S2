@@ -293,6 +293,7 @@ public class Controller_Importer_Ressource implements Initializable {
 		if(media != null) {
 			mediaPlayer.stop();
 		}
+
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
@@ -379,8 +380,9 @@ public class Controller_Importer_Ressource implements Initializable {
 	@FXML
 	public void pageNouvelExoNouv() throws IOException {
 		
-		Controller_Nouvel_Exo.contenuNomExo = null;
-		Controller_Nouvel_Exo.contenuRepertoire = null;
+		//Réinitialisation des variables
+		Controller_Page_Accueil c = new Controller_Page_Accueil();
+		c.delete();
 		
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));

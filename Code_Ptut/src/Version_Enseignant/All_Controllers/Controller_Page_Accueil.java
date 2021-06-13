@@ -37,7 +37,7 @@ public class Controller_Page_Accueil implements Initializable {
 	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 	}
 
 	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
@@ -243,7 +243,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 			// On récupère ensuite le media
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
-			
+
 			//On met à null l'image car il n'y en a pas
 			Controller_Importer_Ressource.contenuImage = null;
 
@@ -270,10 +270,20 @@ public class Controller_Page_Accueil implements Initializable {
 		String chaine = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
 		return chaine;
 	}
+	
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
+	@FXML
+	public void tuto() {
+		
+	}
 
 	// Bouton Nouveau qui permet de créer un nouvel exercice
 	@FXML
 	public void pageNouvelExo() throws IOException {
+
+		//Réinitialisation de tt les variables
+		delete();
+
 		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
@@ -301,7 +311,7 @@ public class Controller_Page_Accueil implements Initializable {
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
 		primaryStage.setScene(scene);
 		darkModeActivation(scene);
-		
+
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
 		primaryStage.show();
@@ -333,5 +343,26 @@ public class Controller_Page_Accueil implements Initializable {
 			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			dark.setSelected(false);
 		}
+	}
+
+	public void delete() {
+		//On remet toutes les variables statiques à null
+		Controller_Nouvel_Exo.contenuNomExo = null;
+		Controller_Nouvel_Exo.contenuRepertoire = null;
+		Controller_Importer_Ressource.contenuMedia = null;
+		Controller_Importer_Ressource.contenuImage = null;
+		Controller_Page_Apercu.contenuAide = null;
+		Controller_Page_Apercu.contenuConsigne = null;
+		Controller_Page_Apercu.contenuTranscription = null;
+		Controller_Page_Des_Options.caraOccul = null;
+		Controller_Page_Des_Options.sensiCasse = false;
+		Controller_Page_Des_Options.entrainement = false;
+		Controller_Page_Des_Options.evaluation = false;
+		Controller_Page_Des_Options.lettres_2 = false;
+		Controller_Page_Des_Options.lettres_3 = false;
+		Controller_Page_Des_Options.motDecouverts = false;
+		Controller_Page_Des_Options.motIncomplet = false;
+		Controller_Page_Des_Options.solution = false;
+		Controller_Page_Des_Options.nbMin = null;
 	}
 }

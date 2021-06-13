@@ -127,6 +127,11 @@ public class Controller_Nouvel_Exo implements Initializable{
 	//Bouton Nouveau qui permet de créer un nouvel exercice
 	@FXML
 	public void pageNouvelExo() throws IOException {
+		
+		//Réinitialisation des variables
+		Controller_Page_Accueil c = new Controller_Page_Accueil();
+		c.delete();
+		
 		Stage primaryStage = (Stage) repertoire.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
