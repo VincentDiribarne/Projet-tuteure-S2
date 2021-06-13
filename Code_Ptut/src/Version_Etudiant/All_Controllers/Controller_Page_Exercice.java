@@ -452,7 +452,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//Si la sensibilité à la casse n'est pas activée, on met le mot en minuscule
 		if(sensiCasse == false) {
-			mot += mot.toLowerCase();
+			mot = mot.toLowerCase();
 
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
 
@@ -460,7 +460,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 				//Si le mot correspond exactement 
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
-					lesMotsEtudiant.set(i, mot);
+					lesMotsEtudiant.set(i, lesMots.get(i));
 					estDecouvert.set(i, 1);
 					nbMotsDecouverts++;
 
