@@ -147,14 +147,14 @@
 						<Menu mnemonicParsing="false" text="Exercice">
 							<items>
 								<MenuItem mnemonicParsing="false" onAction="#pageNouvelExo" text="Créer un exercice" />
-								<MenuItem mnemonicParsing="false" text="Ouvrir un exercice" />
+								<MenuItem disable="true" mnemonicParsing="false" text="Ouvrir un exercice" />
 								<SeparatorMenuItem mnemonicParsing="false" />
 								<MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
 							</items>
 						</Menu>
 						<Menu mnemonicParsing="false" text="Aide">
 							<items>
-								<MenuItem mnemonicParsing="false" text="Tutoriel" />
+								<MenuItem mnemonicParsing="false" onAction="#tuto" text="Tutoriel" />
 								<MenuItem disable="true" mnemonicParsing="false" text="A propos" />
 							</items>
 						</Menu>

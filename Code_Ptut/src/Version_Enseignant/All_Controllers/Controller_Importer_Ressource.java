@@ -1,11 +1,15 @@
 package Version_Enseignant.All_Controllers;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
+import Version_Etudiant.DeplacementFenetre;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,10 +28,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
 
@@ -94,23 +103,29 @@ public class Controller_Importer_Ressource implements Initializable {
 
 	}
 
-	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
-	// sur toutes les pages)
-	@FXML
-	public void quitter(ActionEvent event) {
-		Platform.exit();
-	}
-
-	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
-	// créé auparavant
-	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		// TODO Chargez l'exercice dans la page
-	}
-
+	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
+		@FXML
+		public void quitter(ActionEvent event) throws IOException {
+			
+			Stage primaryStage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+			Scene scene = new Scene(root, 400, 200);
+			//On bloque sur cette fenêtre
+			primaryStage.initModality(Modality.APPLICATION_MODAL);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			scene.setFill(Color.TRANSPARENT);
+			
+			//Bordure
+			Rectangle rect = new Rectangle(400,200); 
+			rect.setArcHeight(20.0); 
+			rect.setArcWidth(20.0);  
+			root.setClip(rect);
+			
+			DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
+			primaryStage.setScene(scene);
+			darkModeActivation(scene);
+			primaryStage.show();
+		}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////       METHDOES SPECIFIQUES A LA PAGE       ////////////////////////////////////////
@@ -278,7 +293,10 @@ public class Controller_Importer_Ressource implements Initializable {
 	// Méthode pour charger la page nouvelExo (bouton retour)
 	@FXML
 	public void pageNouvelExo(ActionEvent event) throws IOException {
-		mediaPlayer.stop();
+		if(media != null) {
+			mediaPlayer.stop();
+		}
+
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
@@ -292,6 +310,7 @@ public class Controller_Importer_Ressource implements Initializable {
 	public void pageApercu(ActionEvent event) throws IOException {
 		//on récupère le media
 		contenuMedia = mediaPlayer.getMedia();
+		mediaPlayer.stop();
 
 		Stage primaryStage = (Stage) playPause.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageApercu.fxml"));
@@ -357,6 +376,30 @@ public class Controller_Importer_Ressource implements Initializable {
 			}
 
 		});
+
+	}
+	
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
+	@FXML
+	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
+        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+	}
+	
+	//Bouton Nouveau qui permet de créer un nouvel exercice
+	@FXML
+	public void pageNouvelExoNouv() throws IOException {
+		
+		//Réinitialisation des variables
+		Controller_Page_Accueil c = new Controller_Page_Accueil();
+		c.delete();
+		
+		Stage primaryStage = (Stage) playPause.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setMaximized(true);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
 
 	}
 }

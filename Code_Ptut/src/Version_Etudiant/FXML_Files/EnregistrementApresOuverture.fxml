@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane minHeight="500.0" minWidth="800.0" style="-fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_EnregistrementApresOuverture">
+<GridPane minHeight="500.0" minWidth="900.0" style="-fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Version_Etudiant.All_Controllers.Controller_EnregistrementApresOuverture">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -22,7 +22,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Veuillez enregistrer votre exercice dès à présent !" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+      <Label text="Veuillez enregistrer votre exercice avant de commencer !" GridPane.halignment="CENTER" GridPane.valignment="TOP">
          <font>
             <Font size="32.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font name="Comic Sans MS Italic" size="18.0" />
          </font>
          <GridPane.margin>
-            <Insets left="35.0" />
+            <Insets left="150.0" />
          </GridPane.margin>
       </Label>
       <Button fx:id="preEnregistrement" disable="true" mnemonicParsing="false" onAction="#quitter" prefHeight="32.0" prefWidth="141.0" style="-fx-border-radius: 5; -fx-border-color: black; -fx-background-radius: 5;" text="Enregistrer Sous" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
@@ -46,19 +46,19 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="nom" promptText="Thomas" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <TextField fx:id="nom" prefHeight="26.0" prefWidth="602.0" promptText="Thomas" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="150.0" right="70.0" />
+            <Insets left="250.0" right="150.0" />
          </GridPane.margin>
       </TextField>
       <TextField fx:id="prenom" promptText="LeDuc" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="150.0" right="70.0" />
+            <Insets left="250.0" right="150.0" />
          </GridPane.margin>
       </TextField>
       <TextField fx:id="repertoire" editable="false" prefHeight="26.0" prefWidth="483.0" promptText="C://PC/MesFichiers/Exercice" style="-fx-background-radius: 5;" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="150.0" right="180.0" />
+            <Insets left="250.0" right="250.0" />
          </GridPane.margin>
       </TextField>
       <Label layoutX="25.0" layoutY="148.0" text="Fichier" GridPane.rowIndex="4">
@@ -66,7 +66,7 @@
             <Font name="Comic Sans MS Italic" size="18.0" />
          </font>
          <GridPane.margin>
-            <Insets left="35.0" />
+            <Insets left="150.0" />
          </GridPane.margin>
       </Label>
       <Label layoutX="25.0" layoutY="148.0" text="Nom" GridPane.rowIndex="2">
@@ -74,12 +74,12 @@
             <Font name="Comic Sans MS Italic" size="18.0" />
          </font>
          <GridPane.margin>
-            <Insets left="35.0" />
+            <Insets left="150.0" />
          </GridPane.margin>
       </Label>
       <Button mnemonicParsing="false" onAction="#choixRepertoire" prefHeight="27.0" prefWidth="100.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Parcourir" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets right="70.0" />
+            <Insets right="150.0" />
          </GridPane.margin>
          <font>
             <Font size="13.0" />
@@ -90,12 +90,12 @@
             <Font name="Comic Sans MS Italic" size="18.0" />
          </font>
          <GridPane.margin>
-            <Insets left="35.0" />
+            <Insets left="150.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="prenom1" layoutX="162.0" layoutY="207.0" promptText="Exercice_Barack_Obama" style="-fx-background-radius: 5;" GridPane.rowIndex="3">
+      <TextField fx:id="nomExercice" layoutX="162.0" layoutY="207.0" promptText="Exercice_Barack_Obama" style="-fx-background-radius: 5;" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="150.0" right="75.0" />
+            <Insets left="250.0" right="150.0" />
          </GridPane.margin>
       </TextField>
    </children>

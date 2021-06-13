@@ -143,7 +143,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Aide">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Tutoriel" />
+                                <MenuItem mnemonicParsing="false" onAction="#tuto" text="Tutoriel" />
                                 <MenuItem mnemonicParsing="false" onAction="#aPropos" text="A propos" />
                             </items>
                         </Menu>

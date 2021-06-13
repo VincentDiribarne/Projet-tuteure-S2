@@ -1,10 +1,14 @@
 package Version_Enseignant.All_Controllers;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
+import Version_Etudiant.DeplacementFenetre;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,10 +21,15 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Controller_Page_Apercu implements Initializable {
 
@@ -73,23 +82,49 @@ public class Controller_Page_Apercu implements Initializable {
 		}
 	}
 
-	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
-	// sur toutes les pages)
+	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
+		@FXML
+		public void quitter(ActionEvent event) throws IOException {
+			
+			Stage primaryStage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+			Scene scene = new Scene(root, 400, 200);
+			//On bloque sur cette fenêtre
+			primaryStage.initModality(Modality.APPLICATION_MODAL);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			scene.setFill(Color.TRANSPARENT);
+			
+			//Bordure
+			Rectangle rect = new Rectangle(400,200); 
+			rect.setArcHeight(20.0); 
+			rect.setArcWidth(20.0);  
+			root.setClip(rect);
+			
+			DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
+			primaryStage.setScene(scene);
+			darkModeActivation(scene);
+			primaryStage.show();
+		}
+		
 	@FXML
-	public void quitter(ActionEvent event) {
-		Platform.exit();
-	}
+	public void pageNouvelExo() throws IOException {
 
-	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
-	// créé auparavant
+		//Réinitialisation des variables
+		Controller_Page_Accueil c = new Controller_Page_Accueil();
+		c.delete();
+		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
+	}
+	
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		// TODO Chargez l'exercice dans la page
+	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
+        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
 	}
-
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)
 	@FXML

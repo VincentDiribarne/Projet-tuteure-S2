@@ -1,9 +1,12 @@
 package Version_Etudiant.All_Controllers;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ResourceBundle;
@@ -33,6 +36,8 @@ public class Controller_Menu implements Initializable{
 	@FXML private CheckMenuItem dark;
 	
 	public static boolean isDark = false;
+	
+	private static Controller_Page_Exercice c;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -43,6 +48,12 @@ public class Controller_Menu implements Initializable{
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
+	}
+	
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
+	@FXML
+	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
+        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
 	}
 
 	//Fonction qui permet à l'étudiant d'ouvrir un exercice (téléchargé au préalable)
@@ -63,7 +74,9 @@ public class Controller_Menu implements Initializable{
 	//Fonction qui permet d'aller à la page où se trouve l'exercice
 	public void loadExo() throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageExercice.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML_Files/PageExercice.fxml"));
+		Parent root = loader.load();
+		c = loader.getController();
 		primaryStage.setMaximized(true);
 		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
 		
@@ -71,6 +84,10 @@ public class Controller_Menu implements Initializable{
 		
 		primaryStage.setScene(scene);		
 		primaryStage.show();
+	}
+
+	public static Controller_Page_Exercice getC() {
+		return c;
 	}
 
 	// Fonction qui converti des bytes en String

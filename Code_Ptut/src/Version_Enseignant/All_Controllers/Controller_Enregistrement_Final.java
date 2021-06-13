@@ -67,7 +67,7 @@ public class Controller_Enregistrement_Final implements Initializable {
 
 			// On ouvre un fichier où on va enregistrer les informations
 			// On lui donne l'endroit où il doit être enregistré et le nom
-			File file = new File(Controller_Nouvel_Exo.contenuRepertoire, Controller_Nouvel_Exo.contenuNomExo + ".bin");
+			File file = new File(Controller_Nouvel_Exo.contenuRepertoire, Controller_Nouvel_Exo.contenuNomExo + ".rct");
 			FileOutputStream out = new FileOutputStream(file);
 
 			// On y écrit la consigne
