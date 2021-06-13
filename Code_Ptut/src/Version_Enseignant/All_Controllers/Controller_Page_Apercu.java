@@ -1,6 +1,9 @@
 package Version_Enseignant.All_Controllers;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -115,6 +118,12 @@ public class Controller_Page_Apercu implements Initializable {
 		primaryStage.setScene(scene);
 		darkModeActivation(scene);
 		primaryStage.show();
+	}
+	
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
+	@FXML
+	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
+        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
 	}
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)
