@@ -1,12 +1,17 @@
 package Version_Enseignant.All_Controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -42,20 +47,23 @@ public class Controller_Enregistrement_Final implements Initializable {
 		// Conteneurs du media
 		byte[] contenuMedia = null;
 		byte[] longueurMedia = null;
-		
+
 		//Conteneur de l'image (pour mp3)
 		byte[] contenuImage = null;
 		byte[] longueurImage = null;
 
 		// On récupère le media / image et on lui demande sa taille
 		try {
-			contenuMedia = URI.create(Controller_Importer_Ressource.contenuMedia.getSource()).toURL().openStream().readAllBytes();
+			
+			FileInputStream fus = new FileInputStream(Controller_Importer_Ressource.cheminVideo);
+			contenuMedia = readAllBytes(fus);
 			longueurMedia = ByteBuffer.allocate(8).putInt(contenuMedia.length).array();
-		
-		if(Controller_Importer_Ressource.contenuImage != null) {
-			contenuImage = URI.create(Controller_Importer_Ressource.contenuImage.getUrl()).toURL().openStream().readAllBytes();
-			longueurImage = ByteBuffer.allocate(8).putInt(contenuImage.length).array();
-		}
+
+			if(Controller_Importer_Ressource.contenuImage != null) {
+				FileInputStream fusImg = new FileInputStream(Controller_Importer_Ressource.cheminImg);
+				contenuImage = readAllBytes(fusImg);
+				longueurImage = ByteBuffer.allocate(8).putInt(contenuImage.length).array();
+			}
 
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
@@ -114,14 +122,14 @@ public class Controller_Enregistrement_Final implements Initializable {
 				// Si les mots incomplets sont autorisés
 				if (Controller_Page_Des_Options.motIncomplet == true) {
 					out.write(1);
-					
+
 					//On précise le nombre de lettres autorisées
 					if (Controller_Page_Des_Options.lettres_2 == true) {
 						out.write(2);
 					} else {
 						out.write(3);
 					}
-					
+
 				} else {
 					out.write(0);
 				}
@@ -129,17 +137,17 @@ public class Controller_Enregistrement_Final implements Initializable {
 
 			// Sinon il s'agit du mode evaluation
 			else {
-				
+
 				// Limite de temps (pour le mode Evaluation)
 				byte[] nbMin = Controller_Page_Des_Options.nbMin.getBytes();
 				byte[] longueurNbMin = getLongueur(Controller_Page_Des_Options.nbMin);
-				
+
 				out.write(1);
 				// On écrit la limite de temps
 				out.write(longueurNbMin);
 				out.write(nbMin);
 			}
-			
+
 			//S'il s'agit d'une extension mp3
 			if(getExtension(Controller_Importer_Ressource.contenuMedia.getSource()).compareTo(".mp3") == 0) {
 				out.write(0);
@@ -161,8 +169,8 @@ public class Controller_Enregistrement_Final implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		//On remet toutes les variables statiques à null
 		Controller_Nouvel_Exo.contenuNomExo = null;
 		Controller_Nouvel_Exo.contenuRepertoire = null;
@@ -193,7 +201,7 @@ public class Controller_Enregistrement_Final implements Initializable {
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
-	
+
 	@FXML
 	public void okay() {
 		recupScene.getScene().getWindow().hide();
@@ -209,18 +217,86 @@ public class Controller_Enregistrement_Final implements Initializable {
 		}
 		return ByteBuffer.allocate(4).putInt(nbCara).array();
 	}
-	
+
 	private String getExtension(String filePath) {
-        if (filePath == null) {
-            return null;
-        }
-        int posPoint = filePath.lastIndexOf(".");
+		if (filePath == null) {
+			return null;
+		}
+		int posPoint = filePath.lastIndexOf(".");
 
-        if (posPoint == -1) {
-            return null;
-        }
+		if (posPoint == -1) {
+			return null;
+		}
 
-        return filePath.substring(posPoint);
-    }
+		return filePath.substring(posPoint);
+	}
+
+	// Méthode qui va lire n bytes (ne marche pas sous java 1.8 donc on la remet ici
+	// telle quel
+	private static final int DEFAULT_BUFFER_SIZE = 8192;
+	private static final int MAX_BUFFER_SIZE = Integer.MAX_VALUE - 8;
+
+	public static byte[] readNBytes(FileInputStream fin, int len) throws IOException {
+		if (len < 0) {
+			throw new IllegalArgumentException("len < 0");
+		}
+
+		List<byte[]> bufs = null;
+		byte[] result = null;
+		int total = 0;
+		int remaining = len;
+		int n;
+		do {
+			byte[] buf = new byte[Math.min(remaining, DEFAULT_BUFFER_SIZE)];
+			int nread = 0;
+
+			// read to EOF which may read more or less than buffer size
+			while ((n = fin.read(buf, nread, Math.min(buf.length - nread, remaining))) > 0) {
+				nread += n;
+				remaining -= n;
+			}
+
+			if (nread > 0) {
+				if (MAX_BUFFER_SIZE - total < nread) {
+					throw new OutOfMemoryError("Required array size too large");
+				}
+				total += nread;
+				if (result == null) {
+					result = buf;
+				} else {
+					if (bufs == null) {
+						bufs = new ArrayList<>();
+						bufs.add(result);
+					}
+					bufs.add(buf);
+				}
+			}
+			// if the last call to read returned -1 or the number of bytes
+			// requested have been read then break
+		} while (n >= 0 && remaining > 0);
+
+		if (bufs == null) {
+			if (result == null) {
+				return new byte[0];
+			}
+			return result.length == total ? result : Arrays.copyOf(result, total);
+		}
+
+		result = new byte[total];
+		int offset = 0;
+		remaining = total;
+		for (byte[] b : bufs) {
+			int count = Math.min(b.length, remaining);
+			System.arraycopy(b, 0, result, offset, count);
+			offset += count;
+			remaining -= count;
+		}
+
+		return result;
+	}
+
+	public static byte[] readAllBytes(FileInputStream fin) throws IOException {
+		return readNBytes(fin, Integer.MAX_VALUE);
+	}
 
 }
