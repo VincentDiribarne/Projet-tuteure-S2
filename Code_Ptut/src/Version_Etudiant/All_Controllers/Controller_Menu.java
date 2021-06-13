@@ -36,6 +36,8 @@ public class Controller_Menu implements Initializable{
 	@FXML private CheckMenuItem dark;
 	
 	public static boolean isDark = false;
+	
+	private static Controller_Page_Exercice c;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -72,7 +74,9 @@ public class Controller_Menu implements Initializable{
 	//Fonction qui permet d'aller à la page où se trouve l'exercice
 	public void loadExo() throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageExercice.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML_Files/PageExercice.fxml"));
+		Parent root = loader.load();
+		c = loader.getController();
 		primaryStage.setMaximized(true);
 		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
 		
@@ -80,6 +84,10 @@ public class Controller_Menu implements Initializable{
 		
 		primaryStage.setScene(scene);		
 		primaryStage.show();
+	}
+
+	public static Controller_Page_Exercice getC() {
+		return c;
 	}
 
 	// Fonction qui converti des bytes en String
