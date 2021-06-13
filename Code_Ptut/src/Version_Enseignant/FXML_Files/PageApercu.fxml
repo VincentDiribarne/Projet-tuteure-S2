@@ -137,7 +137,7 @@
                         <Insets bottom="220.0" left="40.0" right="80.0" top="165.0" />
                      </GridPane.margin>
                      <font>
-                        <Font size="14.0" />
+                        <Font size="17.0" />
                      </font>
                   </TextArea>
                </children>

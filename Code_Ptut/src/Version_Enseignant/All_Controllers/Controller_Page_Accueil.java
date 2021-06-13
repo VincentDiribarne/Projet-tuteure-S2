@@ -132,7 +132,7 @@ public class Controller_Page_Accueil implements Initializable {
 		Controller_Page_Apercu.contenuTranscription = transcription;
 
 		// On récupère la longueur de l'aide + l'aide
-		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
+		nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
 		aide = chaine(readNBytes(fin, nombreOctetALire));
 		// On met les aides dans le textField associé
 		Controller_Page_Apercu.contenuAide = aide;

@@ -734,7 +734,6 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void tipConsigneEnter() {
 		Tooltip t = new Tooltip("Il s'agit de la consigne donnée par le professeur");
-		t.setShowDelay(Duration.seconds(0.2));
 		questionConsigne.setFitWidth(questionConsigne.getFitWidth() + 2);
 		questionConsigne.setFitHeight(questionConsigne.getFitHeight() + 2);
 		Tooltip.install(questionConsigne, t);
@@ -751,7 +750,6 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void tipTranscriptionEnter() {
 		Tooltip t = new Tooltip("Il s'agit du script de la vidéo que vous devez essayer de retrouver");
-		t.setShowDelay(Duration.seconds(0.2));
 		questionTranscription.setFitWidth(questionTranscription.getFitWidth() + 2);
 		questionTranscription.setFitHeight(questionTranscription.getFitHeight() + 2);
 		Tooltip.install(questionTranscription, t);
@@ -768,7 +766,6 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void tipPropositionEnter() {
 		Tooltip t = new Tooltip("Rentrez ici les mots que vous pensez entendre dans le document audio ou vidéo");
-		t.setShowDelay(Duration.seconds(0.2));
 		questionProposition.setFitWidth(questionProposition.getFitWidth() + 2);
 		questionProposition.setFitHeight(questionProposition.getFitHeight() + 2);
 		Tooltip.install(questionProposition, t);

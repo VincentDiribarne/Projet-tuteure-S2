@@ -12,26 +12,16 @@ import Version_Enseignant.DeplacementFenetre;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 import javafx.util.Duration;
 
 public class Controller_Page_Des_Options implements Initializable {
@@ -224,16 +214,6 @@ public class Controller_Page_Des_Options implements Initializable {
 		primaryStage.show();
 	}
 
-	// Bouton Ouvrir qui permet à l'enseignant d'ouvrir un exercice qu'il à déjà
-	// créé auparavant
-	@FXML
-	public void ouvrir(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Ouvrez votre exercice");
-		fileChooser.showOpenDialog(null);
-		// TODO Chargez l'exercice dans la page
-	}
-
 	// Bouton qui fait retourner l'enseignant à la page d'apercu (bouton retour)
 	@FXML
 	public void pageApercu(ActionEvent event) throws IOException {
@@ -280,7 +260,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		Controller_Page_Accueil c = new Controller_Page_Accueil();
 		c.delete();
 		Stage primaryStage = (Stage) CaraOccul.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
 		primaryStage.setScene(scene);
 		darkModeActivation(scene);
@@ -505,7 +485,6 @@ public class Controller_Page_Des_Options implements Initializable {
 	//Méthode pour afficher une tooltip et agrandir l'image
 	public void affichageToolTip(ImageView image, String description) {
 		Tooltip t = new Tooltip(description);
-		t.setShowDelay(Duration.seconds(0.2));
 		image.setFitWidth(image.getFitWidth() + 2);
 		image.setFitHeight(image.getFitHeight() + 2);
 		Tooltip.install(image, t);
