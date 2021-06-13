@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import Version_Enseignant.DeplacementFenetre;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;

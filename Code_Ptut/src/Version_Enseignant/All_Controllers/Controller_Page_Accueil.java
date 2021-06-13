@@ -9,6 +9,9 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
@@ -117,30 +120,30 @@ public class Controller_Page_Accueil implements Initializable {
 		FileInputStream fin = new FileInputStream(file);
 
 		// On récupère la longueur de la consigne + la consigne
-		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-		consigne = chaine(fin.readNBytes(nombreOctetALire));
+		nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+		consigne = chaine(readNBytes(fin, nombreOctetALire));
 		// On met la consigne dans la textField associé
 		Controller_Page_Apercu.contenuConsigne = consigne;
 
 		// On récupère la longueur de la transcription + la transcription
-		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-		transcription = chaine(fin.readNBytes(nombreOctetALire));
+		nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+		transcription = chaine(readNBytes(fin, nombreOctetALire));
 		// On met la transcription dans le textField associé
 		Controller_Page_Apercu.contenuTranscription = transcription;
 
 		// On récupère la longueur de l'aide + l'aide
 		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-		aide = chaine(fin.readNBytes(nombreOctetALire));
+		aide = chaine(readNBytes(fin, nombreOctetALire));
 		// On met les aides dans le textField associé
 		Controller_Page_Apercu.contenuAide = aide;
 
 		// On récupère le caractère d'occultation
-		caraOccul = chaine(fin.readNBytes(1));
+		caraOccul = chaine(readNBytes(fin, 1));
 		// On met le caractère dans le texField associé
 		Controller_Page_Des_Options.caraOccul = caraOccul;
 
 		// On récupère la reponse de sensiCasse 0 = false, 1 = true
-		sensiCasse = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		sensiCasse = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 		// On met la variable associée en fonction de la réponse
 		if (sensiCasse == 1) {
@@ -150,7 +153,7 @@ public class Controller_Page_Accueil implements Initializable {
 		}
 
 		// On récupère le mode choisi par l'enseignant 0 = entrainement, 1 = evaluation
-		mode = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		mode = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 		// On met la variable associée en fonction de la réponse
 		// Mode Evaluation
@@ -158,8 +161,8 @@ public class Controller_Page_Accueil implements Initializable {
 			Controller_Page_Des_Options.evaluation = true;
 			Controller_Page_Des_Options.entrainement = false;
 
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-			nbMin = chaine(fin.readNBytes(nombreOctetALire));
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+			nbMin = chaine(readNBytes(fin, nombreOctetALire));
 
 			Controller_Page_Des_Options.nbMin = nbMin;
 
@@ -169,7 +172,7 @@ public class Controller_Page_Accueil implements Initializable {
 			Controller_Page_Des_Options.entrainement = true;
 
 			// On récupère la reponse de l'affiche de la solution 0 = false, 1 = true
-			solution = ByteBuffer.wrap(fin.readNBytes(1)).get();
+			solution = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 			// On met la variable associée en fonction de la réponse
 			if (solution == 1) {
@@ -180,7 +183,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 			// On récupère la reponse de l'affiche du nombre de mots découverts en temps
 			// réel 0 = false, 1 = true
-			motsDecouverts = ByteBuffer.wrap(fin.readNBytes(1)).get();
+			motsDecouverts = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 			// On met la variable associée en fonction de la réponse
 			if (motsDecouverts == 1) {
@@ -191,7 +194,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 			// On récupère la reponse de l'autorisation du nb min de lettre pour découvrir
 			// le mot 0 = false, 1 = true
-			motsIncomplets = ByteBuffer.wrap(fin.readNBytes(1)).get();
+			motsIncomplets = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 			// On met la variable associée en fonction de la réponse
 			if (motsIncomplets == 1) {
@@ -199,7 +202,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 				// On récupère la reponse du nb min de lettre pour découvrir le mot 2 = 2
 				// lettres, 3 = 3 lettres
-				lettre = ByteBuffer.wrap(fin.readNBytes(1)).get();
+				lettre = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 				// On met la variable associée en fonction de la réponse
 				if (lettre == 2) {
@@ -218,7 +221,7 @@ public class Controller_Page_Accueil implements Initializable {
 		}
 
 		// On regarde l'extension du media
-		extension = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		extension = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
 		// Si c'est un mp3, on doit déchiffrer l'image
 		if (extension == 0) {
@@ -227,7 +230,7 @@ public class Controller_Page_Accueil implements Initializable {
 
 			File tmpFileImage = File.createTempFile("data", ".png");
 			FileOutputStream ecritureFileImage = new FileOutputStream(tmpFileImage);
-			ecritureFileImage.write(fin.readNBytes(nombreOctetALire));
+			ecritureFileImage.write(readNBytes(fin, nombreOctetALire));
 			ecritureFileImage.close();
 
 			Controller_Importer_Ressource.contenuImage = new Image(tmpFileImage.toURI().toString());
@@ -236,7 +239,7 @@ public class Controller_Page_Accueil implements Initializable {
 			tmpFileImage.deleteOnExit();
 
 			// On lit le mp3
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 8)).getInt();
 
 			tmpFile = File.createTempFile("data", ".mp3");
 
@@ -245,7 +248,7 @@ public class Controller_Page_Accueil implements Initializable {
 		else {
 
 			// On récupère ensuite le media
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 8)).getInt();
 
 			//On met à null l'image car il n'y en a pas
 			Controller_Importer_Ressource.contenuImage = null;
@@ -255,7 +258,7 @@ public class Controller_Page_Accueil implements Initializable {
 		}
 
 		FileOutputStream ecritureFile = new FileOutputStream(tmpFile);
-		ecritureFile.write(fin.readAllBytes());
+		ecritureFile.write(readAllBytes(fin));
 		ecritureFile.close();
 
 		Controller_Importer_Ressource.contenuMedia = new Media(tmpFile.toURI().toString());
@@ -364,5 +367,73 @@ public class Controller_Page_Accueil implements Initializable {
 		Controller_Page_Des_Options.motIncomplet = false;
 		Controller_Page_Des_Options.solution = false;
 		Controller_Page_Des_Options.nbMin = null;
+	}
+	
+	// Méthode qui va lire n bytes (ne marche pas sous java 1.8 donc on la remet ici
+	// telle quel
+	private static final int DEFAULT_BUFFER_SIZE = 8192;
+	private static final int MAX_BUFFER_SIZE = Integer.MAX_VALUE - 8;
+
+	public static byte[] readNBytes(FileInputStream fin, int len) throws IOException {
+		if (len < 0) {
+			throw new IllegalArgumentException("len < 0");
+		}
+
+		List<byte[]> bufs = null;
+		byte[] result = null;
+		int total = 0;
+		int remaining = len;
+		int n;
+		do {
+			byte[] buf = new byte[Math.min(remaining, DEFAULT_BUFFER_SIZE)];
+			int nread = 0;
+
+			// read to EOF which may read more or less than buffer size
+			while ((n = fin.read(buf, nread, Math.min(buf.length - nread, remaining))) > 0) {
+				nread += n;
+				remaining -= n;
+			}
+
+			if (nread > 0) {
+				if (MAX_BUFFER_SIZE - total < nread) {
+					throw new OutOfMemoryError("Required array size too large");
+				}
+				total += nread;
+				if (result == null) {
+					result = buf;
+				} else {
+					if (bufs == null) {
+						bufs = new ArrayList<>();
+						bufs.add(result);
+					}
+					bufs.add(buf);
+				}
+			}
+			// if the last call to read returned -1 or the number of bytes
+			// requested have been read then break
+		} while (n >= 0 && remaining > 0);
+
+		if (bufs == null) {
+			if (result == null) {
+				return new byte[0];
+			}
+			return result.length == total ? result : Arrays.copyOf(result, total);
+		}
+
+		result = new byte[total];
+		int offset = 0;
+		remaining = total;
+		for (byte[] b : bufs) {
+			int count = Math.min(b.length, remaining);
+			System.arraycopy(b, 0, result, offset, count);
+			offset += count;
+			remaining -= count;
+		}
+
+		return result;
+	}
+
+	public static byte[] readAllBytes(FileInputStream fin) throws IOException {
+		return readNBytes(fin, Integer.MAX_VALUE);
 	}
 }
