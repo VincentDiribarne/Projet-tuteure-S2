@@ -284,9 +284,6 @@ public class Controller_Page_Accueil implements Initializable {
 	@FXML
 	public void pageNouvelExo() throws IOException {
 
-		//Réinitialisation de tt les variables
-		delete();
-
 		Stage primaryStage = (Stage) RecupScene.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/NouvelExo.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);

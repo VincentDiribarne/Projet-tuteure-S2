@@ -89,6 +89,7 @@ public class Controller_Page_Exercice implements Initializable{
 	private ArrayList<String> lesMots = new ArrayList<>();
 	private ArrayList<String> lesMotsSensiCasse = new ArrayList<>();
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
+	private ArrayList<Integer> estDecouvert = new ArrayList<>();
 
 	//Tout ce qui concerne la barre de progression
 	@FXML private ProgressBar progressBar;
@@ -145,8 +146,16 @@ public class Controller_Page_Exercice implements Initializable{
 			lesMotsEtudiant.add(motCrypte);
 		}
 
-		//On passe les mots comparatifs en minuscule dans une autre liste
+		//On initialise la liste estDecouvert
+		for(String w : lesMots) {
+			if(regexPoint(w)) {
+				estDecouvert.add(1);
+			} else {
+				estDecouvert.add(0);
+			}
+		}
 
+		//On passe les mots comparatifs en minuscule dans une autre liste
 		for(String word : lesMots) {
 			lesMotsSensiCasse.add(word.toLowerCase());
 
@@ -216,6 +225,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		sliderSonChange();
 		sliderVideoChange();
+
 	}
 
 	public void sliderSonChange() {
@@ -322,17 +332,17 @@ public class Controller_Page_Exercice implements Initializable{
 	private boolean regexPoint(String mot) {
 
 		for(int i = 0; i < mot.length(); i++) {
-			if((mot.charAt(i) + "").matches("[.,;!?]")) {
+			if((mot.charAt(i) + "").matches("[.,;!?:]")) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+		Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
 	}
 
 	//Méthode qui fait apparaître la popUp pour que l'étudiant rentre ses infos pour l'enregistrement
@@ -429,22 +439,80 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void propositionMot() throws IOException {
 
-		String mot = motPropose.getText();
-		int cpt = 0, remplacementPartiel = 0;
+		String mot = motPropose.getText(), word = "";
+		int remplacementPartiel = 0, cpt = 0;
+		boolean check = true;
 
 		//On set la variable en fonction du nombre de lettres autorisées
 		if(lettres_2 == true) {
-			remplacementPartiel = 1;
-		} else if (lettres_3 == true) {
 			remplacementPartiel = 2;
+		} else if (lettres_3 == true) {
+			remplacementPartiel = 3;
 		}
 
-		//Si la sensibilité à la casse n'est pas activée
-		if(sensiCasse == true) {
+		//Si la sensibilité à la casse n'est pas activée, on met le mot en minuscule
+		if(sensiCasse == false) {
+			mot += mot.toLowerCase();
+
+			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
+
+				check = true;
+
+				//Si le mot correspond exactement 
+				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
+					lesMotsEtudiant.set(i, mot);
+					estDecouvert.set(i, 1);
+					nbMotsDecouverts++;
+
+					//Gestion de la progressBar
+					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
+					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
+				}
+
+				//Si le remplacement partiel est active et que l'étudiant n'a pas encore trouve le mot
+				if(motIncomplet == true && estDecouvert.get(i) == 0) {
+
+					if(mot.length() >= remplacementPartiel && lesMotsSensiCasse.get(i).length() >= 4) {
+
+						for(int j = 0; j < mot.length(); j++) {
+							if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
+								cpt ++;
+							} else {
+								check = false;
+								break;
+							}
+						}
+					}
+
+					//Si les premières lettres sont les mêmes
+					if(cpt >= remplacementPartiel && check == true) {
+
+						//On "crypte" le mot
+						word = mot;
+
+						for(int z = 0; z < lesMotsSensiCasse.get(i).length() - mot.length(); z++) {
+							word += caractereOccul;
+						}
+						lesMotsEtudiant.set(i, word);
+					}
+					
+					//On réinitialise le compteur
+					cpt = 0;
+
+				}
+			}
+
+
+			//Si la sensibilité à la casse est activée
+		} else {
+
 			for(int i = 0; i < lesMots.size(); i++) {
+
+				check = true;
 
 				if(lesMots.get(i).compareTo(mot) == 0) {
 					lesMotsEtudiant.set(i, mot);
+					estDecouvert.set(i, 1);
 					nbMotsDecouverts++;
 
 					//Gestion de la progressBar
@@ -452,102 +520,35 @@ public class Controller_Page_Exercice implements Initializable{
 					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
 				}
 
-				//Si le remplacement partiel est autorisé
-				if(motIncomplet == true) {
+				//Si le remplacement partiel est active
+				if(motIncomplet == true && estDecouvert.get(i) == 0) {
 
-					//Il faut que le mot de l'étudiant ait une certaine longueur
-					if(mot.length() > remplacementPartiel && lesMots.get(i).length() >= 4) {
+					if(mot.length() >= remplacementPartiel && lesMots.get(i).length() >= 4) {
 
-						//Si le mot est plus petit que le mot à découvrir
-						if(mot.length() < lesMots.get(i).length()) {
-							for(int j = 0; j < mot.length(); j++) {
-								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
-									cpt ++;
-								}
+						for(int j = 0; j < mot.length(); j++) {
+							if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
+								cpt ++;
+							} else {
+								check = false;
+								break;
 							}
-						}
-
-						//Si le mot est plus grand que le mot à découvrir
-						else {
-							for(int j = 0; j > lesMots.get(i).length(); j++) {
-								if(mot.charAt(j) == lesMots.get(i).charAt(j)) {
-									cpt ++;
-								}
-							}
-						}
-
-						//Si les premières lettres sont les mêmes
-						if(cpt == mot.length()) {
-
-							//On "crypte" le mot
-							String word = mot;
-
-							for(int z = 0; z < lesMots.get(i).length() - mot.length(); z++) {
-								word += caractereOccul;
-							}
-							lesMotsEtudiant.set(i, word);
-							//On réinitialise le compteur
-							cpt = 0;
 						}
 					}
-				}
 
-			}
+					//Si les premières lettres sont les mêmes
+					if(cpt >= remplacementPartiel && check == true) {
 
-		}
-		//Si la sensibilité à la casse est activée, on enlève les majuscules
-		else {
-			mot = mot.toLowerCase();
-			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
+						//On "crypte" le mot
+						word = mot;
 
-				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
-					lesMotsEtudiant.set(i, lesMots.get(i));
-					nbMotsDecouverts++;
-
-					//Gestion de la progressBar
-					progressBar.setProgress(nbMotsDecouverts / nbMotsTotal);
-					pourcentageMots.setText(Math.round((nbMotsDecouverts / nbMotsTotal) * 100)  + "%");
-				}
-
-				//Si le remplacement partiel est autorisé
-				if(motIncomplet == true) {
-
-					//Il faut que le mot de l'étudiant ait une certaine longueur
-					if(mot.length() > remplacementPartiel && lesMots.get(i).length() >= 4) {
-
-						//Si le mot est plus petit que le mot à découvrir
-						if(mot.length() < lesMotsSensiCasse.get(i).length()) {
-							for(int j = 0; j < mot.length(); j++) {
-								if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
-									cpt ++;
-								}
-							}
+						for(int z = 0; z < lesMots.get(i).length() - mot.length(); z++) {
+							word += caractereOccul;
 						}
-
-						//Si le mot est plus grand que le mot à découvrir
-						else {
-							for(int j = 0; j > lesMotsSensiCasse.get(i).length(); j++) {
-								if(mot.charAt(j) == lesMotsSensiCasse.get(i).charAt(j)) {
-									cpt ++;
-								}
-							}
-						}
-
-						//Si les premières lettres sont les mêmes
-						if(cpt == mot.length()) {
-
-							//On "crypte" le mot
-							String word = mot;
-
-							for(int z = 0; z < lesMotsSensiCasse.get(i).length() - mot.length(); z++) {
-								word += caractereOccul;
-							}
-
-							lesMotsEtudiant.set(i, word);
-							//On réinitialise le compteur
-							cpt = 0;
-						}
+						lesMotsEtudiant.set(i, word);
 					}
+					
+					//On réinitialise le compteur
+					cpt = 0;
 				}
 			}
 		}
@@ -564,9 +565,9 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//On met à jour la transcription grâce à la liste des mots de l'étudiant		
 		for(int o = 0; o < lesMotsEtudiant.size(); o++) {
-			
-			String word = lesMotsEtudiant.get(o);
-			
+
+			word = lesMotsEtudiant.get(o);
+
 			//Si c'est le premier mot, on ne met pas d'espace avant
 			if(o == 0) {
 				transcription.setText(word);
@@ -589,6 +590,14 @@ public class Controller_Page_Exercice implements Initializable{
 			finExercice();
 			enregistrementExo();
 		}
+	}
+
+	public ArrayList<String> getLesMots() {
+		return lesMots;
+	}
+
+	public ArrayList<String> getLesMotsEtudiant() {
+		return lesMotsEtudiant;
 	}
 
 	//Méthode qui regarde si l'étudiant a fini l'exercice
@@ -787,8 +796,8 @@ public class Controller_Page_Exercice implements Initializable{
 			Controller_Menu.isDark = false;
 		}
 	}
-	
-	
+
+
 	private void setKeyboardShortcut() {
 		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			@Override
@@ -802,7 +811,7 @@ public class Controller_Page_Exercice implements Initializable{
 						mediaView.getMediaPlayer().pause();
 						playOrPause.setImage(play);
 					}
-					
+
 				}
 				if (event.getCode() == KeyCode.RIGHT && mediaView.getMediaPlayer().getTotalDuration().greaterThan(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)))) {
 					mediaView.getMediaPlayer().seek(mediaView.getMediaPlayer().getCurrentTime().add(new Duration(5000)));
@@ -816,7 +825,7 @@ public class Controller_Page_Exercice implements Initializable{
 				if (event.getCode() == KeyCode.DOWN) {
 					sliderSon.setValue(sliderSon.getValue() - 3);
 				}
-				
+
 				if (event.getCode() == KeyCode.ENTER) {
 					if(!motPropose.getText().isEmpty()) {
 						try {
@@ -829,6 +838,6 @@ public class Controller_Page_Exercice implements Initializable{
 			}
 
 		});
-		
+
 	}
 }
