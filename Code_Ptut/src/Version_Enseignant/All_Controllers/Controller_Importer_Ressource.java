@@ -4,13 +4,13 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import Version_Etudiant.DeplacementFenetre;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -108,7 +108,7 @@ public class Controller_Importer_Ressource implements Initializable {
 		public void quitter(ActionEvent event) throws IOException {
 			
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/ConfirmationQuitter.fxml"));
 			Scene scene = new Scene(root, 400, 200);
 			//On bloque sur cette fenêtre
 			primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -379,10 +379,18 @@ public class Controller_Importer_Ressource implements Initializable {
 
 	}
 	
-	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+        if( Desktop.isDesktopSupported() )
+        {
+            new Thread(() -> {
+                   try {
+                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
+                   } catch (IOException | URISyntaxException e1) {
+                       e1.printStackTrace();
+                   }
+               }).start();
+        }
 	}
 	
 	//Bouton Nouveau qui permet de créer un nouvel exercice

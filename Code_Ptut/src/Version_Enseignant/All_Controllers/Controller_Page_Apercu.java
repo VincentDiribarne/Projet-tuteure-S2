@@ -3,13 +3,13 @@ package Version_Enseignant.All_Controllers;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import Version_Etudiant.DeplacementFenetre;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +26,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -87,7 +86,7 @@ public class Controller_Page_Apercu implements Initializable {
 		public void quitter(ActionEvent event) throws IOException {
 			
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/ConfirmationQuitter.fxml"));
 			Scene scene = new Scene(root, 400, 200);
 			//On bloque sur cette fenêtre
 			primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -120,10 +119,18 @@ public class Controller_Page_Apercu implements Initializable {
 		primaryStage.show();
 	}
 	
-	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+        if( Desktop.isDesktopSupported() )
+        {
+            new Thread(() -> {
+                   try {
+                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
+                   } catch (IOException | URISyntaxException e1) {
+                       e1.printStackTrace();
+                   }
+               }).start();
+        }
 	}
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)
