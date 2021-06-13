@@ -26,6 +26,7 @@ public class Controller_Page_Solution implements Initializable {
 
 		//On déclare une TextArea spéciale
 		InlineCssTextArea css = new InlineCssTextArea();
+		css.appendText(c.contenuTranscription);
 		css.setEditable(false);
         css.setPrefSize(500, 250);
         css.setLayoutX(anchor.getLayoutX());
@@ -40,23 +41,5 @@ public class Controller_Page_Solution implements Initializable {
 	public void closeSolution() {
 		closeSol.getScene().getWindow().hide();
 	}
-	
-	/*private InlineCssTextArea colorTextArea(InlineCssTextArea css){
-		
-		String word = "";
-		
-        for(int i = 0; i < c.getLesMotsEtudiant().size(); i++){
-        	
-        	for(int o = 0; o < c.getLesMotsEtudiant().get(i).length(); o++) {
-        		word += Controller_Page_Exercice.caractereOccul;
-        	}
-        	
-        	if(c.getLesMotsEtudiant().get(i).compareTo(word) == 0) {
-                css.setStyle(lesMotsEtudiant.get, word.getIndex() + word.getLength(), "-fx-fill:  #5CA4DA;" + "-fx-font-weight: bold;");
-        	}
-        }
-
-        return css;
-    }*/
 
 }
