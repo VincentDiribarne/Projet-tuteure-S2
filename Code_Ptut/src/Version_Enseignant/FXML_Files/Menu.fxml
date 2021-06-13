@@ -35,7 +35,7 @@
                      <children>
                         <ImageView id="imageRecons" fitHeight="399.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
-                              <Image url="@../../Image/Logo_Reconstitution.png" />
+                              <Image url="@/Image/Logo_Reconstitution.png" />
                            </image>
                         </ImageView>
                         <Label alignment="CENTER" contentDisplay="CENTER" text="Reconstitution">
@@ -117,7 +117,7 @@
                   </Text>
                   <ImageView fitHeight="33.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                      <image>
-                        <Image url="@../../Image/IUT_Laval.png" />
+                        <Image url="@/Image/IUT_Laval.png" />
                      </image>
                      <GridPane.margin>
                         <Insets left="20.0" />

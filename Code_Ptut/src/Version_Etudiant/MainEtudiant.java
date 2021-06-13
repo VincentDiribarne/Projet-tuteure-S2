@@ -19,7 +19,7 @@ public class MainEtudiant extends Application{
 	
 	@Override
     public void start(Stage primaryStage) throws Exception{
-        root = FXMLLoader.load(getClass().getResource("FXML_Files/Menu.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/Menu.fxml"));
         primaryStage.setTitle("Reconstitution - Version Etudiante");
         primaryStage.getIcons().add(new Image("/Image/Logo_Reconstitution.png"));
         
@@ -31,7 +31,7 @@ public class MainEtudiant extends Application{
         width=screenBounds.getWidth();
         height=screenBounds.getHeight();
         Scene scene = new Scene(root, width, height);
-        scene.getStylesheets().addAll(getClass().getResource("FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+        scene.getStylesheets().addAll(getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

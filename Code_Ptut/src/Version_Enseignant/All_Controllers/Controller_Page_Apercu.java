@@ -130,7 +130,7 @@ public class Controller_Page_Apercu implements Initializable {
 	@FXML
 	public void pageImporterRessource(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ImporterRessource.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/ImporterRessource.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
 		darkModeActivation(scene);
 		primaryStage.setScene(scene);
@@ -147,7 +147,7 @@ public class Controller_Page_Apercu implements Initializable {
 		contenuAide = texteAide.getText();
 
 		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/PageOptions.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/PageOptions.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
 		primaryStage.setScene(scene);
 		darkModeActivation(scene);
@@ -159,12 +159,12 @@ public class Controller_Page_Apercu implements Initializable {
 	public void darkMode() {
 
 		if(dark.isSelected()) {
-			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			okApercu.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okApercu.getScene().getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
 			Controller_Page_Accueil.isDark = true;
 		} else {
-			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
-			okApercu.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
+			okApercu.getScene().getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			Controller_Page_Accueil.isDark = false;
 		}
 
@@ -173,12 +173,12 @@ public class Controller_Page_Apercu implements Initializable {
 	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
 	public void darkModeActivation(Scene scene) {
 		if(Controller_Page_Accueil.isDark) {
-			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
 			dark.setSelected(true);
 		} else {
-			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			dark.setSelected(false);
 		}
 	}
