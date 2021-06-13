@@ -3,6 +3,7 @@ package Version_Etudiant.All_Controllers;
 import java.awt.Desktop;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -338,10 +339,18 @@ public class Controller_Page_Exercice implements Initializable{
 		return false;
 	}
 
-	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-		Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+        if( Desktop.isDesktopSupported() )
+        {
+            new Thread(() -> {
+                   try {
+                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
+                   } catch (IOException | URISyntaxException e1) {
+                       e1.printStackTrace();
+                   }
+               }).start();
+        }
 	}
 
 	//Méthode qui fait apparaître la popUp pour que l'étudiant rentre ses infos pour l'enregistrement

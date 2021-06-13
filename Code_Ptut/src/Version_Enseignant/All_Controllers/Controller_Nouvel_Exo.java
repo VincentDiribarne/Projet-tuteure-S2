@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -123,10 +124,18 @@ public class Controller_Nouvel_Exo implements Initializable{
 		primaryStage.show();
 	}
 	
-	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+        if( Desktop.isDesktopSupported() )
+        {
+            new Thread(() -> {
+                   try {
+                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
+                   } catch (IOException | URISyntaxException e1) {
+                       e1.printStackTrace();
+                   }
+               }).start();
+        }
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
