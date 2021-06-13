@@ -145,7 +145,7 @@
                </GridPane.margin></ImageView>
                 <ImageView fx:id="firstPlay" fitHeight="47.0" fitWidth="50.0" onMousePressed="#firstPlay" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <image>
-                        <Image url="@../../Image/Bouton Play.png" />
+                        <Image url="@/Image/Bouton Play.png" />
                     </image>
                <GridPane.margin>
                   <Insets bottom="50.0" />
@@ -171,7 +171,7 @@
 
                 <ImageView fx:id="playOrPause" fitHeight="22.0" fitWidth="20.0" onMousePressed="#playOrPause" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                     <image>
-                        <Image url="@../../Image/Pause.png" />
+                        <Image url="@/Image/Pause.png" />
                     </image>
                     <GridPane.margin>
                         <Insets bottom="217.0" left="60.0" top="350.0" />
@@ -183,7 +183,7 @@
 
                 <ImageView fx:id="son" fitHeight="26.0" fitWidth="49.0" onMousePressed="#sonCoupe" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                     <image>
-                        <Image url="@../../Image/Volume.png" />
+                        <Image url="@/Image/Volume.png" />
                     </image>
                     <GridPane.margin>
                         <Insets bottom="215.0" left="100.0" right="165.0" top="350.0" />
@@ -229,7 +229,7 @@
             </Label>
             <ImageView fx:id="questionConsigne" fitHeight="35.0" fitWidth="20.0" onMouseEntered="#tipConsigneEnter" onMouseExited="#tipConsigneExit" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <image>
-                  <Image url="@../../Image/Aide_Noir.png" />
+                  <Image url="@/Image/Aide_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets left="330.0" top="50.0" />
@@ -237,7 +237,7 @@
             </ImageView>
             <ImageView fx:id="questionTranscription" fitHeight="35.0" fitWidth="20.0" onMouseEntered="#tipTranscriptionEnter" onMouseExited="#tipTranscriptionExit" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <image>
-                  <Image url="@../../Image/Aide_Noir.png" />
+                  <Image url="@/Image/Aide_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets left="250.0" top="50.0" />
@@ -245,7 +245,7 @@
             </ImageView>
             <ImageView fx:id="questionProposition" fitHeight="35.0" fitWidth="20.0" onMouseEntered="#tipPropositionEnter" onMouseExited="#tipPropositionExit" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <image>
-                  <Image url="@../../Image/Aide_Noir.png" />
+                  <Image url="@/Image/Aide_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="145.0" left="240.0" />
@@ -253,7 +253,7 @@
             </ImageView>
             <ImageView fx:id="alertSolution" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <image>
-                  <Image url="@../../Image/Attention.png" />
+                  <Image url="@/Image/Attention.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="215.0" right="265.0" />

@@ -9,6 +9,9 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import Version_Etudiant.MainEtudiant;
 import javafx.application.Platform;
@@ -24,39 +27,46 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class Controller_Menu implements Initializable{
+public class Controller_Menu implements Initializable {
 
-	//Menu
-	@FXML private Text recupScene;
-	@FXML private ImageView handicap;
+	// Menu
+	@FXML
+	private Text recupScene;
+	@FXML
+	private ImageView handicap;
 
-	//A propos
-	@FXML private Label recuperation;
-	
-	@FXML private CheckMenuItem dark;
-	
+	// A propos
+	@FXML
+	private Label recuperation;
+
+	@FXML
+	private CheckMenuItem dark;
+
 	public static boolean isDark = false;
-	
+
 	private static Controller_Page_Exercice c;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 	}
 
-	//Fonction pour quitter l'application
+	// Fonction pour quitter l'application
 	@FXML
 	public void quitter(ActionEvent event) {
 		Platform.exit();
 	}
-	
-	//Méthode qui permet de se rendre au manuel utilisateur == tuto
+
+	// Mï¿½thode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing").toURI());
+		Desktop.getDesktop().browse(new URL(
+				"https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing")
+						.toURI());
 	}
 
-	//Fonction qui permet à l'étudiant d'ouvrir un exercice (téléchargé au préalable)
+	// Fonction qui permet ï¿½ l'ï¿½tudiant d'ouvrir un exercice (tï¿½lï¿½chargï¿½
+	// au prï¿½alable)
 	@FXML
 	public void ouvrir(ActionEvent event) throws IOException {
 
@@ -67,22 +77,22 @@ public class Controller_Menu implements Initializable{
 		selectedFile = fileChooser.showOpenDialog(null);
 		decrypte(selectedFile);
 
-		//On load la page où il y a l'exercice
+		// On load la page oï¿½ il y a l'exercice
 		loadExo();
 	}
 
-	//Fonction qui permet d'aller à la page où se trouve l'exercice
+	// Fonction qui permet d'aller ï¿½ la page oï¿½ se trouve l'exercice
 	public void loadExo() throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML_Files/PageExercice.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Version_Etudiant/FXML_Files/PageExercice.fxml"));
 		Parent root = loader.load();
 		c = loader.getController();
 		primaryStage.setMaximized(true);
 		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
-		
+
 		darkModeActivation(scene);
-		
-		primaryStage.setScene(scene);		
+
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 
@@ -97,12 +107,11 @@ public class Controller_Menu implements Initializable{
 		return chaine;
 	}
 
-
-	// Fonction qui va load les informations du fichier sélectionné dans les
-	// différents TextField...
+	// Fonction qui va load les informations du fichier sï¿½lectionnï¿½ dans les
+	// diffï¿½rents TextField...
 	public void decrypte(File file) throws IOException {
 
-		// Variables pour récupérer les informations du fichier
+		// Variables pour rï¿½cupï¿½rer les informations du fichier
 		String consigne, aide, transcription, caraOccul, nbMin;
 		int nombreOctetALire, sensiCasse, mode, solution, motsDecouverts, motsIncomplets, lettre, extension;
 		File tmpFile;
@@ -110,43 +119,44 @@ public class Controller_Menu implements Initializable{
 		// On ouvre le fichier en lecture
 		FileInputStream fin = new FileInputStream(file);
 
-		// On récupère la longueur de la consigne + la consigne
-		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-		consigne = chaine(fin.readNBytes(nombreOctetALire));
-		// On met la consigne dans la textField associé
+		// On rï¿½cupï¿½re la longueur de la consigne + la consigne
+		nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+		consigne = chaine(readNBytes(fin, nombreOctetALire));
+		// On met la consigne dans la textField associï¿½
 		Controller_Page_Exercice.contenuConsigne = consigne;
 
-		// On récupère la longueur de la transcription + la transcription
-		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-		transcription = chaine(fin.readNBytes(nombreOctetALire));
-		// On met la transcription dans le textField associé
+		// On rï¿½cupï¿½re la longueur de la transcription + la transcription
+		nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+		transcription = chaine(readNBytes(fin, nombreOctetALire));
+		// On met la transcription dans le textField associï¿½
 		Controller_Page_Exercice.contenuTranscription = transcription;
 
-		// On récupère la longueur de l'aide + l'aide
-		nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-		aide = chaine(fin.readNBytes(nombreOctetALire));
-		// On met les aides dans le textField associé
+		// On rï¿½cupï¿½re la longueur de l'aide + l'aide
+		nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+		aide = chaine(readNBytes(fin, nombreOctetALire));
+		// On met les aides dans le textField associï¿½
 		Controller_Page_Aides.contenuAide = aide;
 
-		// On récupère le caractère d'occultation
-		caraOccul = chaine(fin.readNBytes(1));
-		// On met le caractère dans le texField associé
+		// On rï¿½cupï¿½re le caractï¿½re d'occultation
+		caraOccul = chaine(readNBytes(fin, 1));
+		// On met le caractï¿½re dans le texField associï¿½
 		Controller_Page_Exercice.caractereOccul = caraOccul;
 
-		// On récupère la reponse de sensiCasse 0 = false, 1 = true
-		sensiCasse = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		// On rï¿½cupï¿½re la reponse de sensiCasse 0 = false, 1 = true
+		sensiCasse = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-		// On met la variable associée en fonction de la réponse
+		// On met la variable associï¿½e en fonction de la rï¿½ponse
 		if (sensiCasse == 1) {
 			Controller_Page_Exercice.sensiCasse = true;
 		} else {
 			Controller_Page_Exercice.sensiCasse = false;
 		}
 
-		// On récupère le mode choisi par l'enseignant 0 = entrainement, 1 = evaluation
-		mode = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		// On rï¿½cupï¿½re le mode choisi par l'enseignant 0 = entrainement, 1 =
+		// evaluation
+		mode = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-		// On met la variable associée en fonction de la réponse
+		// On met la variable associï¿½e en fonction de la rï¿½ponse
 		// Mode Evaluation
 		if (mode == 1) {
 			Controller_Page_Exercice.evaluation = true;
@@ -162,40 +172,42 @@ public class Controller_Menu implements Initializable{
 			Controller_Page_Exercice.evaluation = false;
 			Controller_Page_Exercice.entrainement = true;
 
-			// On récupère la reponse de l'affiche de la solution 0 = false, 1 = true
-			solution = ByteBuffer.wrap(fin.readNBytes(1)).get();
+			// On rï¿½cupï¿½re la reponse de l'affiche de la solution 0 = false, 1 = true
+			solution = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-			// On met la variable associée en fonction de la réponse
+			// On met la variable associï¿½e en fonction de la rï¿½ponse
 			if (solution == 1) {
 				Controller_Page_Exercice.solution = true;
 			} else {
 				Controller_Page_Exercice.solution = false;
 			}
 
-			// On récupère la reponse de l'affiche du nombre de mots découverts en temps
-			// réel 0 = false, 1 = true
-			motsDecouverts = ByteBuffer.wrap(fin.readNBytes(1)).get();
+			// On rï¿½cupï¿½re la reponse de l'affiche du nombre de mots dï¿½couverts en
+			// temps
+			// rï¿½el 0 = false, 1 = true
+			motsDecouverts = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-			// On met la variable associée en fonction de la réponse
+			// On met la variable associï¿½e en fonction de la rï¿½ponse
 			if (motsDecouverts == 1) {
 				Controller_Page_Exercice.motDecouverts = true;
 			} else {
 				Controller_Page_Exercice.motDecouverts = false;
 			}
 
-			// On récupère la reponse de l'autorisation du nb min de lettre pour découvrir
+			// On rï¿½cupï¿½re la reponse de l'autorisation du nb min de lettre pour
+			// dï¿½couvrir
 			// le mot 0 = false, 1 = true
-			motsIncomplets = ByteBuffer.wrap(fin.readNBytes(1)).get();
+			motsIncomplets = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-			// On met la variable associée en fonction de la réponse
+			// On met la variable associï¿½e en fonction de la rï¿½ponse
 			if (motsIncomplets == 1) {
 				Controller_Page_Exercice.motIncomplet = true;
 
-				// On récupère la reponse du nb min de lettre pour découvrir le mot 2 = 2
+				// On rï¿½cupï¿½re la reponse du nb min de lettre pour dï¿½couvrir le mot 2 = 2
 				// lettres, 3 = 3 lettres
-				lettre = ByteBuffer.wrap(fin.readNBytes(1)).get();
+				lettre = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-				// On met la variable associée en fonction de la réponse
+				// On met la variable associï¿½e en fonction de la rï¿½ponse
 				if (lettre == 2) {
 					Controller_Page_Exercice.lettres_2 = true;
 					Controller_Page_Exercice.lettres_3 = false;
@@ -211,47 +223,47 @@ public class Controller_Menu implements Initializable{
 			}
 		}
 
-		//On regarde l'extension du media
-		extension = ByteBuffer.wrap(fin.readNBytes(1)).get();
+		// On regarde l'extension du media
+		extension = ByteBuffer.wrap(readNBytes(fin, 1)).get();
 
-		//Si c'est un mp3, on doit déchiffrer l'image
-		if(extension == 0) {
+		// Si c'est un mp3, on doit dï¿½chiffrer l'image
+		if (extension == 0) {
 
 			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
 
 			File tmpFileImage = File.createTempFile("data", ".png");
 			FileOutputStream ecritureFileImage = new FileOutputStream(tmpFileImage);
-			ecritureFileImage.write(fin.readNBytes(nombreOctetALire));
+			ecritureFileImage.write(readNBytes(fin, nombreOctetALire));
 			ecritureFileImage.close();
 
 			Controller_Page_Exercice.contenuImage = new Image(tmpFileImage.toURI().toString());
 
-			//On efface le fichier temporaire
+			// On efface le fichier temporaire
 			tmpFileImage.deleteOnExit();
 
-			//On lit le mp3
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			// On lit le mp3
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 8)).getInt();
 
 			tmpFile = File.createTempFile("data", ".mp3");
 
-		} 
-		//Sinon c'est un mp4
+		}
+		// Sinon c'est un mp4
 		else {
 
-			//On récupère ensuite le media
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			// On rï¿½cupï¿½re ensuite le media
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 8)).getInt();
 
 			tmpFile = File.createTempFile("data", ".mp4");
 
 		}
 
 		FileOutputStream ecritureFile = new FileOutputStream(tmpFile);
-		ecritureFile.write(fin.readAllBytes());
+		ecritureFile.write(readAllBytes(fin));
 		ecritureFile.close();
 
 		Controller_Page_Exercice.contenuMedia = new Media(tmpFile.toURI().toString());
 
-		//On efface le fichier temporaire
+		// On efface le fichier temporaire
 		tmpFile.deleteOnExit();
 
 		// Fermeture du fichier
@@ -261,12 +273,12 @@ public class Controller_Menu implements Initializable{
 	@FXML
 	public void aPropos(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recupScene.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/A_Propos.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/A_Propos.fxml"));
 		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height - 60);
 		primaryStage.setScene(scene);
-		
+
 		darkModeActivation(scene);
-		
+
 		primaryStage.setMaximized(true);
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
@@ -276,45 +288,118 @@ public class Controller_Menu implements Initializable{
 	@FXML
 	public void retourMenu(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) recuperation.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/Menu.fxml"));
 		Scene scene = new Scene(root, MainEtudiant.width, MainEtudiant.height);
 		primaryStage.setScene(scene);
-		
+
 		darkModeActivation(scene);
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(1200);
 		primaryStage.show();
 	}
-	
-	//Méthode pour passer ou non le darkMode
+
+	// Mï¿½thode pour passer ou non le darkMode
 	@FXML
 	public void darkMode() {
-		
-		if(dark.isSelected()) {
-			recupScene.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			recupScene.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+
+		if (dark.isSelected()) {
+			recupScene.getScene().getStylesheets().removeAll(
+					getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			recupScene.getScene().getStylesheets()
+					.addAll(getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
 			isDark = true;
 		} else {
-			recupScene.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
-			recupScene.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			recupScene.getScene().getStylesheets().removeAll(
+					getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
+			recupScene.getScene().getStylesheets().addAll(
+					getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			isDark = false;
 		}
 	}
-	
-	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+
+	// Mï¿½thode qui regarde si le darkMode est actif et l'applique en consï¿½quence
+	// ï¿½ la scene
 	public void darkModeActivation(Scene scene) {
-		if(isDark) {
-			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+		if (isDark) {
+			scene.getStylesheets().removeAll(
+					getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets()
+					.addAll(getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
 			dark.setSelected(true);
 		} else {
-			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().removeAll(
+					getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(
+					getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			dark.setSelected(false);
 		}
 	}
-	
+
+	// Méthode qui va lire n bytes (ne marche pas sous java 1.8 donc on la remet ici
+	// telle quel
+	private static final int DEFAULT_BUFFER_SIZE = 8192;
+	private static final int MAX_BUFFER_SIZE = Integer.MAX_VALUE - 8;
+
+	public static byte[] readNBytes(FileInputStream fin, int len) throws IOException {
+		if (len < 0) {
+			throw new IllegalArgumentException("len < 0");
+		}
+
+		List<byte[]> bufs = null;
+		byte[] result = null;
+		int total = 0;
+		int remaining = len;
+		int n;
+		do {
+			byte[] buf = new byte[Math.min(remaining, DEFAULT_BUFFER_SIZE)];
+			int nread = 0;
+
+			// read to EOF which may read more or less than buffer size
+			while ((n = fin.read(buf, nread, Math.min(buf.length - nread, remaining))) > 0) {
+				nread += n;
+				remaining -= n;
+			}
+
+			if (nread > 0) {
+				if (MAX_BUFFER_SIZE - total < nread) {
+					throw new OutOfMemoryError("Required array size too large");
+				}
+				total += nread;
+				if (result == null) {
+					result = buf;
+				} else {
+					if (bufs == null) {
+						bufs = new ArrayList<>();
+						bufs.add(result);
+					}
+					bufs.add(buf);
+				}
+			}
+			// if the last call to read returned -1 or the number of bytes
+			// requested have been read then break
+		} while (n >= 0 && remaining > 0);
+
+		if (bufs == null) {
+			if (result == null) {
+				return new byte[0];
+			}
+			return result.length == total ? result : Arrays.copyOf(result, total);
+		}
+
+		result = new byte[total];
+		int offset = 0;
+		remaining = total;
+		for (byte[] b : bufs) {
+			int count = Math.min(b.length, remaining);
+			System.arraycopy(b, 0, result, offset, count);
+			offset += count;
+			remaining -= count;
+		}
+
+		return result;
+	}
+
+	public static byte[] readAllBytes(FileInputStream fin) throws IOException {
+		return readNBytes(fin, Integer.MAX_VALUE);
+	}
 }
-
-
-

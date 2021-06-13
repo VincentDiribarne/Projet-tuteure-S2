@@ -96,7 +96,7 @@
             </Label>
             <ImageView fitHeight="42.0" fitWidth="66.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../Image/Trait_Noir.png" />
+                  <Image url="@/Image/Trait_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets top="100.0" />
@@ -124,7 +124,7 @@
             </Circle>
             <ImageView fitHeight="42.0" fitWidth="66.0" layoutX="577.0" layoutY="167.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../Image/Trait_Noir.png" />
+                  <Image url="@/Image/Trait_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets right="200.0" top="100.0" />
@@ -132,7 +132,7 @@
             </ImageView>
             <ImageView fitHeight="42.0" fitWidth="66.0" layoutX="10.0" layoutY="117.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../Image/Trait_Noir.png" />
+                  <Image url="@/Image/Trait_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets left="200.0" top="100.0" />

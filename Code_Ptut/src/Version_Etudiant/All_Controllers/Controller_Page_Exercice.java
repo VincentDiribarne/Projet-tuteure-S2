@@ -65,11 +65,10 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML private ImageView firstPlay;
 	@FXML private ImageView playOrPause;
 	MediaPlayer mediaPlayer = new MediaPlayer(contenuMedia);
-	Image play = new Image("file:./src/Image/Play.png");
-	Image pause = new Image("file:./src/Image/Pause.png");
-	Image sonCoupe = new Image("file:./src/Image/VolumeCoupe.png");
-	Image sonPasCoupe = new Image("file:./src/Image/Volume.png");
-	Image reload = new Image("file:./src/Image/Reload.png");
+	Image play = new Image("/Image/Play.png");
+	Image pause = new Image("/Image/Pause.png");
+	Image sonCoupe = new Image("/Image/VolumeCoupe.png");
+	Image sonPasCoupe = new Image("/Image/Volume.png");
 	@FXML private Slider sliderSon;
 	@FXML private Slider sliderVideo;
 	@FXML private ImageView son;
@@ -347,7 +346,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 	//Méthode qui fait apparaître la popUp pour que l'étudiant rentre ses infos pour l'enregistrement
 	public void popUpEnregistrement() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/EnregistrementApresouverture.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/EnregistrementApresOuverture.fxml"));
 		Stage stage = new Stage();
 		Rectangle rect = new Rectangle(900,500);
 		rect.setArcHeight(20.0);
@@ -371,12 +370,12 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
 	public void darkModeActivation(Scene scene) {
 		if(Controller_Menu.isDark) {
-			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().removeAll(getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
 			dark.setSelected(true);
 		} else {
-			scene.getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().removeAll(getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			dark.setSelected(false);
 		}
 	}
@@ -384,7 +383,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode pur afficher l'aide proposée par l'enseignant
 	@FXML
 	public void affichageAide() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Aides.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/Aides.fxml"));
 		Stage stage = new Stage();
 		Rectangle rect = new Rectangle(400,600);
 		rect.setArcHeight(20.0);
@@ -409,7 +408,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		retourMenu();
 
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Solution.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/Solution.fxml"));
 		Stage stage = new Stage();
 		Rectangle rect = new Rectangle(600,400);
 		rect.setArcHeight(20.0);
@@ -452,7 +451,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		//Si la sensibilité à la casse n'est pas activée, on met le mot en minuscule
 		if(sensiCasse == false) {
-			mot += mot.toLowerCase();
+			mot = mot.toLowerCase();
 
 			for(int i = 0; i < lesMotsSensiCasse.size(); i++) {
 
@@ -460,7 +459,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 				//Si le mot correspond exactement 
 				if(lesMotsSensiCasse.get(i).compareTo(mot) == 0) {
-					lesMotsEtudiant.set(i, mot);
+					lesMotsEtudiant.set(i, lesMots.get(i));
 					estDecouvert.set(i, 1);
 					nbMotsDecouverts++;
 
@@ -616,7 +615,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui va load le temps écoulé pour le mode évaluation
 	public void finExercice() throws IOException {
 		Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ValidationEnregistrement.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/ValidationEnregistrement.fxml"));
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.TRANSPARENT);
@@ -691,7 +690,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode qui survient lorsque le timer est écoulé en mode Evaluation
 	public void loadEnregistrement() throws IOException {
 		Stage stage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/TempsEcoule.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/TempsEcoule.fxml"));
 		//On bloque sur cette fenêtre
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initStyle(StageStyle.UNDECORATED);
@@ -723,7 +722,7 @@ public class Controller_Page_Exercice implements Initializable{
 	//Méthode pour retourner au menu
 	public void retourMenu() throws IOException {
 		Stage stage = (Stage) alertSolution.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/Menu.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Etudiant/FXML_Files/Menu.fxml"));
 		Scene scene = new Scene(root,  MainEtudiant.width, MainEtudiant.height - 60);
 		stage.setScene(scene);
 		darkModeActivation(scene);
@@ -735,7 +734,6 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void tipConsigneEnter() {
 		Tooltip t = new Tooltip("Il s'agit de la consigne donnée par le professeur");
-		t.setShowDelay(Duration.seconds(0.2));
 		questionConsigne.setFitWidth(questionConsigne.getFitWidth() + 2);
 		questionConsigne.setFitHeight(questionConsigne.getFitHeight() + 2);
 		Tooltip.install(questionConsigne, t);
@@ -752,7 +750,6 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void tipTranscriptionEnter() {
 		Tooltip t = new Tooltip("Il s'agit du script de la vidéo que vous devez essayer de retrouver");
-		t.setShowDelay(Duration.seconds(0.2));
 		questionTranscription.setFitWidth(questionTranscription.getFitWidth() + 2);
 		questionTranscription.setFitHeight(questionTranscription.getFitHeight() + 2);
 		Tooltip.install(questionTranscription, t);
@@ -769,7 +766,6 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML
 	public void tipPropositionEnter() {
 		Tooltip t = new Tooltip("Rentrez ici les mots que vous pensez entendre dans le document audio ou vidéo");
-		t.setShowDelay(Duration.seconds(0.2));
 		questionProposition.setFitWidth(questionProposition.getFitWidth() + 2);
 		questionProposition.setFitHeight(questionProposition.getFitHeight() + 2);
 		Tooltip.install(questionProposition, t);
@@ -787,12 +783,12 @@ public class Controller_Page_Exercice implements Initializable{
 	public void darkMode() {
 
 		if(dark.isSelected()) {
-			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
 			Controller_Menu.isDark = true;
 		} else {
-			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("../FXML_Files/darkModeTest.css").toExternalForm());
-			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("../FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().removeAll(getClass().getResource("/Version_Etudiant/FXML_Files/darkModeTest.css").toExternalForm());
+			ButtonAide.getScene().getStylesheets().addAll(getClass().getResource("/Version_Etudiant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			Controller_Menu.isDark = false;
 		}
 	}

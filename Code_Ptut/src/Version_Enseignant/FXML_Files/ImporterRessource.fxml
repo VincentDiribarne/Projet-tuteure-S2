@@ -56,7 +56,7 @@
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Image/Play.png" />
+                        <Image url="@/Image/Play.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -102,7 +102,7 @@
             </Circle>
             <ImageView fitHeight="40.0" fitWidth="68.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <image>
-                  <Image url="@../../Image/Trait_Noir.png" />
+                  <Image url="@/Image/Trait_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets top="147.0" />
@@ -110,7 +110,7 @@
             </ImageView>
             <ImageView fitHeight="40.0" fitWidth="68.0" layoutX="576.0" layoutY="157.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <image>
-                  <Image url="@../../Image/Trait_Noir.png" />
+                  <Image url="@/Image/Trait_Noir.png" />
                </image>
                <GridPane.margin>
                   <Insets left="200.0" top="147.0" />
@@ -118,7 +118,7 @@
             </ImageView>
             <ImageView fitHeight="40.0" fitWidth="68.0" layoutX="576.0" layoutY="157.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <image>
-                  <Image url="@../../Image/Trait_Vert.png" />
+                  <Image url="@/Image/Trait_Vert.png" />
                </image>
                <GridPane.margin>
                   <Insets right="200.0" top="147.0" />
@@ -126,7 +126,7 @@
             </ImageView>
             <ImageView fx:id="son" fitHeight="29.0" fitWidth="62.0" onMouseClicked="#sonCoupe" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../Image/Volume.png" />
+                  <Image url="@/Image/Volume.png" />
                </image>
                <GridPane.margin>
                   <Insets left="390.0" top="350.0" />

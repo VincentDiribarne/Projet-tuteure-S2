@@ -137,7 +137,7 @@
                         <Insets bottom="220.0" left="40.0" right="80.0" top="165.0" />
                      </GridPane.margin>
                      <font>
-                        <Font size="14.0" />
+                        <Font size="17.0" />
                      </font>
                   </TextArea>
                </children>
@@ -180,7 +180,7 @@
                   </Circle>
                   <ImageView fitHeight="72.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../Image/Trait_Noir.png" />
+                        <Image url="@/Image/Trait_Noir.png" />
                      </image>
                      <GridPane.margin>
                         <Insets left="200.0" />
@@ -188,7 +188,7 @@
                   </ImageView>
                   <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="577.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../Image/Trait_Vert.png" />
+                        <Image url="@/Image/Trait_Vert.png" />
                      </image>
                      <GridPane.margin>
                         <Insets right="200.0" />
@@ -196,7 +196,7 @@
                   </ImageView>
                   <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="677.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../Image/Trait_Vert.png" />
+                        <Image url="@/Image/Trait_Vert.png" />
                      </image>
                   </ImageView>
                </children>
