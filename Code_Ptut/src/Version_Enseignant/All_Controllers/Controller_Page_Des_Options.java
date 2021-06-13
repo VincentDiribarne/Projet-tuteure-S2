@@ -195,7 +195,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	public void quitter(ActionEvent event) throws IOException {
 
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/ConfirmationQuitter.fxml"));
 		Scene scene = new Scene(root, 400, 200);
 		//On bloque sur cette fenêtre
 		primaryStage.initModality(Modality.APPLICATION_MODAL);

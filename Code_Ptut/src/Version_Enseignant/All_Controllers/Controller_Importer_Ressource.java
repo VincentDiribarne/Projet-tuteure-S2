@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import Version_Etudiant.DeplacementFenetre;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -108,7 +107,7 @@ public class Controller_Importer_Ressource implements Initializable {
 		public void quitter(ActionEvent event) throws IOException {
 			
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("../FXML_Files/ConfirmationQuitter.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/ConfirmationQuitter.fxml"));
 			Scene scene = new Scene(root, 400, 200);
 			//On bloque sur cette fenêtre
 			primaryStage.initModality(Modality.APPLICATION_MODAL);
