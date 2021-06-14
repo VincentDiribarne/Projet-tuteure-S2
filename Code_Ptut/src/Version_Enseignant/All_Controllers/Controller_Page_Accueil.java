@@ -227,7 +227,7 @@ public class Controller_Page_Accueil implements Initializable {
 		// Si c'est un mp3, on doit déchiffrer l'image
 		if (extension == 0) {
 
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 8)).getInt();
 
 			File tmpFileImage = File.createTempFile("data", ".png");
 			FileOutputStream ecritureFileImage = new FileOutputStream(tmpFileImage);
