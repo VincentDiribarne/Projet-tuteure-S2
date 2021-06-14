@@ -65,6 +65,8 @@ public class Controller_Importer_Ressource implements Initializable {
 	public static Image contenuImage;
 
 	@FXML private CheckMenuItem dark;
+	public static String cheminVideo = "";
+	public static String cheminImg = "";
 
 	// Méthode d'initialisation de la page
 	@Override
@@ -148,6 +150,7 @@ public class Controller_Importer_Ressource implements Initializable {
 		File selectedFile = new File("");
 		selectedFile = fileChooser.showOpenDialog(null);
 		path = selectedFile.toURI().toURL().toExternalForm();
+		cheminVideo = selectedFile.getAbsolutePath();
 		media = new Media(path);
 		mediaPlayer = new MediaPlayer(media);
 
@@ -191,9 +194,10 @@ public class Controller_Importer_Ressource implements Initializable {
 			fileChooserImage.setTitle("Choix d'une image pour la preview de l'audio");
 			selectedFile = new File("");
 			selectedFile = fileChooserImage.showOpenDialog(null);
-
+			
 			// On crée une image à partir de l'URL du fichier sélectionné
 			Image image = new Image(selectedFile.toURI().toURL().toExternalForm());
+			cheminImg = selectedFile.getAbsolutePath();
 			// On set l'imageView avec l'image
 			imageAudio.setImage(image);
 

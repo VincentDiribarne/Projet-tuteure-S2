@@ -169,8 +169,8 @@ public class Controller_Menu implements Initializable {
 			Controller_Page_Exercice.evaluation = true;
 			Controller_Page_Exercice.entrainement = false;
 
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(4)).getInt();
-			nbMin = chaine(fin.readNBytes(nombreOctetALire));
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 4)).getInt();
+			nbMin = chaine(readNBytes(fin, nombreOctetALire));
 
 			Controller_Page_Exercice.nbMin = nbMin;
 
@@ -236,7 +236,7 @@ public class Controller_Menu implements Initializable {
 		// Si c'est un mp3, on doit d�chiffrer l'image
 		if (extension == 0) {
 
-			nombreOctetALire = ByteBuffer.wrap(fin.readNBytes(8)).getInt();
+			nombreOctetALire = ByteBuffer.wrap(readNBytes(fin, 8)).getInt();
 
 			File tmpFileImage = File.createTempFile("data", ".png");
 			FileOutputStream ecritureFileImage = new FileOutputStream(tmpFileImage);
