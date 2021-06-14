@@ -25,6 +25,8 @@ public class MainEtudiant extends Application{
         
         //On affiche le plein écran
         primaryStage.setMaximized(true);
+		primaryStage.setMinWidth(1200);
+		primaryStage.setMinHeight(800);
         
         //On récupère la largeur et la hauteur de l'écran
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
