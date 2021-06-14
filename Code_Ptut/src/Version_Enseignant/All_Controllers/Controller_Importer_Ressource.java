@@ -137,6 +137,9 @@ public class Controller_Importer_Ressource implements Initializable {
 	// l'enseignant choisisse la ressource
 	@FXML
 	public void importerRessource(ActionEvent event) throws IOException {
+		
+		//Réinitialisation des variables
+		imageAudio.setImage(null);
 
 		FileChooser fileChooser = new FileChooser();
 		FileChooser fileChooserImage = new FileChooser();
