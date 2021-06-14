@@ -235,6 +235,7 @@ public class Controller_Page_Accueil implements Initializable {
 			ecritureFileImage.close();
 
 			Controller_Importer_Ressource.contenuImage = new Image(tmpFileImage.toURI().toString());
+			Controller_Importer_Ressource.cheminImg = tmpFileImage.getAbsolutePath();
 
 			// On efface le fichier temporaire
 			tmpFileImage.deleteOnExit();
@@ -263,6 +264,7 @@ public class Controller_Page_Accueil implements Initializable {
 		ecritureFile.close();
 
 		Controller_Importer_Ressource.contenuMedia = new Media(tmpFile.toURI().toString());
+		Controller_Importer_Ressource.cheminVideo = tmpFile.getAbsolutePath();
 
 		// On efface le fichier temporaire
 		tmpFile.deleteOnExit();
