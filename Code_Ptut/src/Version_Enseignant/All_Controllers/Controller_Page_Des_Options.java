@@ -324,7 +324,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML
 	public void selectionModeEntrainement(ActionEvent event) {
 		// On fait apparaître ce qui concerne le mode Entrainement
-		//On met disable ce qui concerne le mode Entrainement
+		//On enleve disable ce qui concerne le mode Entrainement
 		checkBoxMotsDecouverts.setDisable(false);
 		checkBoxMotIncomplet.setDisable(false);
 		checkBoxSolution.setDisable(false);
@@ -336,7 +336,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		entrainement = true;
 
 		// On réinitialise le nombre de minutes
-		nbMinute.setText(null);
+		nbMinute.setText("");
 
 		// On regarde si l'autre bouton est sélectionné, si c'est le cas on le
 		// déselectionne
