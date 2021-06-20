@@ -60,6 +60,10 @@ public class Controller_Importer_Ressource implements Initializable {
 	@FXML private ImageView son;
 	Image sonCoupe = new Image("/Image/VolumeCoupe.png");
 	Image sonPasCoupe = new Image("/Image/Volume.png");
+	Image play = new Image("/Image/Play.png");
+	Image pause = new Image("/Image/Pause.png");
+	
+	@FXML private ImageView playPauseVideo;
 
 	public static Media contenuMedia;
 	public static Image contenuImage;
@@ -290,9 +294,11 @@ public class Controller_Importer_Ressource implements Initializable {
 		
 		if (mediaPlayer.getStatus() == Status.PAUSED || mediaPlayer.getStatus() == Status.READY) {
 			mediaPlayer.play();
+			playPauseVideo.setImage(pause);
 			playPause.setText("Pause");
 		} else {
 			mediaPlayer.pause();
+			playPauseVideo.setImage(play);
 			playPause.setText("Play");
 		}
 	}
