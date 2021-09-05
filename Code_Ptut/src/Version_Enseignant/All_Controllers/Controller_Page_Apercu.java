@@ -10,7 +10,10 @@ import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
 import Version_Etudiant.DeplacementFenetre;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,17 +21,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class Controller_Page_Apercu implements Initializable {
 
@@ -50,14 +61,33 @@ public class Controller_Page_Apercu implements Initializable {
 	public static String contenuTranscription;
 	public static String contenuAide;
 
-	@FXML private CheckMenuItem dark;
+	@FXML
+	private CheckMenuItem dark;
+
+	// Gestion du media (son + video)
+	@FXML
+	private Button playPause;
+	@FXML
+	private Slider progressBar;
+	@FXML
+	private Slider sliderSon;
+	@FXML
+	private ImageView son;
+	Image sonCoupe = new Image("/Image/VolumeCoupe.png");
+	Image sonPasCoupe = new Image("/Image/Volume.png");
+	Image play = new Image("/Image/Play.png");
+	Image pause = new Image("/Image/Pause.png");
+	@FXML private ImageView playPauseVideo;
+	
+	MediaPlayer mediaPlayer;
+	Media media = Controller_Importer_Ressource.contenuMedia;
 
 	// Méthode d'initialisation de la page
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// On met le media dans la preview
-		MediaPlayer mediaPlayer = new MediaPlayer(Controller_Importer_Ressource.contenuMedia);
+		mediaPlayer = new MediaPlayer(Controller_Importer_Ressource.contenuMedia);
 		MediaViewApercu.setMediaPlayer(mediaPlayer);
 
 		// On met l'image dans la preview
@@ -80,35 +110,117 @@ public class Controller_Page_Apercu implements Initializable {
 			texteAide.setText(contenuAide);
 		}
 	}
-
-	//Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible sur toutes les pages)
+	
+	// Fonction qui permet à l'enseignant de visualiser sa video ou son son
 		@FXML
-		public void quitter(ActionEvent event) throws IOException {
+		public void playOrPause() {
+
+			sliderSonChange();
+			sliderVideoChange();
 			
-			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/ConfirmationQuitter.fxml"));
-			Scene scene = new Scene(root, 400, 200);
-			//On bloque sur cette fenêtre
-			primaryStage.initModality(Modality.APPLICATION_MODAL);
-			primaryStage.initStyle(StageStyle.TRANSPARENT);
-			scene.setFill(Color.TRANSPARENT);
-			
-			//Bordure
-			Rectangle rect = new Rectangle(400,200); 
-			rect.setArcHeight(20.0); 
-			rect.setArcWidth(20.0);  
-			root.setClip(rect);
-			
-			DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
-			primaryStage.setScene(scene);
-			darkModeActivation(scene);
-			primaryStage.show();
+			if (mediaPlayer.getStatus() == Status.PAUSED || mediaPlayer.getStatus() == Status.READY) {
+				mediaPlayer.play();
+				playPauseVideo.setImage(pause);
+			} else {
+				mediaPlayer.pause();
+				playPauseVideo.setImage(play);
+			}
 		}
 		
+		public void sliderSonChange() {
+			// Change le volume sonore selon la valeur du slider
+			sliderSon.valueProperty().addListener((o -> {
+				mediaPlayer.setVolume(sliderSon.getValue() / 100.0); 
+
+				if(sliderSon.getValue() == 0) {
+					son.setImage(sonCoupe);
+				} else {
+					son.setImage(sonPasCoupe);
+				}
+			}));
+		}
+
+		//Fonction qui permet de mute le son
+		@FXML
+		public void sonCoupe(MouseEvent event) {
+
+			if(mediaPlayer.getVolume() != 0) {
+				son.setImage(sonCoupe);
+				mediaPlayer.setVolume(0);
+			} else {
+				son.setImage(sonPasCoupe);
+				mediaPlayer.setVolume(sliderSon.getValue() / 100);
+			}
+
+		}
+
+		//Fonction qui fait avancer le slider en fonction de la video
+		public void sliderVideoChange() {
+
+			Duration total = media.getDuration();
+			progressBar.setMax(total.toSeconds());
+
+			mediaPlayer.setOnReady(new Runnable() {
+				@Override
+				public void run() {
+					Duration total = media.getDuration();
+					progressBar.setMax(total.toSeconds());
+				}
+			});
+
+			mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+				@Override
+				public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+					progressBar.setValue(newValue.toSeconds());
+				}
+			});
+
+			progressBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					mediaPlayer.seek(Duration.seconds(progressBar.getValue()));
+				}
+			});
+
+			progressBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					mediaPlayer.seek(Duration.seconds(progressBar.getValue()));
+				}
+			});
+			
+		}
+
+	// Bouton Quitter qui permet à l'enseignant de quitter l'application (disponible
+	// sur toutes les pages)
+	@FXML
+	public void quitter(ActionEvent event) throws IOException {
+
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader
+				.load(getClass().getResource("/Version_Enseignant/FXML_Files/ConfirmationQuitter.fxml"));
+		Scene scene = new Scene(root, 400, 200);
+		// On bloque sur cette fenêtre
+		primaryStage.initModality(Modality.APPLICATION_MODAL);
+		primaryStage.initStyle(StageStyle.TRANSPARENT);
+		scene.setFill(Color.TRANSPARENT);
+
+		// Bordure
+		Rectangle rect = new Rectangle(400, 200);
+		rect.setArcHeight(20.0);
+		rect.setArcWidth(20.0);
+		root.setClip(rect);
+
+		DeplacementFenetre.deplacementFenetre((Pane) root, primaryStage);
+		primaryStage.setScene(scene);
+		darkModeActivation(scene);
+		primaryStage.show();
+	}
+
 	@FXML
 	public void pageNouvelExo() throws IOException {
 
-		//Réinitialisation des variables
+		// Réinitialisation des variables
 		Controller_Page_Accueil c = new Controller_Page_Accueil();
 		c.delete();
 		Stage primaryStage = (Stage) okApercu.getScene().getWindow();
@@ -118,19 +230,19 @@ public class Controller_Page_Apercu implements Initializable {
 		darkModeActivation(scene);
 		primaryStage.show();
 	}
-	
+
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        if( Desktop.isDesktopSupported() )
-        {
-            new Thread(() -> {
-                   try {
-                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
-                   } catch (IOException | URISyntaxException e1) {
-                       e1.printStackTrace();
-                   }
-               }).start();
-        }
+		if (Desktop.isDesktopSupported()) {
+			new Thread(() -> {
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}).start();
+		}
 	}
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)
@@ -161,31 +273,40 @@ public class Controller_Page_Apercu implements Initializable {
 		primaryStage.show();
 	}
 
-	//Méthode pour passer ou non le darkMode
+	// Méthode pour passer ou non le darkMode
 	@FXML
 	public void darkMode() {
 
-		if(dark.isSelected()) {
-			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			okApercu.getScene().getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
+		if (dark.isSelected()) {
+			okApercu.getScene().getStylesheets().removeAll(
+					getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okApercu.getScene().getStylesheets()
+					.addAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
 			Controller_Page_Accueil.isDark = true;
 		} else {
-			okApercu.getScene().getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
-			okApercu.getScene().getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			okApercu.getScene().getStylesheets().removeAll(
+					getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
+			okApercu.getScene().getStylesheets().addAll(
+					getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			Controller_Page_Accueil.isDark = false;
 		}
 
 	}
 
-	//Méthode qui regarde si le darkMode est actif et l'applique en conséquence à la scene
+	// Méthode qui regarde si le darkMode est actif et l'applique en conséquence à
+	// la scene
 	public void darkModeActivation(Scene scene) {
-		if(Controller_Page_Accueil.isDark) {
-			scene.getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
+		if (Controller_Page_Accueil.isDark) {
+			scene.getStylesheets().removeAll(
+					getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets()
+					.addAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
 			dark.setSelected(true);
 		} else {
-			scene.getStylesheets().removeAll(getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
-			scene.getStylesheets().addAll(getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
+			scene.getStylesheets().removeAll(
+					getClass().getResource("/Version_Enseignant/FXML_Files/darkModeTest.css").toExternalForm());
+			scene.getStylesheets().addAll(
+					getClass().getResource("/Version_Enseignant/FXML_Files/MenuAndButtonStyles.css").toExternalForm());
 			dark.setSelected(false);
 		}
 	}

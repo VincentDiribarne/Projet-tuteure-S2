@@ -33,28 +33,34 @@
          <children>
             <TextField editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="674.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-background-color: transparent; -fx-border-radius: 15;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets left="250.0" right="250.0" top="30.0" />
+                  <Insets left="250.0" right="250.0" top="120.0" />
                </GridPane.margin>
             </TextField>
             <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="440.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <viewport>
                   <Rectangle2D minX="150.0" />
-               </viewport></MediaView>
-            <ImageView fx:id="imageAudio" fitHeight="200.0" fitWidth="440.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </viewport>
+               <GridPane.margin>
+                  <Insets top="100.0" />
+               </GridPane.margin></MediaView>
+            <ImageView fx:id="imageAudio" fitHeight="200.0" fitWidth="440.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets top="100.0" />
+               </GridPane.margin></ImageView>
             <Button mnemonicParsing="false" onAction="#importerRessource" text="Sélectionner une ressource audio ou video" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="280.0" />
+                  <Insets bottom="280.0" top="60.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="playPause" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playOrPause" prefHeight="25.0" prefWidth="76.0" text="Play" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="playPause" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playOrPause" prefHeight="30.0" prefWidth="70.0" text="Play" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets right="538.0" top="350.0" />
+                  <Insets right="538.0" top="450.0" />
                </GridPane.margin>
                <graphic>
-                  <ImageView fitHeight="39.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="playPauseVideo" fitHeight="39.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/Image/Play.png" />
                      </image>
@@ -70,7 +76,7 @@
             </Button>
             <Slider fx:id="progressBar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="361.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets left="380.0" right="480.0" top="350.0" />
+                  <Insets left="380.0" right="480.0" top="450.0" />
                </GridPane.margin></Slider>
             <Button fx:id="okImport" disable="true" mnemonicParsing="false" onAction="#pageApercu" prefHeight="36.0" prefWidth="180.0" text="Continuer" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <font>
@@ -129,12 +135,12 @@
                   <Image url="@/Image/Volume.png" />
                </image>
                <GridPane.margin>
-                  <Insets left="390.0" top="350.0" />
+                  <Insets left="390.0" top="450.0" />
                </GridPane.margin>
             </ImageView>
             <Slider fx:id="sliderSon" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="85.0" value="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets left="820.0" right="300.0" top="350.0" />
+                  <Insets left="820.0" right="300.0" top="450.0" />
                </GridPane.margin>
             </Slider>
             <Label text="Importer une ressource" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -143,6 +149,38 @@
                </font>
                <GridPane.margin>
                   <Insets top="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="80.0" text="Nommage de l'exercice" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="330.0" right="300.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="80.0" text="Sélection du média" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="330.0" right="100.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="80.0" text="Rédaction du script" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="330.0" left="100.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="80.0" text="Choix des options" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="330.0" left="300.0" />
                </GridPane.margin>
             </Label>
          </children>

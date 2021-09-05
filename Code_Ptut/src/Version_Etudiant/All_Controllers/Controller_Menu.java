@@ -82,11 +82,28 @@ public class Controller_Menu implements Initializable {
 		fileChooser.setTitle("Ouvrez votre exercice");
 
 		selectedFile = fileChooser.showOpenDialog(null);
+		Controller_EnregistrementApresOuverture.nomExo = stripExtension(selectedFile);
 		decrypte(selectedFile);
 
 		// On load la page oï¿½ il y a l'exercice
 		loadExo();
 	}
+	
+	//Méthode qui strip une extension
+	public static String stripExtension(File file) {
+        if (file == null) {
+            return null;
+        }
+        String name = file.getName();
+
+        int posPoint = name.lastIndexOf(".");
+
+        if (posPoint == -1) {
+            return name;
+        }
+
+        return name.substring(0, posPoint);
+    }
 
 	// Fonction qui permet d'aller ï¿½ la page oï¿½ se trouve l'exercice
 	public void loadExo() throws IOException {

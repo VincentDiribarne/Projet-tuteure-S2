@@ -138,6 +138,38 @@
                   <Insets left="200.0" top="100.0" />
                </GridPane.margin>
             </ImageView>
+            <Label prefHeight="39.0" prefWidth="99.0" text="Nommage de l'exercice" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="300.0" top="200.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="94.0" text="Sélection du média" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="100.0" top="200.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="93.0" text="Rédaction du script" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="100.0" top="200.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
+            <Label prefHeight="39.0" prefWidth="92.0" text="Choix des options" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="300.0" top="200.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </center>

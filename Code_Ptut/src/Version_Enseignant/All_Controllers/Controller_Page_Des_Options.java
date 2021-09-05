@@ -133,10 +133,18 @@ public class Controller_Page_Des_Options implements Initializable {
 			checkBoxSolution.setDisable(true);
 			radioButton2Lettres.setDisable(true);
 			radioButton3Lettres.setDisable(true);
+			
+			
 			nbMinute.setText(nbMin);
+			nbMinute.setDisable(false);
 		}
 
 		checkMode();
+		
+		//Si tous les trucs nécessaires sont cochés on met le bouton enregistrer dispo
+		if(!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || (radioButtonEvaluation.isSelected()  && !nbMinute.getText().isEmpty()))) {
+			enregistrer.setDisable(false);
+		}
 
 	}
 
@@ -148,7 +156,7 @@ public class Controller_Page_Des_Options implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || radioButtonEvaluation.isSelected())) {
+				if(!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || (radioButtonEvaluation.isSelected()  && !nbMinute.getText().isEmpty()))) {
 					enregistrer.setDisable(false);
 				} else {
 					enregistrer.setDisable(true);
@@ -161,7 +169,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		radioButtonEntrainement.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
-				if (!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || radioButtonEvaluation.isSelected())) { 
+				if (!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || (radioButtonEvaluation.isSelected() && !nbMinute.getText().isEmpty()))) { 
 					enregistrer.setDisable(false);
 				} else {
 					enregistrer.setDisable(true);
@@ -173,7 +181,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		radioButtonEvaluation.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
-				if (!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || radioButtonEvaluation.isSelected())) { 
+				if (!CaraOccul.getText().isEmpty() && (radioButtonEntrainement.isSelected() || (radioButtonEvaluation.isSelected() && !nbMinute.getText().isEmpty()))) { 
 					enregistrer.setDisable(false);
 				} else {
 					enregistrer.setDisable(true);
@@ -181,20 +189,39 @@ public class Controller_Page_Des_Options implements Initializable {
 			}
 		});
 
+
+		//Pour le nombre de min
+		nbMinute.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+
+				if(radioButtonEvaluation.isSelected()) {
+					if(!CaraOccul.getText().isEmpty() && !nbMinute.getText().isEmpty()) {
+						enregistrer.setDisable(false);
+					} else {
+						enregistrer.setDisable(true);
+					}
+				}
+
+			}
+		});
+
+
 	}
-	
+
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        if( Desktop.isDesktopSupported() )
-        {
-            new Thread(() -> {
-                   try {
-                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
-                   } catch (IOException | URISyntaxException e1) {
-                       e1.printStackTrace();
-                   }
-               }).start();
-        }
+		if( Desktop.isDesktopSupported() )
+		{
+			new Thread(() -> {
+				try {
+					Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}).start();
+		}
 	}
 
 
@@ -225,6 +252,15 @@ public class Controller_Page_Des_Options implements Initializable {
 	// Bouton qui fait retourner l'enseignant à la page d'apercu (bouton retour)
 	@FXML
 	public void pageApercu(ActionEvent event) throws IOException {
+
+		if(!CaraOccul.getText().isEmpty() && CaraOccul.getText() != "") {
+			caraOccul = CaraOccul.getText();
+		}
+
+		if(!nbMinute.getText().isEmpty() && nbMinute.getText() != "") {
+			nbMin = nbMinute.getText();
+		}
+
 		Stage primaryStage = (Stage) nbMinute.getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/Version_Enseignant/FXML_Files/PageApercu.fxml"));
 		Scene scene = new Scene(root, MainEnseignant.width, MainEnseignant.height - 60);
@@ -244,6 +280,8 @@ public class Controller_Page_Des_Options implements Initializable {
 
 	@FXML
 	public void pageEnregistrementFinal(ActionEvent event) throws IOException {
+
+
 		// Quand on passe à la page suivante, on mémorise les informations des options
 		caraOccul = CaraOccul.getText();
 		nbMin = nbMinute.getText();
@@ -324,7 +362,7 @@ public class Controller_Page_Des_Options implements Initializable {
 	@FXML
 	public void selectionModeEntrainement(ActionEvent event) {
 		// On fait apparaître ce qui concerne le mode Entrainement
-		//On met disable ce qui concerne le mode Entrainement
+		//On enleve disable ce qui concerne le mode Entrainement
 		checkBoxMotsDecouverts.setDisable(false);
 		checkBoxMotIncomplet.setDisable(false);
 		checkBoxSolution.setDisable(false);
@@ -336,7 +374,7 @@ public class Controller_Page_Des_Options implements Initializable {
 		entrainement = true;
 
 		// On réinitialise le nombre de minutes
-		nbMinute.setText(null);
+		nbMinute.setText("");
 
 		// On regarde si l'autre bouton est sélectionné, si c'est le cas on le
 		// déselectionne
@@ -427,6 +465,10 @@ public class Controller_Page_Des_Options implements Initializable {
 		if (checkBoxMotIncomplet.isSelected()) {
 
 			radioButton2Lettres.setDisable(false);
+
+			//On coche par défaut les 2 lettres
+			radioButton2Lettres.setSelected(true);
+			lettres_2 = true;
 			radioButton3Lettres.setDisable(false);
 
 			// on passe à true

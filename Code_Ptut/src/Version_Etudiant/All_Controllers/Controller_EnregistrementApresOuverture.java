@@ -18,7 +18,7 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 	@FXML private TextField nom;
 	@FXML private TextField prenom;
 	@FXML private TextField repertoire;
-	@FXML private TextField nomExercice;
+	@FXML private TextField nomFichier;
 	@FXML private Button preEnregistrement;
 	
 	//Variables pour stocker les informations relatives à l'etudiant
@@ -36,7 +36,7 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty() || nomExercice.getText().isEmpty()) {
+				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty()) {
 					preEnregistrement.setDisable(true);
 				} else {
 					preEnregistrement.setDisable(false);
@@ -49,7 +49,7 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty() || nomExercice.getText().isEmpty()) {
+				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty()) {
 					preEnregistrement.setDisable(true);
 				} else {
 					preEnregistrement.setDisable(false);
@@ -62,26 +62,14 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty() || nomExercice.getText().isEmpty()) {
+				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty()) {
 					preEnregistrement.setDisable(true);
 				} else {
 					preEnregistrement.setDisable(false);
 				}
 			}
 		});
-		
-		//Pour le TextField du repertoire dans lequel sera enregistré le fichier de l'étudiant
-		nomExercice.textProperty().addListener(new ChangeListener<String>() {
 
-			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(nom.getText().isEmpty() || prenom.getText().isEmpty() || repertoire.getText().isEmpty() || nomExercice.getText().isEmpty()) {
-					preEnregistrement.setDisable(true);
-				} else {
-					preEnregistrement.setDisable(false);
-				}
-			}
-		});
 	}
 	
 	
@@ -95,6 +83,8 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 		if(selectedDirectory != null) {
 			repertoire.setText(selectedDirectory.getAbsolutePath());
 		}
+		
+		changeFileName();
 	}
 	
 	//Méthode qui permet de quitter la popUp, un fois les TextFields remplis et de sauvegarder les infos
@@ -103,10 +93,14 @@ public class Controller_EnregistrementApresOuverture implements Initializable{
 		nomEtudiant = nom.getText();
 		prenEtudiant = prenom.getText();
 		repertoireEtudiant = repertoire.getText();
-		nomExo = nomExercice.getText();
 		
 		nom.getScene().getWindow().hide();
 	}
+	
+	@FXML public void changeFileName() {
+        nomFichier.setText(repertoire.getText() + "\\" + nomExo + "_" + prenom.getText() + "_" + nom.getText() + ".rct");
+
+    }
 	
 
 }
