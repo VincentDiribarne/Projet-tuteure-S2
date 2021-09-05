@@ -157,22 +157,22 @@
                            </image></ImageView>
                      </graphic>
                   </Button>
-                  <Slider fx:id="progressBar" prefHeight="14.0" prefWidth="196.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Slider fx:id="progressBar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="240.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="140.0" right="220.0" top="280.0" />
+                        <Insets left="120.0" right="200.0" top="280.0" />
                      </GridPane.margin>
                   </Slider>
-                  <ImageView fx:id="son" fitHeight="29.0" fitWidth="62.0" onMouseClicked="#sonCoupe" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                  <ImageView fx:id="son" fitHeight="29.0" fitWidth="62.0" onMouseClicked="#sonCoupe" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="400.0" top="280.0" />
+                        <Insets left="260.0" right="20.0" top="280.0" />
                      </GridPane.margin>
                      <image>
                         <Image url="@/Image/Volume.png" />
                      </image>
                   </ImageView>
-                  <Slider fx:id="sliderSon" prefHeight="14.0" prefWidth="28.0" value="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Slider fx:id="sliderSon" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="14.0" prefWidth="75.0" value="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="470.0" right="60.0" top="280.0" />
+                        <Insets left="470.0" right="70.0" top="280.0" />
                      </GridPane.margin>
                   </Slider>
                </children>
