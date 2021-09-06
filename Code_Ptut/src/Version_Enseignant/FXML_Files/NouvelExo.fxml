@@ -107,7 +107,7 @@
                   <Insets right="100.0" top="100.0" />
                </GridPane.margin>
             </Circle>
-            <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Circle fill="#e8e8e8" radius="17.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="100.0" top="100.0" />
                </GridPane.margin>

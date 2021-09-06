@@ -325,36 +325,36 @@
                   <Insets bottom="100.0" top="15.0" />
                </GridPane.margin>
             </Separator>
-            <Label prefHeight="38.0" prefWidth="82.0" text="Nommage de l'exercice" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label prefHeight="38.0" prefWidth="82.0" text="Nommage de l'exercice" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets right="300.0" />
+                  <Insets right="300.0" top="170.0" />
                </GridPane.margin>
                <font>
                   <Font name="Comic Sans MS" size="12.0" />
                </font>
             </Label>
-            <Label prefHeight="38.0" prefWidth="82.0" text="Rédaction du script" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label prefHeight="38.0" prefWidth="82.0" text="Rédaction du script" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <font>
                   <Font name="Comic Sans MS" size="12.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="100.0" />
+                  <Insets left="100.0" top="170.0" />
                </GridPane.margin>
             </Label>
-            <Label prefHeight="38.0" prefWidth="82.0" text="Sélection du média" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label prefHeight="38.0" prefWidth="82.0" text="Sélection du média" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <font>
                   <Font name="Comic Sans MS" size="12.0" />
                </font>
                <GridPane.margin>
-                  <Insets right="100.0" />
+                  <Insets right="100.0" top="170.0" />
                </GridPane.margin>
             </Label>
-            <Label prefHeight="38.0" prefWidth="82.0" text="Choix des options" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label prefHeight="38.0" prefWidth="82.0" text="Choix des options" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <font>
                   <Font name="Comic Sans MS" size="12.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="300.0" />
+                  <Insets left="300.0" top="170.0" />
                </GridPane.margin>
             </Label>
          </children>
