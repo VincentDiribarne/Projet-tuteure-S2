@@ -218,8 +218,11 @@ public class Controller_Page_Exercice implements Initializable{
 		}
 
 		//On fait apparaître une fenêtre pour que l'étudiant rentre son nom et prénom en vue du futur enregistrement
+		//Note : Seulement si l'exercice est en mode Entrainement
 		try {
-			popUpEnregistrement();
+			if(evaluation == true) {
+				popUpEnregistrement();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
