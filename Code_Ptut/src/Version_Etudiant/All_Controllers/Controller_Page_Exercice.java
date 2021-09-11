@@ -24,6 +24,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
@@ -345,6 +346,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		mediaPlayer.play();
 		setKeyboardShortcut();
+		
 
 		if(timerEstDeclenche == false) {
 			gestionTimer();
@@ -944,7 +946,20 @@ public class Controller_Page_Exercice implements Initializable{
 		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.SPACE) {
+				System.out.println(ButtonAide.getScene().focusOwnerProperty().get());
+				 if ((ButtonAide.getScene().focusOwnerProperty().get() instanceof TextField)) {
+	                    if (event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.ENTER) {
+	                    	if(!motPropose.getText().isEmpty()) {
+	    						try {
+	    							verify(motPropose.getText());
+	    							motPropose.setText("");
+	    						} catch (IOException e) {
+	    							e.printStackTrace();
+	    						}
+	    					}
+	                    }
+	                }
+				 else if (event.getCode() == KeyCode.SPACE) {
 					if (mediaView.getMediaPlayer().getStatus() == Status.PAUSED) {
 						mediaView.getMediaPlayer().play();
 						playOrPause.setImage(pause);
@@ -967,20 +982,19 @@ public class Controller_Page_Exercice implements Initializable{
 				if (event.getCode() == KeyCode.DOWN) {
 					sliderSon.setValue(sliderSon.getValue() - 3);
 				}
-
-				if (event.getCode() == KeyCode.ENTER) {
-					if(!motPropose.getText().isEmpty()) {
-						try {
-							verify(motPropose.getText());
-							motPropose.setText("");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
 			}
 
 		});
-
+		
+		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				 if ((ButtonAide.getScene().focusOwnerProperty().get() instanceof TextField)) {
+	                    if (event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.ENTER) {
+	    						motPropose.setText("");
+	                    }
+	                }
+			}
+		});
 	}
 }
