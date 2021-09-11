@@ -92,6 +92,16 @@ public class Controller_Page_Exercice implements Initializable{
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
 	private ArrayList<Integer> estDecouvert = new ArrayList<>();
 	private String encryptedText;
+	
+	public String getEncryptedText() {
+		return encryptedText;
+	}
+
+	public String getClearText() {
+		return clearText;
+	}
+
+
 	private String clearText = contenuTranscription;
 	public int numberPartialReplacement;
 
