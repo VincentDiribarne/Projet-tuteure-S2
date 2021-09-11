@@ -3,11 +3,12 @@ package Version_Etudiant.All_Controllers;
 import java.awt.Desktop;
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Version_Etudiant.*;
 import javafx.animation.KeyFrame;
@@ -23,6 +24,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.*;
 import javafx.scene.media.MediaPlayer.Status;
@@ -90,6 +92,19 @@ public class Controller_Page_Exercice implements Initializable{
 	private ArrayList<String> lesMotsSensiCasse = new ArrayList<>();
 	private ArrayList<String> lesMotsEtudiant = new ArrayList<>();
 	private ArrayList<Integer> estDecouvert = new ArrayList<>();
+	private String encryptedText;
+	
+	public String getEncryptedText() {
+		return encryptedText;
+	}
+
+	public String getClearText() {
+		return clearText;
+	}
+
+
+	private String clearText = contenuTranscription;
+	public int numberPartialReplacement;
 
 	//Tout ce qui concerne la barre de progression
 	@FXML private ProgressBar progressBar;
@@ -104,6 +119,7 @@ public class Controller_Page_Exercice implements Initializable{
 	@FXML private ImageView questionProposition;
 
 	@FXML private CheckMenuItem dark;
+	@FXML private Button validateButton;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -111,10 +127,12 @@ public class Controller_Page_Exercice implements Initializable{
 		int i;
 		String mot = "", motCrypte = "";
 
+		encryptedText = encryptText();
+
 		//On fait en sorte à ce que le texte ne dépasse pas du cadre
 		transcription.setWrapText(true);
 
-		//On affiche le texte crypté dans le TextField
+		/*//On affiche le texte crypté dans le TextField
 		if(contenuTranscription != null) {
 
 			//Pour la transcription, on utilise le caractere d'occultation
@@ -144,7 +162,7 @@ public class Controller_Page_Exercice implements Initializable{
 			//Si on arrive à la fin de la boucle, on ajoute quand meme le dernier mot
 			lesMots.add(mot);
 			lesMotsEtudiant.add(motCrypte);
-		}
+		}*/
 
 		//On initialise la liste estDecouvert
 		for(String w : lesMots) {
@@ -214,11 +232,22 @@ public class Controller_Page_Exercice implements Initializable{
 				labelMotsDecouverts.setVisible(false);
 			}
 
+			if(lettres_2 == true) {
+				numberPartialReplacement = 2;
+			} else if(lettres_3 == true){
+				numberPartialReplacement = 3;
+			} else {
+				numberPartialReplacement = 0;
+			}
+
 		}
 
 		//On fait apparaître une fenêtre pour que l'étudiant rentre son nom et prénom en vue du futur enregistrement
+		//Note : Seulement si l'exercice est en mode Entrainement
 		try {
-			popUpEnregistrement();
+			if(evaluation == true) {
+				popUpEnregistrement();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -226,6 +255,29 @@ public class Controller_Page_Exercice implements Initializable{
 		sliderSonChange();
 		sliderVideoChange();
 
+		validateButton.setOnAction(ActionEvent -> {
+			try {
+				verify(motPropose.getText());
+				motPropose.setText("");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+
+		transcription.setText(encryptedText);
+
+	}
+
+	private String encryptText() {
+		String constructString = "";
+		for (String string : clearText.split("")) {
+			if (string.matches("[a-zA-Z]") || (string.matches("[0-9]"))) {
+				constructString += caractereOccul;
+			}else {
+				constructString += string;
+			}
+		}
+		return constructString;
 	}
 
 	public void sliderSonChange() {
@@ -294,6 +346,7 @@ public class Controller_Page_Exercice implements Initializable{
 
 		mediaPlayer.play();
 		setKeyboardShortcut();
+		
 
 		if(timerEstDeclenche == false) {
 			gestionTimer();
@@ -339,18 +392,29 @@ public class Controller_Page_Exercice implements Initializable{
 		return false;
 	}
 
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        if( Desktop.isDesktopSupported() )
-        {
-            new Thread(() -> {
-                   try {
-                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
-                   } catch (IOException | URISyntaxException e1) {
-                       e1.printStackTrace();
-                   }
-               }).start();
-        }
+
+		InputStream is = MainEtudiant.class.getResourceAsStream("Manuel_Utilisateur.pdf");
+
+		File pdf = File.createTempFile("Manuel Utilisateur", ".pdf");
+		pdf.deleteOnExit();
+		OutputStream out = new FileOutputStream(pdf);
+
+		byte[] buffer = new byte[4096];
+		int bytesRead = 0;
+
+		while (is.available() != 0) {
+			bytesRead = is.read(buffer);
+			out.write(buffer, 0, bytesRead);
+		}
+
+		out.close();
+		is.close();
+
+		Desktop.getDesktop().open(pdf);
+
 	}
 
 	//Méthode qui fait apparaître la popUp pour que l'étudiant rentre ses infos pour l'enregistrement
@@ -437,6 +501,81 @@ public class Controller_Page_Exercice implements Initializable{
 
 	}
 
+	private void verify(String text) throws IOException {
+		if (text == null) {
+			return;
+		}
+		String[] encrypted = encryptedText.split("[ \\t\\n\\x0B\\f\\r]");
+		String[] clear = clearText.split("[ \\t\\n\\x0B\\f\\r]");
+		Pattern punctionLessPattern = Pattern.compile("[^\\p{Punct}&&[^'-]]*");
+		Matcher clearMatcher;
+		for (int i = 0; i < clear.length; i++) {
+			clearMatcher = punctionLessPattern.matcher(clear[i]);
+			if (clearMatcher.find() && clearMatcher.group(0).toLowerCase().equals(text.toLowerCase())) {
+				if (sensiCasse && !clearMatcher.group(0).equals(text)) {
+					continue;
+				}
+				encrypted[i]=clear[i];
+			}
+			Pattern numberCharPattern = Pattern.compile(".{4,}");
+			Matcher numberCharMatcher = numberCharPattern.matcher(clear[i]);
+			if (numberCharMatcher.find() && numberPartialReplacement > 0 && text.length() >= numberPartialReplacement 
+					&& encrypted[i].substring(0,text.length()).contains(""+caractereOccul) 
+					&& numberCharMatcher.group().substring(0,text.length()).equals(text)) {
+
+				encrypted[i] = numberCharMatcher.group(0).substring(0,text.length());
+				for (int j = text.length(); j < clearMatcher.group(0).length(); j++) {
+					encrypted[i] += caractereOccul;
+				}
+				encrypted[i] += clear[i].substring(clearMatcher.group(0).length());
+			}
+		}
+		encryptedText = "";
+		int length =0;
+		for (int i = 0; i < encrypted.length; i++) {
+			encryptedText += encrypted[i];
+			if (length + clear[i].length() < clearText.length()) {
+				length += clear[i].length();
+			}
+			if (Character.isWhitespace(clearText.charAt(length)) || Character.isSpaceChar(clearText.charAt(length))) {
+				encryptedText += clearText.charAt(length);
+			}
+			length++;
+		}
+
+		int ok = 0;
+
+		if(motDecouverts) {
+			int numberWord = clear.length;
+			int numberFoundWord = 0;
+			for (String string : encrypted) {
+				if (!string.contains(caractereOccul)) {
+					numberFoundWord++;
+				}
+			}
+			progressBar.setProgress( (double) numberFoundWord / (double) numberWord);
+			pourcentageMots.setText(Math.round(( (double) numberFoundWord / (double) numberWord) * 100)  + "%");
+
+			if (Math.round(( (double) numberFoundWord / (double) numberWord) * 100) == 100){
+				ok = 1;
+			}
+		}
+
+		if(ok == 1) {
+
+			//Si c'est le cas, on enregistre son exercice, puis on load une popUp
+			retourMenu();
+
+			if(evaluation == true) {
+				finExercice();
+				enregistrementExo();
+			}
+		}
+
+		transcription.setText(encryptedText);
+	}
+
+
 	//Méthode pour quitter l'application
 	@FXML
 	public void quitter(ActionEvent event) {
@@ -444,7 +583,7 @@ public class Controller_Page_Exercice implements Initializable{
 	}
 
 	//Méthode qui permet à l'étudiant de proposer un mot, et affichage ou non dans le texte occulté si le mot est présent
-	@FXML
+	/*@FXML
 	public void propositionMot() throws IOException {
 
 		String mot = motPropose.getText(), word = "";
@@ -503,7 +642,7 @@ public class Controller_Page_Exercice implements Initializable{
 						}
 						lesMotsEtudiant.set(i, word);
 					}
-					
+
 					//On réinitialise le compteur
 					cpt = 0;
 
@@ -554,7 +693,7 @@ public class Controller_Page_Exercice implements Initializable{
 						}
 						lesMotsEtudiant.set(i, word);
 					}
-					
+
 					//On réinitialise le compteur
 					cpt = 0;
 				}
@@ -598,7 +737,7 @@ public class Controller_Page_Exercice implements Initializable{
 			finExercice();
 			enregistrementExo();
 		}
-	}
+	}*/
 
 	public ArrayList<String> getLesMots() {
 		return lesMots;
@@ -807,7 +946,20 @@ public class Controller_Page_Exercice implements Initializable{
 		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.SPACE) {
+				System.out.println(ButtonAide.getScene().focusOwnerProperty().get());
+				 if ((ButtonAide.getScene().focusOwnerProperty().get() instanceof TextField)) {
+	                    if (event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.ENTER) {
+	                    	if(!motPropose.getText().isEmpty()) {
+	    						try {
+	    							verify(motPropose.getText());
+	    							motPropose.setText("");
+	    						} catch (IOException e) {
+	    							e.printStackTrace();
+	    						}
+	    					}
+	                    }
+	                }
+				 else if (event.getCode() == KeyCode.SPACE) {
 					if (mediaView.getMediaPlayer().getStatus() == Status.PAUSED) {
 						mediaView.getMediaPlayer().play();
 						playOrPause.setImage(pause);
@@ -830,19 +982,19 @@ public class Controller_Page_Exercice implements Initializable{
 				if (event.getCode() == KeyCode.DOWN) {
 					sliderSon.setValue(sliderSon.getValue() - 3);
 				}
-
-				if (event.getCode() == KeyCode.ENTER) {
-					if(!motPropose.getText().isEmpty()) {
-						try {
-							propositionMot();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
 			}
 
 		});
-
+		
+		ButtonAide.getScene().addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				 if ((ButtonAide.getScene().focusOwnerProperty().get() instanceof TextField)) {
+	                    if (event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.ENTER) {
+	    						motPropose.setText("");
+	                    }
+	                }
+			}
+		});
 	}
 }

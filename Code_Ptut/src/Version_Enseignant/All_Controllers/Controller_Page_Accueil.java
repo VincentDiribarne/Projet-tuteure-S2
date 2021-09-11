@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
+
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Version_Enseignant.MainEnseignant;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -279,20 +283,31 @@ public class Controller_Page_Accueil implements Initializable {
 		String chaine = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
 		return chaine;
 	}
-	
+
+
 	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        if( Desktop.isDesktopSupported() )
-        {
-            new Thread(() -> {
-                   try {
-                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
-                   } catch (IOException | URISyntaxException e1) {
-                       e1.printStackTrace();
-                   }
-               }).start();
+		
+		InputStream is = MainEnseignant.class.getResourceAsStream("Manuel_Utilisateur.pdf");
+
+		File pdf = File.createTempFile("Manuel Utilisateur", ".pdf");
+		pdf.deleteOnExit();
+        OutputStream out = new FileOutputStream(pdf);
+
+        byte[] buffer = new byte[4096];
+        int bytesRead = 0;
+
+        while (is.available() != 0) {
+            bytesRead = is.read(buffer);
+            out.write(buffer, 0, bytesRead);
         }
+        
+        out.close();
+        is.close();
+        
+        Desktop.getDesktop().open(pdf);
+
 	}
 
 	// Bouton Nouveau qui permet de créer un nouvel exercice
@@ -380,7 +395,7 @@ public class Controller_Page_Accueil implements Initializable {
 		Controller_Page_Des_Options.solution = false;
 		Controller_Page_Des_Options.nbMin = null;
 	}
-	
+
 	// Méthode qui va lire n bytes (ne marche pas sous java 1.8 donc on la remet ici
 	// telle quel
 	private static final int DEFAULT_BUFFER_SIZE = 8192;

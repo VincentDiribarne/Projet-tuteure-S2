@@ -1,7 +1,11 @@
 package Version_Enseignant.All_Controllers;
 
 import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -231,18 +235,29 @@ public class Controller_Page_Apercu implements Initializable {
 		primaryStage.show();
 	}
 
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-		if (Desktop.isDesktopSupported()) {
-			new Thread(() -> {
-				try {
-					Desktop.getDesktop().browse(new URI(
-							"https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
-				} catch (IOException | URISyntaxException e1) {
-					e1.printStackTrace();
-				}
-			}).start();
-		}
+		
+		InputStream is = MainEnseignant.class.getResourceAsStream("Manuel_Utilisateur.pdf");
+
+		File pdf = File.createTempFile("Manuel Utilisateur", ".pdf");
+		pdf.deleteOnExit();
+        OutputStream out = new FileOutputStream(pdf);
+
+        byte[] buffer = new byte[4096];
+        int bytesRead = 0;
+
+        while (is.available() != 0) {
+            bytesRead = is.read(buffer);
+            out.write(buffer, 0, bytesRead);
+        }
+        
+        out.close();
+        is.close();
+        
+        Desktop.getDesktop().open(pdf);
+
 	}
 
 	// Méthode pour charger la page d'importation de ressource (bouton retour)

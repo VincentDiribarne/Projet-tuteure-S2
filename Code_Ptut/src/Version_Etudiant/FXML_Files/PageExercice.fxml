@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -58,7 +59,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TextField editable="false" style="-fx-border-color: black; -fx-border-radius: 7; -fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ListView opacity="0.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <ListView opacity="0.0" prefHeight="762.0" prefWidth="696.0" />
+                <TextField editable="false" focusTraversable="false" style="-fx-border-color: black; -fx-border-radius: 7; -fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                     <GridPane.margin>
                         <Insets bottom="210.0" left="45.0" right="45.0" />
                     </GridPane.margin>
@@ -128,7 +131,7 @@
                         <Cursor fx:constant="TEXT" />
                     </cursor>
                 </TextField>
-                <Button mnemonicParsing="false" onAction="#propositionMot" prefHeight="35.0" prefWidth="105.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black; -fx-border-width: 1;" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                <Button fx:id="validateButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black; -fx-border-width: 1;" text="Valider" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                     <font>
                         <Font name="Corbel" size="14.0" />
                     </font>

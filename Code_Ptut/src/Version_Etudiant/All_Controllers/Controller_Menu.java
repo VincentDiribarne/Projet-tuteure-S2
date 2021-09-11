@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import Version_Enseignant.MainEnseignant;
 import Version_Etudiant.MainEtudiant;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -58,18 +62,29 @@ public class Controller_Menu implements Initializable {
 		Platform.exit();
 	}
 
+	//Méthode qui permet de se rendre au manuel utilisateur == tuto
 	@FXML
 	public void tuto() throws MalformedURLException, IOException, URISyntaxException {
-        if( Desktop.isDesktopSupported() )
-        {
-            new Thread(() -> {
-                   try {
-                       Desktop.getDesktop().browse( new URI( "https://docs.google.com/document/d/1r6RBg1hgmUD9whe2_Opq_Uy1BgxdBL1Th0HkQHWxcFo/edit?usp=sharing"));
-                   } catch (IOException | URISyntaxException e1) {
-                       e1.printStackTrace();
-                   }
-               }).start();
+		
+		InputStream is = MainEtudiant.class.getResourceAsStream("Manuel_Utilisateur.pdf");
+
+		File pdf = File.createTempFile("Manuel Utilisateur", ".pdf");
+		pdf.deleteOnExit();
+        OutputStream out = new FileOutputStream(pdf);
+
+        byte[] buffer = new byte[4096];
+        int bytesRead = 0;
+
+        while (is.available() != 0) {
+            bytesRead = is.read(buffer);
+            out.write(buffer, 0, bytesRead);
         }
+        
+        out.close();
+        is.close();
+        
+        Desktop.getDesktop().open(pdf);
+
 	}
 
 	// Fonction qui permet ï¿½ l'ï¿½tudiant d'ouvrir un exercice (tï¿½lï¿½chargï¿½
